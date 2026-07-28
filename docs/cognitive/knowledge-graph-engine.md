@@ -9,36 +9,39 @@
 The Knowledge Graph Engine manages **canonical entities**, **typed directional relationships**, and **graph subgraphs**. While the Memory Engine stores vector embeddings and decay states, the Knowledge Graph Engine represents explicit, deterministic relationships between concepts, actors, tools, events, and topics.
 
 It answers:
-- *"What canonical entities exist in the user's thought model?"*
-- *"What exact typed relationships link Entity A to Entity B?"*
-- *"What is the structural path and graph distance between two concepts?"*
-- *"Which source Memory Nodes support a specific relationship edge?"*
+
+- _"What canonical entities exist in the user's thought model?"_
+- _"What exact typed relationships link Entity A to Entity B?"_
+- _"What is the structural path and graph distance between two concepts?"_
+- _"Which source Memory Nodes support a specific relationship edge?"_
 
 ---
 
 ## Responsibilities
 
-| # | Responsibility | Description |
-|---|---|---|
-| 1 | **Entity Management** | Extract and maintain canonical Graph Nodes from Memory Nodes |
-| 2 | **Relationship Edge Management** | Create and version typed directional Graph Edges with explicit evidence links |
-| 3 | **Graph Traversal** | Perform multi-hop graph pathfinding and subgraph extraction |
-| 4 | **Topology Versioning** | Version graph structural changes to preserve complete historical lineage |
-| 5 | **Evidence Linking** | Ensure every Graph Node and Edge maintains direct references to supporting Memory Nodes |
+| #   | Responsibility                   | Description                                                                             |
+| --- | -------------------------------- | --------------------------------------------------------------------------------------- |
+| 1   | **Entity Management**            | Extract and maintain canonical Graph Nodes from Memory Nodes                            |
+| 2   | **Relationship Edge Management** | Create and version typed directional Graph Edges with explicit evidence links           |
+| 3   | **Graph Traversal**              | Perform multi-hop graph pathfinding and subgraph extraction                             |
+| 4   | **Topology Versioning**          | Version graph structural changes to preserve complete historical lineage                |
+| 5   | **Evidence Linking**             | Ensure every Graph Node and Edge maintains direct references to supporting Memory Nodes |
 
 ---
 
 ## Inputs & Outputs
 
 ### Inputs
-* `MemoryNode` (from Memory Engine via `MemoryEncoded` event)
-* Traversal Queries (from Cognitive Engine and Reasoning Engine)
+
+- `MemoryNode` (from Memory Engine via `MemoryEncoded` event)
+- Traversal Queries (from Cognitive Engine and Reasoning Engine)
 
 ### Outputs
-* `GraphNode` (Entity)
-* `GraphEdge` (Relationship)
-* `KnowledgeGraphSubgraph`
-* Domain Events: `GraphNodeCreated`, `GraphEdgeCreated`
+
+- `GraphNode` (Entity)
+- `GraphEdge` (Relationship)
+- `KnowledgeGraphSubgraph`
+- Domain Events: `GraphNodeCreated`, `GraphEdgeCreated`
 
 ---
 

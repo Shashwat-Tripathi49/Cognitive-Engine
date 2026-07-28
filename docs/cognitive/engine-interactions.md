@@ -42,14 +42,14 @@ graph TB
 
 ## Domain Event Catalog Overview
 
-| Event | Producer Engine | Consumer Engine(s) | Trigger |
-|---|---|---|---|
-| `FragmentCaptured` | `Capture Engine` | `Memory Engine` | Ingestion & normalization complete |
-| `MemoryEncoded` | `Memory Engine` | `Knowledge Graph Engine` | Vector embedding & indexing complete |
-| `GraphNodeCreated` | `Knowledge Graph Engine` | `Cognitive Engine` | Entity extracted and canonicalized |
-| `GraphEdgeCreated` | `Knowledge Graph Engine` | `Cognitive Engine` | Relationship edge created & evidence linked |
-| `ClusterFormed` | `Cognitive Engine` | `Cognitive Engine` | Density cluster computed (HDBSCAN) |
-| `PatternDiscovered` | `Cognitive Engine` | `Reasoning Engine` | Pattern passes threshold ($N \ge 3$) |
-| `ReasoningArtifactCreated` | `Reasoning Engine` | `Reflection Engine` | Logic verified and Evidence Chain built |
-| `EvidenceChainVerified` | `Reasoning Engine` | `Reflection Engine` | 100% evidence lineage confirmed |
-| `ReflectionGenerated` | `Reflection Engine` | Presentation Layer | LLM synthesizes prose from evidence |
+| Event                      | Producer Engine          | Consumer Engine(s)       | Trigger                                     |
+| -------------------------- | ------------------------ | ------------------------ | ------------------------------------------- |
+| `FragmentCaptured`         | `Capture Engine`         | `Memory Engine`          | Ingestion & normalization complete          |
+| `MemoryEncoded`            | `Memory Engine`          | `Knowledge Graph Engine` | Vector embedding & indexing complete        |
+| `GraphNodeCreated`         | `Knowledge Graph Engine` | `Cognitive Engine`       | Entity extracted and canonicalized          |
+| `GraphEdgeCreated`         | `Knowledge Graph Engine` | `Cognitive Engine`       | Relationship edge created & evidence linked |
+| `ClusterFormed`            | `Cognitive Engine`       | `Cognitive Engine`       | Density cluster computed (HDBSCAN)          |
+| `PatternDiscovered`        | `Cognitive Engine`       | `Reasoning Engine`       | Pattern passes threshold ($N \ge 3$)        |
+| `ReasoningArtifactCreated` | `Reasoning Engine`       | `Reflection Engine`      | Logic verified and Evidence Chain built     |
+| `EvidenceChainVerified`    | `Reasoning Engine`       | `Reflection Engine`      | 100% evidence lineage confirmed             |
+| `ReflectionGenerated`      | `Reflection Engine`      | Presentation Layer       | LLM synthesizes prose from evidence         |

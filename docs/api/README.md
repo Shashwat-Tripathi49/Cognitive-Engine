@@ -4,13 +4,13 @@ This directory contains all API specification documentation for Cognitive Engine
 
 ## Contents
 
-| Document | Description |
-|---|---|
-| [API Overview](api-overview.md) | API design philosophy, versioning, and base URL structure |
-| [Authentication](authentication.md) | Auth flows, token management, and session handling |
-| [Endpoints](endpoints.md) | Complete endpoint reference organized by resource |
-| [Error Handling](error-handling.md) | Error response format, codes, and recovery guidance |
-| [OpenAPI](openapi/) | OpenAPI/Swagger specification files |
+| Document                            | Description                                               |
+| ----------------------------------- | --------------------------------------------------------- |
+| [API Overview](api-overview.md)     | API design philosophy, versioning, and base URL structure |
+| [Authentication](authentication.md) | Auth flows, token management, and session handling        |
+| [Endpoints](endpoints.md)           | Complete endpoint reference organized by resource         |
+| [Error Handling](error-handling.md) | Error response format, codes, and recovery guidance       |
+| [OpenAPI](openapi/)                 | OpenAPI/Swagger specification files                       |
 
 ## API Design Principles
 

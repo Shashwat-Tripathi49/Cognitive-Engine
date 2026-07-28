@@ -51,14 +51,14 @@ flowchart LR
 
 ## Transformation Pipeline Summary
 
-| Stage | Input Form | Output Form | Performing Engine | Method | LLM Role |
-|---|---|---|---|---|---|
-| **1. Capture** | Raw text / voice | `Cognitive Fragment` | `Capture Engine` | Normalization & content hashing | None |
-| **2. Encoding** | `Cognitive Fragment` | `Memory Node` & `Embedding` | `Memory Engine` | Vector embedding & indexing | Vector model only |
-| **3. Graph Topology** | `Memory Node` | `Graph Node` & `Graph Edge` | `Knowledge Graph Engine` | Entity & relationship resolution | None |
-| **4. Discovery** | Graph & Memory Nodes | `Cluster`, `Sequence`, `Pattern` | `Cognitive Engine` | HDBSCAN, graph math, time-series ($\ge 3$) | **ZERO LLM** |
-| **5. Proof** | `Pattern` & Graph Edges | `ReasoningArtifact` & `EvidenceChain` | `Reasoning Engine` | Formal logic & evidence verification | None |
-| **6. Synthesis** | `ReasoningArtifact` & `EvidenceChain` | `MetacognitiveReflection` | `Reflection Engine` | Constrained prose generation | **Explain Only** |
+| Stage                 | Input Form                            | Output Form                           | Performing Engine        | Method                                     | LLM Role          |
+| --------------------- | ------------------------------------- | ------------------------------------- | ------------------------ | ------------------------------------------ | ----------------- |
+| **1. Capture**        | Raw text / voice                      | `Cognitive Fragment`                  | `Capture Engine`         | Normalization & content hashing            | None              |
+| **2. Encoding**       | `Cognitive Fragment`                  | `Memory Node` & `Embedding`           | `Memory Engine`          | Vector embedding & indexing                | Vector model only |
+| **3. Graph Topology** | `Memory Node`                         | `Graph Node` & `Graph Edge`           | `Knowledge Graph Engine` | Entity & relationship resolution           | None              |
+| **4. Discovery**      | Graph & Memory Nodes                  | `Cluster`, `Sequence`, `Pattern`      | `Cognitive Engine`       | HDBSCAN, graph math, time-series ($\ge 3$) | **ZERO LLM**      |
+| **5. Proof**          | `Pattern` & Graph Edges               | `ReasoningArtifact` & `EvidenceChain` | `Reasoning Engine`       | Formal logic & evidence verification       | None              |
+| **6. Synthesis**      | `ReasoningArtifact` & `EvidenceChain` | `MetacognitiveReflection`             | `Reflection Engine`      | Constrained prose generation               | **Explain Only**  |
 
 ---
 

@@ -35,14 +35,15 @@
 
 **Purpose**: Convert text into semantic vector representations.
 
-| Property | Value |
-|---|---|
-| Model | `text-embedding-3-small` (OpenAI) or equivalent |
-| Dimensions | 1536 |
-| Storage | pgvector extension in PostgreSQL |
-| Trigger | Async on thought creation/update |
+| Property   | Value                                           |
+| ---------- | ----------------------------------------------- |
+| Model      | `text-embedding-3-small` (OpenAI) or equivalent |
+| Dimensions | 1536                                            |
+| Storage    | pgvector extension in PostgreSQL                |
+| Trigger    | Async on thought creation/update                |
 
 **Capabilities**:
+
 - Text-to-vector embedding
 - Semantic similarity search
 - Clustering related thoughts
@@ -52,13 +53,14 @@
 
 **Purpose**: Identify patterns, themes, and cognitive biases in user's thinking.
 
-| Property | Value |
-|---|---|
-| Model | GPT-4o / Claude 3.5 (via gateway) |
-| Trigger | Scheduled (daily digest) + on-demand |
+| Property       | Value                                         |
+| -------------- | --------------------------------------------- |
+| Model          | GPT-4o / Claude 3.5 (via gateway)             |
+| Trigger        | Scheduled (daily digest) + on-demand          |
 | Context window | User's recent + historically relevant entries |
 
 **Capabilities**:
+
 - Theme extraction across entries
 - Recurring pattern detection
 - Cognitive bias identification
@@ -68,13 +70,14 @@
 
 **Purpose**: Create summaries, connections, and insights.
 
-| Property | Value |
-|---|---|
-| Model | GPT-4o / Claude 3.5 (via gateway) |
-| Streaming | Yes (via Vercel AI SDK) |
-| Trigger | User-initiated + scheduled |
+| Property  | Value                             |
+| --------- | --------------------------------- |
+| Model     | GPT-4o / Claude 3.5 (via gateway) |
+| Streaming | Yes (via Vercel AI SDK)           |
+| Trigger   | User-initiated + scheduled        |
 
 **Capabilities**:
+
 - Daily cognitive digest
 - Entry summarization
 - Connection explanations
@@ -97,11 +100,11 @@ interface LLMGateway {
 
 ### Supported Providers (Planned)
 
-| Provider | Models | Priority |
-|---|---|---|
-| OpenAI | GPT-4o, GPT-4o-mini, text-embedding-3 | Primary |
-| Anthropic | Claude 3.5 Sonnet, Claude 3.5 Haiku | Secondary |
-| Local | Ollama (Llama, Mistral) | Self-hosted option |
+| Provider  | Models                                | Priority           |
+| --------- | ------------------------------------- | ------------------ |
+| OpenAI    | GPT-4o, GPT-4o-mini, text-embedding-3 | Primary            |
+| Anthropic | Claude 3.5 Sonnet, Claude 3.5 Haiku   | Secondary          |
+| Local     | Ollama (Llama, Mistral)               | Self-hosted option |
 
 ### Fallback Strategy
 
@@ -142,25 +145,25 @@ User creates thought
 
 ## Performance Targets
 
-| Operation | Target Latency | Strategy |
-|---|---|---|
-| Embedding generation | < 200ms | Async, non-blocking |
-| Semantic search | < 500ms | pgvector HNSW index |
-| Connection detection | < 2s | Background processing |
-| Digest generation | < 10s | Scheduled, cached |
-| Streaming response | First token < 500ms | Vercel AI SDK streaming |
+| Operation            | Target Latency      | Strategy                |
+| -------------------- | ------------------- | ----------------------- |
+| Embedding generation | < 200ms             | Async, non-blocking     |
+| Semantic search      | < 500ms             | pgvector HNSW index     |
+| Connection detection | < 2s                | Background processing   |
+| Digest generation    | < 10s               | Scheduled, cached       |
+| Streaming response   | First token < 500ms | Vercel AI SDK streaming |
 
 ---
 
 ## Cost Management
 
-| Strategy | Implementation |
-|---|---|
+| Strategy      | Implementation                                                  |
+| ------------- | --------------------------------------------------------------- |
 | Model tiering | Use cheaper models for embeddings, powerful models for analysis |
-| Caching | Cache frequent prompts and their responses |
-| Batching | Batch embedding requests where possible |
-| Rate limiting | Per-user AI request quotas |
-| Token budgets | Maximum token limits per request type |
+| Caching       | Cache frequent prompts and their responses                      |
+| Batching      | Batch embedding requests where possible                         |
+| Rate limiting | Per-user AI request quotas                                      |
+| Token budgets | Maximum token limits per request type                           |
 
 ---
 

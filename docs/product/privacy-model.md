@@ -10,6 +10,7 @@
 ### Analysis of Current Architecture
 
 The technical architecture defined in `docs/architecture/tech-stack.md` and `docs/architecture/system-overview.md` relies on:
+
 - **Cloud/Edge API Server:** Hono running on edge/cloud infrastructure.
 - **Hosted Managed Database:** PostgreSQL 16 + pgvector hosted on cloud database providers (Neon/Supabase/RDS).
 - **External LLM Gateways:** Model routing to OpenAI, Anthropic, and cloud inference providers via Vercel AI SDK.
@@ -41,12 +42,12 @@ We recommend updating all project documentation to use **"Privacy-First"**.
 
 The following documents contain instances of "Local-first" or related terminology and should be updated to "Privacy-first" during the baseline alignment pass:
 
-| Document Path | Current Wording | Recommended Update |
-|---|---|---|
-| `docs/product/vision.md` | "...local-first architecture where possible..." | "...privacy-first architecture with strict data boundaries..." |
-| `docs/ai/ethics.md` | "Local-first architecture" | "Privacy-first architecture" |
-| `docs/architecture/tech-stack.md` | Section on local processing | Clarify cloud-hosted, privacy-first data boundaries |
-| `README.md` | General privacy references | Align with Privacy-First standards |
+| Document Path                     | Current Wording                                 | Recommended Update                                             |
+| --------------------------------- | ----------------------------------------------- | -------------------------------------------------------------- |
+| `docs/product/vision.md`          | "...local-first architecture where possible..." | "...privacy-first architecture with strict data boundaries..." |
+| `docs/ai/ethics.md`               | "Local-first architecture"                      | "Privacy-first architecture"                                   |
+| `docs/architecture/tech-stack.md` | Section on local processing                     | Clarify cloud-hosted, privacy-first data boundaries            |
+| `README.md`                       | General privacy references                      | Align with Privacy-First standards                             |
 
 ---
 

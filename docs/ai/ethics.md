@@ -43,13 +43,13 @@ The AI should **augment** thinking, never **direct** it:
 
 ## Data Handling
 
-| Principle | Implementation |
-|---|---|
-| Data minimization | Send only necessary context to models |
-| Purpose limitation | AI processes data only for stated features |
-| Storage limitation | AI-generated data has defined retention periods |
-| Consent | Users explicitly opt into AI features |
-| Auditability | All AI interactions are logged (for the user, not us) |
+| Principle          | Implementation                                        |
+| ------------------ | ----------------------------------------------------- |
+| Data minimization  | Send only necessary context to models                 |
+| Purpose limitation | AI processes data only for stated features            |
+| Storage limitation | AI-generated data has defined retention periods       |
+| Consent            | Users explicitly opt into AI features                 |
+| Auditability       | All AI interactions are logged (for the user, not us) |
 
 ---
 

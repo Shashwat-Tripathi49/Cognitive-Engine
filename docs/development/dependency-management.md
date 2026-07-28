@@ -30,12 +30,12 @@ packages:
 
 ## Dependency Placement
 
-| Dependency Type | Location | Example |
-|---|---|---|
-| Shared dev tools | Root `package.json` | TypeScript, ESLint, Prettier |
-| App-specific | `apps/<app>/package.json` | Next.js, Hono |
-| Shared library | `packages/<pkg>/package.json` | Zod, date-fns |
-| Internal packages | Workspace reference | `"@cognitive-engine/shared": "workspace:*"` |
+| Dependency Type   | Location                      | Example                                     |
+| ----------------- | ----------------------------- | ------------------------------------------- |
+| Shared dev tools  | Root `package.json`           | TypeScript, ESLint, Prettier                |
+| App-specific      | `apps/<app>/package.json`     | Next.js, Hono                               |
+| Shared library    | `packages/<pkg>/package.json` | Zod, date-fns                               |
+| Internal packages | Workspace reference           | `"@cognitive-engine/shared": "workspace:*"` |
 
 ---
 
@@ -80,12 +80,12 @@ We use **Renovate Bot** for automated dependency updates:
 
 ## Security
 
-| Measure | Implementation |
-|---|---|
-| Vulnerability scanning | `pnpm audit` in CI pipeline |
-| License compliance | Allowlisted licenses (MIT, Apache-2.0, BSD) |
-| Supply chain security | Renovate Bot for timely updates |
-| Lock file integrity | CI verifies lock file consistency |
+| Measure                | Implementation                              |
+| ---------------------- | ------------------------------------------- |
+| Vulnerability scanning | `pnpm audit` in CI pipeline                 |
+| License compliance     | Allowlisted licenses (MIT, Apache-2.0, BSD) |
+| Supply chain security  | Renovate Bot for timely updates             |
+| Lock file integrity    | CI verifies lock file consistency           |
 
 ---
 

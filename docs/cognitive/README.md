@@ -58,14 +58,14 @@ graph TB
 
 ## Core Domain Engines
 
-| Engine | Responsibility | Document |
-|---|---|---|
-| [Capture Engine](capture-engine.md) | Ingest, normalize, and enrich raw user input into immutable Cognitive Fragments | Ingestion boundary |
-| [Memory Engine](memory-engine.md) | Encode, index, retrieve, and manage decay for Memory Nodes and embeddings | Memory & vector retrieval |
-| [Knowledge Graph Engine](knowledge-graph-engine.md) | Manage canonical entities, typed relationship edges, and graph topology | Graph structure & topology |
-| [Cognitive Engine](cognitive-engine.md) | Compute spatial clusters, time-series, patterns, and algorithmic confidence (**100% deterministic, 0% LLM**) | Deterministic discovery |
-| [Reasoning Engine](reasoning-engine.md) | Perform formal logic validation, verify relationship hypotheses, and construct Evidence Chains | Logical proof & verification |
-| [Reflection Engine](reflection-engine.md) | Metacognitive synthesis — explain validated evidence in human prose (**LLM explains validated findings**) | Metacognitive reflection |
+| Engine                                              | Responsibility                                                                                               | Document                     |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------- |
+| [Capture Engine](capture-engine.md)                 | Ingest, normalize, and enrich raw user input into immutable Cognitive Fragments                              | Ingestion boundary           |
+| [Memory Engine](memory-engine.md)                   | Encode, index, retrieve, and manage decay for Memory Nodes and embeddings                                    | Memory & vector retrieval    |
+| [Knowledge Graph Engine](knowledge-graph-engine.md) | Manage canonical entities, typed relationship edges, and graph topology                                      | Graph structure & topology   |
+| [Cognitive Engine](cognitive-engine.md)             | Compute spatial clusters, time-series, patterns, and algorithmic confidence (**100% deterministic, 0% LLM**) | Deterministic discovery      |
+| [Reasoning Engine](reasoning-engine.md)             | Perform formal logic validation, verify relationship hypotheses, and construct Evidence Chains               | Logical proof & verification |
+| [Reflection Engine](reflection-engine.md)           | Metacognitive synthesis — explain validated evidence in human prose (**LLM explains validated findings**)    | Metacognitive reflection     |
 
 ---
 
@@ -80,6 +80,6 @@ graph TB
 
 ## Detailed Architectural Specs
 
-* 📐 Domain Objects & Events: See [docs/domain/](file:///C:/Users/SHASHWAT%20TRIPATHI/.gemini/antigravity-ide/scratch/cognitive-engine/docs/domain)
-* 🔗 Evidence System: See [docs/domain/evidence-model.md](file:///C:/Users/SHASHWAT%20TRIPATHI/.gemini/antigravity-ide/scratch/cognitive-engine/docs/domain/evidence-model.md)
-* 🔄 Object Lifecycle: See [docs/domain/object-lifecycle.md](file:///C:/Users/SHASHWAT%20TRIPATHI/.gemini/antigravity-ide/scratch/cognitive-engine/docs/domain/object-lifecycle.md)
+- 📐 Domain Objects & Events: See [docs/domain/](file:///C:/Users/SHASHWAT%20TRIPATHI/.gemini/antigravity-ide/scratch/cognitive-engine/docs/domain)
+- 🔗 Evidence System: See [docs/domain/evidence-model.md](file:///C:/Users/SHASHWAT%20TRIPATHI/.gemini/antigravity-ide/scratch/cognitive-engine/docs/domain/evidence-model.md)
+- 🔄 Object Lifecycle: See [docs/domain/object-lifecycle.md](file:///C:/Users/SHASHWAT%20TRIPATHI/.gemini/antigravity-ide/scratch/cognitive-engine/docs/domain/object-lifecycle.md)

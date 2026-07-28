@@ -20,14 +20,14 @@ Foundation  →    Core MVP    →    Intelligence →   Scale       →    Plat
 
 **Goal**: Establish the repository, documentation, architecture, and engineering standards.
 
-| Deliverable | Status |
-|---|---|
-| Repository structure | ✅ Complete |
-| Product vision & roadmap | ✅ Complete |
+| Deliverable                          | Status      |
+| ------------------------------------ | ----------- |
+| Repository structure                 | ✅ Complete |
+| Product vision & roadmap             | ✅ Complete |
 | Technical architecture documentation | ✅ Complete |
-| Development guidelines & standards | ✅ Complete |
-| CI/CD pipeline (placeholder) | ✅ Complete |
-| Git workflow established | ✅ Complete |
+| Development guidelines & standards   | ✅ Complete |
+| CI/CD pipeline (placeholder)         | ✅ Complete |
+| Git workflow established             | ✅ Complete |
 
 ---
 
@@ -131,11 +131,11 @@ Foundation  →    Core MVP    →    Intelligence →   Scale       →    Plat
 
 Major decisions that shaped this roadmap:
 
-| Date | Decision | Rationale |
-|---|---|---|
-| 2026-07-28 | Monorepo architecture | Shared code across web, API, and mobile |
-| 2026-07-28 | Documentation-first approach | Clarity before code reduces rework |
-| 2026-07-28 | TypeScript everywhere | Type safety prevents an entire class of bugs |
+| Date       | Decision                     | Rationale                                    |
+| ---------- | ---------------------------- | -------------------------------------------- |
+| 2026-07-28 | Monorepo architecture        | Shared code across web, API, and mobile      |
+| 2026-07-28 | Documentation-first approach | Clarity before code reduces rework           |
+| 2026-07-28 | TypeScript everywhere        | Type safety prevents an entire class of bugs |
 
 ---
 

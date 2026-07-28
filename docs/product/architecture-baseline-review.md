@@ -11,12 +11,12 @@ To encourage disciplined evolution without architectural drift, all references t
 
 ### Terminology Mapping
 
-| Legacy Term | Baseline v0.1 Term | Rationale |
-|---|---|---|
-| Frozen | Architecture Baseline v0.1 | Allows structured evolution via RFCs while preserving baseline stability. |
-| Final | Current Baseline | Clarifies that the current state is the reference design for Phase 1 validation. |
-| Permanent | System Invariant (v0.1) | Distinguishes core philosophical rules from implementation details. |
-| Immutable Architecture | Evolving Foundation | Indicates that contracts may evolve through empirical feedback. |
+| Legacy Term            | Baseline v0.1 Term         | Rationale                                                                        |
+| ---------------------- | -------------------------- | -------------------------------------------------------------------------------- |
+| Frozen                 | Architecture Baseline v0.1 | Allows structured evolution via RFCs while preserving baseline stability.        |
+| Final                  | Current Baseline           | Clarifies that the current state is the reference design for Phase 1 validation. |
+| Permanent              | System Invariant (v0.1)    | Distinguishes core philosophical rules from implementation details.              |
+| Immutable Architecture | Evolving Foundation        | Indicates that contracts may evolve through empirical feedback.                  |
 
 ---
 
@@ -26,16 +26,16 @@ The 10 Domain Invariants defined in `docs/domain/domain-invariants.md` represent
 
 ### Invariant Status in Baseline v0.1
 
-1. **Evidence Lineage Invariant:** *Active Baseline.* Required for trust verification.
-2. **Evidence Fragment Integrity Invariant:** *Active Baseline.* Protects against orphan evidence.
-3. **Confidence Origin Invariant:** *Active Baseline.* Prevents LLMs from fabricating certainty scores.
-4. **Deterministic Discovery Invariant:** *Target for Validation.* Currently undergoing algorithmic experimentation (`experiments/journal-clustering/`).
-5. **Immutable Memory Invariant:** *Active Baseline.* Ensures historical thought preservation.
-6. **Graph Node Versioning Invariant:** *Active Baseline.* Preserves topology history.
-7. **Minimum Evidence Threshold Invariant ($N \ge 3$):** *Subject to RFC Validation.* Threshold will be evaluated against entry counts (20, 50, 100 entries).
-8. **LLM Boundary Invariant:** *Active Baseline.* Restricts LLMs to explaining validated evidence.
-9. **Separation of Storage and Graph Invariant:** *Active Baseline.* Decouples vector search from property graph traversal.
-10. **Non-Destructive Decay Invariant:** *Active Baseline.* Prevents accidental data loss.
+1. **Evidence Lineage Invariant:** _Active Baseline._ Required for trust verification.
+2. **Evidence Fragment Integrity Invariant:** _Active Baseline._ Protects against orphan evidence.
+3. **Confidence Origin Invariant:** _Active Baseline._ Prevents LLMs from fabricating certainty scores.
+4. **Deterministic Discovery Invariant:** _Target for Validation._ Currently undergoing algorithmic experimentation (`experiments/journal-clustering/`).
+5. **Immutable Memory Invariant:** _Active Baseline._ Ensures historical thought preservation.
+6. **Graph Node Versioning Invariant:** _Active Baseline._ Preserves topology history.
+7. **Minimum Evidence Threshold Invariant ($N \ge 3$):** _Subject to RFC Validation._ Threshold will be evaluated against entry counts (20, 50, 100 entries).
+8. **LLM Boundary Invariant:** _Active Baseline._ Restricts LLMs to explaining validated evidence.
+9. **Separation of Storage and Graph Invariant:** _Active Baseline._ Decouples vector search from property graph traversal.
+10. **Non-Destructive Decay Invariant:** _Active Baseline._ Prevents accidental data loss.
 
 ---
 

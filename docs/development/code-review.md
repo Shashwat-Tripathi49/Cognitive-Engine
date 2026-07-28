@@ -69,23 +69,23 @@
 - Approve when "good enough" — don't block on style nitpicks
 - Use conventional comment prefixes:
 
-| Prefix | Meaning |
-|---|---|
-| `nit:` | Style nitpick, non-blocking |
-| `suggestion:` | Take it or leave it |
-| `question:` | Genuine question, not a demand |
-| `issue:` | Must be addressed before merge |
-| `praise:` | Something done well |
+| Prefix        | Meaning                        |
+| ------------- | ------------------------------ |
+| `nit:`        | Style nitpick, non-blocking    |
+| `suggestion:` | Take it or leave it            |
+| `question:`   | Genuine question, not a demand |
+| `issue:`      | Must be addressed before merge |
+| `praise:`     | Something done well            |
 
 ---
 
 ## SLA
 
-| Action | Target |
-|---|---|
+| Action               | Target          |
+| -------------------- | --------------- |
 | First review comment | Within 24 hours |
-| Follow-up review | Within 12 hours |
-| Author response | Within 24 hours |
+| Follow-up review     | Within 12 hours |
+| Author response      | Within 24 hours |
 
 ---
 

@@ -1,0 +1,16 @@
+{
+  "name": "@cognitive-engine/config",
+  "version": "0.1.0-alpha",
+  "private": true,
+  "description": "Shared configuration package for TypeScript, ESLint, and Prettier.",
+  "main": "index.js",
+  "files": [
+    "typescript",
+    "eslint",
+    "prettier",
+    "index.js"
+  ],
+  "dependencies": {
+    "prettier": "^3.5.2"
+  }
+}

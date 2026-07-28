@@ -1,152 +1,101 @@
 # Local Development Setup
 
-> Get Cognitive Engine running locally in under 15 minutes.
+> Get Cognitive Engine running locally in under 10 minutes.
 
 ---
 
 ## Prerequisites
 
-| Tool | Version | Install |
-|---|---|---|
-| **Node.js** | ≥ 20.x | [nvm](https://github.com/nvm-sh/nvm) recommended |
-| **pnpm** | ≥ 9.x | `npm install -g pnpm` |
-| **Git** | ≥ 2.x | [git-scm.com](https://git-scm.com/) |
-| **Docker** | ≥ 24.x | [docker.com](https://www.docker.com/) |
+| Tool                    | Version Requirement           | Verification Command |
+| ----------------------- | ----------------------------- | -------------------- |
+| **Node.js**             | ≥ 20.x (see `.nvmrc`)         | `node -v`            |
+| **pnpm**                | ≥ 9.x                         | `pnpm -v`            |
+| **Git**                 | ≥ 2.x                         | `git -v`             |
+| **Docker / PostgreSQL** | PostgreSQL 16 with `pgvector` | `docker --version`   |
 
 ---
 
-## Quick Start
+## Quick Start (Fresh Clone Onboarding)
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-org/cognitive-engine.git
-cd cognitive-engine
+git clone https://github.com/Shashwat-Tripathi49/Cognitive-Engine.git
+cd Cognitive-Engine
 
-# 2. Use the correct Node.js version
+# 2. Use correct Node.js version
 nvm use
 
-# 3. Install dependencies
+# 3. Install workspace dependencies
 pnpm install
 
-# 4. Start infrastructure (PostgreSQL, Redis)
-docker compose up -d
-
-# 5. Set up environment variables
+# 4. Copy environment configuration
 cp .env.example .env.local
 
-# 6. Run database migrations
+# 5. Start infrastructure (PostgreSQL 16 + pgvector)
+docker compose up -d
+
+# 6. Verify database health and apply baseline migration infrastructure
+pnpm db:generate
 pnpm db:migrate
 
-# 7. Seed development data
-pnpm db:seed
-
-# 8. Start all services in development mode
+# 7. Start all services in development mode
 pnpm dev
 ```
 
 ---
 
-## Services
+## Service URLs
 
-| Service | URL | Port |
-|---|---|---|
-| Web app | http://localhost:3000 | 3000 |
-| API server | http://localhost:3001 | 3001 |
-| PostgreSQL | localhost:5432 | 5432 |
-| Redis | localhost:6379 | 6379 |
-
----
-
-## Environment Variables
-
-Create a `.env.local` file in the project root:
-
-```env
-# Database
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/cognitive_engine
-
-# Redis
-REDIS_URL=redis://localhost:6379
-
-# Authentication
-AUTH_SECRET=your-dev-secret-change-in-production
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-
-# AI
-OPENAI_API_KEY=your-openai-api-key
-
-# App
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-API_URL=http://localhost:3001
-```
-
-> ⚠️ Never commit `.env.local`. It's in `.gitignore`.
+| Service                     | Application Path           | URL                          | Port |
+| --------------------------- | -------------------------- | ---------------------------- | ---- |
+| **Web Frontend**            | `apps/web`                 | http://localhost:3000        | 3000 |
+| **Hono API Server**         | `apps/api`                 | http://localhost:3001        | 3001 |
+| **API Root Endpoint**       | `apps/api`                 | http://localhost:3001/       | 3001 |
+| **API Health Check**        | `apps/api`                 | http://localhost:3001/health | 3001 |
+| **Drizzle Studio (DB GUI)** | `@cognitive-engine/shared` | http://localhost:4983        | 4983 |
 
 ---
 
-## Common Commands
+## Workspace Management Commands
 
-| Command | Description |
-|---|---|
-| `pnpm dev` | Start all services in dev mode |
-| `pnpm build` | Build all packages |
-| `pnpm test` | Run all tests |
-| `pnpm lint` | Lint all packages |
-| `pnpm format` | Format all files with Prettier |
-| `pnpm typecheck` | Run TypeScript type checking |
-| `pnpm db:generate` | Generate migrations from schema changes |
-| `pnpm db:migrate` | Apply pending migrations |
-| `pnpm db:seed` | Seed development data |
-| `pnpm db:studio` | Open Drizzle Studio (database GUI) |
-| `pnpm clean` | Clean all build artifacts and node_modules |
+All development commands work consistently from the repository root:
 
----
-
-## Troubleshooting
-
-### Port already in use
-
-```bash
-# Find and kill the process
-npx kill-port 3000 3001
-```
-
-### Database connection refused
-
-```bash
-# Ensure Docker containers are running
-docker compose ps
-docker compose up -d
-```
-
-### pnpm install fails
-
-```bash
-# Clear pnpm store and retry
-pnpm store prune
-pnpm install
-```
+| Command             | Action                                                                     |
+| ------------------- | -------------------------------------------------------------------------- |
+| `pnpm dev`          | Run all applications (`apps/web`, `apps/api`) concurrently with hot reload |
+| `pnpm build`        | Build all packages and applications in dependency order via Turborepo      |
+| `pnpm lint`         | Run ESLint across all workspaces                                           |
+| `pnpm typecheck`    | Run TypeScript type checking (`tsc --noEmit`) across all workspaces        |
+| `pnpm format`       | Automatically format all files with Prettier                               |
+| `pnpm format:check` | Verify formatting without modifying files                                  |
+| `pnpm db:generate`  | Generate SQL migration files from Drizzle schema                           |
+| `pnpm db:migrate`   | Apply pending migrations to the PostgreSQL database                        |
+| `pnpm db:studio`    | Launch Drizzle Studio database manager UI                                  |
+| `pnpm clean`        | Clean all build artifacts, `.next` caches, and `node_modules`              |
 
 ---
 
-## IDE Setup
+## Infrastructure Verification
 
-### VS Code (Recommended)
+After running `pnpm dev`, verify that the system infrastructure is running properly:
 
-Install recommended extensions:
-- ESLint
-- Prettier
-- Tailwind CSS IntelliSense (if used)
-- Error Lens
-- GitLens
+1. **Verify API Root:**
 
-### JetBrains (WebStorm)
+   ```bash
+   curl http://localhost:3001/
+   # Returns: {"status":"ok"}
+   ```
 
-- Enable ESLint integration
-- Configure Prettier as default formatter
-- Enable TypeScript language service
+2. **Verify API & Database Health:**
+
+   ```bash
+   curl http://localhost:3001/health
+   # Returns: {"healthy":true,"services":{"api":"ok","database":"ok"},...}
+   ```
+
+3. **Verify Web App:**
+   Open http://localhost:3000 in your browser.
 
 ---
 
-> _If you encounter issues not covered here, please open a GitHub Discussion._
+> _For coding standards, git workflows, and naming conventions, see the other guides in `docs/development/`._

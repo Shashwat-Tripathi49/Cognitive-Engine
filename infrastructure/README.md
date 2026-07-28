@@ -6,10 +6,10 @@
 
 ## Contents
 
-| Directory | Purpose | Status |
-|---|---|---|
-| `docker/` | Docker Compose for local development | ⏳ Planned |
-| `terraform/` | Cloud infrastructure provisioning | 🔮 Future |
+| Directory    | Purpose                              | Status     |
+| ------------ | ------------------------------------ | ---------- |
+| `docker/`    | Docker Compose for local development | ⏳ Planned |
+| `terraform/` | Cloud infrastructure provisioning    | 🔮 Future  |
 
 ## Local Development Infrastructure
 

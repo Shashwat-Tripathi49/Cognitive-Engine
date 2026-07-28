@@ -6,12 +6,12 @@
 
 ## Authentication Methods
 
-| Method | Use Case | Status |
-|---|---|---|
-| OAuth 2.0 (Google) | Primary sign-up / login | Planned |
-| OAuth 2.0 (GitHub) | Developer-friendly option | Planned |
+| Method             | Use Case                    | Status  |
+| ------------------ | --------------------------- | ------- |
+| OAuth 2.0 (Google) | Primary sign-up / login     | Planned |
+| OAuth 2.0 (GitHub) | Developer-friendly option   | Planned |
 | Magic Link (Email) | Passwordless authentication | Planned |
-| API Key | Programmatic access | Future |
+| API Key            | Programmatic access         | Future  |
 
 ---
 
@@ -28,10 +28,10 @@
 
 ## Token Strategy
 
-| Token | Type | Lifetime | Storage |
-|---|---|---|---|
-| Access Token | JWT | 15 minutes | Memory (client) |
-| Refresh Token | Opaque | 30 days | HttpOnly cookie |
+| Token         | Type   | Lifetime   | Storage         |
+| ------------- | ------ | ---------- | --------------- |
+| Access Token  | JWT    | 15 minutes | Memory (client) |
+| Refresh Token | Opaque | 30 days    | HttpOnly cookie |
 
 ### Access Token Payload
 
@@ -59,13 +59,13 @@
 
 ## Security Measures
 
-| Measure | Implementation |
-|---|---|
-| Token rotation | Refresh tokens are single-use |
-| CSRF protection | SameSite cookies + CSRF tokens |
-| Brute force prevention | Rate limiting on auth endpoints |
-| Session invalidation | Logout clears all tokens |
-| Suspicious activity | Alert on login from new device/location |
+| Measure                | Implementation                          |
+| ---------------------- | --------------------------------------- |
+| Token rotation         | Refresh tokens are single-use           |
+| CSRF protection        | SameSite cookies + CSRF tokens          |
+| Brute force prevention | Rate limiting on auth endpoints         |
+| Session invalidation   | Logout clears all tokens                |
+| Suspicious activity    | Alert on login from new device/location |
 
 ---
 

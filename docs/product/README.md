@@ -4,11 +4,11 @@ This directory contains all product-level documentation for Cognitive Engine.
 
 ## Contents
 
-| Document | Description |
-|---|---|
-| [Vision](vision.md) | Product vision, mission, and core principles |
-| [Roadmap](roadmap.md) | Development phases and milestones |
-| [User Stories](user-stories.md) | User stories organized by persona and epic |
+| Document                        | Description                                  |
+| ------------------------------- | -------------------------------------------- |
+| [Vision](vision.md)             | Product vision, mission, and core principles |
+| [Roadmap](roadmap.md)           | Development phases and milestones            |
+| [User Stories](user-stories.md) | User stories organized by persona and epic   |
 
 ## Purpose
 

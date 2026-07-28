@@ -4,12 +4,12 @@ This directory contains all database design documentation for Cognitive Engine.
 
 ## Contents
 
-| Document | Description |
-|---|---|
-| [Schema Design](schema-design.md) | Table definitions, relationships, and constraints |
-| [Data Model](data-model.md) | Conceptual data model and entity relationships |
-| [Migrations Strategy](migrations-strategy.md) | Database migration workflow and versioning |
-| [Diagrams](diagrams/) | ER diagrams and visual schema representations |
+| Document                                      | Description                                       |
+| --------------------------------------------- | ------------------------------------------------- |
+| [Schema Design](schema-design.md)             | Table definitions, relationships, and constraints |
+| [Data Model](data-model.md)                   | Conceptual data model and entity relationships    |
+| [Migrations Strategy](migrations-strategy.md) | Database migration workflow and versioning        |
+| [Diagrams](diagrams/)                         | ER diagrams and visual schema representations     |
 
 ## Database Choice
 

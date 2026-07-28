@@ -48,12 +48,12 @@ Examples:
 
 ## Environment Strategy
 
-| Environment | Migration Mode | Approval |
-|---|---|---|
-| Local dev | Auto-apply on start | None |
-| CI/Preview | Auto-apply | None |
-| Staging | Auto-apply from `develop` | None |
-| Production | Manual apply | Required |
+| Environment | Migration Mode            | Approval |
+| ----------- | ------------------------- | -------- |
+| Local dev   | Auto-apply on start       | None     |
+| CI/Preview  | Auto-apply                | None     |
+| Staging     | Auto-apply from `develop` | None     |
+| Production  | Manual apply              | Required |
 
 ---
 

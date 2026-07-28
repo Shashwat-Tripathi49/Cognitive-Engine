@@ -49,12 +49,12 @@ main ← production-ready, protected
 
 ### Branch Naming
 
-| Type | Pattern | Example |
-|---|---|---|
+| Type    | Pattern                      | Example                    |
+| ------- | ---------------------------- | -------------------------- |
 | Feature | `feature/CE-xxx-description` | `feature/CE-042-user-auth` |
-| Bug Fix | `fix/CE-xxx-description` | `fix/CE-087-login-crash` |
-| Hotfix | `hotfix/description` | `hotfix/critical-db-fix` |
-| Release | `release/vX.Y.Z` | `release/v1.0.0` |
+| Bug Fix | `fix/CE-xxx-description`     | `fix/CE-087-login-crash`   |
+| Hotfix  | `hotfix/description`         | `hotfix/critical-db-fix`   |
+| Release | `release/vX.Y.Z`             | `release/v1.0.0`           |
 
 ---
 
@@ -92,18 +92,18 @@ We use [Conventional Commits](https://www.conventionalcommits.org/):
 
 ### Types
 
-| Type | Description |
-|---|---|
-| `feat` | A new feature |
-| `fix` | A bug fix |
-| `docs` | Documentation changes |
-| `style` | Code style changes (formatting, semicolons, etc.) |
+| Type       | Description                                           |
+| ---------- | ----------------------------------------------------- |
+| `feat`     | A new feature                                         |
+| `fix`      | A bug fix                                             |
+| `docs`     | Documentation changes                                 |
+| `style`    | Code style changes (formatting, semicolons, etc.)     |
 | `refactor` | Code changes that neither fix a bug nor add a feature |
-| `perf` | Performance improvements |
-| `test` | Adding or updating tests |
-| `build` | Build system or dependency changes |
-| `ci` | CI/CD configuration changes |
-| `chore` | Other changes that don't modify src or test files |
+| `perf`     | Performance improvements                              |
+| `test`     | Adding or updating tests                              |
+| `build`    | Build system or dependency changes                    |
+| `ci`       | CI/CD configuration changes                           |
+| `chore`    | Other changes that don't modify src or test files     |
 
 ### Examples
 

@@ -10,12 +10,12 @@ Centralized configurations for development tools, ensuring every package and app
 
 ## Planned Configs
 
-| Config | Purpose |
-|---|---|
-| `eslint/` | ESLint configurations (base, React, Node) |
-| `typescript/` | TSConfig presets (base, React, Node) |
-| `prettier/` | Prettier configuration |
-| `vitest/` | Vitest configuration presets |
+| Config        | Purpose                                   |
+| ------------- | ----------------------------------------- |
+| `eslint/`     | ESLint configurations (base, React, Node) |
+| `typescript/` | TSConfig presets (base, React, Node)      |
+| `prettier/`   | Prettier configuration                    |
+| `vitest/`     | Vitest configuration presets              |
 
 ## Usage
 

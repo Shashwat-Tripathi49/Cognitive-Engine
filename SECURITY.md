@@ -19,20 +19,20 @@ Include the following in your report:
 
 ### Response Timeline
 
-| Action | Timeline |
-|---|---|
-| Acknowledgment of report | Within 48 hours |
-| Initial assessment | Within 5 business days |
-| Fix development | Within 30 days (critical) |
-| Public disclosure | After fix is deployed |
+| Action                   | Timeline                  |
+| ------------------------ | ------------------------- |
+| Acknowledgment of report | Within 48 hours           |
+| Initial assessment       | Within 5 business days    |
+| Fix development          | Within 30 days (critical) |
+| Public disclosure        | After fix is deployed     |
 
 ### Supported Versions
 
-| Version | Supported |
-|---|---|
-| Latest | ✅ |
-| Previous minor | ✅ |
-| Older versions | ❌ |
+| Version        | Supported |
+| -------------- | --------- |
+| Latest         | ✅        |
+| Previous minor | ✅        |
+| Older versions | ❌        |
 
 ## Security Best Practices
 

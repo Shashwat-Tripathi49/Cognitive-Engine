@@ -4,12 +4,12 @@ This directory contains all technical architecture documentation for Cognitive E
 
 ## Contents
 
-| Document | Description |
-|---|---|
-| [System Overview](system-overview.md) | High-level system architecture and component diagram |
-| [Tech Stack](tech-stack.md) | Technology choices and rationale for each layer |
-| [Infrastructure](infrastructure.md) | Cloud infrastructure, deployment, and scaling strategy |
-| [Decisions](decisions/) | Architecture Decision Records (ADRs) |
+| Document                              | Description                                            |
+| ------------------------------------- | ------------------------------------------------------ |
+| [System Overview](system-overview.md) | High-level system architecture and component diagram   |
+| [Tech Stack](tech-stack.md)           | Technology choices and rationale for each layer        |
+| [Infrastructure](infrastructure.md)   | Cloud infrastructure, deployment, and scaling strategy |
+| [Decisions](decisions/)               | Architecture Decision Records (ADRs)                   |
 
 ## Purpose
 

@@ -6,12 +6,12 @@
 
 ## Technology
 
-| Technology | Purpose |
-|---|---|
-| **React Native** | Cross-platform native UI |
+| Technology         | Purpose                          |
+| ------------------ | -------------------------------- |
+| **React Native**   | Cross-platform native UI         |
 | **Expo** (SDK 52+) | Development tooling, OTA updates |
-| **TypeScript** | Type safety |
-| **Expo Router** | File-based navigation |
+| **TypeScript**     | Type safety                      |
+| **Expo Router**    | File-based navigation            |
 
 ## Status
 

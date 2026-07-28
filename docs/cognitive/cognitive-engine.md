@@ -9,37 +9,40 @@
 The Cognitive Engine performs **deterministic mathematical and statistical computations** over memory embeddings and knowledge graph topology. It is the analytical discovery engine of the architecture.
 
 It answers:
-- *"Which memory nodes form dense spatial clusters in vector space?"*
-- *"What time-series sequences recur across the user's timeline?"*
-- *"What mathematical patterns exceed the minimum evidence threshold (occurrence $\ge 3$)?"*
-- *"What is the exact numerical confidence score of a discovered pattern?"*
+
+- _"Which memory nodes form dense spatial clusters in vector space?"_
+- _"What time-series sequences recur across the user's timeline?"_
+- _"What mathematical patterns exceed the minimum evidence threshold (occurrence $\ge 3$)?"_
+- _"What is the exact numerical confidence score of a discovered pattern?"_
 
 ---
 
 ## Responsibilities
 
-| # | Responsibility | Description |
-|---|---|---|
-| 1 | **Deterministic Clustering** | Compute density-based clusters (HDBSCAN / vector distance math) over Memory Nodes |
-| 2 | **Time-Series Analysis** | Calculate temporal sequences, occurrence frequencies, and rate deltas |
-| 3 | **Pattern Discovery** | Identify recurring structural and temporal configurations ($N \ge 3$) |
-| 4 | **Algorithmic Confidence** | Compute mathematical confidence scores based on density, sample size, and variance |
-| 5 | **Zero LLM Boundary** | Execute all computations using pure deterministic algorithms — **0% LLM usage** |
+| #   | Responsibility               | Description                                                                        |
+| --- | ---------------------------- | ---------------------------------------------------------------------------------- |
+| 1   | **Deterministic Clustering** | Compute density-based clusters (HDBSCAN / vector distance math) over Memory Nodes  |
+| 2   | **Time-Series Analysis**     | Calculate temporal sequences, occurrence frequencies, and rate deltas              |
+| 3   | **Pattern Discovery**        | Identify recurring structural and temporal configurations ($N \ge 3$)              |
+| 4   | **Algorithmic Confidence**   | Compute mathematical confidence scores based on density, sample size, and variance |
+| 5   | **Zero LLM Boundary**        | Execute all computations using pure deterministic algorithms — **0% LLM usage**    |
 
 ---
 
 ## Inputs & Outputs
 
 ### Inputs
-* `MemoryNode` & `Embedding` (from Memory Engine)
-* `GraphNode` & `GraphEdge` (from Knowledge Graph Engine)
+
+- `MemoryNode` & `Embedding` (from Memory Engine)
+- `GraphNode` & `GraphEdge` (from Knowledge Graph Engine)
 
 ### Outputs
-* `Cluster`
-* `TemporalSequence`
-* `Pattern`
-* `AlgorithmicConfidence`
-* Domain Events: `ClusterFormed`, `PatternDiscovered`
+
+- `Cluster`
+- `TemporalSequence`
+- `Pattern`
+- `AlgorithmicConfidence`
+- Domain Events: `ClusterFormed`, `PatternDiscovered`
 
 ---
 

@@ -25,13 +25,13 @@
 
 ### What Makes This Different
 
-| Traditional Apps | Cognitive Engine |
-|---|---|
-| Store static text | Understand semantic meaning |
-| Flat organization | Dynamic knowledge graphs |
-| Passive storage | Active cognitive augmentation |
-| Keyword search | Contextual intelligence |
-| Isolated entries | Connected thought patterns |
+| Traditional Apps  | Cognitive Engine              |
+| ----------------- | ----------------------------- |
+| Store static text | Understand semantic meaning   |
+| Flat organization | Dynamic knowledge graphs      |
+| Passive storage   | Active cognitive augmentation |
+| Keyword search    | Contextual intelligence       |
+| Isolated entries  | Connected thought patterns    |
 
 ---
 
@@ -88,17 +88,17 @@ pnpm dev
 
 All documentation lives in the [`docs/`](docs/) directory, organized by domain:
 
-| Section | Description |
-|---|---|
-| [🧠 Cognitive Architecture](docs/cognitive/) | Core domain engines (Capture, Memory, Knowledge Graph, Cognitive, Reasoning, Reflection) |
-| [📐 Domain Model](docs/domain/) | Bounded contexts, 19 core objects, evidence lineage, lifecycle, domain events & invariants |
-| [📋 Product](docs/product/) | Vision, roadmap, user stories |
-| [🏗️ Technical Architecture](docs/architecture/) | System design, tech stack, ADRs |
-| [🎨 UX](docs/ux/) | Design system, user flows, accessibility |
-| [🤖 AI Architecture](docs/ai/) | Model architecture, data pipeline, prompt engineering, ethics |
-| [🗄️ Database](docs/database/) | Schema design, data model, migrations strategy |
-| [🔌 API](docs/api/) | Endpoints, authentication, error handling |
-| [🛠️ Development](docs/development/) | Setup, standards, git workflow, testing |
+| Section                                         | Description                                                                                |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| [🧠 Cognitive Architecture](docs/cognitive/)    | Core domain engines (Capture, Memory, Knowledge Graph, Cognitive, Reasoning, Reflection)   |
+| [📐 Domain Model](docs/domain/)                 | Bounded contexts, 19 core objects, evidence lineage, lifecycle, domain events & invariants |
+| [📋 Product](docs/product/)                     | Vision, roadmap, user stories                                                              |
+| [🏗️ Technical Architecture](docs/architecture/) | System design, tech stack, ADRs                                                            |
+| [🎨 UX](docs/ux/)                               | Design system, user flows, accessibility                                                   |
+| [🤖 AI Architecture](docs/ai/)                  | Model architecture, data pipeline, prompt engineering, ethics                              |
+| [🗄️ Database](docs/database/)                   | Schema design, data model, migrations strategy                                             |
+| [🔌 API](docs/api/)                             | Endpoints, authentication, error handling                                                  |
+| [🛠️ Development](docs/development/)             | Setup, standards, git workflow, testing                                                    |
 
 ---
 

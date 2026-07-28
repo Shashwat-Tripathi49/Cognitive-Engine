@@ -54,24 +54,24 @@ Ingestion → Processing → Embedding → Indexing → Serving
 
 ### Job Types
 
-| Job | Priority | Retry | Timeout |
-|---|---|---|---|
-| `embed_entry` | High | 3x | 30s |
-| `find_connections` | Medium | 2x | 60s |
-| `generate_digest` | Low | 1x | 120s |
-| `analyze_patterns` | Low | 1x | 180s |
+| Job                | Priority | Retry | Timeout |
+| ------------------ | -------- | ----- | ------- |
+| `embed_entry`      | High     | 3x    | 30s     |
+| `find_connections` | Medium   | 2x    | 60s     |
+| `generate_digest`  | Low      | 1x    | 120s    |
+| `analyze_patterns` | Low      | 1x    | 180s    |
 
 ---
 
 ## Data Retention
 
-| Data Type | Retention | Reason |
-|---|---|---|
-| Raw text | Until user deletes | User ownership |
-| Embeddings | Rebuilt on model change | Tied to model version |
-| Connections | Rebuilt on analysis | Derived data |
-| AI responses | 30 days | Cache / audit |
-| Usage metrics | 90 days | Analytics |
+| Data Type     | Retention               | Reason                |
+| ------------- | ----------------------- | --------------------- |
+| Raw text      | Until user deletes      | User ownership        |
+| Embeddings    | Rebuilt on model change | Tied to model version |
+| Connections   | Rebuilt on analysis     | Derived data          |
+| AI responses  | 30 days                 | Cache / audit         |
+| Usage metrics | 90 days                 | Analytics             |
 
 ---
 

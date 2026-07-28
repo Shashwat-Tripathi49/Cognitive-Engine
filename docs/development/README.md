@@ -4,15 +4,15 @@ This directory contains all engineering standards and development workflow docum
 
 ## Contents
 
-| Document | Description |
-|---|---|
-| [Setup](setup.md) | Local development environment setup |
-| [Coding Standards](coding-standards.md) | TypeScript style guide, patterns, and anti-patterns |
-| [Git Workflow](git-workflow.md) | Branching strategy, commit conventions, PR process |
-| [Naming Conventions](naming-conventions.md) | Naming rules for files, variables, APIs, and database |
-| [Dependency Management](dependency-management.md) | How we manage packages and dependencies |
-| [Testing Strategy](testing-strategy.md) | Testing philosophy, tooling, and coverage targets |
-| [Code Review](code-review.md) | Code review process and checklist |
+| Document                                          | Description                                           |
+| ------------------------------------------------- | ----------------------------------------------------- |
+| [Setup](setup.md)                                 | Local development environment setup                   |
+| [Coding Standards](coding-standards.md)           | TypeScript style guide, patterns, and anti-patterns   |
+| [Git Workflow](git-workflow.md)                   | Branching strategy, commit conventions, PR process    |
+| [Naming Conventions](naming-conventions.md)       | Naming rules for files, variables, APIs, and database |
+| [Dependency Management](dependency-management.md) | How we manage packages and dependencies               |
+| [Testing Strategy](testing-strategy.md)           | Testing philosophy, tooling, and coverage targets     |
+| [Code Review](code-review.md)                     | Code review process and checklist                     |
 
 ## Purpose
 

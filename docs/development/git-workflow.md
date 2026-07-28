@@ -30,13 +30,13 @@ main                         ← Production-ready, protected
 <type>/<ticket-id>-<short-description>
 ```
 
-| Type | Use | Example |
-|---|---|---|
-| `feature` | New functionality | `feature/CE-042-user-auth` |
-| `fix` | Bug fixes | `fix/CE-087-login-crash` |
-| `chore` | Maintenance, refactoring | `chore/update-dependencies` |
-| `hotfix` | Emergency production fix | `hotfix/critical-db-fix` |
-| `release` | Release preparation | `release/v1.0.0` |
+| Type      | Use                      | Example                     |
+| --------- | ------------------------ | --------------------------- |
+| `feature` | New functionality        | `feature/CE-042-user-auth`  |
+| `fix`     | Bug fixes                | `fix/CE-087-login-crash`    |
+| `chore`   | Maintenance, refactoring | `chore/update-dependencies` |
+| `hotfix`  | Emergency production fix | `hotfix/critical-db-fix`    |
+| `release` | Release preparation      | `release/v1.0.0`            |
 
 ---
 
@@ -54,18 +54,18 @@ We use [Conventional Commits](https://www.conventionalcommits.org/):
 
 ### Types
 
-| Type | Description |
-|---|---|
-| `feat` | New feature |
-| `fix` | Bug fix |
-| `docs` | Documentation only |
-| `style` | Formatting (no code change) |
+| Type       | Description                  |
+| ---------- | ---------------------------- |
+| `feat`     | New feature                  |
+| `fix`      | Bug fix                      |
+| `docs`     | Documentation only           |
+| `style`    | Formatting (no code change)  |
 | `refactor` | Code change (no feature/fix) |
-| `perf` | Performance improvement |
-| `test` | Adding/updating tests |
-| `build` | Build system changes |
-| `ci` | CI configuration |
-| `chore` | Other maintenance |
+| `perf`     | Performance improvement      |
+| `test`     | Adding/updating tests        |
+| `build`    | Build system changes         |
+| `ci`       | CI configuration             |
+| `chore`    | Other maintenance            |
 
 ### Scope
 
@@ -82,11 +82,11 @@ refactor(shared): extract date utilities
 
 ## Merge Strategy
 
-| Target Branch | Merge Type | Rationale |
-|---|---|---|
+| Target Branch           | Merge Type       | Rationale                             |
+| ----------------------- | ---------------- | ------------------------------------- |
 | `develop` ← feature/fix | **Squash merge** | Clean history, one commit per feature |
-| `main` ← release | **Merge commit** | Preserves release context |
-| `main` ← hotfix | **Merge commit** | Preserves hotfix context |
+| `main` ← release        | **Merge commit** | Preserves release context             |
+| `main` ← hotfix         | **Merge commit** | Preserves hotfix context              |
 
 ---
 

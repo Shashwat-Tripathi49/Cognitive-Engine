@@ -31,12 +31,12 @@ If applicable, add screenshots to help explain your problem.
 
 ## Environment
 
-| Property | Value |
-|---|---|
-| OS | [e.g., Windows 11, macOS 15] |
-| Browser | [e.g., Chrome 128, Firefox 130] |
-| Node.js | [e.g., 20.x] |
-| App Version | [e.g., 0.1.0] |
+| Property    | Value                           |
+| ----------- | ------------------------------- |
+| OS          | [e.g., Windows 11, macOS 15]    |
+| Browser     | [e.g., Chrome 128, Firefox 130] |
+| Node.js     | [e.g., 20.x]                    |
+| App Version | [e.g., 0.1.0]                   |
 
 ## Additional Context
 

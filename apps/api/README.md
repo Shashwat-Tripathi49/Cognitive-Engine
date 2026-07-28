@@ -6,13 +6,13 @@
 
 ## Technology
 
-| Technology | Purpose |
-|---|---|
-| **Hono** | Lightweight, edge-ready HTTP framework |
-| **TypeScript** | Type safety |
-| **Drizzle ORM** | Type-safe database queries |
-| **Zod** | Request/response validation |
-| **Vercel AI SDK** | LLM integration (server-side) |
+| Technology        | Purpose                                |
+| ----------------- | -------------------------------------- |
+| **Hono**          | Lightweight, edge-ready HTTP framework |
+| **TypeScript**    | Type safety                            |
+| **Drizzle ORM**   | Type-safe database queries             |
+| **Zod**           | Request/response validation            |
+| **Vercel AI SDK** | LLM integration (server-side)          |
 
 ## Directory Structure (Planned)
 

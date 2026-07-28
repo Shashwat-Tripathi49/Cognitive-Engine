@@ -4,13 +4,13 @@ This directory contains all AI/ML architecture documentation for Cognitive Engin
 
 ## Contents
 
-| Document | Description |
-|---|---|
+| Document                                    | Description                                                 |
+| ------------------------------------------- | ----------------------------------------------------------- |
 | [Model Architecture](model-architecture.md) | AI system design, model selection, and integration patterns |
-| [Data Pipeline](data-pipeline.md) | Data ingestion, processing, embedding, and indexing |
-| [Prompt Engineering](prompt-engineering.md) | Prompt design principles, templates, and versioning |
-| [Evaluation](evaluation.md) | AI quality metrics, benchmarking, and testing framework |
-| [Ethics](ethics.md) | AI ethics guidelines, bias mitigation, and responsible AI |
+| [Data Pipeline](data-pipeline.md)           | Data ingestion, processing, embedding, and indexing         |
+| [Prompt Engineering](prompt-engineering.md) | Prompt design principles, templates, and versioning         |
+| [Evaluation](evaluation.md)                 | AI quality metrics, benchmarking, and testing framework     |
+| [Ethics](ethics.md)                         | AI ethics guidelines, bias mitigation, and responsible AI   |
 
 ## Purpose
 

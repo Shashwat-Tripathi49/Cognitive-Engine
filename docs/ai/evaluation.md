@@ -17,28 +17,28 @@
 
 ### Semantic Search
 
-| Metric | Description | Target |
-|---|---|---|
-| Precision@5 | % of top-5 results that are relevant | > 80% |
-| Recall@10 | % of relevant results in top-10 | > 70% |
-| MRR | Mean Reciprocal Rank | > 0.7 |
-| Latency (P95) | 95th percentile response time | < 500ms |
+| Metric        | Description                          | Target  |
+| ------------- | ------------------------------------ | ------- |
+| Precision@5   | % of top-5 results that are relevant | > 80%   |
+| Recall@10     | % of relevant results in top-10      | > 70%   |
+| MRR           | Mean Reciprocal Rank                 | > 0.7   |
+| Latency (P95) | 95th percentile response time        | < 500ms |
 
 ### Connection Detection
 
-| Metric | Description | Target |
-|---|---|---|
-| Precision | % of suggested connections that are meaningful | > 75% |
-| User acceptance rate | % of connections users engage with | > 30% |
-| False positive rate | % of irrelevant connections shown | < 15% |
+| Metric               | Description                                    | Target |
+| -------------------- | ---------------------------------------------- | ------ |
+| Precision            | % of suggested connections that are meaningful | > 75%  |
+| User acceptance rate | % of connections users engage with             | > 30%  |
+| False positive rate  | % of irrelevant connections shown              | < 15%  |
 
 ### Digest Quality
 
-| Metric | Description | Target |
-|---|---|---|
-| Relevance score | Human-rated relevance (1-5) | > 4.0 |
-| Engagement rate | % of users who read full digest | > 50% |
-| Actionability | % of digests leading to user action | > 20% |
+| Metric          | Description                         | Target |
+| --------------- | ----------------------------------- | ------ |
+| Relevance score | Human-rated relevance (1-5)         | > 4.0  |
+| Engagement rate | % of users who read full digest     | > 50%  |
+| Actionability   | % of digests leading to user action | > 20%  |
 
 ---
 
@@ -57,11 +57,11 @@
 
 ## Golden Datasets
 
-| Dataset | Size | Purpose |
-|---|---|---|
-| `search_eval_v1` | 200 queries | Semantic search quality |
-| `connection_eval_v1` | 100 entry pairs | Connection detection accuracy |
-| `digest_eval_v1` | 50 weekly samples | Digest quality |
+| Dataset              | Size              | Purpose                       |
+| -------------------- | ----------------- | ----------------------------- |
+| `search_eval_v1`     | 200 queries       | Semantic search quality       |
+| `connection_eval_v1` | 100 entry pairs   | Connection detection accuracy |
+| `digest_eval_v1`     | 50 weekly samples | Digest quality                |
 
 > Datasets will be created during Phase 2 development.
 

@@ -14,26 +14,28 @@ It receives verified `ReasoningArtifact` objects and `EvidenceChain` containers 
 
 ## Responsibilities
 
-| # | Responsibility | Description |
-|---|---|---|
-| 1 | **Prose Synthesis** | Translate structured `ReasoningArtifact` data into clear human language via LLMs |
-| 2 | **Evidence Constraint** | Restrict LLM text generation strictly to facts and excerpts in the linked `EvidenceChain` |
-| 3 | **Metacognitive Mirroring** | Reflect thinking patterns, temporal trends, and structural shifts back to the user |
-| 4 | **Reflection Report Assembly** | Compile reflections into temporal reports (weekly/monthly cognitive digests) |
-| 5 | **Zero Recommendation Invariant** | Enforce "Reflection over recommendation" — no advice, calls-to-action, or predictions |
+| #   | Responsibility                    | Description                                                                               |
+| --- | --------------------------------- | ----------------------------------------------------------------------------------------- |
+| 1   | **Prose Synthesis**               | Translate structured `ReasoningArtifact` data into clear human language via LLMs          |
+| 2   | **Evidence Constraint**           | Restrict LLM text generation strictly to facts and excerpts in the linked `EvidenceChain` |
+| 3   | **Metacognitive Mirroring**       | Reflect thinking patterns, temporal trends, and structural shifts back to the user        |
+| 4   | **Reflection Report Assembly**    | Compile reflections into temporal reports (weekly/monthly cognitive digests)              |
+| 5   | **Zero Recommendation Invariant** | Enforce "Reflection over recommendation" — no advice, calls-to-action, or predictions     |
 
 ---
 
 ## Inputs & Outputs
 
 ### Inputs
-* `ReasoningArtifact` (from Reasoning Engine)
-* `EvidenceChain` (from Reasoning Engine)
+
+- `ReasoningArtifact` (from Reasoning Engine)
+- `EvidenceChain` (from Reasoning Engine)
 
 ### Outputs
-* `MetacognitiveReflection`
-* `ReflectionReport`
-* Domain Events: `ReflectionGenerated`
+
+- `MetacognitiveReflection`
+- `ReflectionReport`
+- Domain Events: `ReflectionGenerated`
 
 ---
 

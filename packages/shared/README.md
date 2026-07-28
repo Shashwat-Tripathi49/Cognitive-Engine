@@ -37,8 +37,8 @@ packages/shared/
 ## Usage
 
 ```typescript
-import type { Entry, UserProfile } from '@cognitive-engine/shared';
-import { LIMITS, validateEntry } from '@cognitive-engine/shared';
+import type { Entry, UserProfile } from "@cognitive-engine/shared";
+import { LIMITS, validateEntry } from "@cognitive-engine/shared";
 ```
 
 ## Status

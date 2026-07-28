@@ -18,13 +18,13 @@
 
 ```typescript
 interface PromptTemplate {
-  id: string;           // e.g., "cognitive.connection.detect.v2"
-  version: string;      // semantic versioning
-  model: string;        // target model
-  temperature: number;  // 0.0 - 1.0
+  id: string; // e.g., "cognitive.connection.detect.v2"
+  version: string; // semantic versioning
+  model: string; // target model
+  temperature: number; // 0.0 - 1.0
   maxTokens: number;
   systemPrompt: string;
-  userPromptTemplate: string;  // with {{variables}}
+  userPromptTemplate: string; // with {{variables}}
   outputSchema: object; // expected response structure
 }
 ```
@@ -87,12 +87,12 @@ Output: 1-2 sentence summary
 
 ## Prompt Versioning Strategy
 
-| Action | Process |
-|---|---|
-| New prompt | Create with v1, add test cases |
-| Modify prompt | Increment version, A/B test against previous |
-| Deprecate prompt | Mark deprecated, set sunset date |
-| Rollback | Revert to previous version in config |
+| Action           | Process                                      |
+| ---------------- | -------------------------------------------- |
+| New prompt       | Create with v1, add test cases               |
+| Modify prompt    | Increment version, A/B test against previous |
+| Deprecate prompt | Mark deprecated, set sunset date             |
+| Rollback         | Revert to previous version in config         |
 
 ---
 

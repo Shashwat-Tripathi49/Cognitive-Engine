@@ -16,14 +16,14 @@ The Capture Engine does **not** interpret meaning. It captures, normalizes, enri
 
 ## Responsibilities
 
-| # | Responsibility | Description |
-|---|---|---|
-| 1 | **Input Acceptance** | Accept input from any supported modality (text, voice, link, highlight, image) |
-| 2 | **Validation** | Ensure input meets minimum quality thresholds (non-empty, within size limits, valid encoding) |
-| 3 | **Normalization** | Transform modality-specific input into a uniform Cognitive Fragment structure |
-| 4 | **Metadata Enrichment** | Attach structural metadata: timestamp, source modality, language, word count, content hash |
-| 5 | **Initial Classification** | Assign a preliminary content type (freeform, question, decision, observation, reference) |
-| 6 | **Fragment Emission** | Emit a `FragmentCaptured` Domain Event containing the completed Cognitive Fragment |
+| #   | Responsibility             | Description                                                                                   |
+| --- | -------------------------- | --------------------------------------------------------------------------------------------- |
+| 1   | **Input Acceptance**       | Accept input from any supported modality (text, voice, link, highlight, image)                |
+| 2   | **Validation**             | Ensure input meets minimum quality thresholds (non-empty, within size limits, valid encoding) |
+| 3   | **Normalization**          | Transform modality-specific input into a uniform Cognitive Fragment structure                 |
+| 4   | **Metadata Enrichment**    | Attach structural metadata: timestamp, source modality, language, word count, content hash    |
+| 5   | **Initial Classification** | Assign a preliminary content type (freeform, question, decision, observation, reference)      |
+| 6   | **Fragment Emission**      | Emit a `FragmentCaptured` Domain Event containing the completed Cognitive Fragment            |
 
 ### What It Does NOT Do
 
@@ -36,14 +36,14 @@ The Capture Engine does **not** interpret meaning. It captures, normalizes, enri
 
 ## Inputs
 
-| Input | Source | Description |
-|---|---|---|
-| Raw text | User (manual entry) | Free-form text of any length |
-| Voice transcript | User (voice capture) | Transcribed audio input |
-| Web highlight | User (browser extension) | Highlighted text + source URL |
-| Linked reference | User (paste/import) | URL with optional annotation |
-| Structured prompt | System (guided capture) | Response to a system-posed question |
-| Image annotation | User (image + text) | Image with descriptive caption |
+| Input             | Source                   | Description                         |
+| ----------------- | ------------------------ | ----------------------------------- |
+| Raw text          | User (manual entry)      | Free-form text of any length        |
+| Voice transcript  | User (voice capture)     | Transcribed audio input             |
+| Web highlight     | User (browser extension) | Highlighted text + source URL       |
+| Linked reference  | User (paste/import)      | URL with optional annotation        |
+| Structured prompt | System (guided capture)  | Response to a system-posed question |
+| Image annotation  | User (image + text)      | Image with descriptive caption      |
 
 ---
 
@@ -120,15 +120,15 @@ flowchart TD
 
 ### Step Details
 
-| Step | Description | Failure Mode |
-|---|---|---|
-| **Validate** | Check non-empty content, size limits, valid encoding | Reject with clear error; no fragment created |
-| **Normalize** | Strip formatting artifacts, normalize whitespace, handle encoding | Degrade to raw text if normalization fails |
-| **Detect Modality** | Classify input source (text, voice, highlight, etc.) | Default to `text` if detection fails |
-| **Enrich** | Language detection, word count, complexity estimation | Continue without enrichment; mark fields as `unknown` |
-| **Classify** | Assign content type using heuristics (question marks → question, etc.) | Default to `freeform` |
-| **Hash & Deduplicate** | SHA-256 content hash; check against recent fragments | Allow duplicate but tag it; never silently discard |
-| **Emit** | Publish `FragmentCaptured` event to the Event Bus | Retry with exponential backoff; dead-letter after 3 failures |
+| Step                   | Description                                                            | Failure Mode                                                 |
+| ---------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------ |
+| **Validate**           | Check non-empty content, size limits, valid encoding                   | Reject with clear error; no fragment created                 |
+| **Normalize**          | Strip formatting artifacts, normalize whitespace, handle encoding      | Degrade to raw text if normalization fails                   |
+| **Detect Modality**    | Classify input source (text, voice, highlight, etc.)                   | Default to `text` if detection fails                         |
+| **Enrich**             | Language detection, word count, complexity estimation                  | Continue without enrichment; mark fields as `unknown`        |
+| **Classify**           | Assign content type using heuristics (question marks → question, etc.) | Default to `freeform`                                        |
+| **Hash & Deduplicate** | SHA-256 content hash; check against recent fragments                   | Allow duplicate but tag it; never silently discard           |
+| **Emit**               | Publish `FragmentCaptured` event to the Event Bus                      | Retry with exponential backoff; dead-letter after 3 failures |
 
 ---
 
@@ -144,12 +144,12 @@ graph LR
     style CE fill:#6C5CE7,color:#fff
 ```
 
-| Dependency | Direction | Type | Description |
-|---|---|---|---|
-| Presentation Layer | Upstream (provides input) | External | Any UI, API, or import mechanism |
-| Event Bus | Downstream (receives events) | Infrastructure | Routes `FragmentCaptured` to subscribers |
-| Memory Engine | Downstream (consumes events) | Indirect | Subscribes to `FragmentCaptured`; no direct coupling |
-| Orchestration Engine | Observer | Indirect | Monitors capture events for pipeline coordination |
+| Dependency           | Direction                    | Type           | Description                                          |
+| -------------------- | ---------------------------- | -------------- | ---------------------------------------------------- |
+| Presentation Layer   | Upstream (provides input)    | External       | Any UI, API, or import mechanism                     |
+| Event Bus            | Downstream (receives events) | Infrastructure | Routes `FragmentCaptured` to subscribers             |
+| Memory Engine        | Downstream (consumes events) | Indirect       | Subscribes to `FragmentCaptured`; no direct coupling |
+| Orchestration Engine | Observer                     | Indirect       | Monitors capture events for pipeline coordination    |
 
 **The Capture Engine has ZERO dependencies on other engines.** It is the entry point of the system and must never be blocked by downstream failures.
 
@@ -157,14 +157,14 @@ graph LR
 
 ## Failure Scenarios
 
-| Scenario | Impact | Mitigation |
-|---|---|---|
-| **Invalid input** | Fragment not created | Return clear validation error; never silently drop |
-| **Enrichment failure** (language detection, complexity) | Fragment created with partial metadata | Mark unknown fields explicitly; process anyway |
-| **Duplicate input** | Near-identical fragment | Detect via content hash; emit `DuplicateDetected` event but still persist (user may intend repetition) |
-| **Event Bus unavailable** | Fragment created but event not delivered | Local queue with retry; fragment is persisted independently of event delivery |
-| **High volume burst** | Backpressure on downstream engines | Capture Engine operates independently; downstream engines handle their own throughput via the Orchestration Engine |
-| **Malformed encoding** | Content corruption | Normalize to UTF-8; reject if normalization is impossible |
+| Scenario                                                | Impact                                   | Mitigation                                                                                                         |
+| ------------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Invalid input**                                       | Fragment not created                     | Return clear validation error; never silently drop                                                                 |
+| **Enrichment failure** (language detection, complexity) | Fragment created with partial metadata   | Mark unknown fields explicitly; process anyway                                                                     |
+| **Duplicate input**                                     | Near-identical fragment                  | Detect via content hash; emit `DuplicateDetected` event but still persist (user may intend repetition)             |
+| **Event Bus unavailable**                               | Fragment created but event not delivered | Local queue with retry; fragment is persisted independently of event delivery                                      |
+| **High volume burst**                                   | Backpressure on downstream engines       | Capture Engine operates independently; downstream engines handle their own throughput via the Orchestration Engine |
+| **Malformed encoding**                                  | Content corruption                       | Normalize to UTF-8; reject if normalization is impossible                                                          |
 
 ### Failure Principle
 
@@ -174,14 +174,14 @@ graph LR
 
 ## Future Scalability Considerations
 
-| Consideration | Description |
-|---|---|
-| **New modalities** | Adding new input types (audio, video, sketches, sensor data) should require only a new normalizer — no changes to the core fragment structure |
-| **Multi-language support** | Language detection enrichment should scale to any language; normalization must be Unicode-safe from day one |
-| **Batch import** | Users may import existing journals, notes, or data from other tools; the Capture Engine must support bulk fragment creation without overwhelming downstream engines |
-| **Real-time streaming** | Voice and continuous capture should be supported as streaming input that produces fragments at natural boundaries (sentences, pauses) |
-| **Content versioning** | If users edit a capture, the original fragment remains immutable; edits produce a new fragment linked to the original via a `revises` relationship |
-| **Third-party integrations** | Captures from external tools (email, calendar, reading apps) should enter through the same normalization pipeline |
+| Consideration                | Description                                                                                                                                                         |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **New modalities**           | Adding new input types (audio, video, sketches, sensor data) should require only a new normalizer — no changes to the core fragment structure                       |
+| **Multi-language support**   | Language detection enrichment should scale to any language; normalization must be Unicode-safe from day one                                                         |
+| **Batch import**             | Users may import existing journals, notes, or data from other tools; the Capture Engine must support bulk fragment creation without overwhelming downstream engines |
+| **Real-time streaming**      | Voice and continuous capture should be supported as streaming input that produces fragments at natural boundaries (sentences, pauses)                               |
+| **Content versioning**       | If users edit a capture, the original fragment remains immutable; edits produce a new fragment linked to the original via a `revises` relationship                  |
+| **Third-party integrations** | Captures from external tools (email, calendar, reading apps) should enter through the same normalization pipeline                                                   |
 
 ---
 

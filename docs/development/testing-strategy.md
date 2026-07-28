@@ -23,23 +23,23 @@
 
 ## Tooling
 
-| Type | Tool | Config Location |
-|---|---|---|
-| Unit & Integration | Vitest | `packages/config/vitest` |
-| E2E | Playwright | `apps/web/playwright.config.ts` |
-| API testing | Vitest + supertest | `apps/api/tests/` |
-| Component testing | Vitest + Testing Library | `apps/web/tests/` |
+| Type               | Tool                     | Config Location                 |
+| ------------------ | ------------------------ | ------------------------------- |
+| Unit & Integration | Vitest                   | `packages/config/vitest`        |
+| E2E                | Playwright               | `apps/web/playwright.config.ts` |
+| API testing        | Vitest + supertest       | `apps/api/tests/`               |
+| Component testing  | Vitest + Testing Library | `apps/web/tests/`               |
 
 ---
 
 ## Coverage Targets
 
-| Package | Target | Required for Merge |
-|---|---|---|
-| `packages/shared` | ≥ 90% | ✅ |
-| `apps/api` | ≥ 80% | ✅ |
-| `apps/web` | ≥ 70% | ✅ |
-| E2E (critical paths) | 100% of user stories | ✅ |
+| Package              | Target               | Required for Merge |
+| -------------------- | -------------------- | ------------------ |
+| `packages/shared`    | ≥ 90%                | ✅                 |
+| `apps/api`           | ≥ 80%                | ✅                 |
+| `apps/web`           | ≥ 70%                | ✅                 |
+| E2E (critical paths) | 100% of user stories | ✅                 |
 
 ---
 
@@ -67,20 +67,20 @@ tests/
 
 ```typescript
 // ✅ Descriptive test names
-describe('EntryService', () => {
-  describe('createEntry', () => {
-    it('should create an entry with the given content and return it with a generated ID', async () => {
+describe("EntryService", () => {
+  describe("createEntry", () => {
+    it("should create an entry with the given content and return it with a generated ID", async () => {
       // ...
     });
 
-    it('should throw ValidationError when content is empty', async () => {
+    it("should throw ValidationError when content is empty", async () => {
       // ...
     });
   });
 });
 
 // ✅ Arrange-Act-Assert pattern
-it('should calculate connection strength correctly', () => {
+it("should calculate connection strength correctly", () => {
   // Arrange
   const similarity = 0.8;
   const recency = 0.6;
@@ -97,13 +97,13 @@ it('should calculate connection strength correctly', () => {
 
 ## What to Test
 
-| ✅ Test | ❌ Don't Test |
-|---|---|
-| Business logic | Framework internals |
-| API contracts | Third-party library behavior |
-| Error handling paths | CSS styling |
-| Edge cases | Implementation details |
-| User interactions (E2E) | Private methods directly |
+| ✅ Test                 | ❌ Don't Test                |
+| ----------------------- | ---------------------------- |
+| Business logic          | Framework internals          |
+| API contracts           | Third-party library behavior |
+| Error handling paths    | CSS styling                  |
+| Edge cases              | Implementation details       |
+| User interactions (E2E) | Private methods directly     |
 
 ---
 

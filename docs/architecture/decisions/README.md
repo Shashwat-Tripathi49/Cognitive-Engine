@@ -6,8 +6,8 @@ Architecture Decision Records capture significant architectural decisions along 
 
 ## Index
 
-| ADR | Title | Status | Date |
-|---|---|---|---|
+| ADR                              | Title                             | Status      | Date       |
+| -------------------------------- | --------------------------------- | ----------- | ---------- |
 | [001](001-monorepo-structure.md) | Monorepo Structure with Turborepo | ✅ Accepted | 2026-07-28 |
 
 ## ADR Template
@@ -32,12 +32,15 @@ What is the change that we're proposing and/or doing?
 ## Consequences
 
 ### Positive
+
 - ...
 
 ### Negative
+
 - ...
 
 ### Neutral
+
 - ...
 
 ## Alternatives Considered

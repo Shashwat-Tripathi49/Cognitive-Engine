@@ -89,27 +89,27 @@ All responses follow a consistent envelope:
 
 ## Conventions
 
-| Convention | Standard |
-|---|---|
+| Convention      | Standard                                                    |
+| --------------- | ----------------------------------------------------------- |
 | Resource naming | Plural nouns, kebab-case (`/entries`, `/cognitive-digests`) |
-| Query params | camelCase (`?pageSize=20&sortBy=createdAt`) |
-| Request body | camelCase JSON |
-| Response body | camelCase JSON |
-| Dates | ISO 8601 with timezone (`2026-07-28T00:00:00Z`) |
-| IDs | UUID v4 |
-| Pagination | Offset-based (page + pageSize) |
-| Sorting | `?sortBy=field&sortOrder=asc|desc` |
-| Filtering | `?filter[field]=value` |
+| Query params    | camelCase (`?pageSize=20&sortBy=createdAt`)                 |
+| Request body    | camelCase JSON                                              |
+| Response body   | camelCase JSON                                              |
+| Dates           | ISO 8601 with timezone (`2026-07-28T00:00:00Z`)             |
+| IDs             | UUID v4                                                     |
+| Pagination      | Offset-based (page + pageSize)                              |
+| Sorting         | `?sortBy=field&sortOrder=asc                                | desc` |
+| Filtering       | `?filter[field]=value`                                      |
 
 ---
 
 ## Rate Limiting
 
-| Tier | Limit | Window |
-|---|---|---|
-| Free | 100 req/min | Per user |
-| Pro | 500 req/min | Per user |
-| AI endpoints | 30 req/min | Per user |
+| Tier         | Limit       | Window   |
+| ------------ | ----------- | -------- |
+| Free         | 100 req/min | Per user |
+| Pro          | 500 req/min | Per user |
+| AI endpoints | 30 req/min  | Per user |
 
 Rate limit headers:
 
@@ -123,18 +123,18 @@ X-RateLimit-Reset: 1690502400
 
 ## HTTP Status Codes
 
-| Code | Meaning | When |
-|---|---|---|
-| `200` | OK | Successful GET, PUT, PATCH |
-| `201` | Created | Successful POST |
-| `204` | No Content | Successful DELETE |
-| `400` | Bad Request | Validation error |
-| `401` | Unauthorized | Missing or invalid token |
-| `403` | Forbidden | Insufficient permissions |
-| `404` | Not Found | Resource doesn't exist |
-| `409` | Conflict | Duplicate resource |
-| `429` | Too Many Requests | Rate limit exceeded |
-| `500` | Internal Server Error | Unexpected server error |
+| Code  | Meaning               | When                       |
+| ----- | --------------------- | -------------------------- |
+| `200` | OK                    | Successful GET, PUT, PATCH |
+| `201` | Created               | Successful POST            |
+| `204` | No Content            | Successful DELETE          |
+| `400` | Bad Request           | Validation error           |
+| `401` | Unauthorized          | Missing or invalid token   |
+| `403` | Forbidden             | Insufficient permissions   |
+| `404` | Not Found             | Resource doesn't exist     |
+| `409` | Conflict              | Duplicate resource         |
+| `429` | Too Many Requests     | Rate limit exceeded        |
+| `500` | Internal Server Error | Unexpected server error    |
 
 ---
 

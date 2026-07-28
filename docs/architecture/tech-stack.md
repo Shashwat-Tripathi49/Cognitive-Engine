@@ -6,24 +6,24 @@
 
 ## Stack Overview
 
-| Layer | Technology | Version | License |
-|---|---|---|---|
-| **Language** | TypeScript | 5.x | Apache-2.0 |
-| **Runtime** | Node.js | 20.x LTS | MIT |
-| **Frontend** | Next.js (App Router) | 15.x | MIT |
-| **Backend** | Hono | 4.x | MIT |
-| **Database** | PostgreSQL | 16.x | PostgreSQL |
-| **ORM** | Drizzle ORM | Latest | Apache-2.0 |
-| **Cache** | Redis | 7.x | BSD-3 |
-| **AI SDK** | Vercel AI SDK | 4.x | Apache-2.0 |
-| **AI Framework** | LangChain.js | Latest | MIT |
-| **Vector DB** | pgvector (PostgreSQL extension) | Latest | PostgreSQL |
-| **Mobile** | React Native (Expo) | SDK 52+ | MIT |
-| **Monorepo** | Turborepo | 2.x | MIT |
-| **Package Manager** | pnpm | 9.x | MIT |
-| **Testing (Unit)** | Vitest | 2.x | MIT |
-| **Testing (E2E)** | Playwright | Latest | Apache-2.0 |
-| **CI/CD** | GitHub Actions | N/A | N/A |
+| Layer               | Technology                      | Version  | License    |
+| ------------------- | ------------------------------- | -------- | ---------- |
+| **Language**        | TypeScript                      | 5.x      | Apache-2.0 |
+| **Runtime**         | Node.js                         | 20.x LTS | MIT        |
+| **Frontend**        | Next.js (App Router)            | 15.x     | MIT        |
+| **Backend**         | Hono                            | 4.x      | MIT        |
+| **Database**        | PostgreSQL                      | 16.x     | PostgreSQL |
+| **ORM**             | Drizzle ORM                     | Latest   | Apache-2.0 |
+| **Cache**           | Redis                           | 7.x      | BSD-3      |
+| **AI SDK**          | Vercel AI SDK                   | 4.x      | Apache-2.0 |
+| **AI Framework**    | LangChain.js                    | Latest   | MIT        |
+| **Vector DB**       | pgvector (PostgreSQL extension) | Latest   | PostgreSQL |
+| **Mobile**          | React Native (Expo)             | SDK 52+  | MIT        |
+| **Monorepo**        | Turborepo                       | 2.x      | MIT        |
+| **Package Manager** | pnpm                            | 9.x      | MIT        |
+| **Testing (Unit)**  | Vitest                          | 2.x      | MIT        |
+| **Testing (E2E)**   | Playwright                      | Latest   | Apache-2.0 |
+| **CI/CD**           | GitHub Actions                  | N/A      | N/A        |
 
 ---
 
@@ -75,12 +75,12 @@
 
 ## Version Pinning Strategy
 
-| Level | Strategy |
-|---|---|
-| **Node.js** | Pinned via `.nvmrc` — all contributors use same version |
-| **pnpm** | Pinned via `packageManager` in `package.json` |
-| **Dependencies** | Exact versions in `pnpm-lock.yaml` |
-| **Major upgrades** | Require ADR and team discussion |
+| Level              | Strategy                                                |
+| ------------------ | ------------------------------------------------------- |
+| **Node.js**        | Pinned via `.nvmrc` — all contributors use same version |
+| **pnpm**           | Pinned via `packageManager` in `package.json`           |
+| **Dependencies**   | Exact versions in `pnpm-lock.yaml`                      |
+| **Major upgrades** | Require ADR and team discussion                         |
 
 ---
 

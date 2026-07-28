@@ -4,12 +4,12 @@ This directory contains all user experience documentation for Cognitive Engine.
 
 ## Contents
 
-| Document | Description |
-|---|---|
+| Document                          | Description                                      |
+| --------------------------------- | ------------------------------------------------ |
 | [Design System](design-system.md) | Colors, typography, spacing, component standards |
-| [User Flows](user-flows.md) | Key user journeys mapped step-by-step |
-| [Accessibility](accessibility.md) | WCAG compliance and accessibility standards |
-| [Wireframes](wireframes/) | Visual wireframes and mockups |
+| [User Flows](user-flows.md)       | Key user journeys mapped step-by-step            |
+| [Accessibility](accessibility.md) | WCAG compliance and accessibility standards      |
+| [Wireframes](wireframes/)         | Visual wireframes and mockups                    |
 
 ## Design Philosophy
 

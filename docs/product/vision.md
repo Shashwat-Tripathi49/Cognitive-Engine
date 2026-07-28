@@ -36,12 +36,12 @@ The product should become more valuable over time. Every thought captured streng
 
 ## What This Is NOT
 
-| ❌ Not This | ✅ This Instead |
-|---|---|
-| A note-taking app | A cognitive augmentation engine |
-| A journaling tool | A thought pattern analyzer |
-| A to-do list | A decision support system |
-| A search engine | A contextual intelligence layer |
+| ❌ Not This       | ✅ This Instead                     |
+| ----------------- | ----------------------------------- |
+| A note-taking app | A cognitive augmentation engine     |
+| A journaling tool | A thought pattern analyzer          |
+| A to-do list      | A decision support system           |
+| A search engine   | A contextual intelligence layer     |
 | A chatbot wrapper | A deeply integrated AI architecture |
 
 ---
@@ -74,13 +74,13 @@ Collaborative cognitive augmentation for teams making complex decisions together
 
 ## Success Metrics
 
-| Metric | Target | Timeframe |
-|---|---|---|
-| Daily Active Users | 1,000 | Month 6 |
-| Avg. Session Duration | > 5 min | Month 3 |
-| Insight Engagement Rate | > 30% | Month 4 |
-| User Retention (30-day) | > 40% | Month 6 |
-| NPS Score | > 50 | Month 6 |
+| Metric                  | Target  | Timeframe |
+| ----------------------- | ------- | --------- |
+| Daily Active Users      | 1,000   | Month 6   |
+| Avg. Session Duration   | > 5 min | Month 3   |
+| Insight Engagement Rate | > 30%   | Month 4   |
+| User Retention (30-day) | > 40%   | Month 6   |
+| NPS Score               | > 50    | Month 6   |
 
 ---
 

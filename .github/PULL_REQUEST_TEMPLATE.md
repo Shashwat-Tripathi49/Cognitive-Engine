@@ -20,9 +20,9 @@
 
 <!-- List the specific changes made in this PR -->
 
-- 
-- 
-- 
+-
+-
+-
 
 ## Screenshots / Recordings
 
@@ -40,9 +40,9 @@
 
 <!-- Describe the manual testing you did -->
 
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 ## Checklist
 

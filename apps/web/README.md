@@ -6,13 +6,13 @@
 
 ## Technology
 
-| Technology | Purpose |
-|---|---|
-| **Next.js 15** | React framework with App Router |
-| **TypeScript** | Type safety |
-| **CSS Modules** | Scoped styling |
-| **React Query** | Server state management |
-| **Vercel AI SDK** | AI streaming on the client |
+| Technology        | Purpose                         |
+| ----------------- | ------------------------------- |
+| **Next.js 15**    | React framework with App Router |
+| **TypeScript**    | Type safety                     |
+| **CSS Modules**   | Scoped styling                  |
+| **React Query**   | Server state management         |
+| **Vercel AI SDK** | AI streaming on the client      |
 
 ## Directory Structure (Planned)
 

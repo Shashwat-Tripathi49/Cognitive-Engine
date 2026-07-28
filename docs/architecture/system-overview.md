@@ -66,35 +66,35 @@
 
 ### Client Layer
 
-| Component | Responsibility |
-|---|---|
-| **Web App** | Primary user interface. Server-rendered with Next.js for performance and SEO. |
-| **Mobile App** | Native mobile experience. React Native + Expo for cross-platform code sharing. |
-| **Browser Extension** | Future. Quick capture from any webpage. |
+| Component             | Responsibility                                                                 |
+| --------------------- | ------------------------------------------------------------------------------ |
+| **Web App**           | Primary user interface. Server-rendered with Next.js for performance and SEO.  |
+| **Mobile App**        | Native mobile experience. React Native + Expo for cross-platform code sharing. |
+| **Browser Extension** | Future. Quick capture from any webpage.                                        |
 
 ### API Layer
 
-| Component | Responsibility |
-|---|---|
+| Component        | Responsibility                                                              |
+| ---------------- | --------------------------------------------------------------------------- |
 | **Auth Service** | Authentication, authorization, session management (OAuth 2.0, magic links). |
-| **Core API** | Business logic, CRUD operations, data validation, real-time subscriptions. |
-| **AI Service** | Orchestrates AI operations — embedding, analysis, insight generation. |
+| **Core API**     | Business logic, CRUD operations, data validation, real-time subscriptions.  |
+| **AI Service**   | Orchestrates AI operations — embedding, analysis, insight generation.       |
 
 ### Data Layer
 
-| Component | Responsibility |
-|---|---|
+| Component      | Responsibility                                                         |
+| -------------- | ---------------------------------------------------------------------- |
 | **PostgreSQL** | Primary data store. Relational data, user accounts, entries, metadata. |
-| **Redis** | Caching, session store, rate limiting, real-time pub/sub. |
-| **Vector DB** | Semantic search via embedding vectors. Integrated with AI pipeline. |
+| **Redis**      | Caching, session store, rate limiting, real-time pub/sub.              |
+| **Vector DB**  | Semantic search via embedding vectors. Integrated with AI pipeline.    |
 
 ### Intelligence Layer
 
-| Component | Responsibility |
-|---|---|
-| **Embedding Pipeline** | Converts text to semantic vectors for similarity search. |
-| **LLM Gateway** | Model-agnostic interface to LLM providers (OpenAI, Anthropic, local models). |
-| **Knowledge Graph Engine** | Builds and queries the user's personal knowledge graph. |
+| Component                  | Responsibility                                                               |
+| -------------------------- | ---------------------------------------------------------------------------- |
+| **Embedding Pipeline**     | Converts text to semantic vectors for similarity search.                     |
+| **LLM Gateway**            | Model-agnostic interface to LLM providers (OpenAI, Anthropic, local models). |
+| **Knowledge Graph Engine** | Builds and queries the user's personal knowledge graph.                      |
 
 ---
 
@@ -123,13 +123,13 @@ User Input → API Gateway → Core API → PostgreSQL (persist)
 
 ## Cross-Cutting Concerns
 
-| Concern | Approach |
-|---|---|
-| **Authentication** | JWT + refresh tokens, OAuth 2.0 |
-| **Authorization** | Role-based (RBAC) with resource-level policies |
-| **Logging** | Structured JSON logs, centralized aggregation |
-| **Monitoring** | Health checks, metrics, distributed tracing |
-| **Rate Limiting** | Token bucket algorithm at API gateway |
+| Concern            | Approach                                       |
+| ------------------ | ---------------------------------------------- |
+| **Authentication** | JWT + refresh tokens, OAuth 2.0                |
+| **Authorization**  | Role-based (RBAC) with resource-level policies |
+| **Logging**        | Structured JSON logs, centralized aggregation  |
+| **Monitoring**     | Health checks, metrics, distributed tracing    |
+| **Rate Limiting**  | Token bucket algorithm at API gateway          |
 | **Error Handling** | Typed errors, consistent error response format |
 
 ---

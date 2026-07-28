@@ -6,27 +6,27 @@
 
 ## Domain Ownership Matrix
 
-| Domain Object | Owner Engine | Read Access (Engines) | Write Access (Owner Only) | Immutable? | Versioned? | Traceable? |
-|---|---|---|---|---|---|---|
-| **Cognitive Fragment** | `Capture Engine` | `Memory`, `Capture` | `Capture Engine` | **YES** | No | **YES** (Source) |
-| **Source Reference** | `Capture Engine` | `Capture`, `Memory` | `Capture Engine` | **YES** | No | **YES** |
-| **Session** | `Capture Engine` | `Capture`, `Orchestration` | `Capture Engine` | **YES** | No | No |
-| **Memory Node** | `Memory Engine` | `Knowledge Graph`, `Cognitive`, `Reasoning`, `Reflection` | `Memory Engine` | **NO** (Metadata decays) | No | **YES** |
-| **Embedding** | `Memory Engine` | `Memory`, `Cognitive` | `Memory Engine` | **YES** | No | **YES** |
-| **Context** | `Memory Engine` | `Memory`, `Reasoning` | `Memory Engine` | **NO** (Transient) | No | No |
-| **Graph Node** | `Knowledge Graph Engine` | `Cognitive`, `Reasoning`, `Reflection` | `Knowledge Graph Engine` | **NO** (Versioned) | **YES** | **YES** |
-| **Graph Edge** | `Knowledge Graph Engine` | `Cognitive`, `Reasoning`, `Reflection` | `Knowledge Graph Engine` | **NO** (Versioned) | **YES** | **YES** |
-| **Subgraph** | `Knowledge Graph Engine` | `Cognitive`, `Reasoning` | `Knowledge Graph Engine` | **YES** (Transient) | No | **YES** |
-| **Cluster** | `Cognitive Engine` | `Reasoning`, `Reflection` | `Cognitive Engine` | **YES** (Computed) | No | **YES** |
-| **Temporal Sequence** | `Cognitive Engine` | `Reasoning`, `Reflection` | `Cognitive Engine` | **YES** (Calculated) | No | **YES** |
-| **Pattern** | `Cognitive Engine` | `Reasoning`, `Reflection` | `Cognitive Engine` | **YES** | No | **YES** |
-| **Algorithmic Confidence** | `Cognitive Engine` | `Reasoning`, `Reflection` | `Cognitive Engine` | **YES** | No | **YES** |
-| **Reasoning Artifact** | `Reasoning Engine` | `Reflection` | `Reasoning Engine` | **YES** | No | **YES** |
-| **Evidence Chain** | `Reasoning Engine` | `Reflection`, `Presentation` | `Reasoning Engine` | **YES** | No | **YES** (Root) |
-| **Evidence Reference** | `Reasoning Engine` | `Reflection`, `Presentation` | `Reasoning Engine` | **YES** | No | **YES** |
-| **Evidence Provenance** | `Reasoning Engine` | `Reflection`, `Audit` | `Reasoning Engine` | **YES** | No | **YES** |
-| **Metacognitive Reflection**| `Reflection Engine` | `Presentation`, `User` | `Reflection Engine` | **YES** | No | **YES** |
-| **Reflection Report** | `Reflection Engine` | `Presentation`, `User` | `Reflection Engine` | **YES** | No | **YES** |
+| Domain Object                | Owner Engine             | Read Access (Engines)                                     | Write Access (Owner Only) | Immutable?               | Versioned? | Traceable?       |
+| ---------------------------- | ------------------------ | --------------------------------------------------------- | ------------------------- | ------------------------ | ---------- | ---------------- |
+| **Cognitive Fragment**       | `Capture Engine`         | `Memory`, `Capture`                                       | `Capture Engine`          | **YES**                  | No         | **YES** (Source) |
+| **Source Reference**         | `Capture Engine`         | `Capture`, `Memory`                                       | `Capture Engine`          | **YES**                  | No         | **YES**          |
+| **Session**                  | `Capture Engine`         | `Capture`, `Orchestration`                                | `Capture Engine`          | **YES**                  | No         | No               |
+| **Memory Node**              | `Memory Engine`          | `Knowledge Graph`, `Cognitive`, `Reasoning`, `Reflection` | `Memory Engine`           | **NO** (Metadata decays) | No         | **YES**          |
+| **Embedding**                | `Memory Engine`          | `Memory`, `Cognitive`                                     | `Memory Engine`           | **YES**                  | No         | **YES**          |
+| **Context**                  | `Memory Engine`          | `Memory`, `Reasoning`                                     | `Memory Engine`           | **NO** (Transient)       | No         | No               |
+| **Graph Node**               | `Knowledge Graph Engine` | `Cognitive`, `Reasoning`, `Reflection`                    | `Knowledge Graph Engine`  | **NO** (Versioned)       | **YES**    | **YES**          |
+| **Graph Edge**               | `Knowledge Graph Engine` | `Cognitive`, `Reasoning`, `Reflection`                    | `Knowledge Graph Engine`  | **NO** (Versioned)       | **YES**    | **YES**          |
+| **Subgraph**                 | `Knowledge Graph Engine` | `Cognitive`, `Reasoning`                                  | `Knowledge Graph Engine`  | **YES** (Transient)      | No         | **YES**          |
+| **Cluster**                  | `Cognitive Engine`       | `Reasoning`, `Reflection`                                 | `Cognitive Engine`        | **YES** (Computed)       | No         | **YES**          |
+| **Temporal Sequence**        | `Cognitive Engine`       | `Reasoning`, `Reflection`                                 | `Cognitive Engine`        | **YES** (Calculated)     | No         | **YES**          |
+| **Pattern**                  | `Cognitive Engine`       | `Reasoning`, `Reflection`                                 | `Cognitive Engine`        | **YES**                  | No         | **YES**          |
+| **Algorithmic Confidence**   | `Cognitive Engine`       | `Reasoning`, `Reflection`                                 | `Cognitive Engine`        | **YES**                  | No         | **YES**          |
+| **Reasoning Artifact**       | `Reasoning Engine`       | `Reflection`                                              | `Reasoning Engine`        | **YES**                  | No         | **YES**          |
+| **Evidence Chain**           | `Reasoning Engine`       | `Reflection`, `Presentation`                              | `Reasoning Engine`        | **YES**                  | No         | **YES** (Root)   |
+| **Evidence Reference**       | `Reasoning Engine`       | `Reflection`, `Presentation`                              | `Reasoning Engine`        | **YES**                  | No         | **YES**          |
+| **Evidence Provenance**      | `Reasoning Engine`       | `Reflection`, `Audit`                                     | `Reasoning Engine`        | **YES**                  | No         | **YES**          |
+| **Metacognitive Reflection** | `Reflection Engine`      | `Presentation`, `User`                                    | `Reflection Engine`       | **YES**                  | No         | **YES**          |
+| **Reflection Report**        | `Reflection Engine`      | `Presentation`, `User`                                    | `Reflection Engine`       | **YES**                  | No         | **YES**          |
 
 ---
 

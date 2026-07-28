@@ -39,8 +39,8 @@ Add any other context, research, or references about the feature request here.
 
 ## Impact Assessment
 
-| Area | Impact |
-|---|---|
-| Users affected | [e.g., All users, Premium users] |
-| Complexity | [e.g., Low, Medium, High] |
-| Priority | [e.g., Nice-to-have, Important, Critical] |
+| Area           | Impact                                    |
+| -------------- | ----------------------------------------- |
+| Users affected | [e.g., All users, Premium users]          |
+| Complexity     | [e.g., Low, Medium, High]                 |
+| Priority       | [e.g., Nice-to-have, Important, Critical] |

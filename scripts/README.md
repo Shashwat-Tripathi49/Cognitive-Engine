@@ -8,12 +8,12 @@
 
 This directory contains scripts that automate common development tasks:
 
-| Script | Purpose | Status |
-|---|---|---|
-| `setup.sh` | First-time project setup | ⏳ Planned |
-| `seed.ts` | Seed development database | ⏳ Planned |
+| Script              | Purpose                                  | Status     |
+| ------------------- | ---------------------------------------- | ---------- |
+| `setup.sh`          | First-time project setup                 | ⏳ Planned |
+| `seed.ts`           | Seed development database                | ⏳ Planned |
 | `generate-types.ts` | Generate TypeScript types from DB schema | ⏳ Planned |
-| `health-check.ts` | Verify all services are running | ⏳ Planned |
+| `health-check.ts`   | Verify all services are running          | ⏳ Planned |
 
 ## Usage
 

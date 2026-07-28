@@ -49,7 +49,7 @@ export function formatEntry(entry) {
 class EntryNotFoundError extends Error {
   constructor(public readonly entryId: string) {
     super(`Entry not found: ${entryId}`);
-    this.name = 'EntryNotFoundError';
+    this.name = "EntryNotFoundError";
   }
 }
 
@@ -57,7 +57,7 @@ class EntryNotFoundError extends Error {
 try {
   await saveEntry(entry);
 } catch (error) {
-  logger.error('Failed to save entry', { error, entryId: entry.id });
+  logger.error("Failed to save entry", { error, entryId: entry.id });
   throw error; // re-throw or handle explicitly
 }
 
@@ -73,13 +73,13 @@ try {
 
 ```typescript
 // ✅ Order: external → internal → types
-import { Hono } from 'hono';
-import { z } from 'zod';
+import { Hono } from "hono";
+import { z } from "zod";
 
-import { db } from '@/lib/db';
-import { validateEntry } from '@/lib/validation';
+import { db } from "@/lib/db";
+import { validateEntry } from "@/lib/validation";
 
-import type { Entry, EntryCreateInput } from '@cognitive-engine/shared';
+import type { Entry, EntryCreateInput } from "@cognitive-engine/shared";
 ```
 
 ### Constants
@@ -137,15 +137,15 @@ export function useEntries(filters?: EntryFilters) {
 
 ## Anti-Patterns
 
-| ❌ Don't | ✅ Do Instead |
-|---|---|
-| `any` type | `unknown` + type guard |
-| `console.log` in production | Structured logger |
-| Nested ternaries | `if/else` or early returns |
-| `!important` in CSS | Fix specificity properly |
-| Index as React key | Use stable unique ID |
-| Barrel exports everywhere | Direct imports for tree-shaking |
-| God components (500+ lines) | Compose smaller components |
+| ❌ Don't                    | ✅ Do Instead                   |
+| --------------------------- | ------------------------------- |
+| `any` type                  | `unknown` + type guard          |
+| `console.log` in production | Structured logger               |
+| Nested ternaries            | `if/else` or early returns      |
+| `!important` in CSS         | Fix specificity properly        |
+| Index as React key          | Use stable unique ID            |
+| Barrel exports everywhere   | Direct imports for tree-shaking |
+| God components (500+ lines) | Compose smaller components      |
 
 ---
 

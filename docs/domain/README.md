@@ -95,30 +95,30 @@ graph TB
 
 ## The 6 Domain Engines (Bounded Context Owners)
 
-| Engine | Bounded Domain Context | Primary Responsibilities |
-|---|---|---|
-| **Capture Engine** | Capture Context | Ingest, validate, and normalize raw multi-modal input into immutable `Cognitive Fragments`. |
-| **Memory Engine** | Memory Context | Encode, index, retrieve, and manage lifecycle (decay, reinforcement) for `Memory Nodes`. |
-| **Knowledge Graph Engine** | Knowledge Graph Context | Manage canonical `Graph Nodes`, `Graph Edges`, `Entities`, and `Relationships` with strict graph topology. |
-| **Cognitive Engine** | Algorithmic Cognitive Context | Execute 100% deterministic algorithms (clustering, time-series, graph algorithms, `Pattern` discovery, `Algorithmic Confidence`). |
-| **Reasoning Engine** | Reasoning & Proof Context | Perform formal logic validation, verify relationship hypotheses, and construct `Evidence Chains`. |
-| **Reflection Engine** | Metacognition & Synthesis Context | Produce `Metacognitive Reflections` and `Reflection Reports` by translating validated evidence into human language via LLMs. |
+| Engine                     | Bounded Domain Context            | Primary Responsibilities                                                                                                          |
+| -------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Capture Engine**         | Capture Context                   | Ingest, validate, and normalize raw multi-modal input into immutable `Cognitive Fragments`.                                       |
+| **Memory Engine**          | Memory Context                    | Encode, index, retrieve, and manage lifecycle (decay, reinforcement) for `Memory Nodes`.                                          |
+| **Knowledge Graph Engine** | Knowledge Graph Context           | Manage canonical `Graph Nodes`, `Graph Edges`, `Entities`, and `Relationships` with strict graph topology.                        |
+| **Cognitive Engine**       | Algorithmic Cognitive Context     | Execute 100% deterministic algorithms (clustering, time-series, graph algorithms, `Pattern` discovery, `Algorithmic Confidence`). |
+| **Reasoning Engine**       | Reasoning & Proof Context         | Perform formal logic validation, verify relationship hypotheses, and construct `Evidence Chains`.                                 |
+| **Reflection Engine**      | Metacognition & Synthesis Context | Produce `Metacognitive Reflections` and `Reflection Reports` by translating validated evidence into human language via LLMs.      |
 
 ---
 
 ## Domain Model Documents
 
-| Document | Description |
-|---|---|
-| 📐 [domain-model.md](domain-model.md) | High-level domain architecture, bounded contexts, and subsystem interaction rules. |
-| 📦 [domain-objects.md](domain-objects.md) | Complete specifications for all 19 domain objects (fields, invariants, validation rules, examples). |
-| 🔗 [evidence-model.md](evidence-model.md) | Evidence chain design, provenance rules, traceability verification, and proof structures. |
-| 🔄 [object-lifecycle.md](object-lifecycle.md) | End-to-end evolution of domain objects from capture to reflection, transition rules, and state diagrams. |
-| 📊 [ownership-matrix.md](ownership-matrix.md) | Matrix detailing read/write access, immutability, versioning, and traceability for all objects. |
-| ⚡ [domain-events.md](domain-events.md) | Comprehensive catalog of domain events, producers, consumers, and payload schemas. |
-| 🛡️ [domain-invariants.md](domain-invariants.md) | Non-negotiable rules of the system (e.g., Evidence Invariant, LLM Boundary Invariant). |
-| 🤖 [llm-boundary-matrix.md](#) *(embedded in domain-model.md & domain-objects.md)* | Precise permissions for LLM operations per domain object. |
-| 📖 [glossary.md](glossary.md) | Authoritative business vocabulary definitions. |
+| Document                                                                           | Description                                                                                              |
+| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| 📐 [domain-model.md](domain-model.md)                                              | High-level domain architecture, bounded contexts, and subsystem interaction rules.                       |
+| 📦 [domain-objects.md](domain-objects.md)                                          | Complete specifications for all 19 domain objects (fields, invariants, validation rules, examples).      |
+| 🔗 [evidence-model.md](evidence-model.md)                                          | Evidence chain design, provenance rules, traceability verification, and proof structures.                |
+| 🔄 [object-lifecycle.md](object-lifecycle.md)                                      | End-to-end evolution of domain objects from capture to reflection, transition rules, and state diagrams. |
+| 📊 [ownership-matrix.md](ownership-matrix.md)                                      | Matrix detailing read/write access, immutability, versioning, and traceability for all objects.          |
+| ⚡ [domain-events.md](domain-events.md)                                            | Comprehensive catalog of domain events, producers, consumers, and payload schemas.                       |
+| 🛡️ [domain-invariants.md](domain-invariants.md)                                    | Non-negotiable rules of the system (e.g., Evidence Invariant, LLM Boundary Invariant).                   |
+| 🤖 [llm-boundary-matrix.md](#) _(embedded in domain-model.md & domain-objects.md)_ | Precise permissions for LLM operations per domain object.                                                |
+| 📖 [glossary.md](glossary.md)                                                      | Authoritative business vocabulary definitions.                                                           |
 
 ---
 

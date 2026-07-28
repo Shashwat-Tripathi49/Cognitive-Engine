@@ -9,6 +9,7 @@
 The Memory Engine transforms **Cognitive Fragments** into **Memory Nodes** — semantically rich, interconnected units of knowledge organized across three memory types that mirror human cognition.
 
 It is not a storage layer. It is a **knowledge encoding and retrieval system** that understands:
+
 - **What** was captured (semantic content)
 - **When** it was captured (temporal context)
 - **How it relates** to everything else (associative connections)
@@ -18,15 +19,15 @@ It is not a storage layer. It is a **knowledge encoding and retrieval system** t
 
 ## Responsibilities
 
-| # | Responsibility | Description |
-|---|---|---|
-| 1 | **Encoding** | Transform Cognitive Fragments into Memory Nodes with semantic embeddings |
-| 2 | **Classification** | Assign memory type: Working, Episodic, or Semantic |
-| 3 | **Indexing** | Build and maintain vector indexes for semantic retrieval |
-| 4 | **Association** | Detect and create edges between related Memory Nodes |
-| 5 | **Retrieval** | Serve contextually relevant Memory Nodes to other engines on demand |
-| 6 | **Lifecycle Management** | Manage decay, reinforcement, consolidation, and archival of Memory Nodes |
-| 7 | **Context Assembly** | Assemble coherent context windows from distributed Memory Nodes for downstream engines |
+| #   | Responsibility           | Description                                                                            |
+| --- | ------------------------ | -------------------------------------------------------------------------------------- |
+| 1   | **Encoding**             | Transform Cognitive Fragments into Memory Nodes with semantic embeddings               |
+| 2   | **Classification**       | Assign memory type: Working, Episodic, or Semantic                                     |
+| 3   | **Indexing**             | Build and maintain vector indexes for semantic retrieval                               |
+| 4   | **Association**          | Detect and create edges between related Memory Nodes                                   |
+| 5   | **Retrieval**            | Serve contextually relevant Memory Nodes to other engines on demand                    |
+| 6   | **Lifecycle Management** | Manage decay, reinforcement, consolidation, and archival of Memory Nodes               |
+| 7   | **Context Assembly**     | Assemble coherent context windows from distributed Memory Nodes for downstream engines |
 
 ### What It Does NOT Do
 
@@ -39,13 +40,13 @@ It is not a storage layer. It is a **knowledge encoding and retrieval system** t
 
 ## Inputs
 
-| Input | Source | Trigger |
-|---|---|---|
-| Cognitive Fragment | Capture Engine (via `FragmentCaptured` event) | New user input captured |
-| Retrieval Query | Reasoning Engine, Reflection Engine, Insight Engine | Engine needs context |
-| Enrichment Payload | Reasoning Engine (via `ReasoningCompleted` event) | Reasoning results that enrich existing nodes |
-| Reinforcement Signal | Any engine that accesses a Memory Node | Memory was retrieved and used |
-| Consolidation Trigger | Orchestration Engine (scheduled) | Periodic memory maintenance |
+| Input                 | Source                                              | Trigger                                      |
+| --------------------- | --------------------------------------------------- | -------------------------------------------- |
+| Cognitive Fragment    | Capture Engine (via `FragmentCaptured` event)       | New user input captured                      |
+| Retrieval Query       | Reasoning Engine, Reflection Engine, Insight Engine | Engine needs context                         |
+| Enrichment Payload    | Reasoning Engine (via `ReasoningCompleted` event)   | Reasoning results that enrich existing nodes |
+| Reinforcement Signal  | Any engine that accesses a Memory Node              | Memory was retrieved and used                |
+| Consolidation Trigger | Orchestration Engine (scheduled)                    | Periodic memory maintenance                  |
 
 ---
 
@@ -98,12 +99,12 @@ RetrievalResult {
 
 ### Domain Events
 
-| Event | Trigger | Consumers |
-|---|---|---|
-| `MemoryEncoded` | New Memory Node created from fragment | Orchestration Engine |
-| `AssociationCreated` | New edge between Memory Nodes detected | Reasoning Engine, Orchestration Engine |
+| Event                | Trigger                                  | Consumers                               |
+| -------------------- | ---------------------------------------- | --------------------------------------- |
+| `MemoryEncoded`      | New Memory Node created from fragment    | Orchestration Engine                    |
+| `AssociationCreated` | New edge between Memory Nodes detected   | Reasoning Engine, Orchestration Engine  |
 | `MemoryConsolidated` | Episodic nodes merged into semantic node | Reflection Engine, Orchestration Engine |
-| `MemoryDecayed` | Node's decay crossed archival threshold | Orchestration Engine |
+| `MemoryDecayed`      | Node's decay crossed archival threshold  | Orchestration Engine                    |
 
 ---
 
@@ -193,14 +194,15 @@ Working Memory → Episodic Memory → Semantic Memory
 
 The Memory Engine detects four types of associations between Memory Nodes:
 
-| Type | Detection Method | Example |
-|---|---|---|
-| **Semantic** | Embedding vector cosine similarity above threshold | Two entries about "decision fatigue" |
-| **Temporal** | Captured within a configurable time window | Three thoughts in the same afternoon |
-| **Causal** | One fragment explicitly references another's topic | "Following up on what I wrote about X..." |
-| **Thematic** | Shared tags or classified into the same theme | Both tagged "career" or classified as "decision" |
+| Type         | Detection Method                                   | Example                                          |
+| ------------ | -------------------------------------------------- | ------------------------------------------------ |
+| **Semantic** | Embedding vector cosine similarity above threshold | Two entries about "decision fatigue"             |
+| **Temporal** | Captured within a configurable time window         | Three thoughts in the same afternoon             |
+| **Causal**   | One fragment explicitly references another's topic | "Following up on what I wrote about X..."        |
+| **Thematic** | Shared tags or classified into the same theme      | Both tagged "career" or classified as "decision" |
 
 Association strength is a continuous value (0.0–1.0) that changes over time:
+
 - **Strengthened** when the Reasoning Engine confirms the relationship
 - **Weakened** when nodes are accessed independently (suggesting the link is coincidental)
 
@@ -220,26 +222,26 @@ graph LR
     style ME fill:#0984E3,color:#fff
 ```
 
-| Dependency | Direction | Description |
-|---|---|---|
-| Capture Engine | Upstream | Provides Cognitive Fragments via `FragmentCaptured` events |
-| Reasoning Engine | Bidirectional | Queries for context; sends enrichment payloads back |
-| Reflection Engine | Downstream consumer | Queries for temporal collections of Memory Nodes |
-| Insight Engine | Downstream consumer | Queries for context to enrich insight generation |
-| Orchestration Engine | Coordination | Triggers consolidation and maintenance cycles |
+| Dependency           | Direction           | Description                                                |
+| -------------------- | ------------------- | ---------------------------------------------------------- |
+| Capture Engine       | Upstream            | Provides Cognitive Fragments via `FragmentCaptured` events |
+| Reasoning Engine     | Bidirectional       | Queries for context; sends enrichment payloads back        |
+| Reflection Engine    | Downstream consumer | Queries for temporal collections of Memory Nodes           |
+| Insight Engine       | Downstream consumer | Queries for context to enrich insight generation           |
+| Orchestration Engine | Coordination        | Triggers consolidation and maintenance cycles              |
 
 ---
 
 ## Failure Scenarios
 
-| Scenario | Impact | Mitigation |
-|---|---|---|
-| **Embedding generation failure** | Node created without vector; unsearchable semantically | Queue for retry; node is still retrievable by ID, time, and tags |
-| **Vector index corruption** | Semantic search returns incorrect results | Rebuild index from stored embeddings; index is derived, not primary |
-| **Association detection timeout** | Node created without associations | Associations are computed eventually; not blocking |
-| **Retrieval latency spike** | Downstream engines receive slow context | Return partial results with `isPartial: true` flag; engines must handle partial context |
-| **Consolidation failure** | Episodic memories not merged | No data loss; consolidation retries on next cycle |
-| **Storage full** | New nodes cannot be created | Alert; never silently drop fragments; queue writes |
+| Scenario                          | Impact                                                 | Mitigation                                                                              |
+| --------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| **Embedding generation failure**  | Node created without vector; unsearchable semantically | Queue for retry; node is still retrievable by ID, time, and tags                        |
+| **Vector index corruption**       | Semantic search returns incorrect results              | Rebuild index from stored embeddings; index is derived, not primary                     |
+| **Association detection timeout** | Node created without associations                      | Associations are computed eventually; not blocking                                      |
+| **Retrieval latency spike**       | Downstream engines receive slow context                | Return partial results with `isPartial: true` flag; engines must handle partial context |
+| **Consolidation failure**         | Episodic memories not merged                           | No data loss; consolidation retries on next cycle                                       |
+| **Storage full**                  | New nodes cannot be created                            | Alert; never silently drop fragments; queue writes                                      |
 
 ### Failure Principle
 
@@ -249,15 +251,15 @@ graph LR
 
 ## Future Scalability Considerations
 
-| Consideration | Description |
-|---|---|
-| **Multi-modal embeddings** | As input modalities expand (images, audio), the embedding model must support or compose multi-modal vectors |
-| **Personalized embedding models** | Over time, the system could fine-tune embedding models on the user's own vocabulary and conceptual space |
-| **Hierarchical memory** | Beyond the three-type model, memories could form hierarchies (themes → sub-themes → individual nodes) for faster retrieval |
-| **Cross-user memory** (future team features) | Shared semantic memory between collaborating users, with privacy boundaries |
-| **Memory compression** | For long-term users with tens of thousands of nodes, semantic consolidation must scale without losing retrieval quality |
-| **Adaptive decay** | Decay rates should adapt to user behavior — fast decay for transient notes, slow decay for deeply referenced ideas |
-| **Contextual retrieval ranking** | Retrieval should factor in the requesting engine's purpose, not just semantic similarity |
+| Consideration                                | Description                                                                                                                |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **Multi-modal embeddings**                   | As input modalities expand (images, audio), the embedding model must support or compose multi-modal vectors                |
+| **Personalized embedding models**            | Over time, the system could fine-tune embedding models on the user's own vocabulary and conceptual space                   |
+| **Hierarchical memory**                      | Beyond the three-type model, memories could form hierarchies (themes → sub-themes → individual nodes) for faster retrieval |
+| **Cross-user memory** (future team features) | Shared semantic memory between collaborating users, with privacy boundaries                                                |
+| **Memory compression**                       | For long-term users with tens of thousands of nodes, semantic consolidation must scale without losing retrieval quality    |
+| **Adaptive decay**                           | Decay rates should adapt to user behavior — fast decay for transient notes, slow decay for deeply referenced ideas         |
+| **Contextual retrieval ranking**             | Retrieval should factor in the requesting engine's purpose, not just semantic similarity                                   |
 
 ---
 
