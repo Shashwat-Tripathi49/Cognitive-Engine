@@ -1,11 +1,12 @@
-export * from "./env.js";
-export * from "./db/index.js";
+export * from './env.js';
+export * from './db/index.js';
+export * from './capture/index.js';
 
 /**
- * Common shared constants — Sprint 1A Baseline
+ * Common shared constants — Sprint 1B Baseline
  */
 export const CONSTANTS = {
-  APP_NAME: "Cognitive Engine",
-  API_VERSION: "v1",
+  APP_NAME: 'Cognitive Engine',
+  API_VERSION: 'v1',
   DEFAULT_PORT: 3001,
 } as const;

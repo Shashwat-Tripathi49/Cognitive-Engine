@@ -18,12 +18,17 @@
     "./env": {
       "types": "./src/env.ts",
       "default": "./src/env.ts"
+    },
+    "./capture": {
+      "types": "./src/capture/index.ts",
+      "default": "./src/capture/index.ts"
     }
   },
   "scripts": {
     "build": "tsc",
     "lint": "eslint src/ --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio"
@@ -39,6 +44,7 @@
     "@types/node": "^20.17.19",
     "drizzle-kit": "^0.30.4",
     "eslint": "^8.57.1",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
   }
 }
