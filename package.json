@@ -1,0 +1,31 @@
+{
+  "name": "cognitive-engine",
+  "version": "0.0.0",
+  "private": true,
+  "description": "An AI-powered cognitive architecture for human thought augmentation.",
+  "keywords": [
+    "ai",
+    "cognitive",
+    "knowledge-graph",
+    "thought-augmentation",
+    "typescript"
+  ],
+  "license": "MIT",
+  "author": "Cognitive Engine Team",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\"",
+    "clean": "turbo clean && rm -rf node_modules",
+    "typecheck": "turbo typecheck"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.0"
+}
