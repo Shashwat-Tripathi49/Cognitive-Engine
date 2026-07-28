@@ -1,16 +1,14 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   env: {
     node: true,
     es2022: true,
   },
-  extends: ['eslint:recommended'],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  },
   rules: {
     'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
-    'no-unused-vars': 'off', // TypeScript handles unused vars
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
   },
 };
