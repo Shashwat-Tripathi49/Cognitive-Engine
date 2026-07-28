@@ -7,7 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [0.1.0-alpha] - 2026-07-28
+## [0.1.0-alpha.2] - 2026-07-29
+
+### Added
+
+- **Sprint 1B — Cognitive Fragment & Capture Engine Vertical Slice**:
+  - `CognitiveFragment` Domain Model: Immutable raw cognitive thought representation (`id`, `userId`, `content`, `modality`, `contentHash`, `capturedAt`, `metadata`).
+  - Drizzle PostgreSQL Database Schema: Created `cognitive_fragments` table in `packages/shared/src/db/schema.ts` with B-Tree indexes on `user_id`, `content_hash`, and `captured_at`.
+  - Drizzle SQL Migration: Generated `drizzle/0000_tidy_firedrake.sql`.
+  - Repository Layer: `ICognitiveFragmentRepository` interface and `DrizzleCognitiveFragmentRepository` implementation (`create`, `findById`).
+  - Capture Engine Application Service: Deterministic `CaptureEngine` performing input validation, whitespace normalization, and SHA-256 cryptographic hashing.
+  - API Endpoints: `POST /capture` and `GET /capture/:id` with Zod schema validation and structured HTTP error responses (400 `INVALID_INPUT`, 404 `NOT_FOUND`, 500 `PERSISTENCE_ERROR`).
+  - Test Suite: 14/14 unit & integration tests passing in Vitest (`pnpm test`).
+
+- **Sprint 1A — Monorepo & Project Foundation**:
+  - Turborepo v2.10 + pnpm v9.15 workspace layout (`apps/web`, `apps/api`, `packages/shared`, `packages/config`, `packages/ui`).
+  - Next.js 15 App Router client (`apps/web`).
+  - Hono API Server (`apps/api`) with `GET /` and `GET /health` endpoints.
+  - PostgreSQL 16 + `pgvector` Docker Compose setup (`docker-compose.yml`).
+  - Drizzle ORM client, Drizzle Kit config, and Zod environment schema validation (`@cognitive-engine/shared/env`).
+  - Shared TypeScript, ESLint, and Prettier configuration presets (`@cognitive-engine/config`).
+
+---
+
+## [0.1.0-alpha.1] - 2026-07-28
 
 ### Added
 
@@ -29,5 +52,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Domain Events catalog with schemas (`domain-events.md`)
   - 10 Non-Negotiable System Invariants (`domain-invariants.md`)
   - Authoritative Domain Glossary (`glossary.md`)
-
----
