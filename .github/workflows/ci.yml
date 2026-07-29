@@ -1,8 +1,6 @@
 # ================================
 # Cognitive Engine — CI Pipeline
 # ================================
-# This is a placeholder CI configuration.
-# It will be expanded as the application code is developed.
 
 name: CI
 
@@ -26,6 +24,8 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -52,6 +52,8 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -75,6 +77,8 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

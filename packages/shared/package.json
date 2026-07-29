@@ -22,6 +22,10 @@
     "./capture": {
       "types": "./src/capture/index.ts",
       "default": "./src/capture/index.ts"
+    },
+    "./memory": {
+      "types": "./src/memory/index.ts",
+      "default": "./src/memory/index.ts"
     }
   },
   "scripts": {
