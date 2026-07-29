@@ -15,7 +15,8 @@
   "dependencies": {
     "@cognitive-engine/shared": "workspace:*",
     "@hono/node-server": "^1.13.8",
-    "hono": "^4.6.20"
+    "hono": "^4.6.20",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@cognitive-engine/config": "workspace:*",
