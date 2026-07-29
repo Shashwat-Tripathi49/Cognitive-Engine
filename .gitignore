@@ -62,3 +62,6 @@ ehthumbs.db
 *.key
 .vercel
 .netlify
+venv/
+.venv/
+

@@ -1,9 +1,10 @@
 export * from './env.js';
 export * from './db/index.js';
 export * from './capture/index.js';
+export * from './memory/index.js';
 
 /**
- * Common shared constants — Sprint 1B Baseline
+ * Common shared constants — Sprint 1C-B Baseline
  */
 export const CONSTANTS = {
   APP_NAME: 'Cognitive Engine',

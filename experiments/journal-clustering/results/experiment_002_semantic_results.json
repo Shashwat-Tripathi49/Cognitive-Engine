@@ -1,0 +1,77 @@
+{
+  "N_20": {
+    "dataset_size": 20,
+    "kmeans": {
+      "ari_mean": 0.4087,
+      "ari_min": 0.3321,
+      "ari_max": 0.4904,
+      "sil_mean": 0.1061,
+      "k_mean": 4.7
+    },
+    "dbscan": {
+      "ari_mean": -0.0158,
+      "ari_min": -0.0638,
+      "ari_max": 0.0165,
+      "sil_mean": -0.2573,
+      "k_mean": 1.0,
+      "noise_pct_mean": 90.0
+    },
+    "graph_community": {
+      "ari_mean": 0.3458,
+      "ari_min": 0.1669,
+      "ari_max": 0.5366,
+      "sil_mean": 0.0959,
+      "k_mean": 13.0
+    }
+  },
+  "N_50": {
+    "dataset_size": 50,
+    "kmeans": {
+      "ari_mean": 0.42,
+      "ari_min": 0.3564,
+      "ari_max": 0.4662,
+      "sil_mean": 0.1119,
+      "k_mean": 6.3
+    },
+    "dbscan": {
+      "ari_mean": 0.041,
+      "ari_min": -0.0466,
+      "ari_max": 0.0922,
+      "sil_mean": 0.1779,
+      "k_mean": 8.0,
+      "noise_pct_mean": 61.33
+    },
+    "graph_community": {
+      "ari_mean": 0.4014,
+      "ari_min": 0.3185,
+      "ari_max": 0.4588,
+      "sil_mean": 0.1523,
+      "k_mean": 15.3
+    }
+  },
+  "N_100": {
+    "dataset_size": 100,
+    "kmeans": {
+      "ari_mean": 0.4198,
+      "ari_min": 0.354,
+      "ari_max": 0.5465,
+      "sil_mean": 0.1124,
+      "k_mean": 6.7
+    },
+    "dbscan": {
+      "ari_mean": 0.1559,
+      "ari_min": 0.1559,
+      "ari_max": 0.1559,
+      "sil_mean": 0.4825,
+      "k_mean": 30.0,
+      "noise_pct_mean": 23.0
+    },
+    "graph_community": {
+      "ari_mean": 0.5061,
+      "ari_min": 0.5061,
+      "ari_max": 0.5061,
+      "sil_mean": 0.2046,
+      "k_mean": 17.0
+    }
+  }
+}

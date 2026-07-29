@@ -1,0 +1,62 @@
+[
+  {
+    "dataset_size": 20,
+    "vocab_size": 227,
+    "kmeans": {
+      "clusters": 6,
+      "silhouette": 0.0206,
+      "ari": 0.0375
+    },
+    "dbscan": {
+      "clusters": 0,
+      "noise_pct": 100.0,
+      "silhouette": -1.0,
+      "ari": 0.0
+    },
+    "graph_community": {
+      "clusters": 20,
+      "silhouette": -1.0,
+      "ari": 0.0
+    }
+  },
+  {
+    "dataset_size": 50,
+    "vocab_size": 446,
+    "kmeans": {
+      "clusters": 7,
+      "silhouette": 0.0097,
+      "ari": 0.1385
+    },
+    "dbscan": {
+      "clusters": 0,
+      "noise_pct": 100.0,
+      "silhouette": -1.0,
+      "ari": 0.0
+    },
+    "graph_community": {
+      "clusters": 50,
+      "silhouette": -1.0,
+      "ari": 0.0
+    }
+  },
+  {
+    "dataset_size": 100,
+    "vocab_size": 548,
+    "kmeans": {
+      "clusters": 7,
+      "silhouette": 0.0524,
+      "ari": 0.2198
+    },
+    "dbscan": {
+      "clusters": 35,
+      "noise_pct": 30.0,
+      "silhouette": 0.38,
+      "ari": 0.0597
+    },
+    "graph_community": {
+      "clusters": 65,
+      "silhouette": 0.3903,
+      "ari": 0.0742
+    }
+  }
+]

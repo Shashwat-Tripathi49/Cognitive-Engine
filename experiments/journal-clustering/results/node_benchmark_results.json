@@ -1,0 +1,35 @@
+[
+  {
+    "dataset_size": 20,
+    "vocab_size": 243,
+    "kmeans": {
+      "clusters": 4
+    },
+    "threshold_clustering": {
+      "clusters": 0,
+      "noise_pct": 100
+    }
+  },
+  {
+    "dataset_size": 50,
+    "vocab_size": 451,
+    "kmeans": {
+      "clusters": 6
+    },
+    "threshold_clustering": {
+      "clusters": 0,
+      "noise_pct": 100
+    }
+  },
+  {
+    "dataset_size": 100,
+    "vocab_size": 505,
+    "kmeans": {
+      "clusters": 6
+    },
+    "threshold_clustering": {
+      "clusters": 35,
+      "noise_pct": 30
+    }
+  }
+]

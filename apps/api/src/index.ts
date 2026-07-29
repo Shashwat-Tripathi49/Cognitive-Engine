@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { serve } from '@hono/node-server';
 import { env, checkDatabaseHealth } from '@cognitive-engine/shared';
 import { captureRouter } from './routes/capture.js';
+import { memoryApp } from './routes/memory.js';
 
 const app = new Hono();
 
@@ -31,17 +32,20 @@ app.get('/health', async (c) => {
 });
 
 /**
- * Mount Capture Router — Sprint 1B
+ * Mount Routers — Sprint 1B & Sprint 1C-B
  */
 app.route('/capture', captureRouter);
+app.route('/memory', memoryApp);
 
 const port = env.PORT || 3001;
 
-console.info(`⚡ API server starting on http://localhost:${port}`);
-
-serve({
-  fetch: app.fetch,
-  port,
-});
+// Only start HTTP listener if not running inside automated Vitest suite
+if (process.env.NODE_ENV !== 'test') {
+  console.info(`⚡ API server starting on http://localhost:${port}`);
+  serve({
+    fetch: app.fetch,
+    port,
+  });
+}
 
 export default app;
