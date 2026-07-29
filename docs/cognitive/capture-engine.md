@@ -34,6 +34,32 @@ The Capture Engine does **not** interpret meaning. It captures, normalizes, enri
 
 ---
 
+## Sprint 1C-A Hardening Specifications
+
+### 1. Production Authentication Baseline
+* **Provider Decision:** **Clerk** is frozen as the primary authentication provider.
+* **Token Verification:** API middleware (`requireAuth`) verifies Clerk JWTs / Session Bearer tokens and extracts the user identity (`userId`).
+* **Multi-Tenant Ownership:** Every `CognitiveFragment` belongs to an authenticated `userId`. Clients are **strictly prohibited** from passing `userId` in payloads. Backend middleware extracts `userId` directly from verified context.
+* **Authorization Isolation:** Database queries enforce `WHERE user_id = :userId` on all reads (`GET /capture/:id`, `GET /capture`). Users can never access another user's fragments.
+
+### 2. Typed & Versioned `CaptureMetadata` (Schema v1)
+All fragments carry structured provenance metadata conforming to `captureMetadataSchema` v1:
+```json
+{
+  "schemaVersion": 1,
+  "source": "api",
+  "clientTimezone": "Asia/Kolkata",
+  "clientPlatform": "iOS 18.2"
+}
+```
+
+### 3. Content Hash Policy (`contentHash`)
+* **Primary Purpose:** Cryptographic SHA-256 fingerprint of normalized text for evidence binding and tamper detection.
+* **Idempotency Window (10 Seconds):** Exact duplicate requests (`same userId` + `same contentHash`) submitted within 10 seconds are de-duplicated and return the existing fragment. This protects against network retry storms.
+* **Multi-Temporal Captures:** Identical text submitted at different times (>10s) or by different users represents distinct thoughts and creates a new fragment with its own timestamp.
+
+---
+
 ## Inputs
 
 | Input             | Source                   | Description                         |
@@ -55,133 +81,23 @@ The sole output of the Capture Engine. A Cognitive Fragment is **immutable once 
 
 ```
 CognitiveFragment {
-  id:               Unique identifier
+  id:               Unique identifier (UUID)
+  userId:           Owner identifier (UUID)
   content:          Normalized text content
-  contentType:      freeform | question | decision | observation | reference
-  modality:         text | voice | highlight | link | prompt | image
-  sourceMetadata: {
-    capturedAt:     ISO 8601 timestamp
-    timezone:       User's timezone
-    deviceContext:  Device type (web, mobile, extension)
-    sourceUrl:      Origin URL (if applicable)
-  }
-  enrichments: {
-    language:       Detected language code
-    wordCount:      Integer
-    contentHash:    SHA-256 of normalized content
-    complexity:     Estimated reading complexity (simple | moderate | complex)
-  }
-  userMetadata: {
-    tags:           User-applied tags (optional)
-    mood:           User-selected mood (optional)
-    context:        User-provided context note (optional)
-  }
-}
-```
-
-### Domain Event: `FragmentCaptured`
-
-Emitted when a Cognitive Fragment is successfully created.
-
-```
-FragmentCaptured {
-  eventId:          Unique event identifier
-  timestamp:        When the event was emitted
-  fragmentId:       ID of the created fragment
-  userId:           Owner of the fragment
-  modality:         Input modality
-  contentType:      Classified content type
+  modality:         text | voice_transcript | web_highlight | structured_prompt | image_annotation
+  contentHash:      SHA-256 of normalized content
+  capturedAt:       ISO 8601 timestamp
+  metadata:         Typed CaptureMetadata (schemaVersion, source, clientTimezone, clientPlatform)
 }
 ```
 
 ---
 
-## Internal Workflow
+## API Specification (Sprint 1C-A)
 
-```mermaid
-flowchart TD
-    A["Receive Raw Input"] --> B{"Validate Input"}
-    B -->|Invalid| C["Emit ValidationFailed Event"]
-    B -->|Valid| D["Normalize Content"]
-    D --> E["Detect Modality"]
-    E --> F["Enrich Metadata"]
-    F --> G["Classify Content Type"]
-    G --> H["Construct Cognitive Fragment"]
-    H --> I["Generate Content Hash"]
-    I --> J{"Duplicate Detection"}
-    J -->|Duplicate| K["Emit DuplicateDetected Event"]
-    J -->|Unique| L["Emit FragmentCaptured Event"]
-
-    style A fill:#6C5CE7,color:#fff
-    style L fill:#00B894,color:#fff
-    style C fill:#E17055,color:#fff
-    style K fill:#FDCB6E,color:#000
-```
-
-### Step Details
-
-| Step                   | Description                                                            | Failure Mode                                                 |
-| ---------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Validate**           | Check non-empty content, size limits, valid encoding                   | Reject with clear error; no fragment created                 |
-| **Normalize**          | Strip formatting artifacts, normalize whitespace, handle encoding      | Degrade to raw text if normalization fails                   |
-| **Detect Modality**    | Classify input source (text, voice, highlight, etc.)                   | Default to `text` if detection fails                         |
-| **Enrich**             | Language detection, word count, complexity estimation                  | Continue without enrichment; mark fields as `unknown`        |
-| **Classify**           | Assign content type using heuristics (question marks → question, etc.) | Default to `freeform`                                        |
-| **Hash & Deduplicate** | SHA-256 content hash; check against recent fragments                   | Allow duplicate but tag it; never silently discard           |
-| **Emit**               | Publish `FragmentCaptured` event to the Event Bus                      | Retry with exponential backoff; dead-letter after 3 failures |
-
----
-
-## Dependencies
-
-```mermaid
-graph LR
-    UI["Presentation Layer<br/>(any modality)"] -->|raw input| CE["Capture Engine"]
-    CE -->|FragmentCaptured| EB["Event Bus"]
-    EB -->|consumed by| ME["Memory Engine"]
-    EB -->|monitored by| OE["Orchestration Engine"]
-
-    style CE fill:#6C5CE7,color:#fff
-```
-
-| Dependency           | Direction                    | Type           | Description                                          |
-| -------------------- | ---------------------------- | -------------- | ---------------------------------------------------- |
-| Presentation Layer   | Upstream (provides input)    | External       | Any UI, API, or import mechanism                     |
-| Event Bus            | Downstream (receives events) | Infrastructure | Routes `FragmentCaptured` to subscribers             |
-| Memory Engine        | Downstream (consumes events) | Indirect       | Subscribes to `FragmentCaptured`; no direct coupling |
-| Orchestration Engine | Observer                     | Indirect       | Monitors capture events for pipeline coordination    |
-
-**The Capture Engine has ZERO dependencies on other engines.** It is the entry point of the system and must never be blocked by downstream failures.
-
----
-
-## Failure Scenarios
-
-| Scenario                                                | Impact                                   | Mitigation                                                                                                         |
-| ------------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| **Invalid input**                                       | Fragment not created                     | Return clear validation error; never silently drop                                                                 |
-| **Enrichment failure** (language detection, complexity) | Fragment created with partial metadata   | Mark unknown fields explicitly; process anyway                                                                     |
-| **Duplicate input**                                     | Near-identical fragment                  | Detect via content hash; emit `DuplicateDetected` event but still persist (user may intend repetition)             |
-| **Event Bus unavailable**                               | Fragment created but event not delivered | Local queue with retry; fragment is persisted independently of event delivery                                      |
-| **High volume burst**                                   | Backpressure on downstream engines       | Capture Engine operates independently; downstream engines handle their own throughput via the Orchestration Engine |
-| **Malformed encoding**                                  | Content corruption                       | Normalize to UTF-8; reject if normalization is impossible                                                          |
-
-### Failure Principle
-
-> The Capture Engine **never loses user input**. If any step after validation fails, the raw input is preserved and the failure is logged. The user's thought is sacred — even a partially enriched fragment is better than a lost one.
-
----
-
-## Future Scalability Considerations
-
-| Consideration                | Description                                                                                                                                                         |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **New modalities**           | Adding new input types (audio, video, sketches, sensor data) should require only a new normalizer — no changes to the core fragment structure                       |
-| **Multi-language support**   | Language detection enrichment should scale to any language; normalization must be Unicode-safe from day one                                                         |
-| **Batch import**             | Users may import existing journals, notes, or data from other tools; the Capture Engine must support bulk fragment creation without overwhelming downstream engines |
-| **Real-time streaming**      | Voice and continuous capture should be supported as streaming input that produces fragments at natural boundaries (sentences, pauses)                               |
-| **Content versioning**       | If users edit a capture, the original fragment remains immutable; edits produce a new fragment linked to the original via a `revises` relationship                  |
-| **Third-party integrations** | Captures from external tools (email, calendar, reading apps) should enter through the same normalization pipeline                                                   |
+* `POST /capture` $\rightarrow$ Accepts `{ "text": "...", "modality": "text", "metadata": {...} }`. Returns `201 Created` with `CognitiveFragment`.
+* `GET /capture` $\rightarrow$ Accepts query params `page`, `limit`, `modality`, `startDate`, `endDate`. Returns `200 OK` with paginated `{ "data": [...], "pagination": {...} }`.
+* `GET /capture/:id` $\rightarrow$ Accepts fragment ID. Returns `200 OK` if owned by user, `404 Not Found` if non-existent or owned by another user.
 
 ---
 

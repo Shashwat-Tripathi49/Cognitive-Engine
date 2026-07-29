@@ -4,6 +4,7 @@ import {
   CaptureRequest,
   captureRequestSchema,
   CaptureValidationError,
+  CaptureMetadata,
 } from './types.js';
 import {
   ICognitiveFragmentRepository,
@@ -47,9 +48,23 @@ export class CaptureEngine {
   }
 
   /**
-   * Ingests a raw thought, normalizes content, validates inputs, and persists a Cognitive Fragment.
+   * Ingests a raw thought for an authenticated user.
+   *
+   * CONTENT HASH POLICY:
+   * 1. Primary Purpose: Integrity fingerprint for downstream Memory/Graph engines.
+   * 2. Idempotency Window: Exact same content captured by the same user within 10s is
+   *    de-duplicated to protect against network retry storms.
+   * 3. Distinct Time Captures: Identical text captured across different days/hours remains
+   *    a valid distinct temporal event.
    */
-  public async captureThought(rawInput: unknown): Promise<CognitiveFragment> {
+  public async captureThought(
+    userId: string,
+    rawInput: unknown
+  ): Promise<CognitiveFragment> {
+    if (!userId || typeof userId !== 'string' || userId.trim() === '') {
+      throw new CaptureValidationError('Authentication required: Missing userId context');
+    }
+
     const parseResult = captureRequestSchema.safeParse(rawInput);
 
     if (!parseResult.success) {
@@ -61,7 +76,6 @@ export class CaptureEngine {
     }
 
     const payload: CaptureRequest = parseResult.data;
-
     const normalizedContent = this.normalizeContent(payload.text);
 
     if (!normalizedContent) {
@@ -72,12 +86,34 @@ export class CaptureEngine {
 
     const contentHash = this.calculateContentHash(normalizedContent);
 
+    // 10-second Idempotency Protection Window
+    const recentDuplicate = await this.repository.findRecentByHash(
+      userId,
+      contentHash,
+      10
+    );
+
+    if (recentDuplicate) {
+      return recentDuplicate;
+    }
+
+    const metadata: CaptureMetadata = {
+      schemaVersion: payload.metadata?.schemaVersion ?? 1,
+      source: payload.metadata?.source ?? 'api',
+      ...(payload.metadata?.clientTimezone
+        ? { clientTimezone: payload.metadata.clientTimezone }
+        : {}),
+      ...(payload.metadata?.clientPlatform
+        ? { clientPlatform: payload.metadata.clientPlatform }
+        : {}),
+    };
+
     const fragment = await this.repository.create({
-      userId: payload.userId,
+      userId,
       content: normalizedContent,
       modality: payload.modality,
       contentHash,
-      metadata: payload.metadata,
+      metadata,
       capturedAt: new Date(),
     });
 

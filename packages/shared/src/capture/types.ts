@@ -8,6 +8,20 @@ export type CognitiveFragmentModality =
   | 'image_annotation';
 
 /**
+ * Typed & Versioned Capture Metadata — Schema Version 1
+ */
+export const captureMetadataSchema = z
+  .object({
+    schemaVersion: z.number().int().positive().default(1),
+    source: z.enum(['web', 'mobile', 'api', 'cli']).default('api'),
+    clientTimezone: z.string().optional(),
+    clientPlatform: z.string().optional(),
+  })
+  .passthrough();
+
+export type CaptureMetadata = z.infer<typeof captureMetadataSchema>;
+
+/**
  * Immutable Cognitive Fragment Domain Model
  */
 export interface CognitiveFragment {
@@ -17,7 +31,7 @@ export interface CognitiveFragment {
   modality: CognitiveFragmentModality;
   contentHash: string;
   capturedAt: Date;
-  metadata: Record<string, unknown>;
+  metadata: CaptureMetadata;
 }
 
 /**
@@ -30,16 +44,12 @@ export interface CreateCognitiveFragmentInput {
   modality?: CognitiveFragmentModality;
   contentHash: string;
   capturedAt?: Date;
-  metadata?: Record<string, unknown>;
+  metadata?: CaptureMetadata;
 }
 
 /**
- * System fallback user ID for unauthenticated Sprint 1B operations
- */
-export const SYSTEM_DEFAULT_USER_ID = '00000000-0000-0000-0000-000000000000';
-
-/**
  * Zod Input Validation Schema for Capture Requests
+ * NOTE: userId is enforced by backend auth context and CANNOT be passed by client.
  */
 export const captureRequestSchema = z.object({
   text: z
@@ -61,11 +71,39 @@ export const captureRequestSchema = z.object({
     ])
     .optional()
     .default('text'),
-  userId: z.string().uuid().optional().default(SYSTEM_DEFAULT_USER_ID),
-  metadata: z.record(z.unknown()).optional().default({}),
+  metadata: captureMetadataSchema.optional().default({
+    schemaVersion: 1,
+    source: 'api',
+  }),
 });
 
 export type CaptureRequest = z.infer<typeof captureRequestSchema>;
+
+/**
+ * Listing & Query Filter Parameters
+ */
+export interface CaptureQueryOptions {
+  page?: number;
+  limit?: number;
+  modality?: CognitiveFragmentModality;
+  startDate?: Date;
+  endDate?: Date;
+}
+
+/**
+ * Standard Paginated Response Wrapper
+ */
+export interface PaginatedResult<T> {
+  data: T[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+  };
+}
 
 /**
  * Domain Exception for Capture Validation Errors
