@@ -1,6 +1,6 @@
 # Architecture Baseline v1.0 — Cognitive Engine
 
-> **Document Status:** Frozen Architectural Reference  
+> **Document Status:** Architecture Baseline (Validated Decision — Subject to Revision)  
 > **Effective Date:** 2026-07-29  
 > **Version:** 1.0.0  
 > **Scope:** Establishes the authoritative architectural contract and engine boundary definitions for the Cognitive Engine project based on empirical evidence from Sprint 1A through Experiment 002.
@@ -15,9 +15,9 @@ The long-term objective of the system is to act as a deterministic, evidence-bou
 
 ---
 
-## 2. Validated Assumptions
+## 2. Validated Decisions
 
-The following architectural assumptions have been empirically validated through production implementations and disposable research spikes:
+The following architectural decisions have been empirically validated through production implementations and disposable research spikes:
 
 1. **Capture Engine Boundary (Sprint 1B, Sprint 1C-A):**
    * The ingestion boundary must remain strictly un-opinionated. The Capture Engine is responsible solely for normalization, structural enrichment, SHA-256 content hashing, and emit—it must never attempt AI interpretation or memory indexing.
@@ -45,7 +45,7 @@ The following initial hypotheses were disproved during research validation and a
 
 ---
 
-## 4. Open Questions
+## 4. Open Questions & Future Sprints
 
 The following engineering questions remain open for future sprints. They are explicitly acknowledged but NOT resolved in Architecture Baseline v1.0:
 
@@ -129,7 +129,19 @@ The following engineering questions remain open for future sprints. They are exp
 
 ---
 
-## 7. Technology Decisions (Frozen)
+## 7. Memory Lifecycle & Future Memory Policies
+
+### Current Decision
+Automated memory decay, episodic/semantic/procedural memory classification, memory forgetting, and consolidation algorithms are **intentionally deferred beyond Phase 1 (v1)**.
+
+### Architectural Rationale
+1. **Infrastructure Prerequisites:** Reliable, deterministic memory storage (`pgvector`), immutable evidence lineage (`CognitiveFragment`), and semantic vector retrieval MUST exist and be thoroughly validated before automated lifecycle policies become meaningful or manageable.
+2. **Prevention of Premature Complexity:** Implementing memory decay or forgetting algorithms prior to establishing baseline retrieval accuracy would introduce compounding non-deterministic variables into similarity scoring.
+3. **Evidence Integrity:** In early development stages, all recorded memories remain permanently retrievable to ensure source evidence is preserved without artificial temporal attenuation.
+
+---
+
+## 8. Current Technology Decisions (Subject to Revision)
 
 * **Authentication:** **Clerk** (Bearer JWT tokens, Clerk SDK integration).
 * **Database & Vector Search:** **PostgreSQL 16** with **`pgvector`** extension (`vector(384)`).
@@ -141,9 +153,10 @@ The following engineering questions remain open for future sprints. They are exp
 
 ---
 
-## 8. Roadmap
+## 9. Roadmap
 
-* **Sprint 1C-B (Current):** Memory Engine — Vector embeddings, `pgvector` storage, semantic similarity retrieval, evidence linkage.
+* **Sprint 1C-B:** Memory Engine — Vector embeddings, `pgvector` storage, semantic similarity retrieval, evidence linkage.
+* **Sprint 1C-C (Current):** Phase 1 Validation & Architectural Audit Milestone.
 * **Sprint 1D:** Entity & Metadata Engine — Deterministic entity extraction (People, Projects) and structural metadata indexing.
 * **Sprint 2:** Knowledge Graph Engine — Node/edge storage, graph querying, alias resolution.
 * **Sprint 3:** Cognitive Engine — Pattern discovery, thematic clustering ($N \ge 50$), memory recency decay ranking.

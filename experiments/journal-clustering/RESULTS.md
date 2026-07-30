@@ -114,3 +114,38 @@ Benchmark pipeline evaluated across 3 dataset scales ($N = 20, 50, 100$) using *
 
 1. **Multi-Label Clustering:** Would overlapping soft clustering (e.g., Fuzzy C-Means or LDA) outperform hard partitioning for multi-topic journal entries?
 2. **Dynamic Incremental Clustering:** How do cluster centroids evolve as a user adds 5 new entries per day without re-clustering the entire historical vector space?
+
+---
+
+## 8. Experiment 003 — Entity Extraction Validation
+
+> **Date:** 2026-07-30  
+> **Dataset:** `synthetic_journal_entries.json` ($N=100$)  
+> **Status:** Completed (Negative Validation Finding)
+
+### Pre-Stated Reliability Thresholds (Declared Prior to Evaluation)
+* **Precision:** $\ge 85.0\%$
+* **Recall:** $\ge 80.0\%$
+* **F1 Score:** $\ge 82.0\%$
+* **Hallucination Rate:** $\le 2.0\%$ (Strict Ceiling — LLMs must not invent facts)
+* **False Positive Rate (FPR):** $\le 15.0\%$
+* **False Negative Rate (FNR):** $\le 20.0\%$
+
+### Empirical Results Table
+
+| Approach | Precision | Recall | F1 Score | FPR | FNR | Hallucination Rate | Verdict |
+|---|---|---|---|---|---|---|---|
+| **Target Threshold** | **$\ge 85.0\%$** | **$\ge 80.0\%$** | **$\ge 82.0\%$** | **$\le 15.0\%$** | **$\le 20.0\%$** | **$\le 2.0\%$** | — |
+| **Method A (Traditional NER / Pattern Rules)** | **81.25%** | **11.82%** | **20.63%** | **2.65%** | **88.18%** | **6.25%** | **FAILED** (Catastrophic Recall Deficit) |
+| **Method B (LLM Structured JSON Extraction)** | **71.43%** | **13.64%** | **22.90%** | **5.17%** | **86.36%** | **38.10%** | **FAILED** (Severe Hallucination Rate) |
+
+### Category Breakdown & Failure Mode Analysis
+
+1. **Clean Entries:** Both methods achieved high precision ($\ge 90\%$) when explicit names (*"Rahul"*, *"Priya"*) were present, but missed domain projects without rigid keyword matches.
+2. **Ambiguous & Indirect References:** When entries referenced *"the tool"* or *"the project"* instead of explicit proper nouns, Method A generated massive False Negatives ($\text{FNR} = 88.18\%$), while Method B attempted to infer unstated project names, driving a **$38.10\%$ Hallucination Rate**.
+3. **Conversational & Pronoun-Heavy Entries:** Pronoun substitution (*"he said"*, *"she reviewed"*) caused both methods to drop below $15\%$ recall.
+
+### Critical Verdict & Architectural Impact
+**UNSATISFACTORY FOR UNGUARDED KNOWLEDGE GRAPH INPUT.**  
+Neither Traditional NER nor LLM Structured Extraction meets the pre-stated reliability thresholds. Unstructured entity extraction must **NOT** be deployed into production without a hybrid human-in-the-loop verification or strict ground-truth entity resolution layer in Phase 2.
+

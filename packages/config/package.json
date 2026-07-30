@@ -10,6 +10,11 @@
     "prettier",
     "index.js"
   ],
+  "exports": {
+    "./typescript/*": "./typescript/*",
+    "./eslint/*": "./eslint/*",
+    "./prettier/*": "./prettier/*"
+  },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^8.24.0",
     "@typescript-eslint/parser": "^8.24.0",
