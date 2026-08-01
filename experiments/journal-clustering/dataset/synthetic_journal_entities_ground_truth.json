@@ -1,0 +1,1117 @@
+[
+  {
+    "id": "entry_001",
+    "date": "2026-03-01",
+    "text": "Met Rahul at the cafe to map out the transaction synchronization flow for the personal finance tool. We decided to prioritize ledger reconciliations over auto-categorization.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      },
+      {
+        "name": "Expense Tracker",
+        "type": "Project",
+        "text_span": "personal finance tool",
+        "canonical": "Expense Tracker",
+        "aliases": [
+          "personal finance tool",
+          "budgeting dashboard"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "entry_002",
+    "date": "2026-03-02",
+    "text": "Spent four hours chasing a subtle race condition in the ledger state manager. Turned out to be an unhandled promise rejection in the batch writer.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Race Condition",
+        "type": "Topic",
+        "text_span": "race condition",
+        "canonical": "Race Condition"
+      }
+    ]
+  },
+  {
+    "id": "entry_003",
+    "date": "2026-03-03",
+    "text": "Priya delivered the initial dark-mode UI mockups for the budgeting dashboard. The color palette looks crisp and modern.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Priya",
+        "type": "Person",
+        "text_span": "Priya",
+        "canonical": "Priya"
+      },
+      {
+        "name": "Expense Tracker",
+        "type": "Project",
+        "text_span": "budgeting dashboard",
+        "canonical": "Expense Tracker",
+        "aliases": [
+          "personal finance tool",
+          "budgeting dashboard"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "entry_004",
+    "date": "2026-03-05",
+    "text": "Reviewed the database migration strategy for financial records. We need strict ACID compliance and audit logging for every user mutation.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "ACID Compliance",
+        "type": "Topic",
+        "text_span": "ACID compliance",
+        "canonical": "ACID Compliance"
+      }
+    ]
+  },
+  {
+    "id": "entry_005",
+    "date": "2026-03-08",
+    "text": "Quick sync with Rahul on backend API authorization. We agreed to freeze Clerk as the primary auth provider for multi-tenant isolation.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      },
+      {
+        "name": "Clerk",
+        "type": "Organization",
+        "text_span": "Clerk",
+        "canonical": "Clerk"
+      }
+    ]
+  },
+  {
+    "id": "entry_006",
+    "date": "2026-03-10",
+    "text": "Pushed the initial version of the transaction parsing engine. Bank statement CSV imports are working smoothly now.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "CSV",
+        "type": "Tool",
+        "text_span": "CSV",
+        "canonical": "CSV"
+      }
+    ]
+  },
+  {
+    "id": "entry_007",
+    "date": "2026-03-12",
+    "text": "Debugging memory leaks in the Node.js server during heavy payload ingestion. Turns out event listeners weren't being cleaned up.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Node.js",
+        "type": "Tool",
+        "text_span": "Node.js",
+        "canonical": "Node.js"
+      }
+    ]
+  },
+  {
+    "id": "entry_008",
+    "date": "2026-03-15",
+    "text": "Rahul suggested adding automatic receipt scanning later, but I insisted we keep the MVP focused solely on core ledger reliability.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      }
+    ]
+  },
+  {
+    "id": "entry_009",
+    "date": "2026-03-18",
+    "text": "Priya updated the component library with accessible contrast ratios. The user flows feel significantly smoother.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Priya",
+        "type": "Person",
+        "text_span": "Priya",
+        "canonical": "Priya"
+      }
+    ]
+  },
+  {
+    "id": "entry_010",
+    "date": "2026-03-22",
+    "text": "Completed the integration test suite for accounting entries. 100% of test cases passed in CI.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_011",
+    "date": "2026-03-01",
+    "text": "Pushed through a crisp 5km morning run along the lake. Pace was steady at 5:15/km despite the cool breeze.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_012",
+    "date": "2026-03-04",
+    "text": "Heavy leg day at the gym. Squats felt solid but my lower back is feeling slightly fatigued.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_013",
+    "date": "2026-03-07",
+    "text": "Suffered from a throbbing tension headache all afternoon. Likely due to poor posture and staring at code for 8 hours without breaks.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_014",
+    "date": "2026-03-09",
+    "text": "Early morning yoga session helped relieve tight shoulders. Slept a full 8 hours last night and energy levels are high.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_015",
+    "date": "2026-03-11",
+    "text": "Ran 10km in the rain. Feet got soaked but the runner's high was completely worth it.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_016",
+    "date": "2026-03-14",
+    "text": "Feeling under the weather with a sore throat and mild fever. Resting all day and drinking hot chamomile tea.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_017",
+    "date": "2026-03-17",
+    "text": "Back to full recovery! Completed 45 minutes of zone-2 cardio on the stationary bike.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_018",
+    "date": "2026-03-20",
+    "text": "Tried high-protein meal prepping for the week ahead. Grilled chicken, quinoa, and roasted broccoli.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_019",
+    "date": "2026-03-06",
+    "text": "Called mom for her birthday. We talked about her garden and planning a family dinner next weekend.",
+    "category": "pronoun_heavy",
+    "entities": []
+  },
+  {
+    "id": "entry_020",
+    "date": "2026-03-13",
+    "text": "Drove down to my parents' house for Sunday lunch. Dad made his famous homemade curry.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_021",
+    "date": "2026-03-21",
+    "text": "Helped my sister move into her new apartment. Spending hours carrying heavy furniture up three flights of stairs.",
+    "category": "pronoun_heavy",
+    "entities": []
+  },
+  {
+    "id": "entry_022",
+    "date": "2026-03-27",
+    "text": "Quiet family dinner catching up on old childhood memories. It is rare we all get to sit together like this.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_023",
+    "date": "2026-03-25",
+    "text": "Boarded an early morning flight to Bangalore for a weekend getaway. Looking forward to exploring tech cafes and local coffee culture.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Bangalore",
+        "type": "Place",
+        "text_span": "Bangalore",
+        "canonical": "Bangalore"
+      }
+    ]
+  },
+  {
+    "id": "entry_024",
+    "date": "2026-03-26",
+    "text": "Visited a botanical garden in Bangalore. The quiet walking trails were a welcome escape from urban noise.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Bangalore",
+        "type": "Place",
+        "text_span": "Bangalore",
+        "canonical": "Bangalore"
+      }
+    ]
+  },
+  {
+    "id": "entry_025",
+    "date": "2026-03-28",
+    "text": "Returned home from Bangalore trip. Flight was delayed two hours but overall a refreshing weekend break.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Bangalore",
+        "type": "Place",
+        "text_span": "Bangalore",
+        "canonical": "Bangalore"
+      }
+    ]
+  },
+  {
+    "id": "entry_026",
+    "date": "2026-03-02",
+    "text": "Read the HDBSCAN paper on density-based hierarchical clustering. Fascinating how it handles varying cluster densities better than standard DBSCAN.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "HDBSCAN",
+        "type": "Tool",
+        "text_span": "HDBSCAN",
+        "canonical": "HDBSCAN"
+      },
+      {
+        "name": "DBSCAN",
+        "type": "Tool",
+        "text_span": "DBSCAN",
+        "canonical": "DBSCAN"
+      },
+      {
+        "name": "Hierarchical Clustering",
+        "type": "Topic",
+        "text_span": "density-based hierarchical clustering",
+        "canonical": "Hierarchical Clustering"
+      }
+    ]
+  },
+  {
+    "id": "entry_027",
+    "date": "2026-03-16",
+    "text": "Experimented with Rust memory safety model and ownership borrow checker. Concepts are rigorous but compile error messages are remarkably helpful.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rust",
+        "type": "Tool",
+        "text_span": "Rust",
+        "canonical": "Rust"
+      }
+    ]
+  },
+  {
+    "id": "entry_028",
+    "date": "2026-03-24",
+    "text": "Studied vector indexing structures: HNSW vs IVFFlat. HNSW provides faster query recall at the cost of higher RAM usage.",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Vector Indexing",
+        "type": "Topic",
+        "text_span": "vector indexing",
+        "canonical": "Vector Indexing"
+      },
+      {
+        "name": "HNSW Indexing",
+        "type": "Topic",
+        "text_span": "HNSW",
+        "canonical": "HNSW Indexing"
+      },
+      {
+        "name": "IVFFlat Indexing",
+        "type": "Topic",
+        "text_span": "IVFFlat",
+        "canonical": "IVFFlat Indexing"
+      }
+    ]
+  },
+  {
+    "id": "entry_029",
+    "date": "2026-03-19",
+    "text": "Feeling overwhelmed by the sheer number of competing priorities this week. Need to slow down, write down my thoughts, and declutter my mind.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_030",
+    "date": "2026-03-29",
+    "text": "Felt a strong sense of clarity tonight. Realized that steady incremental progress beats intense bursts of unsustainable effort every time.",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_031",
+    "date": "2026-04-01",
+    "text": "Met Rahul to review quarterly tech goals and refactoring priorities. [Ref #31]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      }
+    ]
+  },
+  {
+    "id": "entry_032",
+    "date": "2026-04-02",
+    "text": "Priya suggested simplifying the navigation drawer for mobile screens. [Ref #32]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Priya",
+        "type": "Person",
+        "text_span": "Priya",
+        "canonical": "Priya"
+      }
+    ]
+  },
+  {
+    "id": "entry_033",
+    "date": "2026-04-03",
+    "text": "Ran 8km under sunrise. Cold morning air felt revitalizing. [Ref #33]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_034",
+    "date": "2026-04-04",
+    "text": "Spent evening cooking pasta with family. [Ref #34]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_035",
+    "date": "2026-04-05",
+    "text": "Struggled with sleep insomnia. Tossed and turned until 3 AM. [Ref #35]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_036",
+    "date": "2026-04-06",
+    "text": "Deep dive into graph Louvain community detection algorithms. [Ref #36]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Community Detection",
+        "type": "Topic",
+        "text_span": "Louvain community detection",
+        "canonical": "Community Detection"
+      }
+    ]
+  },
+  {
+    "id": "entry_037",
+    "date": "2026-04-07",
+    "text": "Rahul and I debugged WebSocket connection drops in production. [Ref #37]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      },
+      {
+        "name": "WebSocket",
+        "type": "Tool",
+        "text_span": "WebSocket",
+        "canonical": "WebSocket"
+      }
+    ]
+  },
+  {
+    "id": "entry_038",
+    "date": "2026-04-08",
+    "text": "Priya finalized icon set for financial metrics dashboard. [Ref #38]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Priya",
+        "type": "Person",
+        "text_span": "Priya",
+        "canonical": "Priya"
+      }
+    ]
+  },
+  {
+    "id": "entry_039",
+    "date": "2026-04-09",
+    "text": "Weekend road trip to hills with old college friends. [Ref #39]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_040",
+    "date": "2026-04-10",
+    "text": "Felt burnt out after continuous 14-hour workdays. Time to set boundaries. [Ref #40]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_041",
+    "date": "2026-04-11",
+    "text": "Completed 10km marathon training run. Legs felt strong. [Ref #41]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Marathon Training",
+        "type": "Goal",
+        "text_span": "10km marathon",
+        "canonical": "Marathon Training"
+      }
+    ]
+  },
+  {
+    "id": "entry_042",
+    "date": "2026-04-12",
+    "text": "Family dinner at restaurant celebrating dad's retirement. [Ref #42]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_043",
+    "date": "2026-04-13",
+    "text": "Investigated Postgres pgvector index build times for 100k vectors. [Ref #43]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "PostgreSQL",
+        "type": "Tool",
+        "text_span": "Postgres",
+        "canonical": "PostgreSQL"
+      },
+      {
+        "name": "pgvector",
+        "type": "Tool",
+        "text_span": "pgvector",
+        "canonical": "pgvector"
+      }
+    ]
+  },
+  {
+    "id": "entry_044",
+    "date": "2026-04-14",
+    "text": "Rahul reviewed my pull request for data validation schemas. [Ref #44]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      }
+    ]
+  },
+  {
+    "id": "entry_045",
+    "date": "2026-04-15",
+    "text": "Rainy afternoon. Spent hours reading a book on cognitive science. [Ref #45]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Cognitive Science",
+        "type": "Topic",
+        "text_span": "cognitive science",
+        "canonical": "Cognitive Science"
+      }
+    ]
+  },
+  {
+    "id": "entry_046",
+    "date": "2026-04-16",
+    "text": "Priya proposed redesigning landing page typography. [Ref #46]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Priya",
+        "type": "Person",
+        "text_span": "Priya",
+        "canonical": "Priya"
+      }
+    ]
+  },
+  {
+    "id": "entry_047",
+    "date": "2026-04-17",
+    "text": "High stress day due to unexpected server downtime. [Ref #47]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_048",
+    "date": "2026-04-18",
+    "text": "Gym session: deadlifts and core conditioning. [Ref #48]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_049",
+    "date": "2026-04-19",
+    "text": "Visited weekend farmers market for organic produce. [Ref #49]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_050",
+    "date": "2026-04-20",
+    "text": "Explored transformer attention mechanism paper. [Ref #50]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Transformer Attention",
+        "type": "Topic",
+        "text_span": "transformer attention mechanism",
+        "canonical": "Transformer Attention"
+      }
+    ]
+  },
+  {
+    "id": "entry_051",
+    "date": "2026-04-21",
+    "text": "Rahul and Priya presented sprint achievements during team demo. [Ref #51]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      },
+      {
+        "name": "Priya",
+        "type": "Person",
+        "text_span": "Priya",
+        "canonical": "Priya"
+      }
+    ]
+  },
+  {
+    "id": "entry_052",
+    "date": "2026-04-22",
+    "text": "Quiet Sunday morning drinking coffee on the balcony. [Ref #52]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_053",
+    "date": "2026-04-23",
+    "text": "Struggling to focus on coding tasks due to noise. [Ref #53]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_054",
+    "date": "2026-04-24",
+    "text": "Pushed bugfix for timezone offset handling in financial records. [Ref #54]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_055",
+    "date": "2026-04-25",
+    "text": "Went for a 6km trail run in the woods. [Ref #55]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_056",
+    "date": "2026-04-26",
+    "text": "Family movie night watching classic sci-fi. [Ref #56]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_057",
+    "date": "2026-04-27",
+    "text": "Researched deterministic vs stochastic LLM sampling. [Ref #57]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_058",
+    "date": "2026-04-28",
+    "text": "Rahul initiated code review on security compliance. [Ref #58]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      }
+    ]
+  },
+  {
+    "id": "entry_059",
+    "date": "2026-04-01",
+    "text": "Suffered mild back pain from bad chair ergonomics. [Ref #59]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_060",
+    "date": "2026-04-02",
+    "text": "Priya created sleek dark mode theme variables. [Ref #60]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Priya",
+        "type": "Person",
+        "text_span": "Priya",
+        "canonical": "Priya"
+      }
+    ]
+  },
+  {
+    "id": "entry_061",
+    "date": "2026-04-03",
+    "text": "Short flight for client meeting in Mumbai. [Ref #61]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Mumbai",
+        "type": "Place",
+        "text_span": "Mumbai",
+        "canonical": "Mumbai"
+      }
+    ]
+  },
+  {
+    "id": "entry_062",
+    "date": "2026-04-04",
+    "text": "Feeling grateful for supportive colleagues and family. [Ref #62]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_063",
+    "date": "2026-04-05",
+    "text": "Completed 5km morning jog. [Ref #63]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_064",
+    "date": "2026-04-06",
+    "text": "Cooked dinner for friends at home. [Ref #64]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_065",
+    "date": "2026-04-07",
+    "text": "Analyzed database query execution plans using EXPLAIN ANALYZE. [Ref #65]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Database Query Optimization",
+        "type": "Topic",
+        "text_span": "EXPLAIN ANALYZE",
+        "canonical": "Database Query Optimization"
+      }
+    ]
+  },
+  {
+    "id": "entry_066",
+    "date": "2026-05-08",
+    "text": "Met Rahul to review quarterly tech goals and refactoring priorities. [Ref #66]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      }
+    ]
+  },
+  {
+    "id": "entry_067",
+    "date": "2026-05-09",
+    "text": "Priya suggested simplifying the navigation drawer for mobile screens. [Ref #67]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Priya",
+        "type": "Person",
+        "text_span": "Priya",
+        "canonical": "Priya"
+      }
+    ]
+  },
+  {
+    "id": "entry_068",
+    "date": "2026-05-10",
+    "text": "Ran 8km under sunrise. Cold morning air felt revitalizing. [Ref #68]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_069",
+    "date": "2026-05-11",
+    "text": "Spent evening cooking pasta with family. [Ref #69]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_070",
+    "date": "2026-05-12",
+    "text": "Struggled with sleep insomnia. Tossed and turned until 3 AM. [Ref #70]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_071",
+    "date": "2026-05-13",
+    "text": "Deep dive into graph Louvain community detection algorithms. [Ref #71]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Community Detection",
+        "type": "Topic",
+        "text_span": "Louvain community detection",
+        "canonical": "Community Detection"
+      }
+    ]
+  },
+  {
+    "id": "entry_072",
+    "date": "2026-05-14",
+    "text": "Rahul and I debugged WebSocket connection drops in production. [Ref #72]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      },
+      {
+        "name": "WebSocket",
+        "type": "Tool",
+        "text_span": "WebSocket",
+        "canonical": "WebSocket"
+      }
+    ]
+  },
+  {
+    "id": "entry_073",
+    "date": "2026-05-15",
+    "text": "Priya finalized icon set for financial metrics dashboard. [Ref #73]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Priya",
+        "type": "Person",
+        "text_span": "Priya",
+        "canonical": "Priya"
+      }
+    ]
+  },
+  {
+    "id": "entry_074",
+    "date": "2026-05-16",
+    "text": "Weekend road trip to hills with old college friends. [Ref #74]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_075",
+    "date": "2026-05-17",
+    "text": "Felt burnt out after continuous 14-hour workdays. Time to set boundaries. [Ref #75]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_076",
+    "date": "2026-05-18",
+    "text": "Completed 10km marathon training run. Legs felt strong. [Ref #76]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Marathon Training",
+        "type": "Goal",
+        "text_span": "10km marathon",
+        "canonical": "Marathon Training"
+      }
+    ]
+  },
+  {
+    "id": "entry_077",
+    "date": "2026-05-19",
+    "text": "Family dinner at restaurant celebrating dad's retirement. [Ref #77]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_078",
+    "date": "2026-05-20",
+    "text": "Investigated Postgres pgvector index build times for 100k vectors. [Ref #78]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "PostgreSQL",
+        "type": "Tool",
+        "text_span": "Postgres",
+        "canonical": "PostgreSQL"
+      },
+      {
+        "name": "pgvector",
+        "type": "Tool",
+        "text_span": "pgvector",
+        "canonical": "pgvector"
+      }
+    ]
+  },
+  {
+    "id": "entry_079",
+    "date": "2026-05-21",
+    "text": "Rahul reviewed my pull request for data validation schemas. [Ref #79]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      }
+    ]
+  },
+  {
+    "id": "entry_080",
+    "date": "2026-05-22",
+    "text": "Rainy afternoon. Spent hours reading a book on cognitive science. [Ref #80]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Cognitive Science",
+        "type": "Topic",
+        "text_span": "cognitive science",
+        "canonical": "Cognitive Science"
+      }
+    ]
+  },
+  {
+    "id": "entry_081",
+    "date": "2026-05-23",
+    "text": "Priya proposed redesigning landing page typography. [Ref #81]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Priya",
+        "type": "Person",
+        "text_span": "Priya",
+        "canonical": "Priya"
+      }
+    ]
+  },
+  {
+    "id": "entry_082",
+    "date": "2026-05-24",
+    "text": "High stress day due to unexpected server downtime. [Ref #82]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_083",
+    "date": "2026-05-25",
+    "text": "Gym session: deadlifts and core conditioning. [Ref #83]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_084",
+    "date": "2026-05-26",
+    "text": "Visited weekend farmers market for organic produce. [Ref #84]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_085",
+    "date": "2026-05-27",
+    "text": "Explored transformer attention mechanism paper. [Ref #85]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Transformer Attention",
+        "type": "Topic",
+        "text_span": "transformer attention mechanism",
+        "canonical": "Transformer Attention"
+      }
+    ]
+  },
+  {
+    "id": "entry_086",
+    "date": "2026-05-28",
+    "text": "Rahul and Priya presented sprint achievements during team demo. [Ref #86]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      },
+      {
+        "name": "Priya",
+        "type": "Person",
+        "text_span": "Priya",
+        "canonical": "Priya"
+      }
+    ]
+  },
+  {
+    "id": "entry_087",
+    "date": "2026-05-01",
+    "text": "Quiet Sunday morning drinking coffee on the balcony. [Ref #87]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_088",
+    "date": "2026-05-02",
+    "text": "Struggling to focus on coding tasks due to noise. [Ref #88]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_089",
+    "date": "2026-05-03",
+    "text": "Pushed bugfix for timezone offset handling in financial records. [Ref #89]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_090",
+    "date": "2026-05-04",
+    "text": "Went for a 6km trail run in the woods. [Ref #90]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_091",
+    "date": "2026-05-05",
+    "text": "Family movie night watching classic sci-fi. [Ref #91]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_092",
+    "date": "2026-05-06",
+    "text": "Researched deterministic vs stochastic LLM sampling. [Ref #92]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_093",
+    "date": "2026-05-07",
+    "text": "Rahul initiated code review on security compliance. [Ref #93]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Rahul",
+        "type": "Person",
+        "text_span": "Rahul",
+        "canonical": "Rahul"
+      }
+    ]
+  },
+  {
+    "id": "entry_094",
+    "date": "2026-05-08",
+    "text": "Suffered mild back pain from bad chair ergonomics. [Ref #94]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_095",
+    "date": "2026-05-09",
+    "text": "Priya created sleek dark mode theme variables. [Ref #95]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Priya",
+        "type": "Person",
+        "text_span": "Priya",
+        "canonical": "Priya"
+      }
+    ]
+  },
+  {
+    "id": "entry_096",
+    "date": "2026-05-10",
+    "text": "Short flight for client meeting in Mumbai. [Ref #96]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Mumbai",
+        "type": "Place",
+        "text_span": "Mumbai",
+        "canonical": "Mumbai"
+      }
+    ]
+  },
+  {
+    "id": "entry_097",
+    "date": "2026-05-11",
+    "text": "Feeling grateful for supportive colleagues and family. [Ref #97]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_098",
+    "date": "2026-05-12",
+    "text": "Completed 5km morning jog. [Ref #98]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_099",
+    "date": "2026-05-13",
+    "text": "Cooked dinner for friends at home. [Ref #99]",
+    "category": "clean",
+    "entities": []
+  },
+  {
+    "id": "entry_100",
+    "date": "2026-05-14",
+    "text": "Analyzed database query execution plans using EXPLAIN ANALYZE. [Ref #100]",
+    "category": "clean",
+    "entities": [
+      {
+        "name": "Database Query Optimization",
+        "type": "Topic",
+        "text_span": "EXPLAIN ANALYZE",
+        "canonical": "Database Query Optimization"
+      }
+    ]
+  }
+]

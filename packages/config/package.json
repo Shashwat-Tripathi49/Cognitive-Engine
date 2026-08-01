@@ -12,8 +12,8 @@
   ],
   "exports": {
     "./typescript/*": "./typescript/*",
-    "./eslint/*": "./eslint/*",
-    "./prettier/*": "./prettier/*"
+    "./eslint/*": ["./eslint/*.js", "./eslint/*"],
+    "./prettier/*": ["./prettier/*.js", "./prettier/*"]
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^8.24.0",
