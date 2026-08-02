@@ -23,8 +23,9 @@ import requests
 sys.stdout.reconfigure(encoding='utf-8')
 
 def load_env_file():
-    """Helper to load key-value pairs from root .env file into os.environ."""
-    env_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../.env'))
+    """Helper to load key-value pairs from repo-root .env file into os.environ."""
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
+    env_path = os.path.join(repo_root, '.env')
     if os.path.exists(env_path):
         with open(env_path, 'r', encoding='utf-8') as f:
             for line in f:
@@ -138,9 +139,12 @@ def call_groq_json_mode(prompt_text, retries=5):
             resp = requests.post(GROQ_ENDPOINT, headers=headers, json=payload, timeout=30)
             latency_ms = (time.time() - start) * 1000
 
+            if resp.status_code in (401, 403):
+                raise RuntimeError(f"FATAL AUTH ERROR HTTP {resp.status_code}: {resp.text[:200]}")
+
             if resp.status_code == 429:
-                # HTTP 429 Rate Limit -- wait 5s and retry
-                time.sleep(5.0 * (attempt + 1))
+                # HTTP 429 Rate Limit -- wait 10s backoff and retry
+                time.sleep(10.0 * (attempt + 1))
                 continue
 
             if resp.status_code != 200:
@@ -274,13 +278,10 @@ def run_experiment_003a_final(max_entries=100):
             text = entry["text"]
             gt_entities = entry["entities"]
 
-            if is_high_only:
-                raw_text, latency, usage, success, err = cached_responses.get(("V3_Confidence_All", entry_id), (None, 0, {}, False, "Cache miss"))
-            else:
-                prompt_text = prompt_template.replace("{text}", text)
-                raw_text, latency, usage, success, err = call_groq_json_mode(prompt_text)
-                cached_responses[(variant_name, entry_id)] = (raw_text, latency, usage, success, err)
-                time.sleep(1.8)  # Optimal 1.8s rate pacing for 0% HTTP 429 drops
+            prompt_text = prompt_template.replace("{text}", text)
+            raw_text, latency, usage, success, err = call_groq_json_mode(prompt_text)
+            cached_responses[(variant_name, entry_id)] = (raw_text, latency, usage, success, err)
+            time.sleep(1.8)  # Optimal 1.8s rate pacing for 0% HTTP 429 drops
 
             total_latency += latency
             prompt_tokens_total += usage.get("prompt_tokens", 0)
