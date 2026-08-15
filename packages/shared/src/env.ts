@@ -20,6 +20,7 @@ export const serverEnvSchema = z.object({
     .string()
     .url()
     .default("postgresql://postgres:postgres@localhost:5432/cognitive_engine"),
+  CLERK_SECRET_KEY: z.string().optional(),
 });
 
 /**
@@ -28,6 +29,13 @@ export const serverEnvSchema = z.object({
 export const clientEnvSchema = z.object({
   NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
   NEXT_PUBLIC_API_URL: z.string().url().default("http://localhost:3001"),
+  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z
+    .string()
+    .min(1, {
+      message:
+        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY is required for Clerk authentication",
+    })
+    .default("pk_test_placeholder"),
 });
 
 /**
