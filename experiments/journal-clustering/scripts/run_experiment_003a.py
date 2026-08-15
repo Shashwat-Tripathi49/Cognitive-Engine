@@ -388,35 +388,40 @@ def run_experiment_003a_final(max_entries=100):
             }
         }
 
+        # Incremental Save & Flush After Every Variant
+        out_payload = {
+            "experiment": "Experiment 003A (Revalidated Final): Real LLM Entity Extraction Benchmark",
+            "model": MODEL,
+            "api_feature_used": "response_format={'type': 'json_object'}",
+            "dataset_size": len(dataset),
+            "total_ground_truth_entities": total_gt_ents,
+            "variant_results": variant_results
+        }
+        with open(RESULTS_PATH, 'w', encoding='utf-8') as f:
+            json.dump(out_payload, f, indent=2)
+
+        print(f"  --> Saved intermediate results for [{variant_name}] to {RESULTS_PATH}", flush=True)
+
     # Print Revalidated Comparison Table
-    print("\n" + "=" * 125)
-    print("EXPERIMENT 003A REVALIDATED RESULTS -- CANONICAL REAL LLM BENCHMARK")
-    print("=" * 125)
-    print(f"{'Variant':<22} | {'APIFail':<7} | {'JsonFail':<8} | {'EXACT P':<7} | {'EXACT R':<7} | {'EXACT F1':<8} | {'ALIAS P':<7} | {'ALIAS R':<7} | {'ALIAS F1':<8} | {'HalRate':<7}")
-    print("-" * 125)
+    print("\n" + "=" * 125, flush=True)
+    print("EXPERIMENT 003A REVALIDATED RESULTS -- CANONICAL REAL LLM BENCHMARK", flush=True)
+    print("=" * 125, flush=True)
+    print(f"{'Variant':<22} | {'APIFail':<7} | {'JsonFail':<8} | {'EXACT P':<7} | {'EXACT R':<7} | {'EXACT F1':<8} | {'ALIAS P':<7} | {'ALIAS R':<7} | {'ALIAS F1':<8} | {'HalRate':<7}", flush=True)
+    print("-" * 125, flush=True)
 
     for vk, res in variant_results.items():
         ex = res["exact_span_matching"]
         al = res["alias_aware_matching"]
-        print(f"{vk:<22} | {res['api_failure_rate']*100:6.1f}% | {res['malformed_json_rate']*100:7.1f}% | {ex['precision']*100:6.2f}% | {ex['recall']*100:6.2f}% | {ex['f1']*100:7.2f}% | {al['precision']*100:6.2f}% | {al['recall']*100:6.2f}% | {al['f1']*100:7.2f}% | {al['hallucination_rate']*100:6.2f}%")
+        print(f"{vk:<22} | {res['api_failure_rate']*100:6.1f}% | {res['malformed_json_rate']*100:7.1f}% | {ex['precision']*100:6.2f}% | {ex['recall']*100:6.2f}% | {ex['f1']*100:7.2f}% | {al['precision']*100:6.2f}% | {al['recall']*100:6.2f}% | {al['f1']*100:7.2f}% | {al['hallucination_rate']*100:6.2f}%", flush=True)
 
-    out_payload = {
-        "experiment": "Experiment 003A (Revalidated Final): Real LLM Entity Extraction Benchmark",
-        "model": MODEL,
-        "api_feature_used": "response_format={'type': 'json_object'}",
-        "dataset_size": len(dataset),
-        "total_ground_truth_entities": total_gt_ents,
-        "variant_results": variant_results
-    }
-
-    with open(RESULTS_PATH, 'w', encoding='utf-8') as f:
-        json.dump(out_payload, f, indent=2)
-
-    print(f"\nRevalidated results successfully saved to {RESULTS_PATH}")
+    print(f"\nRevalidated results successfully finalized in {RESULTS_PATH}", flush=True)
 
 if __name__ == "__main__":
     import sys
     max_e = 100
+    target_variants = None
     if len(sys.argv) > 1:
         max_e = int(sys.argv[1])
+    if len(sys.argv) > 2:
+        target_variants = [sys.argv[2]]
     run_experiment_003a_final(max_entries=max_e)
