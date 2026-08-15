@@ -10,9 +10,11 @@
 ## 1. Experimental Design
 
 ### Overview & Scale
-* **Total Journal Entries Evaluated:** $N = 100$ entries from `synthetic_journal_entries.json`.
-* **Total Ground-Truth Entity Instances:** 220 ground-truth theme/entity annotations across the 100 entries (average $2.2$ entities per entry).
-* **Dataset Source:** `experiments/journal-clustering/dataset/synthetic_journal_entries.json`.
+* **Total Journal Entries Evaluated:** $N = 100$ raw entries ($65$ unique base templates with $35$ near-duplicate/templated repetitions, duplication ratio $1.54\times$) from `synthetic_journal_entries.json`.
+* **Total Ground-Truth Entity Instances:** 
+  * *Canonical Zero-Inference Ground Truth (`synthetic_journal_entities_ground_truth.json` v2.0):* **68 verified grounded entities** (strictly textually supported proper names, tools, places, organizations, and explicit project aliases).
+  * *Legacy Contaminated Baseline (Historical):* 220 ground-truth theme/entity annotations that previously mixed broad category tags (`"work"`, `"fitness"`) with ungrounded contextual inferences (`"Expense Tracker"` inferred from `"ledger"`).
+* **Dataset Sources:** `experiments/journal-clustering/dataset/synthetic_journal_entries.json` and `experiments/journal-clustering/dataset/synthetic_journal_entities_ground_truth.json`.
 
 ### Category Distribution
 The dataset was categorized across five structural slices based on linguistic patterns:
