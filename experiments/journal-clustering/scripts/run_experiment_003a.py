@@ -278,13 +278,9 @@ def run_experiment_003a_final(max_entries=100):
             text = entry["text"]
             gt_entities = entry["entities"]
 
-            if is_high_only:
-                raw_text, latency, usage, success, err = cached_responses.get(("V3_Confidence_All", entry_id), (None, 0, {}, False, "Cache miss"))
-            else:
-                prompt_text = prompt_template.replace("{text}", text)
-                raw_text, latency, usage, success, err = call_groq_json_mode(prompt_text)
-                cached_responses[(variant_name, entry_id)] = (raw_text, latency, usage, success, err)
-                time.sleep(1.8)  # Optimal 1.8s rate pacing for 0% HTTP 429 drops
+            prompt_text = prompt_template.replace("{text}", text)
+            raw_text, latency, usage, success, err = call_groq_json_mode(prompt_text)
+            time.sleep(2.2)  # Strict 2.2s pacing (27.2 RPM) to guarantee 0% HTTP 429 rate limit drops
 
             total_latency += latency
             prompt_tokens_total += usage.get("prompt_tokens", 0)
