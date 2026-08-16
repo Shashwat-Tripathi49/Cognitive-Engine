@@ -1,10 +1,21 @@
 import { Hono } from 'hono';
+import { cors } from 'hono/cors';
 import { serve } from '@hono/node-server';
 import { env, checkDatabaseHealth } from '@cognitive-engine/shared';
 import { captureRouter } from './routes/capture.js';
 import { memoryApp } from './routes/memory.js';
 
 const app = new Hono();
+
+// Enable CORS for web frontend clients
+app.use(
+  '*',
+  cors({
+    origin: '*',
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 
 /**
  * Root endpoint — Infrastructure verification

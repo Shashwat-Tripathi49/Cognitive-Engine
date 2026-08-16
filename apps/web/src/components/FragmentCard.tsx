@@ -16,30 +16,29 @@ export function FragmentCard({ fragment }: FragmentCardProps) {
     <article
       style={{
         backgroundColor: 'var(--bg-surface)',
-        borderRadius: 'var(--radius-lg)',
-        border: '1px solid var(--border-subtle)',
-        padding: '18px 20px',
+        border: '1px solid var(--border-hairline)',
+        boxShadow: 'var(--shadow-paper)',
+        padding: '20px 22px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '12px',
+        gap: '14px',
         transition: 'border-color var(--duration-fast), transform var(--duration-fast)',
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.borderColor = 'var(--border-strong)';
-        e.currentTarget.style.transform = 'translateY(-1px)';
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = 'var(--border-subtle)';
-        e.currentTarget.style.transform = 'none';
+        e.currentTarget.style.borderColor = 'var(--border-hairline)';
       }}
     >
       <p
         style={{
-          fontSize: '0.975rem',
-          lineHeight: '1.65',
+          fontSize: '1rem',
+          lineHeight: '1.68',
           color: 'var(--text-primary)',
           whiteSpace: 'pre-wrap',
           wordBreak: 'break-word',
+          fontFamily: 'var(--font-sans)',
         }}
       >
         {fragment.content}
@@ -50,45 +49,31 @@ export function FragmentCard({ fragment }: FragmentCardProps) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          fontSize: '0.75rem',
-          color: 'var(--text-muted)',
-          paddingTop: '8px',
-          borderTop: '1px solid rgba(255, 255, 255, 0.04)',
+          paddingTop: '10px',
+          borderTop: '1px solid var(--border-hairline)',
         }}
       >
-        <span
+        <time
+          dateTime={new Date(fragment.capturedAt).toISOString()}
           title={fullDate}
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '4px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.72rem',
+            color: 'var(--text-muted)',
+            letterSpacing: '0.04em',
           }}
         >
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
           {formattedTime}
-        </span>
+        </time>
 
         {fragment.modality && fragment.modality !== 'text' && (
           <span
             style={{
-              padding: '2px 8px',
-              borderRadius: 'var(--radius-sm)',
-              backgroundColor: 'rgba(108, 92, 231, 0.12)',
-              color: 'var(--accent-tertiary)',
-              textTransform: 'capitalize',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.68rem',
+              color: 'var(--text-secondary)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
             }}
           >
             {fragment.modality.replace('_', ' ')}

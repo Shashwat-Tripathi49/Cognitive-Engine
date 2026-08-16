@@ -9,64 +9,65 @@ interface LoadingSkeletonProps {
 export function LoadingSkeleton({ count = 3 }: LoadingSkeletonProps) {
   return (
     <div
-      role="status"
-      aria-busy="true"
-      aria-label="Loading content"
       style={{
         display: 'flex',
         flexDirection: 'column',
         gap: '12px',
         width: '100%',
       }}
+      aria-busy="true"
+      aria-label="Loading content"
     >
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
           style={{
             backgroundColor: 'var(--bg-surface)',
-            borderRadius: 'var(--radius-lg)',
-            border: '1px solid var(--border-subtle)',
-            padding: '20px',
+            border: '1px solid var(--border-hairline)',
+            padding: '22px',
             display: 'flex',
             flexDirection: 'column',
             gap: '12px',
           }}
         >
           <div
-            className="skeleton-line"
             style={{
-              width: `${75 + (i % 3) * 10}%`,
-              height: '16px',
-              borderRadius: 'var(--radius-sm)',
-              backgroundColor: 'rgba(255, 255, 255, 0.06)',
+              height: '14px',
+              width: `${Math.floor(75 + (i * 12) % 20)}%`,
+              backgroundColor: 'var(--bg-surface-hover)',
+              borderRadius: 'var(--radius-xs)',
+              animation: 'pulse 1.6s ease-in-out infinite',
             }}
           />
           <div
-            className="skeleton-line"
             style={{
-              width: `${40 + (i % 2) * 20}%`,
               height: '14px',
-              borderRadius: 'var(--radius-sm)',
-              backgroundColor: 'rgba(255, 255, 255, 0.04)',
+              width: `${Math.floor(45 + (i * 17) % 35)}%`,
+              backgroundColor: 'var(--bg-surface-hover)',
+              borderRadius: 'var(--radius-xs)',
+              animation: 'pulse 1.6s ease-in-out infinite',
+            }}
+          />
+          <div
+            style={{
+              height: '10px',
+              width: '20%',
+              backgroundColor: 'var(--bg-surface-hover)',
+              borderRadius: 'var(--radius-xs)',
+              marginTop: '6px',
+              animation: 'pulse 1.6s ease-in-out infinite',
             }}
           />
         </div>
       ))}
 
       <style jsx>{`
-        .skeleton-line {
-          animation: skeleton-pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes skeleton-pulse {
-          0% {
-            opacity: 0.5;
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 0.6;
           }
           50% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0.5;
+            opacity: 0.25;
           }
         }
       `}</style>
