@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cognitive Engine — Design Direction Mockups</title>
+  <!-- Google Fonts: Space Grotesk, Newsreader, JetBrains Mono, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --font-display: 'Space Grotesk', -apple-system, sans-serif;
+      --font-serif: 'Newsreader', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #060709;
+      color: #E2E8F0;
+      font-family: var(--font-body);
+      line-height: 1.5;
+      padding: 30px 20px 60px;
+    }
+
+    .theme-toggle-bar {
+      max-width: 1200px;
+      margin: 0 auto 28px;
+      display: flex;
+      align-items: center;
+      justifyContent: space-between;
+      padding: 16px 20px;
+      background: #111418;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .theme-toggle-bar h2 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .comparison-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    @media (max-width: 900px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .device-viewport {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .viewport-label {
+      padding: 12px 18px;
+      background: #171A21;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #94A3B8;
+    }
+
+    .viewport-content {
+      padding: 28px 24px 76px;
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      position: relative;
+    }
+
+    /* THEME A: DEEP BASALT & MUTED CELADON */
+    .theme-basalt {
+      --bg: #0D0F12;
+      --surface: #14171C;
+      --surface-raised: #1C2026;
+      --border: rgba(240, 242, 244, 0.09);
+      --border-strong: rgba(240, 242, 244, 0.18);
+      --text-main: #F0F2F4;
+      --text-sub: #94A3B8;
+      --text-mute: #64748B;
+      --accent: #52796F;
+      --btn-bg: #F0F2F4;
+      --btn-text: #0D0F12;
+      background: var(--bg);
+      color: var(--text-main);
+    }
+
+    /* THEME B: ALABASTER SLATE & BONE INK */
+    .theme-alabaster {
+      --bg: #F3F3F0;
+      --surface: #FFFFFF;
+      --surface-raised: #E9E9E5;
+      --border: rgba(20, 23, 26, 0.1);
+      --border-strong: rgba(20, 23, 26, 0.22);
+      --text-main: #14171A;
+      --text-sub: #5A626A;
+      --text-mute: #8C949D;
+      --accent: #3A5A40;
+      --btn-bg: #14171A;
+      --btn-text: #F3F3F0;
+      background: var(--bg);
+      color: var(--text-main);
+    }
+
+    .mock-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mock-brand {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .mock-vol {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-mute);
+      font-weight: 400;
+    }
+
+    .mock-auth {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-sub);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    .mock-prompt-section {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mock-prompt-date {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .mock-prompt-title {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.45rem;
+      font-weight: 400;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+    }
+
+    .mock-writing-card {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.22);
+      border-radius: 3px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+
+    .mock-textarea-sim {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.68;
+      color: var(--text-main);
+      min-height: 85px;
+    }
+
+    .mock-writing-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .mock-meta-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-mute);
+      letter-spacing: 0.05em;
+      display: flex;
+      gap: 6px;
+    }
+
+    .mock-capture-btn {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      background: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      padding: 7px 16px;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 1px 2px 0px rgba(0,0,0,0.18);
+    }
+
+    .mock-ledger-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mock-ledger-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mock-ledger-title {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-sub);
+    }
+
+    .mock-entry-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 1px 2px 0px rgba(0,0,0,0.08);
+    }
+
+    .mock-entry-text {
+      font-size: 0.92rem;
+      line-height: 1.62;
+      color: var(--text-main);
+      max-width: 65ch;
+    }
+
+    .mock-entry-footer {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-mute);
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+    }
+
+    .mock-entry-seq {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .mock-dock {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface);
+      border: 1.5px solid var(--border-strong);
+      box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.25);
+      display: flex;
+      padding: 2px;
+      z-index: 10;
+    }
+
+    .mock-dock-item {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 7px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      color: var(--text-sub);
+    }
+
+    .mock-dock-item.active {
+      background: var(--btn-bg);
+      color: var(--btn-text);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="theme-toggle-bar">
+    <div>
+      <h2>Cognitive Engine — Human-Made Constraint Mockups</h2>
+      <p style="font-size: 0.8rem; color: #94A3B8; margin-top: 4px;">
+        Comparing Option A (Deep Basalt & Muted Celadon) vs Option B (Alabaster & Bone Ink).
+      </p>
+    </div>
+    <div>
+      <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #64748B;">Live Side-by-Side</span>
+    </div>
+  </div>
+
+  <div class="comparison-grid">
+
+    <!-- DIRECTION A: DEEP BASALT & MUTED CELADON -->
+    <div class="device-viewport theme-basalt">
+      <div class="viewport-label">
+        <span>[OPTION A] DEEP BASALT SLATE & CELADON</span>
+        <span>15.5:1 (AAA)</span>
+      </div>
+      <div class="viewport-content">
+        <header class="mock-header">
+          <div class="mock-brand">
+            Cognitive Engine
+            <span class="mock-vol">// VOL. 01</span>
+          </div>
+          <div class="mock-auth">
+            Session Active
+          </div>
+        </header>
+
+        <section class="mock-prompt-section">
+          <span class="mock-prompt-date">Sunday, Aug 16 · Unstructured</span>
+          <h1 class="mock-prompt-title">What is preoccupying your attention right now?</h1>
+        </section>
+
+        <div class="mock-writing-card">
+          <div class="mock-textarea-sim">
+            Exploring how mental models decay over time when not continuously tested against reality. The tension between structured taxonomies and natural associative memory...
+          </div>
+          <div class="mock-writing-footer">
+            <div class="mock-meta-tag">
+              <span>24 WDS</span>
+              <span>·</span>
+              <span>⌘+ENTER</span>
+            </div>
+            <button class="mock-capture-btn">
+              Record Thought
+            </button>
+          </div>
+        </div>
+
+        <section class="mock-ledger-section">
+          <div class="mock-ledger-header">
+            <span class="mock-ledger-title">Recent Stream</span>
+            <span style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-mute);">2 entries</span>
+          </div>
+
+          <div class="mock-entry-card">
+            <p class="mock-entry-text">
+              Architecture baseline confirmed: keep the capture interface immediate. Avoid prematurely introducing graph visualizers before underlying clusters stabilize.
+            </p>
+            <div class="mock-entry-footer">
+              <span class="mock-entry-seq">#002</span>
+              <span>24m ago</span>
+            </div>
+          </div>
+
+          <div class="mock-entry-card">
+            <p class="mock-entry-text">
+              Observation on cognitive friction: if a tool asks for tags before writing, the thought is already lost.
+            </p>
+            <div class="mock-entry-footer">
+              <span class="mock-entry-seq">#001</span>
+              <span>2h ago</span>
+            </div>
+          </div>
+        </section>
+
+        <nav class="mock-dock">
+          <div class="mock-dock-item active">
+            <span>[01]</span> RECORD
+          </div>
+          <div class="mock-dock-item">
+            <span>[02]</span> RECALL
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- DIRECTION B: ALABASTER SLATE & BONE INK -->
+    <div class="device-viewport theme-alabaster">
+      <div class="viewport-label">
+        <span>[OPTION B] ALABASTER CHALK & BONE INK</span>
+        <span>16.2:1 (AAA)</span>
+      </div>
+      <div class="viewport-content">
+        <header class="mock-header">
+          <div class="mock-brand">
+            Cognitive Engine
+            <span class="mock-vol">// VOL. 01</span>
+          </div>
+          <div class="mock-auth">
+            Session Active
+          </div>
+        </header>
+
+        <section class="mock-prompt-section">
+          <span class="mock-prompt-date">Sunday, Aug 16 · Unstructured</span>
+          <h1 class="mock-prompt-title">What is preoccupying your attention right now?</h1>
+        </section>
+
+        <div class="mock-writing-card">
+          <div class="mock-textarea-sim">
+            Exploring how mental models decay over time when not continuously tested against reality. The tension between structured taxonomies and natural associative memory...
+          </div>
+          <div class="mock-writing-footer">
+            <div class="mock-meta-tag">
+              <span>24 WDS</span>
+              <span>·</span>
+              <span>⌘+ENTER</span>
+            </div>
+            <button class="mock-capture-btn">
+              Record Thought
+            </button>
+          </div>
+        </div>
+
+        <section class="mock-ledger-section">
+          <div class="mock-ledger-header">
+            <span class="mock-ledger-title">Recent Stream</span>
+            <span style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-mute);">2 entries</span>
+          </div>
+
+          <div class="mock-entry-card">
+            <p class="mock-entry-text">
+              Architecture baseline confirmed: keep the capture interface immediate. Avoid prematurely introducing graph visualizers before underlying clusters stabilize.
+            </p>
+            <div class="mock-entry-footer">
+              <span class="mock-entry-seq">#002</span>
+              <span>24m ago</span>
+            </div>
+          </div>
+
+          <div class="mock-entry-card">
+            <p class="mock-entry-text">
+              Observation on cognitive friction: if a tool asks for tags before writing, the thought is already lost.
+            </p>
+            <div class="mock-entry-footer">
+              <span class="mock-entry-seq">#001</span>
+              <span>2h ago</span>
+            </div>
+          </div>
+        </section>
+
+        <nav class="mock-dock">
+          <div class="mock-dock-item active">
+            <span>[01]</span> RECORD
+          </div>
+          <div class="mock-dock-item">
+            <span>[02]</span> RECALL
+          </div>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

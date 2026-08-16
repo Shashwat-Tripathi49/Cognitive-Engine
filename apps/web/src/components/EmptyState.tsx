@@ -11,22 +11,22 @@ export function EmptyState({ title, description }: EmptyStateProps) {
   return (
     <div
       style={{
-        padding: '48px 24px',
-        textAlign: 'center',
+        padding: '40px 20px',
+        textAlign: 'left',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        gap: '8px',
-        border: '1px dashed var(--border-strong)',
-        backgroundColor: 'var(--bg-surface-subtle)',
+        gap: '6px',
+        border: '1px dashed var(--border-structural)',
+        backgroundColor: 'var(--surface-raised)',
+        borderRadius: 'var(--radius-slip)',
       }}
     >
       <h3
         style={{
-          fontFamily: 'var(--font-serif)',
-          fontSize: '1.2rem',
-          fontWeight: 400,
-          color: 'var(--text-primary)',
+          fontFamily: 'var(--font-display)',
+          fontSize: '0.95rem',
+          fontWeight: 600,
+          color: 'var(--ink-bone)',
           letterSpacing: '-0.01em',
         }}
       >
@@ -34,11 +34,11 @@ export function EmptyState({ title, description }: EmptyStateProps) {
       </h3>
       <p
         style={{
-          fontSize: '0.9rem',
-          color: 'var(--text-secondary)',
-          maxWidth: '400px',
+          fontSize: '0.875rem',
+          color: 'var(--ink-zinc)',
+          maxWidth: '55ch',
           lineHeight: '1.6',
-          fontFamily: 'var(--font-sans)',
+          fontFamily: 'var(--font-body)',
         }}
       >
         {description}
