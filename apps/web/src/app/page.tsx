@@ -25,7 +25,6 @@ export default function CapturePage() {
       const response = await api.listCaptures(1, 20);
       setFragments(response.data || []);
     } catch {
-      // Graceful offline message when local PostgreSQL Docker is not running
       setError('Local memory database is currently offline. Start PostgreSQL container to sync live entries.');
     } finally {
       setIsLoading(false);
@@ -73,19 +72,20 @@ export default function CapturePage() {
       {/* Left Icon Dock */}
       <LeftDock />
 
-      {/* Main Column */}
+      {/* Main Column - Full Screen Width Expansion on Desktop */}
       <main
         style={{
           flex: 1,
-          maxWidth: '740px',
           width: '100%',
+          maxWidth: '1280px',
           margin: '0 auto',
-          padding: '28px 24px 80px 24px',
+          padding: '36px 36px 80px 88px',
           display: 'flex',
           flexDirection: 'column',
           gap: '36px',
           position: 'relative',
         }}
+        className="main-app-container"
       >
         {/* Heading Section with Crop Marks */}
         <section
@@ -133,7 +133,7 @@ export default function CapturePage() {
           <h1
             style={{
               fontFamily: 'var(--font-headline)',
-              fontSize: '2.5rem',
+              fontSize: '2.8rem',
               fontWeight: 800,
               letterSpacing: '-0.025em',
               color: 'var(--ink-bone)',
@@ -145,7 +145,7 @@ export default function CapturePage() {
           <span
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.68rem',
+              fontSize: '0.72rem',
               textTransform: 'uppercase',
               letterSpacing: '0.12em',
               color: 'var(--ink-dust)',
@@ -156,8 +156,8 @@ export default function CapturePage() {
           </span>
         </section>
 
-        {/* The Signature Tilted Journal Slip Input */}
-        <section aria-label="Journal Input Surface" style={{ position: 'relative' }}>
+        {/* The Signature Tilted Journal Slip Input (Full Width) */}
+        <section aria-label="Journal Input Surface" style={{ position: 'relative', width: '100%' }}>
           {/* Tilted Backing Slip */}
           <div
             aria-hidden="true"
@@ -166,7 +166,7 @@ export default function CapturePage() {
               inset: 0,
               backgroundColor: 'var(--surface-raised)',
               border: '1.5px solid var(--border-structural)',
-              transform: 'rotate(0.4deg) translate(3px, 4px)',
+              transform: 'rotate(0.35deg) translate(3px, 4px)',
               zIndex: 0,
             }}
           />
@@ -180,10 +180,10 @@ export default function CapturePage() {
               backgroundColor: 'var(--surface-pure)',
               border: '1.5px solid var(--ink-bone)',
               boxShadow: '2.5px 3.5px 0px rgba(0, 0, 0, 0.15)',
-              padding: '20px 24px 18px 24px',
+              padding: '22px 28px 20px 28px',
               display: 'flex',
               flexDirection: 'column',
-              gap: '14px',
+              gap: '16px',
             }}
           >
             {/* Corner Crop Marks */}
@@ -191,10 +191,10 @@ export default function CapturePage() {
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                top: '5px',
-                left: '7px',
+                top: '6px',
+                left: '8px',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '0.75rem',
                 color: 'var(--ink-bone)',
                 lineHeight: 1,
               }}
@@ -205,10 +205,10 @@ export default function CapturePage() {
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                top: '5px',
-                right: '7px',
+                top: '6px',
+                right: '8px',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '0.75rem',
                 color: 'var(--ink-bone)',
                 lineHeight: 1,
               }}
@@ -219,10 +219,10 @@ export default function CapturePage() {
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                bottom: '5px',
-                left: '7px',
+                bottom: '6px',
+                left: '8px',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '0.75rem',
                 color: 'var(--ink-bone)',
                 lineHeight: 1,
               }}
@@ -233,10 +233,10 @@ export default function CapturePage() {
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                bottom: '5px',
-                right: '7px',
+                bottom: '6px',
+                right: '8px',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '0.75rem',
                 color: 'var(--ink-bone)',
                 lineHeight: 1,
               }}
@@ -256,7 +256,7 @@ export default function CapturePage() {
                 htmlFor="capture-input-area"
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.68rem',
+                  fontSize: '0.72rem',
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
                   color: 'var(--ink-dust)',
@@ -269,7 +269,7 @@ export default function CapturePage() {
               <span
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.68rem',
+                  fontSize: '0.72rem',
                   color: 'var(--ink-dust)',
                   letterSpacing: '0.04em',
                 }}
@@ -286,7 +286,7 @@ export default function CapturePage() {
               onKeyDown={handleKeyDown}
               placeholder="What is preoccupying your attention right now? Record a reflection, observation, or idea..."
               disabled={isSubmitting}
-              rows={4}
+              rows={5}
               style={{
                 width: '100%',
                 backgroundColor: 'transparent',
@@ -296,8 +296,8 @@ export default function CapturePage() {
                 borderRadius: 0,
                 outline: 'none',
                 resize: 'vertical',
-                minHeight: '90px',
-                fontSize: '1rem',
+                minHeight: '110px',
+                fontSize: '1.05rem',
                 lineHeight: '1.65',
                 fontFamily: 'var(--font-body)',
                 paddingBottom: '8px',
@@ -311,14 +311,14 @@ export default function CapturePage() {
                 disabled={!text.trim() || isSubmitting}
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
+                  fontSize: '0.78rem',
                   fontWeight: 600,
                   textTransform: 'uppercase',
                   letterSpacing: '0.08em',
                   backgroundColor: !text.trim() || isSubmitting ? 'var(--surface-raised)' : 'var(--ink-bone)',
                   color: !text.trim() || isSubmitting ? 'var(--ink-dust)' : 'var(--ink-inverse)',
                   border: '1px solid var(--ink-bone)',
-                  padding: '8px 20px',
+                  padding: '9px 24px',
                   cursor: !text.trim() || isSubmitting ? 'default' : 'pointer',
                   transition: 'all var(--duration-fast)',
                   boxShadow: text.trim() && !isSubmitting ? '1.5px 2px 0px rgba(0,0,0,0.2)' : 'none',
@@ -337,7 +337,8 @@ export default function CapturePage() {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '18px',
+            gap: '20px',
+            width: '100%',
           }}
         >
           <div
@@ -345,14 +346,14 @@ export default function CapturePage() {
               display: 'flex',
               alignItems: 'baseline',
               justifyContent: 'space-between',
-              paddingBottom: '8px',
+              paddingBottom: '10px',
               borderBottom: '1.5px solid var(--border-structural)',
             }}
           >
             <h2
               style={{
                 fontFamily: 'var(--font-headline)',
-                fontSize: '1.65rem',
+                fontSize: '1.85rem',
                 fontWeight: 800,
                 letterSpacing: '-0.02em',
                 color: 'var(--ink-bone)',
@@ -365,7 +366,7 @@ export default function CapturePage() {
               <span
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.7rem',
+                  fontSize: '0.72rem',
                   color: 'var(--ink-dust)',
                 }}
               >
@@ -389,7 +390,7 @@ export default function CapturePage() {
                 fontFamily: 'var(--font-body)',
               }}
             >
-              <span style={{ fontSize: '0.85rem' }}>{error}</span>
+              <span style={{ fontSize: '0.875rem' }}>{error}</span>
               <button
                 type="button"
                 onClick={fetchRecentCaptures}
@@ -426,7 +427,8 @@ export default function CapturePage() {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '18px',
+                gap: '20px',
+                width: '100%',
               }}
             >
               {fragments.map((fragment, index) => (
@@ -441,6 +443,14 @@ export default function CapturePage() {
           )}
         </section>
       </main>
+
+      <style jsx>{`
+        @media (max-width: 900px) {
+          .main-app-container {
+            padding: 24px 20px 80px 20px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

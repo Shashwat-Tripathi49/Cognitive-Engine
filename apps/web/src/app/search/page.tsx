@@ -91,19 +91,20 @@ export default function MemorySearchPage() {
       {/* Left Icon Dock */}
       <LeftDock />
 
-      {/* Main Column */}
+      {/* Main Column - Full Screen Width Expansion on Desktop */}
       <main
         style={{
           flex: 1,
-          maxWidth: '740px',
           width: '100%',
+          maxWidth: '1280px',
           margin: '0 auto',
-          padding: '28px 24px 80px 24px',
+          padding: '36px 36px 80px 88px',
           display: 'flex',
           flexDirection: 'column',
           gap: '36px',
           position: 'relative',
         }}
+        className="main-app-container"
       >
         {/* Top Section: Heading + Subtitle with Crop Marks */}
         <section
@@ -151,7 +152,7 @@ export default function MemorySearchPage() {
           <h1
             style={{
               fontFamily: 'var(--font-headline)',
-              fontSize: '2.5rem',
+              fontSize: '2.8rem',
               fontWeight: 800,
               letterSpacing: '-0.025em',
               color: 'var(--ink-bone)',
@@ -163,7 +164,7 @@ export default function MemorySearchPage() {
           <span
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.68rem',
+              fontSize: '0.72rem',
               textTransform: 'uppercase',
               letterSpacing: '0.12em',
               color: 'var(--ink-dust)',
@@ -174,8 +175,8 @@ export default function MemorySearchPage() {
           </span>
         </section>
 
-        {/* The Signature Stitch Search Box Container */}
-        <section aria-label="Search Surface" style={{ position: 'relative' }}>
+        {/* The Signature Stitch Search Box Container (Full Width) */}
+        <section aria-label="Search Surface" style={{ position: 'relative', width: '100%' }}>
           {/* Tilted Backing Slip */}
           <div
             aria-hidden="true"
@@ -184,7 +185,7 @@ export default function MemorySearchPage() {
               inset: 0,
               backgroundColor: 'var(--surface-raised)',
               border: '1.5px solid var(--border-structural)',
-              transform: 'rotate(0.5deg) translate(3px, 4px)',
+              transform: 'rotate(0.35deg) translate(3px, 4px)',
               zIndex: 0,
             }}
           />
@@ -198,10 +199,10 @@ export default function MemorySearchPage() {
               backgroundColor: 'var(--surface-pure)',
               border: '1.5px solid var(--ink-bone)',
               boxShadow: '2.5px 3.5px 0px rgba(0, 0, 0, 0.15)',
-              padding: '20px 24px 18px 24px',
+              padding: '22px 28px 20px 28px',
               display: 'flex',
               flexDirection: 'column',
-              gap: '12px',
+              gap: '14px',
             }}
           >
             {/* Corner Crop Marks */}
@@ -209,10 +210,10 @@ export default function MemorySearchPage() {
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                top: '5px',
-                left: '7px',
+                top: '6px',
+                left: '8px',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '0.75rem',
                 color: 'var(--ink-bone)',
                 lineHeight: 1,
               }}
@@ -223,10 +224,10 @@ export default function MemorySearchPage() {
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                top: '5px',
-                right: '7px',
+                top: '6px',
+                right: '8px',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '0.75rem',
                 color: 'var(--ink-bone)',
                 lineHeight: 1,
               }}
@@ -237,10 +238,10 @@ export default function MemorySearchPage() {
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                bottom: '5px',
-                left: '7px',
+                bottom: '6px',
+                left: '8px',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '0.75rem',
                 color: 'var(--ink-bone)',
                 lineHeight: 1,
               }}
@@ -251,10 +252,10 @@ export default function MemorySearchPage() {
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                bottom: '5px',
-                right: '7px',
+                bottom: '6px',
+                right: '8px',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '0.75rem',
                 color: 'var(--ink-bone)',
                 lineHeight: 1,
               }}
@@ -268,14 +269,14 @@ export default function MemorySearchPage() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingLeft: '28px',
+                paddingLeft: '32px',
               }}
             >
               <label
                 htmlFor="memory-search-input"
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.68rem',
+                  fontSize: '0.72rem',
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
                   color: 'var(--ink-dust)',
@@ -294,7 +295,7 @@ export default function MemorySearchPage() {
                     background: 'none',
                     border: 'none',
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '0.68rem',
+                    fontSize: '0.72rem',
                     color: 'var(--ink-dust)',
                     cursor: 'pointer',
                     letterSpacing: '0.04em',
@@ -310,13 +311,13 @@ export default function MemorySearchPage() {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '12px',
+                gap: '16px',
               }}
             >
               {/* Search Lens Icon */}
               <svg
-                width="16"
-                height="16"
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="var(--ink-bone)"
@@ -336,7 +337,7 @@ export default function MemorySearchPage() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search thoughts naturally..."
+                placeholder="Search thoughts naturally — ideas, concepts, observations..."
                 aria-label="Search memories"
                 style={{
                   flex: 1,
@@ -347,7 +348,7 @@ export default function MemorySearchPage() {
                   borderBottom: '1px solid var(--border-structural)',
                   borderRadius: 0,
                   outline: 'none',
-                  fontSize: '1rem',
+                  fontSize: '1.05rem',
                   lineHeight: '1.6',
                   fontFamily: 'var(--font-body)',
                   paddingBottom: '4px',
@@ -359,14 +360,14 @@ export default function MemorySearchPage() {
                 disabled={!query.trim() || isSearching}
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
+                  fontSize: '0.78rem',
                   fontWeight: 600,
                   textTransform: 'uppercase',
                   letterSpacing: '0.08em',
                   backgroundColor: !query.trim() || isSearching ? 'var(--surface-raised)' : 'var(--ink-bone)',
                   color: !query.trim() || isSearching ? 'var(--ink-dust)' : 'var(--ink-inverse)',
                   border: '1px solid var(--ink-bone)',
-                  padding: '8px 20px',
+                  padding: '9px 24px',
                   cursor: !query.trim() || isSearching ? 'default' : 'pointer',
                   transition: 'all var(--duration-fast)',
                   boxShadow: query.trim() && !isSearching ? '1.5px 2px 0px rgba(0,0,0,0.2)' : 'none',
@@ -385,7 +386,8 @@ export default function MemorySearchPage() {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '18px',
+            gap: '20px',
+            width: '100%',
           }}
         >
           {/* Result Section Header */}
@@ -394,14 +396,14 @@ export default function MemorySearchPage() {
               display: 'flex',
               alignItems: 'baseline',
               justifyContent: 'space-between',
-              paddingBottom: '8px',
+              paddingBottom: '10px',
               borderBottom: '1.5px solid var(--border-structural)',
             }}
           >
             <h2
               style={{
                 fontFamily: 'var(--font-headline)',
-                fontSize: '1.65rem',
+                fontSize: '1.85rem',
                 fontWeight: 800,
                 letterSpacing: '-0.02em',
                 color: 'var(--ink-bone)',
@@ -414,7 +416,7 @@ export default function MemorySearchPage() {
               <span
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.7rem',
+                  fontSize: '0.72rem',
                   color: 'var(--ink-dust)',
                 }}
               >
@@ -477,13 +479,14 @@ export default function MemorySearchPage() {
             />
           )}
 
-          {/* Populated Memory Stream (Stitch Stacked Cards) */}
+          {/* Populated Memory Stream */}
           {!isSearching && !error && results.length > 0 && (
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '18px',
+                gap: '20px',
+                width: '100%',
               }}
             >
               {results.map((item, index) => (
@@ -498,6 +501,14 @@ export default function MemorySearchPage() {
           )}
         </section>
       </main>
+
+      <style jsx>{`
+        @media (max-width: 900px) {
+          .main-app-container {
+            padding: 24px 20px 80px 20px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

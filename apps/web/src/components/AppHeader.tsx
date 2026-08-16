@@ -24,9 +24,10 @@ export function AppHeader() {
     >
       <div
         style={{
-          maxWidth: '820px',
+          width: '100%',
+          maxWidth: '1440px',
           margin: '0 auto',
-          padding: '14px 20px',
+          padding: '14px 32px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -44,8 +45,8 @@ export function AppHeader() {
         >
           <div
             style={{
-              width: '26px',
-              height: '26px',
+              width: '28px',
+              height: '28px',
               borderRadius: '50%',
               backgroundColor: 'var(--surface-raised)',
               border: '1px solid var(--border-structural)',
@@ -53,7 +54,7 @@ export function AppHeader() {
               alignItems: 'center',
               justifyContent: 'center',
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.65rem',
+              fontSize: '0.7rem',
               fontWeight: 700,
               color: 'var(--ink-bone)',
             }}
@@ -63,7 +64,7 @@ export function AppHeader() {
           <span
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.75rem',
+              fontSize: '0.8rem',
               fontWeight: 600,
               letterSpacing: '0.04em',
               color: 'var(--ink-bone)',
@@ -93,11 +94,11 @@ export function AppHeader() {
             aria-selected={isCapture}
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.7rem',
+              fontSize: '0.72rem',
               fontWeight: 600,
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
-              padding: '4px 12px',
+              padding: '5px 16px',
               backgroundColor: isCapture ? 'var(--ink-bone)' : 'transparent',
               color: isCapture ? 'var(--ink-inverse)' : 'var(--ink-zinc)',
               textDecoration: 'none',
@@ -114,11 +115,11 @@ export function AppHeader() {
             aria-selected={isSearch}
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.7rem',
+              fontSize: '0.72rem',
               fontWeight: 600,
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
-              padding: '4px 12px',
+              padding: '5px 16px',
               backgroundColor: isSearch ? 'var(--ink-bone)' : 'transparent',
               color: isSearch ? 'var(--ink-inverse)' : 'var(--ink-zinc)',
               textDecoration: 'none',
@@ -131,7 +132,7 @@ export function AppHeader() {
         </nav>
 
         {/* Right: Auth / Menu Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           {isLoaded && (
             <>
               {isSignedIn ? (
@@ -139,8 +140,8 @@ export function AppHeader() {
                   appearance={{
                     elements: {
                       avatarBox: {
-                        width: '24px',
-                        height: '24px',
+                        width: '26px',
+                        height: '26px',
                         borderRadius: '0px',
                         border: '1px solid var(--border-structural)',
                       },
@@ -153,11 +154,11 @@ export function AppHeader() {
                     type="button"
                     style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '0.7rem',
+                      fontSize: '0.72rem',
                       fontWeight: 500,
                       textTransform: 'uppercase',
                       letterSpacing: '0.06em',
-                      padding: '3px 8px',
+                      padding: '4px 10px',
                       backgroundColor: 'transparent',
                       color: 'var(--ink-zinc)',
                       border: '1px solid var(--border-structural)',
@@ -175,7 +176,7 @@ export function AppHeader() {
           <span
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '1rem',
+              fontSize: '1.1rem',
               color: 'var(--ink-bone)',
               lineHeight: 1,
               userSelect: 'none',
