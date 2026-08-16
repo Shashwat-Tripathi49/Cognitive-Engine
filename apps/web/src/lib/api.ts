@@ -10,8 +10,12 @@ import type {
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
-const DEFAULT_DEV_TOKEN =
-  process.env.NEXT_PUBLIC_API_TOKEN || 'test_token_user_A';
+/**
+ * Development-only fallback token.
+ * Strictly isolated: Evaluates to null in production builds.
+ */
+const DEV_FALLBACK_TOKEN =
+  process.env.NODE_ENV === 'development' ? 'test_token_user_A' : null;
 
 export interface ApiErrorResponse {
   error: {
@@ -34,7 +38,7 @@ export class ApiClientError extends Error {
 }
 
 /**
- * Internal fetch wrapper with Bearer token injection and error handling
+ * Internal fetch wrapper with Clerk Bearer token injection and error handling
  */
 export async function fetchApi<T>(
   endpoint: string,
@@ -42,7 +46,7 @@ export async function fetchApi<T>(
   token?: string | null
 ): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`;
-  const authToken = token || DEFAULT_DEV_TOKEN;
+  const authToken = token || DEV_FALLBACK_TOKEN;
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -86,7 +90,7 @@ export async function fetchApi<T>(
 }
 
 /**
- * Direct API Methods (Accepts explicit Bearer token)
+ * Direct API Methods (Accepts Clerk Bearer token)
  */
 export async function createCapture(
   text: string,

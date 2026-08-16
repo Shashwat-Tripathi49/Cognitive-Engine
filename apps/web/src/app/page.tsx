@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { CognitiveFragment } from '@cognitive-engine/shared';
 import { AppHeader } from '../components/AppHeader';
-import { LeftDock } from '../components/LeftDock';
 import { FragmentCard } from '../components/FragmentCard';
 import { EmptyState } from '../components/EmptyState';
 import { LoadingSkeleton } from '../components/LoadingSkeleton';
@@ -43,9 +42,11 @@ export default function CapturePage() {
     setIsSubmitting(true);
     setError(null);
     try {
-      const newFragment = await api.createCapture(trimmed);
-      setFragments((prev) => [newFragment, ...prev]);
+      // 1. Submit capture to server
+      await api.createCapture(trimmed);
       setText('');
+      // 2. Revalidate canonical state from server database
+      await fetchRecentCaptures();
     } catch (err: unknown) {
       const message =
         err instanceof Error
@@ -66,28 +67,24 @@ export default function CapturePage() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--canvas-bg)' }}>
-      {/* Top Masthead */}
+      {/* Top Masthead Navigation */}
       <AppHeader />
 
-      {/* Left Icon Dock */}
-      <LeftDock />
-
-      {/* Main Column - Full Screen Width Expansion on Desktop */}
+      {/* Main Column */}
       <main
         style={{
           flex: 1,
           width: '100%',
-          maxWidth: '1280px',
+          maxWidth: '760px',
           margin: '0 auto',
-          padding: '36px 36px 80px 88px',
+          padding: '36px 24px 80px 24px',
           display: 'flex',
           flexDirection: 'column',
           gap: '36px',
           position: 'relative',
         }}
-        className="main-app-container"
       >
-        {/* Heading Section with Crop Marks */}
+        {/* Heading Section */}
         <section
           aria-label="Capture Introduction"
           style={{
@@ -133,30 +130,30 @@ export default function CapturePage() {
           <h1
             style={{
               fontFamily: 'var(--font-headline)',
-              fontSize: '2.8rem',
+              fontSize: '2.5rem',
               fontWeight: 800,
               letterSpacing: '-0.025em',
               color: 'var(--ink-bone)',
               lineHeight: 1.1,
             }}
           >
-            Capture Stream
+            Capture a thought
           </h1>
           <span
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '0.72rem',
               textTransform: 'uppercase',
-              letterSpacing: '0.12em',
+              letterSpacing: '0.1em',
               color: 'var(--ink-dust)',
               fontWeight: 500,
             }}
           >
-            SYS.INPUT // JOURNAL & REFLECTION
+            Personal Thinking Ledger
           </span>
         </section>
 
-        {/* The Signature Tilted Journal Slip Input (Full Width) */}
+        {/* The Signature Writing Slip */}
         <section aria-label="Journal Input Surface" style={{ position: 'relative', width: '100%' }}>
           {/* Tilted Backing Slip */}
           <div
@@ -180,10 +177,10 @@ export default function CapturePage() {
               backgroundColor: 'var(--surface-pure)',
               border: '1.5px solid var(--ink-bone)',
               boxShadow: '2.5px 3.5px 0px rgba(0, 0, 0, 0.15)',
-              padding: '22px 28px 20px 28px',
+              padding: '20px 24px 18px 24px',
               display: 'flex',
               flexDirection: 'column',
-              gap: '16px',
+              gap: '14px',
             }}
           >
             {/* Corner Crop Marks */}
@@ -256,20 +253,20 @@ export default function CapturePage() {
                 htmlFor="capture-input-area"
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.72rem',
+                  fontSize: '0.7rem',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
+                  letterSpacing: '0.08em',
                   color: 'var(--ink-dust)',
                   fontWeight: 500,
                 }}
               >
-                ENTRY / UNSTRUCTURED NOTE
+                New Entry
               </label>
 
               <span
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.72rem',
+                  fontSize: '0.7rem',
                   color: 'var(--ink-dust)',
                   letterSpacing: '0.04em',
                 }}
@@ -286,7 +283,7 @@ export default function CapturePage() {
               onKeyDown={handleKeyDown}
               placeholder="What is preoccupying your attention right now? Record a reflection, observation, or idea..."
               disabled={isSubmitting}
-              rows={5}
+              rows={4}
               style={{
                 width: '100%',
                 backgroundColor: 'transparent',
@@ -296,7 +293,7 @@ export default function CapturePage() {
                 borderRadius: 0,
                 outline: 'none',
                 resize: 'vertical',
-                minHeight: '110px',
+                minHeight: '90px',
                 fontSize: '1.05rem',
                 lineHeight: '1.65',
                 fontFamily: 'var(--font-body)',
@@ -318,13 +315,13 @@ export default function CapturePage() {
                   backgroundColor: !text.trim() || isSubmitting ? 'var(--surface-raised)' : 'var(--ink-bone)',
                   color: !text.trim() || isSubmitting ? 'var(--ink-dust)' : 'var(--ink-inverse)',
                   border: '1px solid var(--ink-bone)',
-                  padding: '9px 24px',
+                  padding: '8px 20px',
                   cursor: !text.trim() || isSubmitting ? 'default' : 'pointer',
                   transition: 'all var(--duration-fast)',
                   boxShadow: text.trim() && !isSubmitting ? '1.5px 2px 0px rgba(0,0,0,0.2)' : 'none',
                 }}
               >
-                {isSubmitting ? 'RECORDING...' : 'RECORD THOUGHT'}
+                {isSubmitting ? 'Recording...' : 'Record Thought'}
               </button>
             </div>
           </form>
@@ -337,7 +334,7 @@ export default function CapturePage() {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '20px',
+            gap: '18px',
             width: '100%',
           }}
         >
@@ -346,14 +343,14 @@ export default function CapturePage() {
               display: 'flex',
               alignItems: 'baseline',
               justifyContent: 'space-between',
-              paddingBottom: '10px',
+              paddingBottom: '8px',
               borderBottom: '1.5px solid var(--border-structural)',
             }}
           >
             <h2
               style={{
                 fontFamily: 'var(--font-headline)',
-                fontSize: '1.85rem',
+                fontSize: '1.65rem',
                 fontWeight: 800,
                 letterSpacing: '-0.02em',
                 color: 'var(--ink-bone)',
@@ -370,7 +367,7 @@ export default function CapturePage() {
                   color: 'var(--ink-dust)',
                 }}
               >
-                {fragments.length} {fragments.length === 1 ? 'Entry' : 'Entries'}
+                {fragments.length} {fragments.length === 1 ? 'entry' : 'entries'}
               </span>
             )}
           </div>
@@ -427,7 +424,7 @@ export default function CapturePage() {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '20px',
+                gap: '16px',
                 width: '100%',
               }}
             >
@@ -436,21 +433,12 @@ export default function CapturePage() {
                   key={fragment.id}
                   fragment={fragment}
                   index={index}
-                  totalCount={fragments.length}
                 />
               ))}
             </div>
           )}
         </section>
       </main>
-
-      <style jsx>{`
-        @media (max-width: 900px) {
-          .main-app-container {
-            padding: 24px 20px 80px 20px !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

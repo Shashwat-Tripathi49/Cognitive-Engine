@@ -23,22 +23,13 @@ export function MemoryResultCard({ result, index = 0, query = '' }: MemoryResult
     minute: '2-digit',
   });
 
-  // Calculate deterministic reference ID from real UUID/id
-  const refCode = useMemo(() => {
-    const id = memory.id || sourceFragment?.id || '';
-    if (id.length >= 4) {
-      return `REF: ${id.replace(/[^0-9a-zA-Z]/g, '').substring(0, 4).toUpperCase()}`;
-    }
-    return `REF: ${String(index + 1001)}`;
-  }, [memory.id, sourceFragment?.id, index]);
-
   // Subtle controlled rotation for editorial paper feel
   const rotationAngle = useMemo(() => {
-    const angles = ['0deg', '-0.35deg', '0.3deg', '-0.25deg', '0.4deg'];
+    const angles = ['0deg', '-0.3deg', '0.25deg', '-0.2deg', '0.3deg'];
     return angles[index % angles.length];
   }, [index]);
 
-  // Highlight query keywords softly if present
+  // Highlight query keywords softly only if they literally exist in text
   const highlightedContent = useMemo(() => {
     const trimmedQuery = query.trim();
     if (!trimmedQuery || trimmedQuery.length < 2) return content;
@@ -60,7 +51,7 @@ export function MemoryResultCard({ result, index = 0, query = '' }: MemoryResult
             <mark
               key={i}
               style={{
-                backgroundColor: 'rgba(20, 23, 26, 0.09)',
+                backgroundColor: 'rgba(20, 23, 26, 0.08)',
                 color: 'var(--ink-bone)',
                 padding: '1px 3px',
                 borderRadius: '1px',
@@ -83,8 +74,8 @@ export function MemoryResultCard({ result, index = 0, query = '' }: MemoryResult
       style={{
         backgroundColor: 'var(--surface-pure)',
         border: '1px solid var(--border-structural)',
-        boxShadow: '2px 3px 0px rgba(0, 0, 0, 0.12)',
-        padding: '20px 22px',
+        boxShadow: '1.5px 2.5px 0px rgba(0, 0, 0, 0.10)',
+        padding: '18px 22px',
         display: 'flex',
         flexDirection: 'column',
         gap: '12px',
@@ -101,79 +92,22 @@ export function MemoryResultCard({ result, index = 0, query = '' }: MemoryResult
         e.currentTarget.style.transform = rotationAngle;
       }}
     >
-      {/* Top Header: Ref code */}
-      <div
+      {/* Memory Content */}
+      <p
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
+          fontSize: '0.975rem',
+          lineHeight: '1.68',
+          color: 'var(--ink-bone)',
+          whiteSpace: 'pre-wrap',
+          wordBreak: 'break-word',
+          maxWidth: '65ch',
+          fontFamily: 'var(--font-body)',
         }}
       >
-        <span
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.65rem',
-            color: 'var(--ink-dust)',
-            letterSpacing: '0.06em',
-          }}
-        >
-          {refCode}
-        </span>
-      </div>
+        {highlightedContent}
+      </p>
 
-      {/* Main Content Row: Left Icon Box + Text */}
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-        {/* Left Icon Box (Stitch Stamp) */}
-        <div
-          style={{
-            width: '32px',
-            height: '32px',
-            border: '1px solid var(--border-structural)',
-            backgroundColor: 'var(--surface-raised)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-            marginTop: '2px',
-          }}
-        >
-          {index % 3 === 0 ? (
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="16" y1="13" x2="8" y2="13" />
-              <line x1="16" y1="17" x2="8" y2="17" />
-            </svg>
-          ) : index % 3 === 1 ? (
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M10 2v7.31M14 9.3V1.99M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0" />
-            </svg>
-          ) : (
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-            </svg>
-          )}
-        </div>
-
-        {/* Text Area */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <p
-            style={{
-              fontSize: '0.96rem',
-              lineHeight: '1.65',
-              color: 'var(--ink-bone)',
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-word',
-              maxWidth: '65ch',
-              fontFamily: 'var(--font-body)',
-            }}
-          >
-            {highlightedContent}
-          </p>
-        </div>
-      </div>
-
-      {/* Footer Tags & Timestamp */}
+      {/* Real Temporal Context Footer */}
       <div
         style={{
           display: 'flex',
@@ -181,48 +115,13 @@ export function MemoryResultCard({ result, index = 0, query = '' }: MemoryResult
           justifyContent: 'space-between',
           paddingTop: '10px',
           borderTop: '1px solid var(--border-hairline)',
+          fontFamily: 'var(--font-mono)',
+          fontSize: '0.7rem',
+          color: 'var(--ink-dust)',
         }}
       >
-        <div style={{ display: 'flex', gap: '6px' }}>
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.65rem',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
-              padding: '2px 6px',
-              backgroundColor: 'var(--surface-raised)',
-              border: '1px solid var(--border-hairline)',
-              color: 'var(--ink-zinc)',
-            }}
-          >
-            MEMORY
-          </span>
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.65rem',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
-              padding: '2px 6px',
-              backgroundColor: 'var(--surface-raised)',
-              border: '1px solid var(--border-hairline)',
-              color: 'var(--ink-zinc)',
-            }}
-          >
-            {formattedTime}
-          </span>
-        </div>
-
-        <time
-          dateTime={new Date(dateValue).toISOString()}
-          title={fullDate}
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.68rem',
-            color: 'var(--ink-dust)',
-          }}
-        >
+        <span>{formattedTime}</span>
+        <time dateTime={new Date(dateValue).toISOString()} title={fullDate}>
           {fullDate}
         </time>
       </div>

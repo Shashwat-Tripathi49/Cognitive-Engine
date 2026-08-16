@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import type { MemorySearchResult } from '@cognitive-engine/shared';
 import { AppHeader } from '../../components/AppHeader';
-import { LeftDock } from '../../components/LeftDock';
 import { MemoryResultCard } from '../../components/MemoryResultCard';
 import { EmptyState } from '../../components/EmptyState';
 import { LoadingSkeleton } from '../../components/LoadingSkeleton';
@@ -85,28 +84,24 @@ export default function MemorySearchPage() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--canvas-bg)' }}>
-      {/* Top Masthead */}
+      {/* Top Masthead Navigation */}
       <AppHeader />
 
-      {/* Left Icon Dock */}
-      <LeftDock />
-
-      {/* Main Column - Full Screen Width Expansion on Desktop */}
+      {/* Main Column */}
       <main
         style={{
           flex: 1,
           width: '100%',
-          maxWidth: '1280px',
+          maxWidth: '760px',
           margin: '0 auto',
-          padding: '36px 36px 80px 88px',
+          padding: '36px 24px 80px 24px',
           display: 'flex',
           flexDirection: 'column',
           gap: '36px',
           position: 'relative',
         }}
-        className="main-app-container"
       >
-        {/* Top Section: Heading + Subtitle with Crop Marks */}
+        {/* Search Introduction */}
         <section
           aria-label="Search Introduction"
           style={{
@@ -152,30 +147,30 @@ export default function MemorySearchPage() {
           <h1
             style={{
               fontFamily: 'var(--font-headline)',
-              fontSize: '2.8rem',
+              fontSize: '2.5rem',
               fontWeight: 800,
               letterSpacing: '-0.025em',
               color: 'var(--ink-bone)',
               lineHeight: 1.1,
             }}
           >
-            Query Registry
+            Search your memory
           </h1>
           <span
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '0.72rem',
               textTransform: 'uppercase',
-              letterSpacing: '0.12em',
+              letterSpacing: '0.1em',
               color: 'var(--ink-dust)',
               fontWeight: 500,
             }}
           >
-            SYS.INDEX // AWAITING INPUT
+            Personal Memory Retrieval
           </span>
         </section>
 
-        {/* The Signature Stitch Search Box Container (Full Width) */}
+        {/* The Signature Search Box */}
         <section aria-label="Search Surface" style={{ position: 'relative', width: '100%' }}>
           {/* Tilted Backing Slip */}
           <div
@@ -199,10 +194,10 @@ export default function MemorySearchPage() {
               backgroundColor: 'var(--surface-pure)',
               border: '1.5px solid var(--ink-bone)',
               boxShadow: '2.5px 3.5px 0px rgba(0, 0, 0, 0.15)',
-              padding: '22px 28px 20px 28px',
+              padding: '20px 24px 18px 24px',
               display: 'flex',
               flexDirection: 'column',
-              gap: '14px',
+              gap: '12px',
             }}
           >
             {/* Corner Crop Marks */}
@@ -269,21 +264,21 @@ export default function MemorySearchPage() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingLeft: '32px',
+                paddingLeft: '30px',
               }}
             >
               <label
                 htmlFor="memory-search-input"
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.72rem',
+                  fontSize: '0.7rem',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
+                  letterSpacing: '0.08em',
                   color: 'var(--ink-dust)',
                   fontWeight: 500,
                 }}
               >
-                SUBJECT / KEYWORD
+                Search Query
               </label>
 
               {query && (
@@ -295,7 +290,7 @@ export default function MemorySearchPage() {
                     background: 'none',
                     border: 'none',
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '0.72rem',
+                    fontSize: '0.7rem',
                     color: 'var(--ink-dust)',
                     cursor: 'pointer',
                     letterSpacing: '0.04em',
@@ -311,7 +306,7 @@ export default function MemorySearchPage() {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '16px',
+                gap: '14px',
               }}
             >
               {/* Search Lens Icon */}
@@ -367,14 +362,14 @@ export default function MemorySearchPage() {
                   backgroundColor: !query.trim() || isSearching ? 'var(--surface-raised)' : 'var(--ink-bone)',
                   color: !query.trim() || isSearching ? 'var(--ink-dust)' : 'var(--ink-inverse)',
                   border: '1px solid var(--ink-bone)',
-                  padding: '9px 24px',
+                  padding: '8px 20px',
                   cursor: !query.trim() || isSearching ? 'default' : 'pointer',
                   transition: 'all var(--duration-fast)',
                   boxShadow: query.trim() && !isSearching ? '1.5px 2px 0px rgba(0,0,0,0.2)' : 'none',
                   flexShrink: 0,
                 }}
               >
-                EXECUTE
+                Search
               </button>
             </div>
           </form>
@@ -386,7 +381,7 @@ export default function MemorySearchPage() {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '20px',
+            gap: '18px',
             width: '100%',
           }}
         >
@@ -396,20 +391,20 @@ export default function MemorySearchPage() {
               display: 'flex',
               alignItems: 'baseline',
               justifyContent: 'space-between',
-              paddingBottom: '10px',
+              paddingBottom: '8px',
               borderBottom: '1.5px solid var(--border-structural)',
             }}
           >
             <h2
               style={{
                 fontFamily: 'var(--font-headline)',
-                fontSize: '1.85rem',
+                fontSize: '1.65rem',
                 fontWeight: 800,
                 letterSpacing: '-0.02em',
                 color: 'var(--ink-bone)',
               }}
             >
-              Retrieved Entries
+              What surfaced
             </h2>
 
             {hasSearched && !isSearching && !error && (
@@ -420,7 +415,7 @@ export default function MemorySearchPage() {
                   color: 'var(--ink-dust)',
                 }}
               >
-                {results.length} {results.length === 1 ? 'Result Found' : 'Results Found'}
+                {results.length} {results.length === 1 ? 'memory found' : 'memories found'}
               </span>
             )}
           </div>
@@ -485,7 +480,7 @@ export default function MemorySearchPage() {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '20px',
+                gap: '16px',
                 width: '100%',
               }}
             >
@@ -501,14 +496,6 @@ export default function MemorySearchPage() {
           )}
         </section>
       </main>
-
-      <style jsx>{`
-        @media (max-width: 900px) {
-          .main-app-container {
-            padding: 24px 20px 80px 20px !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }
