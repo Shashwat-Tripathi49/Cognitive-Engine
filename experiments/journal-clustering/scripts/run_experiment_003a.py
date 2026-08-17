@@ -10,6 +10,8 @@ Fulfills Workstream 3 & 5 Requirements:
    a. EXACT TEXT SPAN MATCHING
    b. ALIAS-AWARE CANONICAL MATCHING
 5. Paced rate limiting (2.2s delay) to guarantee 0% network 429 drops.
+6. Target Variant Filtering: Executes ONLY requested variants.
+7. Merge Persistence: Preserves existing variant results when running targeted variants.
 """
 
 import json
@@ -239,24 +241,60 @@ def evaluate_predictions_alias_aware(gt_entities, pred_entities, text):
     return tp, fp, fn, hallucinations
 
 
-def run_experiment_003a_final(max_entries=100):
+def run_experiment_003a_final(max_entries=100, target_variants=None, results_path=None, api_caller=None):
+    """
+    Executes Experiment 003A entity extraction benchmark.
+    
+    Args:
+        max_entries: Max dataset entries to evaluate (default: 100)
+        target_variants: Optional string, list of strings, or None to execute all variants.
+        results_path: Optional custom path for output results (default: RESULTS_PATH).
+        api_caller: Optional callable (prompt_text) -> (raw_text, latency, usage, success, err) for testing/mocking.
+    """
+    out_results_path = results_path or RESULTS_PATH
+    call_api_fn = api_caller or call_groq_json_mode
+
+    # 1. Determine target variants to execute
+    all_available = list(PROMPTS.keys())
+    if target_variants is not None:
+        if isinstance(target_variants, str):
+            variants_to_run = [v.strip() for v in target_variants.split(',') if v.strip()]
+        else:
+            variants_to_run = list(target_variants)
+
+        # Validate that all requested variants exist
+        invalid = [v for v in variants_to_run if v not in PROMPTS]
+        if invalid:
+            raise ValueError(f"Unknown variant(s) requested: {invalid}. Available variants: {all_available}")
+    else:
+        variants_to_run = ["V0_Original", "V1_Exhaustive", "V2_Conservative", "V3_Confidence_All", "V3_Confidence_HighOnly"]
+
     with open(DATASET_PATH, 'r', encoding='utf-8') as f:
         dataset = json.load(f)[:max_entries]
+
+    total_gt_ents = sum(len(e["entities"]) for e in dataset)
 
     print("=" * 95)
     print("EXPERIMENT 003A (REVALIDATED FINAL) -- CANONICAL REAL LLM BENCHMARK")
     print(f"Model: {MODEL} (Groq API, Native JSON Mode)")
-    print(f"Dataset: {len(dataset)} Zero-Inference Ground-Truth Entries")
-    total_gt_ents = sum(len(e["entities"]) for e in dataset)
-    print(f"Total Ground-Truth Entities: {total_gt_ents}")
+    print(f"Dataset: {len(dataset)} Zero-Inference Ground-Truth Entries ({total_gt_ents} GT Entities)")
+    print(f"Executing Target Variants: {variants_to_run}")
     print("=" * 95 + "\n")
 
-    cached_responses = {}
+    # 2. Load existing results if file exists to preserve all non-executed variants
     variant_results = {}
+    if os.path.exists(out_results_path):
+        try:
+            with open(out_results_path, 'r', encoding='utf-8') as f:
+                existing_payload = json.load(f)
+                if isinstance(existing_payload, dict) and "variant_results" in existing_payload:
+                    variant_results = dict(existing_payload["variant_results"])
+                    print(f"Loaded existing results preserving {len(variant_results)} prior variant(s): {list(variant_results.keys())}")
+        except Exception as e:
+            print(f"Warning: Could not read existing results from {out_results_path}: {e}")
 
-    variant_keys = ["V0_Original", "V1_Exhaustive", "V2_Conservative", "V3_Confidence_All", "V3_Confidence_HighOnly"]
-
-    for variant_name in variant_keys:
+    # 3. Execute ONLY requested variants
+    for variant_name in variants_to_run:
         prompt_template = PROMPTS[variant_name]
         is_high_only = (variant_name == "V3_Confidence_HighOnly")
 
@@ -279,8 +317,11 @@ def run_experiment_003a_final(max_entries=100):
             gt_entities = entry["entities"]
 
             prompt_text = prompt_template.replace("{text}", text)
-            raw_text, latency, usage, success, err = call_groq_json_mode(prompt_text)
-            time.sleep(2.2)  # Strict 2.2s pacing (27.2 RPM) to guarantee 0% HTTP 429 rate limit drops
+            raw_text, latency, usage, success, err = call_api_fn(prompt_text)
+            
+            # Rate pacing only when calling real API
+            if api_caller is None:
+                time.sleep(2.2)  # Strict 2.2s pacing (27.2 RPM) to guarantee 0% HTTP 429 rate limit drops
 
             total_latency += latency
             prompt_tokens_total += usage.get("prompt_tokens", 0)
@@ -357,6 +398,7 @@ def run_experiment_003a_final(max_entries=100):
         tot_tokens = prompt_tokens_total + completion_tokens_total
         cost_usd = (prompt_tokens_total / 1_000_000 * PRICE_PER_M_INPUT) + (completion_tokens_total / 1_000_000 * PRICE_PER_M_OUTPUT)
 
+        # Update variant results dictionary (preserving other variants)
         variant_results[variant_name] = {
             "name": variant_name,
             "api_failure_rate": api_fail_rate,
@@ -388,7 +430,7 @@ def run_experiment_003a_final(max_entries=100):
             }
         }
 
-        # Incremental Save & Flush After Every Variant
+        # Incremental Save & Flush Merged Results After Every Variant
         out_payload = {
             "experiment": "Experiment 003A (Revalidated Final): Real LLM Entity Extraction Benchmark",
             "model": MODEL,
@@ -397,14 +439,14 @@ def run_experiment_003a_final(max_entries=100):
             "total_ground_truth_entities": total_gt_ents,
             "variant_results": variant_results
         }
-        with open(RESULTS_PATH, 'w', encoding='utf-8') as f:
+        with open(out_results_path, 'w', encoding='utf-8') as f:
             json.dump(out_payload, f, indent=2)
 
-        print(f"  --> Saved intermediate results for [{variant_name}] to {RESULTS_PATH}", flush=True)
+        print(f"  --> Saved merged intermediate results for [{variant_name}] to {out_results_path}", flush=True)
 
-    # Print Revalidated Comparison Table
+    # Print Comparison Table for all populated variants
     print("\n" + "=" * 125, flush=True)
-    print("EXPERIMENT 003A REVALIDATED RESULTS -- CANONICAL REAL LLM BENCHMARK", flush=True)
+    print("EXPERIMENT 003A REVALIDATED RESULTS -- MERGED BENCHMARK STATE", flush=True)
     print("=" * 125, flush=True)
     print(f"{'Variant':<22} | {'APIFail':<7} | {'JsonFail':<8} | {'EXACT P':<7} | {'EXACT R':<7} | {'EXACT F1':<8} | {'ALIAS P':<7} | {'ALIAS R':<7} | {'ALIAS F1':<8} | {'HalRate':<7}", flush=True)
     print("-" * 125, flush=True)
@@ -414,14 +456,21 @@ def run_experiment_003a_final(max_entries=100):
         al = res["alias_aware_matching"]
         print(f"{vk:<22} | {res['api_failure_rate']*100:6.1f}% | {res['malformed_json_rate']*100:7.1f}% | {ex['precision']*100:6.2f}% | {ex['recall']*100:6.2f}% | {ex['f1']*100:7.2f}% | {al['precision']*100:6.2f}% | {al['recall']*100:6.2f}% | {al['f1']*100:7.2f}% | {al['hallucination_rate']*100:6.2f}%", flush=True)
 
-    print(f"\nRevalidated results successfully finalized in {RESULTS_PATH}", flush=True)
+    print(f"\nResults successfully finalized in {out_results_path}", flush=True)
+    return variant_results
+
 
 if __name__ == "__main__":
-    import sys
     max_e = 100
-    target_variants = None
+    target_v = None
     if len(sys.argv) > 1:
         max_e = int(sys.argv[1])
     if len(sys.argv) > 2:
-        target_variants = [sys.argv[2]]
-    run_experiment_003a_final(max_entries=max_e)
+        # Support single or multiple comma-separated variants from CLI
+        raw_v = sys.argv[2]
+        if "," in raw_v:
+            target_v = [x.strip() for x in raw_v.split(",") if x.strip()]
+        else:
+            target_v = sys.argv[2:] if len(sys.argv) > 3 else raw_v
+
+    run_experiment_003a_final(max_entries=max_e, target_variants=target_v)
