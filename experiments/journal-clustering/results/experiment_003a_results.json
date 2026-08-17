@@ -111,28 +111,32 @@
     },
     "V3_Confidence_HighOnly": {
       "name": "V3_Confidence_HighOnly",
-      "parse_failure_rate": 1.0,
-      "parse_failures_count": 100,
-      "avg_latency_ms": 443.8629722595215,
-      "total_tokens": 0,
-      "total_cost_usd": 0.0,
+      "api_failure_rate": 0.0,
+      "api_failures_count": 0,
+      "malformed_json_rate": 0.0,
+      "malformed_json_count": 0,
+      "schema_failure_rate": 0.0,
+      "schema_failures_count": 0,
+      "avg_latency_ms": 935.1149773597717,
+      "total_tokens": 26921,
+      "total_cost_usd": 0.01698499,
       "exact_span_matching": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1": 0.0,
+        "precision": 0.36220472440944884,
+        "recall": 0.7666666666666667,
+        "f1": 0.49197860962566836,
         "hallucination_rate": 0.0,
-        "tp": 0,
-        "fp": 0,
-        "fn": 68
+        "tp": 46,
+        "fp": 81,
+        "fn": 14
       },
       "alias_aware_matching": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1": 0.0,
+        "precision": 0.36220472440944884,
+        "recall": 0.7666666666666667,
+        "f1": 0.49197860962566836,
         "hallucination_rate": 0.0,
-        "tp": 0,
-        "fp": 0,
-        "fn": 68
+        "tp": 46,
+        "fp": 81,
+        "fn": 14
       }
     }
   }
