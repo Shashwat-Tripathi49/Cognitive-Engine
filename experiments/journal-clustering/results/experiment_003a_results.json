@@ -1,34 +1,38 @@
 {
-  "experiment": "Experiment 003A (v4 Final): Native JSON Mode & Dual Matching Benchmark",
+  "experiment": "Experiment 003A (Revalidated Final): Real LLM Entity Extraction Benchmark",
   "model": "llama-3.3-70b-versatile",
   "api_feature_used": "response_format={'type': 'json_object'}",
   "dataset_size": 100,
-  "total_ground_truth_entities": 68,
+  "total_ground_truth_entities": 60,
   "variant_results": {
     "V0_Original": {
       "name": "V0_Original",
-      "parse_failure_rate": 0.86,
-      "parse_failures_count": 86,
-      "avg_latency_ms": 90.20715951919556,
-      "total_tokens": 2377,
-      "total_cost_usd": 0.00149723,
+      "api_failure_rate": 0.0,
+      "api_failures_count": 0,
+      "malformed_json_rate": 0.0,
+      "malformed_json_count": 0,
+      "schema_failure_rate": 0.0,
+      "schema_failures_count": 0,
+      "avg_latency_ms": 1039.3621444702148,
+      "total_tokens": 16664,
+      "total_cost_usd": 0.01046196,
       "exact_span_matching": {
-        "precision": 0.2777777777777778,
-        "recall": 0.07352941176470588,
-        "f1": 0.11627906976744186,
+        "precision": 0.3728813559322034,
+        "recall": 0.7333333333333333,
+        "f1": 0.49438202247191015,
         "hallucination_rate": 0.0,
-        "tp": 5,
-        "fp": 13,
-        "fn": 63
+        "tp": 44,
+        "fp": 74,
+        "fn": 16
       },
       "alias_aware_matching": {
-        "precision": 0.2777777777777778,
-        "recall": 0.07352941176470588,
-        "f1": 0.11627906976744186,
+        "precision": 0.3728813559322034,
+        "recall": 0.7333333333333333,
+        "f1": 0.49438202247191015,
         "hallucination_rate": 0.0,
-        "tp": 5,
-        "fp": 13,
-        "fn": 63
+        "tp": 44,
+        "fp": 74,
+        "fn": 16
       }
     },
     "V1_Exhaustive": {

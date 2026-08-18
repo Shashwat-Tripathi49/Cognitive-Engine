@@ -452,9 +452,11 @@ def run_experiment_003a_final(max_entries=100, target_variants=None, results_pat
     print("-" * 125, flush=True)
 
     for vk, res in variant_results.items():
-        ex = res["exact_span_matching"]
-        al = res["alias_aware_matching"]
-        print(f"{vk:<22} | {res['api_failure_rate']*100:6.1f}% | {res['malformed_json_rate']*100:7.1f}% | {ex['precision']*100:6.2f}% | {ex['recall']*100:6.2f}% | {ex['f1']*100:7.2f}% | {al['precision']*100:6.2f}% | {al['recall']*100:6.2f}% | {al['f1']*100:7.2f}% | {al['hallucination_rate']*100:6.2f}%", flush=True)
+        ex = res.get("exact_span_matching", {})
+        al = res.get("alias_aware_matching", {})
+        api_f = res.get("api_failure_rate", res.get("parse_failure_rate", 0.0))
+        json_f = res.get("malformed_json_rate", 0.0)
+        print(f"{vk:<22} | {api_f*100:6.1f}% | {json_f*100:7.1f}% | {ex.get('precision', 0)*100:6.2f}% | {ex.get('recall', 0)*100:6.2f}% | {ex.get('f1', 0)*100:7.2f}% | {al.get('precision', 0)*100:6.2f}% | {al.get('recall', 0)*100:6.2f}% | {al.get('f1', 0)*100:7.2f}% | {al.get('hallucination_rate', 0)*100:6.2f}%", flush=True)
 
     print(f"\nResults successfully finalized in {out_results_path}", flush=True)
     return variant_results
