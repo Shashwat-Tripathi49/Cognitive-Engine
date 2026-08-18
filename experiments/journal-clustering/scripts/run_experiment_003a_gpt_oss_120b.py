@@ -307,8 +307,8 @@ def run_benchmark():
             prompt_text = prompt_template.replace("{text}", text)
             raw_text, reasoning, latency_ms, usage, success, err = call_groq_api(prompt_text)
 
-            # Rate pacing: 1.5s between calls (~40 RPM)
-            time.sleep(1.5)
+            # Rate pacing: 2.5s between calls to stay cleanly under 8,000 TPM limit
+            time.sleep(2.5)
 
             p_tokens = usage.get("prompt_tokens", 0)
             c_tokens = usage.get("completion_tokens", 0)
