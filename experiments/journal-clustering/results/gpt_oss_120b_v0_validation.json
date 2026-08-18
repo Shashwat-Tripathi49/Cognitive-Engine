@@ -1,0 +1,164 @@
+{
+  "pricing": {
+    "input_per_m": 0.15,
+    "output_per_m": 0.6
+  },
+  "per_call_averages": {
+    "prompt_tokens": 198.8,
+    "completion_tokens": 284.8,
+    "reasoning_tokens": 243.8,
+    "total_tokens": 483.6,
+    "latency_ms": 1092.1338081359863,
+    "cost_usd": 0.00020069999999999997
+  },
+  "extrapolation_500_calls": {
+    "total_calls": 500,
+    "total_prompt_tokens": 99400.0,
+    "total_completion_tokens": 142400.0,
+    "total_tokens": 241800.0,
+    "total_cost_usd": 0.10034999999999998,
+    "duration_minutes": 12.5
+  },
+  "entries": [
+    {
+      "entry_id": "entry_001",
+      "text_snippet": "Met Rahul at the cafe to map out the transaction synchroniza...",
+      "latency_ms": 1779.5076370239258,
+      "prompt_tokens": 207,
+      "completion_tokens": 574,
+      "reasoning_tokens": 500,
+      "total_tokens": 781,
+      "cost_usd": 0.00037544999999999994,
+      "json_parsed": true,
+      "has_reasoning_leak": false,
+      "entities_found_count": 6,
+      "entities": [
+        {
+          "name": "Rahul",
+          "type": "Person"
+        },
+        {
+          "name": "cafe",
+          "type": "Place"
+        },
+        {
+          "name": "transaction synchronization flow",
+          "type": "Topic"
+        },
+        {
+          "name": "personal finance tool",
+          "type": "Tool"
+        },
+        {
+          "name": "ledger reconciliations",
+          "type": "Goal"
+        },
+        {
+          "name": "auto-categorization",
+          "type": "Topic"
+        }
+      ],
+      "content_raw": "{\"entities\":[{\"name\":\"Rahul\",\"type\":\"Person\"},{\"name\":\"cafe\",\"type\":\"Place\"},{\"name\":\"transaction synchronization flow\",\"type\":\"Topic\"},{\"name\":\"personal finance tool\",\"type\":\"Tool\"},{\"name\":\"ledger reconciliations\",\"type\":\"Goal\"},{\"name\":\"auto-categorization\",\"type\":\"Topic\"}]}",
+      "reasoning_snippet": "We need to extract named entities: Person, Project, Place, Organization, Tool, Topic, Goal.\n\nJournal..."
+    },
+    {
+      "entry_id": "entry_005",
+      "text_snippet": "Quick sync with Rahul on backend API authorization. We agree...",
+      "latency_ms": 1089.7495746612549,
+      "prompt_tokens": 200,
+      "completion_tokens": 309,
+      "reasoning_tokens": 256,
+      "total_tokens": 509,
+      "cost_usd": 0.00021539999999999998,
+      "json_parsed": true,
+      "has_reasoning_leak": false,
+      "entities_found_count": 4,
+      "entities": [
+        {
+          "name": "Rahul",
+          "type": "Person"
+        },
+        {
+          "name": "backend API authorization",
+          "type": "Topic"
+        },
+        {
+          "name": "Clerk",
+          "type": "Tool"
+        },
+        {
+          "name": "multi-tenant isolation",
+          "type": "Goal"
+        }
+      ],
+      "content_raw": "{\"entities\":[{\"name\":\"Rahul\",\"type\":\"Person\"},{\"name\":\"backend API authorization\",\"type\":\"Topic\"},{\"name\":\"Clerk\",\"type\":\"Tool\"},{\"name\":\"multi-tenant isolation\",\"type\":\"Goal\"}]}",
+      "reasoning_snippet": "We need to extract named entities: Person, Project, Place, Organization, Tool, Topic, Goal.\n\nJournal..."
+    },
+    {
+      "entry_id": "entry_010",
+      "text_snippet": "Completed the integration test suite for accounting entries....",
+      "latency_ms": 908.189058303833,
+      "prompt_tokens": 194,
+      "completion_tokens": 244,
+      "reasoning_tokens": 202,
+      "total_tokens": 438,
+      "cost_usd": 0.00017549999999999998,
+      "json_parsed": true,
+      "has_reasoning_leak": false,
+      "entities_found_count": 3,
+      "entities": [
+        {
+          "name": "integration test suite",
+          "type": "Tool"
+        },
+        {
+          "name": "accounting entries",
+          "type": "Topic"
+        },
+        {
+          "name": "CI",
+          "type": "Tool"
+        }
+      ],
+      "content_raw": "{\"entities\":[{\"name\":\"integration test suite\",\"type\":\"Tool\"},{\"name\":\"accounting entries\",\"type\":\"Topic\"},{\"name\":\"CI\",\"type\":\"Tool\"}]}",
+      "reasoning_snippet": "We need to extract named entities: Person, Project, Place, Organization, Tool, Topic, Goal. The jour..."
+    },
+    {
+      "entry_id": "entry_020",
+      "text_snippet": "Drove down to my parents' house for Sunday lunch. Dad made h...",
+      "latency_ms": 953.967809677124,
+      "prompt_tokens": 193,
+      "completion_tokens": 198,
+      "reasoning_tokens": 176,
+      "total_tokens": 391,
+      "cost_usd": 0.00014774999999999999,
+      "json_parsed": true,
+      "has_reasoning_leak": false,
+      "entities_found_count": 1,
+      "entities": [
+        {
+          "name": "Dad",
+          "type": "Person"
+        }
+      ],
+      "content_raw": "{\"entities\":[{\"name\":\"Dad\",\"type\":\"Person\"}]}",
+      "reasoning_snippet": "We need to extract named entities: Person, Project, Place, Organization, Tool, Topic, Goal. The jour..."
+    },
+    {
+      "entry_id": "entry_030",
+      "text_snippet": "Felt a strong sense of clarity tonight. Realized that steady...",
+      "latency_ms": 729.254961013794,
+      "prompt_tokens": 200,
+      "completion_tokens": 99,
+      "reasoning_tokens": 85,
+      "total_tokens": 299,
+      "cost_usd": 8.939999999999999e-05,
+      "json_parsed": true,
+      "has_reasoning_leak": false,
+      "entities_found_count": 0,
+      "entities": [],
+      "content_raw": "{\"entities\": []}",
+      "reasoning_snippet": "The user wants to extract named entities from the journal entry. The entry: \"Felt a strong sense of ..."
+    }
+  ]
+}
