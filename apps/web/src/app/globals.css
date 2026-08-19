@@ -1,18 +1,25 @@
 :root {
-  /* Option B: Alabaster Chalk & Bone Ink Design System */
-  --canvas-bg: #F3F3F0;
+  /* Direction 5: Stitch Archival Ledger & Espresso Ink */
+  --canvas-bg: #F6F4EE;
   --surface-pure: #FFFFFF;
-  --surface-raised: #E9E9E5;
-  --surface-hover: #DFDFD9;
+  --surface-raised: #EFECE4;
+  --surface-hover: #E5E1D7;
+  --surface-pressed: #DCD8CD;
 
-  --border-hairline: rgba(20, 23, 26, 0.10);
-  --border-structural: rgba(20, 23, 26, 0.22);
-  --border-focus: #14171A;
+  --border-hairline: rgba(26, 22, 18, 0.12);
+  --border-structural: rgba(26, 22, 18, 0.25);
+  --border-focus: #1A1612;
 
-  --ink-bone: #14171A;
-  --ink-zinc: #5A626A;
-  --ink-dust: #8C949D;
-  --ink-inverse: #F3F3F0;
+  --ink-bone: #1A1612;
+  --ink-stone: #4A463F;
+  --ink-dust: #8C887F;
+  --ink-inverse: #F6F4EE;
+
+  --action-espresso: #2B231A;
+  --action-espresso-hover: #3D3227;
+
+  --tag-bg: #EFECE4;
+  --highlight-bg: rgba(26, 22, 18, 0.08);
 
   --accent-moss: #3A5A40;
   --accent-ochre: #B85D36;
@@ -20,13 +27,13 @@
 
   /* Varied Geometry Scale */
   --radius-sharp: 0px;
-  --radius-stamp: 2px;
-  --radius-slip: 3px;
+  --radius-stamp: 1px;
+  --radius-slip: 2px;
 
   /* Directional Shadows */
-  --shadow-slip: 2px 3px 0px rgba(0, 0, 0, 0.22);
-  --shadow-entry: 1px 2px 0px rgba(0, 0, 0, 0.08);
-  --shadow-dock: 2px 3px 0px rgba(0, 0, 0, 0.25);
+  --shadow-slip: 2px 3px 0px rgba(26, 22, 18, 0.20);
+  --shadow-card: 2px 3px 0px rgba(0, 0, 0, 0.10);
+  --shadow-dock: 2px 4px 0px rgba(0, 0, 0, 0.30);
 
   /* Spacing Grid (4px base) */
   --space-1: 4px;
@@ -52,8 +59,10 @@
 
 html,
 body {
-  max-width: 100vw;
+  width: 100%;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
   background-color: var(--canvas-bg);
   color: var(--ink-bone);
@@ -93,8 +102,8 @@ a:active {
 
 /* Subtle Architectural Scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -107,5 +116,5 @@ a:active {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--ink-zinc);
+  background: var(--ink-stone);
 }

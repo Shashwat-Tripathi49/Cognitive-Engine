@@ -1,26 +1,32 @@
 /**
  * Cognitive Engine Design System Tokens & Constants
  * Source of truth: docs/ux/design-system.md
- * Palette: Alabaster Chalk & Bone Ink (Human-Made Constraints Framework)
+ * Palette: Stitch Archival Ledger (Warm Parchment & Espresso Ink)
+ * Direction History: Direction 5 (Finalized Archival Ledger)
  */
 
-export const UI_VERSION = "0.2.0-beta";
+export const UI_VERSION = "0.3.0";
 
 export const tokens = {
   colors: {
-    canvasAlabaster: "#F3F3F0",
+    canvasParchment: "#F6F4EE",
     surfacePure: "#FFFFFF",
-    surfaceRaised: "#E9E9E5",
-    surfacePressed: "#DFDFD9",
-    borderHairline: "rgba(20, 23, 26, 0.10)",
-    borderStructural: "rgba(20, 23, 26, 0.24)",
-    inkBone: "#14171A",
-    inkZinc: "#5A626A",
-    inkDust: "#8C949D",
-    accentMoss: "#3A5A40",
-    accentOchre: "#B85D36",
+    surfaceRaised: "#EFECE4",
+    surfacePressed: "#E5E1D7",
+    borderHairline: "rgba(26, 22, 18, 0.10)",
+    borderStructural: "rgba(26, 22, 18, 0.22)",
+    borderFocus: "#1A1612",
+    inkBone: "#1A1612",
+    inkStone: "#4A463F",
+    inkDust: "#8C887F",
+    inkInverse: "#F6F4EE",
+    actionEspresso: "#2B231A",
+    actionEspressoHover: "#3D3227",
+    tagBg: "#EFECE4",
+    highlightBg: "rgba(26, 22, 18, 0.08)",
   },
   typography: {
+    fontHeadline: "'Playfair Display', Georgia, serif",
     fontDisplay: "'Space Grotesk', -apple-system, sans-serif",
     fontSerif: "'Newsreader', Georgia, serif",
     fontBody: "'Inter', -apple-system, sans-serif",
@@ -40,14 +46,14 @@ export const tokens = {
   },
   radius: {
     sharp: "0px",
-    stamp: "2px",
-    slip: "3px",
+    stamp: "1px",
+    slip: "2px",
     pill: "9999px",
   },
   shadows: {
-    slip: "2px 3px 0px rgba(0, 0, 0, 0.22)",
-    entry: "1px 2px 0px rgba(0, 0, 0, 0.08)",
-    dock: "2px 3px 0px rgba(0, 0, 0, 0.25)",
+    slip: "2px 3px 0px rgba(26, 22, 18, 0.20)",
+    card: "2px 3px 0px rgba(0, 0, 0, 0.12)",
+    dock: "2px 4px 0px rgba(0, 0, 0, 0.28)",
   },
 } as const;
 
