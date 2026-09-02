@@ -4,6 +4,7 @@ import { serve } from '@hono/node-server';
 import { env, checkDatabaseHealth } from '@cognitive-engine/shared';
 import { captureRouter } from './routes/capture.js';
 import { memoryApp } from './routes/memory.js';
+import { graphRouter } from './routes/graph.js';
 
 const app = new Hono();
 
@@ -43,10 +44,11 @@ app.get('/health', async (c) => {
 });
 
 /**
- * Mount Routers — Sprint 1B & Sprint 1C-B
+ * Mount Routers — Sprint 1B, Sprint 1C-B & Knowledge Graph Engine
  */
 app.route('/capture', captureRouter);
 app.route('/memory', memoryApp);
+app.route('/graph', graphRouter);
 
 const port = env.PORT || 3001;
 

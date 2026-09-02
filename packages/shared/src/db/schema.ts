@@ -84,3 +84,249 @@ export const memories = pgTable(
 
 export type MemorySelect = typeof memories.$inferSelect;
 export type MemoryInsert = typeof memories.$inferInsert;
+
+/**
+ * Canonical Entities Table — Knowledge Graph Engine
+ *
+ * Persists deduplicated canonical entity nodes with multi-tenant isolation.
+ */
+export const canonicalEntities = pgTable(
+  'canonical_entities',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id').notNull(),
+    canonicalName: varchar('canonical_name', { length: 255 }).notNull(),
+    entityType: varchar('entity_type', { length: 64 }).notNull(),
+    status: varchar('status', { length: 32 }).notNull().default('ACTIVE'),
+    mergedIntoId: uuid('merged_into_id'),
+    currentCanonicalId: uuid('current_canonical_id'),
+    description: text('description'),
+    createdAt: timestamp('created_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    index('canonical_entities_user_id_idx').on(table.userId),
+    index('canonical_entities_user_status_idx').on(table.userId, table.status),
+    index('canonical_entities_user_type_idx').on(table.userId, table.entityType),
+    index('canonical_entities_user_current_idx').on(
+      table.userId,
+      table.currentCanonicalId
+    ),
+  ]
+);
+
+export type CanonicalEntitySelect = typeof canonicalEntities.$inferSelect;
+export type CanonicalEntityInsert = typeof canonicalEntities.$inferInsert;
+
+/**
+ * Entity Aliases Table — Knowledge Graph Engine
+ *
+ * Stores verified and proposed surface aliases mapped to canonical entities.
+ */
+export const entityAliases = pgTable(
+  'entity_aliases',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id').notNull(),
+    canonicalId: uuid('canonical_id')
+      .notNull()
+      .references(() => canonicalEntities.id, { onDelete: 'restrict' }),
+    aliasName: varchar('alias_name', { length: 255 }).notNull(),
+    normalizedAlias: varchar('normalized_alias', { length: 255 }).notNull(),
+    status: varchar('status', { length: 32 }).notNull().default('ACTIVE'),
+    verificationActor: varchar('verification_actor', { length: 32 })
+      .notNull()
+      .default('SYSTEM'),
+    sourceMemoryId: uuid('source_memory_id'),
+    createdAt: timestamp('created_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    index('entity_aliases_user_id_idx').on(table.userId),
+    index('entity_aliases_user_norm_idx').on(
+      table.userId,
+      table.normalizedAlias,
+      table.status
+    ),
+    index('entity_aliases_canonical_id_idx').on(table.canonicalId),
+  ]
+);
+
+export type EntityAliasSelect = typeof entityAliases.$inferSelect;
+export type EntityAliasInsert = typeof entityAliases.$inferInsert;
+
+/**
+ * Entity Resolution Provenance Table — Knowledge Graph Engine
+ *
+ * Immutable audit log recording every resolver decision and link to source evidence.
+ */
+export const entityResolutionProvenance = pgTable(
+  'entity_resolution_provenance',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id').notNull(),
+    mentionId: uuid('mention_id').notNull(),
+    sourceFragmentId: uuid('source_fragment_id')
+      .notNull()
+      .references(() => cognitiveFragments.id, { onDelete: 'restrict' }),
+    sourceFragmentRevisionId: uuid('source_fragment_revision_id'),
+    sourceContentHash: varchar('source_content_hash', { length: 64 }).notNull(),
+    sourceMemoryId: uuid('source_memory_id'),
+    canonicalId: uuid('canonical_id').references(() => canonicalEntities.id, {
+      onDelete: 'restrict',
+    }),
+    surfaceMention: varchar('surface_mention', { length: 255 }).notNull(),
+    resolutionMethod: varchar('resolution_method', { length: 64 }).notNull(),
+    similarityScore: customType<{ data: number; driverData: number }>({
+      dataType() {
+        return 'real';
+      },
+    })('similarity_score'),
+    separationMargin: customType<{ data: number; driverData: number }>({
+      dataType() {
+        return 'real';
+      },
+    })('separation_margin'),
+    resolverVersion: varchar('resolver_version', { length: 32 })
+      .notNull()
+      .default('v2.0.0'),
+    decidedBy: varchar('decided_by', { length: 32 }).notNull().default('RESOLVER'),
+    createdAt: timestamp('created_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    index('provenance_user_id_idx').on(table.userId),
+    index('provenance_source_fragment_idx').on(table.sourceFragmentId),
+    index('provenance_source_memory_idx').on(table.sourceMemoryId),
+    index('provenance_canonical_id_idx').on(table.canonicalId),
+  ]
+);
+
+export type EntityResolutionProvenanceSelect =
+  typeof entityResolutionProvenance.$inferSelect;
+export type EntityResolutionProvenanceInsert =
+  typeof entityResolutionProvenance.$inferInsert;
+
+/**
+ * Candidate Confirmation Queue Table — Knowledge Graph Engine
+ *
+ * Stages ambiguous entity mentions requiring human or higher-order resolution.
+ */
+export const candidateConfirmationQueue = pgTable(
+  'candidate_confirmation_queue',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id').notNull(),
+    surfaceMention: varchar('surface_mention', { length: 255 }).notNull(),
+    entityType: varchar('entity_type', { length: 64 }).notNull(),
+    suggestedCanonicalId: uuid('suggested_canonical_id').references(
+      () => canonicalEntities.id,
+      { onDelete: 'set null' }
+    ),
+    similarityScore: customType<{ data: number; driverData: number }>({
+      dataType() {
+        return 'real';
+      },
+    })('similarity_score'),
+    sourceMemoryId: uuid('source_memory_id'),
+    sourceFragmentId: uuid('source_fragment_id').references(
+      () => cognitiveFragments.id,
+      { onDelete: 'cascade' }
+    ),
+    status: varchar('status', { length: 32 }).notNull().default('PENDING'),
+    createdAt: timestamp('created_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    index('candidate_queue_user_status_idx').on(table.userId, table.status),
+    index('candidate_queue_source_fragment_idx').on(table.sourceFragmentId),
+  ]
+);
+
+export type CandidateConfirmationQueueSelect =
+  typeof candidateConfirmationQueue.$inferSelect;
+export type CandidateConfirmationQueueInsert =
+  typeof candidateConfirmationQueue.$inferInsert;
+
+/**
+ * KG Relationships Table (Graph Assertions) — Knowledge Graph Engine
+ *
+ * Persists bitemporal, provenance-bound edges between canonical entities.
+ */
+export const kgRelationships = pgTable(
+  'kg_relationships',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id').notNull(),
+    sourceEntityId: uuid('source_entity_id')
+      .notNull()
+      .references(() => canonicalEntities.id, { onDelete: 'restrict' }),
+    targetEntityId: uuid('target_entity_id')
+      .notNull()
+      .references(() => canonicalEntities.id, { onDelete: 'restrict' }),
+    relationType: varchar('relation_type', { length: 64 }).notNull(),
+    confidence: customType<{ data: number; driverData: number }>({
+      dataType() {
+        return 'real';
+      },
+    })('confidence')
+      .notNull()
+      .default(1.0),
+    evidenceCount: customType<{ data: number; driverData: number }>({
+      dataType() {
+        return 'integer';
+      },
+    })('evidence_count')
+      .notNull()
+      .default(1),
+    sourceFragmentId: uuid('source_fragment_id')
+      .notNull()
+      .references(() => cognitiveFragments.id, { onDelete: 'restrict' }),
+    sourceMemoryId: uuid('source_memory_id'),
+    sourceContentHash: varchar('source_content_hash', { length: 64 }).notNull(),
+    extractionRunId: varchar('extraction_run_id', { length: 64 }),
+    status: varchar('status', { length: 32 }).notNull().default('ACTIVE'),
+    assertedAt: timestamp('asserted_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    validAt: timestamp('valid_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    createdAt: timestamp('created_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    index('kg_relationships_user_id_idx').on(table.userId),
+    index('kg_relationships_source_idx').on(
+      table.userId,
+      table.sourceEntityId
+    ),
+    index('kg_relationships_target_idx').on(
+      table.userId,
+      table.targetEntityId
+    ),
+    index('kg_relationships_type_idx').on(table.userId, table.relationType),
+    index('kg_relationships_source_frag_idx').on(table.sourceFragmentId),
+  ]
+);
+
+export type KgRelationshipSelect = typeof kgRelationships.$inferSelect;
+export type KgRelationshipInsert = typeof kgRelationships.$inferInsert;
+

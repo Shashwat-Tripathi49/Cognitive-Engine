@@ -26,6 +26,10 @@
     "./memory": {
       "types": "./src/memory/index.ts",
       "default": "./src/memory/index.ts"
+    },
+    "./kg": {
+      "types": "./src/kg/index.ts",
+      "default": "./src/kg/index.ts"
     }
   },
   "scripts": {
