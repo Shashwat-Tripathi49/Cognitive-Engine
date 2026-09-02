@@ -257,9 +257,9 @@ export interface ReasoningRuleContext {
   finding: CandidateFinding;
   evidence: EvidenceObject[];
   rootFragments: { id: string; contentHash: string; capturedAt: Date }[];
-  entities: Map<string, any>;
-  relationships: Map<string, any>;
-  memories: Map<string, any>;
+  entities: Map<string, { id: string; canonicalName: string; entityType: string; status?: string }>;
+  relationships: Map<string, { id: string; sourceEntityId: string; targetEntityId: string; relationType: string; status?: string; assertedAt?: Date; validAt?: Date }>;
+  memories: Map<string, { id: string; content?: string; createdAt?: Date; metadata?: unknown }>;
   evaluationTimestamp: Date; // Explicit evaluation reference timestamp (Zero wall-clock dependency)
 }
 

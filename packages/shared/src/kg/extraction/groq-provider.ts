@@ -124,7 +124,15 @@ export class GroqEntityExtractionProvider implements EntityExtractionProvider {
           );
         }
 
-        const data: any = await response.json();
+        const data = (await response.json()) as {
+          choices?: { message?: { content?: string } }[];
+          usage?: {
+            prompt_tokens?: number;
+            completion_tokens?: number;
+            total_tokens?: number;
+            completion_tokens_details?: { reasoning_tokens?: number };
+          };
+        };
         const latencyMs = Date.now() - startTime;
         const choice = data.choices?.[0];
         const content = choice?.message?.content || '{}';
@@ -150,8 +158,8 @@ export class GroqEntityExtractionProvider implements EntityExtractionProvider {
           },
           rawResponse: content,
         };
-      } catch (err: any) {
-        lastError = err;
+      } catch (err: unknown) {
+        lastError = err instanceof Error ? err : new Error(String(err));
         await new Promise((resolve) => setTimeout(resolve, delay));
         delay *= 2;
       }

@@ -18,7 +18,7 @@ describe('Domain Invariants & Multi-Tenancy Enforcement', () => {
     const contentHash = 'hash_abcdef123456';
     const text = 'Worked with Rahul on Expense Tracker';
 
-    const result = await engine.processFragment({
+    await engine.processFragment({
       userId: userA,
       fragmentId,
       content: text,

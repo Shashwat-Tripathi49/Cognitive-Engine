@@ -7,9 +7,7 @@ import {
 } from '@cognitive-engine/shared';
 
 // Mock DB and default engine for fast isolated API tests
-vi.mock('../routes/graph.js', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../routes/graph.js')>();
-
+vi.mock('../routes/graph.js', async () => {
   const entities: CanonicalEntity[] = [
     {
       id: 'ent_1',

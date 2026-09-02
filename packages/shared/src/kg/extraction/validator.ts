@@ -31,11 +31,11 @@ export class ExtractionValidator {
       return [];
     }
 
-    let parsedObj: any = rawInput;
+    let parsedObj: unknown = rawInput;
     if (typeof rawInput === 'string') {
       try {
         parsedObj = JSON.parse(rawInput);
-      } catch (err) {
+      } catch {
         throw new ExtractionValidationError('Invalid JSON emitted by extractor', {
           raw: rawInput,
         });
@@ -46,11 +46,12 @@ export class ExtractionValidator {
       return [];
     }
 
-    const rawList = Array.isArray(parsedObj.entities)
-      ? parsedObj.entities
-      : Array.isArray(parsedObj)
-        ? parsedObj
-        : [];
+    const rawList: unknown[] =
+      'entities' in parsedObj && Array.isArray((parsedObj as { entities: unknown }).entities)
+        ? (parsedObj as { entities: unknown[] }).entities
+        : Array.isArray(parsedObj)
+          ? parsedObj
+          : [];
 
     const validated: ExtractedEntityMention[] = [];
     const seen = new Set<string>();
@@ -60,14 +61,15 @@ export class ExtractionValidator {
         continue;
       }
 
-      const rawName = typeof item.name === 'string' ? item.name : '';
+      const itemObj = item as Record<string, unknown>;
+      const rawName = typeof itemObj.name === 'string' ? itemObj.name : '';
       const cleanName = rawName.trim().replace(/^["']|["']$/g, '');
 
       if (!cleanName || cleanName.length < 2) {
         continue;
       }
 
-      const rawType = typeof item.type === 'string' ? item.type.trim().toLowerCase() : '';
+      const rawType = typeof itemObj.type === 'string' ? itemObj.type.trim().toLowerCase() : '';
       
       // Check for explicitly rejected ontology types
       if (this.REJECTED_TYPES.has(rawType)) {
@@ -98,11 +100,11 @@ export class ExtractionValidator {
 
       let confidence: 'HIGH' | 'MEDIUM' | 'LOW' = 'HIGH';
       if (
-        item.confidence === 'HIGH' ||
-        item.confidence === 'MEDIUM' ||
-        item.confidence === 'LOW'
+        itemObj.confidence === 'HIGH' ||
+        itemObj.confidence === 'MEDIUM' ||
+        itemObj.confidence === 'LOW'
       ) {
-        confidence = item.confidence;
+        confidence = itemObj.confidence;
       }
 
       validated.push({

@@ -18,7 +18,7 @@ export function normalizeText(text: string | null | undefined): string {
   t = t.toLowerCase().trim();
 
   // 3. Punctuation stripping replaced with space
-  t = t.replace(/[\.\-\_\,\/\(\)\"\']+/g, ' ');
+  t = t.replace(/[.\-_,/()"']+/g, ' ');
 
   // 4. Collapse whitespace
   t = t.replace(/\s+/g, ' ').trim();

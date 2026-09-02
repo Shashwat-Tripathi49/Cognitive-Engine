@@ -7,6 +7,8 @@ import {
   LayeredHybridEntityResolver,
   MiniLMEmbeddingProvider,
   entityTypeSchema,
+  EntityType,
+  CanonicalEntityStatus,
 } from '@cognitive-engine/shared';
 
 export const graphRouter = new Hono();
@@ -62,7 +64,7 @@ graphRouter.post('/process-fragment', async (c) => {
       },
       200
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     if (err instanceof z.ZodError) {
       return c.json(
         {
@@ -72,10 +74,11 @@ graphRouter.post('/process-fragment', async (c) => {
         400
       );
     }
+    const message = err instanceof Error ? err.message : String(err);
     return c.json(
       {
         error: 'Failed to process fragment in knowledge graph',
-        message: err.message,
+        message,
       },
       500
     );
@@ -94,7 +97,7 @@ graphRouter.get('/entities', async (c) => {
   }
 
   const rawType = c.req.query('entityType');
-  const rawStatus = c.req.query('status') as any;
+  const rawStatus = c.req.query('status') as CanonicalEntityStatus | undefined;
   const limit = c.req.query('limit') ? parseInt(c.req.query('limit')!, 10) : 50;
   const offset = c.req.query('offset')
     ? parseInt(c.req.query('offset')!, 10)
@@ -102,7 +105,7 @@ graphRouter.get('/entities', async (c) => {
 
   const entityType =
     rawType && entityTypeSchema.safeParse(rawType).success
-      ? (rawType as any)
+      ? (rawType as EntityType)
       : undefined;
 
   const entities = await defaultKgEngine.listCanonicalEntities(userId, {
@@ -199,12 +202,13 @@ graphRouter.post('/confirmation-queue/:id/resolve', async (c) => {
     );
 
     return c.json({ success: true, data: result }, 200);
-  } catch (err: any) {
+  } catch (err: unknown) {
     if (err instanceof z.ZodError) {
       return c.json({ error: 'Validation failed', issues: err.issues }, 400);
     }
+    const message = err instanceof Error ? err.message : String(err);
     return c.json(
-      { error: 'Failed to resolve candidate', message: err.message },
+      { error: 'Failed to resolve candidate', message },
       500
     );
   }

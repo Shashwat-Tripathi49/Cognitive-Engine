@@ -71,12 +71,13 @@ reasoningRouter.post('/evaluate', async (c) => {
       },
       200
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Error in POST /reasoning/evaluate:', err);
+    const message = err instanceof Error ? err.message : String(err);
     return c.json(
       {
         error: 'Failed to evaluate candidate finding',
-        message: err.message,
+        message,
       },
       500
     );
@@ -133,12 +134,13 @@ reasoningRouter.get('/claims', async (c) => {
       },
       200
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Error in GET /reasoning/claims:', err);
+    const message = err instanceof Error ? err.message : String(err);
     return c.json(
       {
         error: 'Failed to retrieve claims',
-        message: err.message,
+        message,
       },
       500
     );
@@ -179,12 +181,13 @@ reasoningRouter.get('/claims/:id', async (c) => {
       },
       200
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(`Error in GET /reasoning/claims/${c.req.param('id')}:`, err);
+    const message = err instanceof Error ? err.message : String(err);
     return c.json(
       {
         error: 'Failed to retrieve claim details',
-        message: err.message,
+        message,
       },
       500
     );
@@ -217,12 +220,13 @@ reasoningRouter.get('/evidence-chains/:id', async (c) => {
       },
       200
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(`Error in GET /reasoning/evidence-chains/${c.req.param('id')}:`, err);
+    const message = err instanceof Error ? err.message : String(err);
     return c.json(
       {
         error: 'Failed to retrieve evidence chain',
-        message: err.message,
+        message,
       },
       500
     );

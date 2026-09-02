@@ -8,6 +8,8 @@ import {
 import {
   ValidatedClaim,
   EvidenceChain,
+  EvidenceObjectType,
+  RuleEvaluationResult,
   ClaimStatus,
   FindingType,
 } from './types.js';
@@ -210,13 +212,13 @@ export class DrizzleReasoningRepository implements IReasoningRepository {
       isVerified: c.isVerified,
       chainIntegrityHash: c.chainIntegrityHash,
       rootFragmentIds: (c.rootFragmentIds as string[]) || [],
-      ruleEvaluations: (c.ruleEvaluations as any[]) || [],
+      ruleEvaluations: (c.ruleEvaluations as unknown as RuleEvaluationResult[]) || [],
       createdAt: c.createdAt,
       verificationTimestamp: c.verificationTimestamp,
       evidenceObjects: evRows.map((ev) => ({
         id: ev.id,
         userId: ev.userId,
-        evidenceType: ev.evidenceType as any,
+        evidenceType: ev.evidenceType as EvidenceObjectType,
         sourceId: ev.sourceId,
         sourceContentHash: ev.sourceContentHash || undefined,
         sourceTimestamp: ev.sourceTimestamp || undefined,

@@ -6,9 +6,7 @@ import {
 } from '@cognitive-engine/shared';
 
 // Mock reasoning router default engine for isolated fast API testing
-vi.mock('../routes/reasoning.js', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../routes/reasoning.js')>();
-
+vi.mock('../routes/reasoning.js', async () => {
   const dummyUser = '00000000-0000-0000-0000-000000000001';
   const dummyChainId = '22222222-2222-2222-2222-222222222222';
   const dummyClaimId = '33333333-3333-3333-3333-333333333333';

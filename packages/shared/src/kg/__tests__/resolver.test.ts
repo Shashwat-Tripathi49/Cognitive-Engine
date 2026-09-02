@@ -2,11 +2,8 @@ import { describe, it, expect } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
 import { LayeredHybridEntityResolver } from '../resolution/resolver.js';
-import { normalizeText } from '../resolution/normalizer.js';
-import { stringSimilarity } from '../resolution/string-similarity.js';
 import { RESOLVER_CONSTANTS } from '../resolution/constants.js';
 import { CanonicalEntity, EntityType } from '../types.js';
-import { MockEmbeddingProvider } from '../../memory/embedding-provider.js';
 
 describe('Phase KG-03 — Layered Hybrid Entity Resolver V2', () => {
   const dummyUser = '00000000-0000-0000-0000-000000000001';
@@ -163,7 +160,7 @@ describe('Phase KG-03 — Layered Hybrid Entity Resolver V2', () => {
     }
 
     const goldData = JSON.parse(fs.readFileSync(benchmarkPath, 'utf-8'));
-    const canonicals: CanonicalEntity[] = goldData.canonical_entities.map((c: any) => ({
+    const canonicals: CanonicalEntity[] = goldData.canonical_entities.map((c: { id: string; canonical_name: string; type: EntityType; active_verified_aliases?: string[] }) => ({
       id: c.id,
       userId: dummyUser,
       canonicalName: c.canonical_name,

@@ -11,14 +11,14 @@ import { CandidateFinding, EvidenceObject } from './types.js';
 export interface RetrievedEvidenceBundle {
   evidenceObjects: EvidenceObject[];
   rootFragments: { id: string; contentHash: string; capturedAt: Date }[];
-  entities: Map<string, any>;
-  relationships: Map<string, any>;
-  memories: Map<string, any>;
+  entities: Map<string, { id: string; canonicalName: string; entityType: string; status: string }>;
+  relationships: Map<string, { id: string; sourceEntityId: string; targetEntityId: string; relationType: string; status: string; assertedAt: Date; validAt: Date }>;
+  memories: Map<string, { id: string; content?: string; createdAt?: Date; metadata?: unknown }>;
 }
 
 export interface IEvidenceStorageAdapter {
   getFragments(userId: string, ids: string[]): Promise<{ id: string; contentHash: string; capturedAt: Date; content: string }[]>;
-  getMemories(userId: string, ids: string[]): Promise<{ id: string; content: string; createdAt: Date; metadata: any }[]>;
+  getMemories(userId: string, ids: string[]): Promise<{ id: string; content: string; createdAt: Date; metadata: unknown }[]>;
   getEntities(userId: string, ids: string[]): Promise<{ id: string; canonicalName: string; entityType: string; status: string }[]>;
   getRelationships(userId: string, ids: string[]): Promise<{ id: string; sourceEntityId: string; targetEntityId: string; relationType: string; status: string; assertedAt: Date; validAt: Date }[]>;
 }
@@ -109,7 +109,7 @@ export class DrizzleEvidenceStorageAdapter implements IEvidenceStorageAdapter {
  */
 export class InMemoryEvidenceStorageAdapter implements IEvidenceStorageAdapter {
   private fragments = new Map<string, { id: string; userId: string; contentHash: string; capturedAt: Date; content: string }>();
-  private memoriesMap = new Map<string, { id: string; userId: string; content: string; createdAt: Date; metadata: any }>();
+  private memoriesMap = new Map<string, { id: string; userId: string; content: string; createdAt: Date; metadata: unknown }>();
   private entitiesMap = new Map<string, { id: string; userId: string; canonicalName: string; entityType: string; status: string }>();
   private relationshipsMap = new Map<string, { id: string; userId: string; sourceEntityId: string; targetEntityId: string; relationType: string; status: string; assertedAt: Date; validAt: Date }>();
 
@@ -117,8 +117,11 @@ export class InMemoryEvidenceStorageAdapter implements IEvidenceStorageAdapter {
     this.fragments.set(data.id, data);
   }
 
-  addMemory(data: { id: string; userId: string; content: string; createdAt: Date; metadata: any }) {
-    this.memoriesMap.set(data.id, data);
+  addMemory(data: { id: string; userId: string; content: string; createdAt: Date; metadata?: unknown }) {
+    this.memoriesMap.set(data.id, {
+      ...data,
+      metadata: data.metadata ?? {},
+    });
   }
 
   addEntity(data: { id: string; userId: string; canonicalName: string; entityType: string; status: string }) {
@@ -198,7 +201,7 @@ export class EvidenceRetrievalService {
     // 2. Gather entities
     const entityIds = finding.involvedEntityIds || [];
     const fetchedEntities = await this.adapter.getEntities(userId, entityIds);
-    const entitiesMap = new Map<string, any>();
+    const entitiesMap = new Map<string, { id: string; canonicalName: string; entityType: string; status: string }>();
 
     for (const e of fetchedEntities) {
       entitiesMap.set(e.id, e);
@@ -218,7 +221,7 @@ export class EvidenceRetrievalService {
       userId,
       relationshipIds
     );
-    const relationshipsMap = new Map<string, any>();
+    const relationshipsMap = new Map<string, { id: string; sourceEntityId: string; targetEntityId: string; relationType: string; status: string; assertedAt: Date; validAt: Date }>();
 
     for (const r of fetchedRelationships) {
       relationshipsMap.set(r.id, r);
@@ -237,7 +240,7 @@ export class EvidenceRetrievalService {
     // 4. Gather memories
     const memoryIds = finding.involvedMemoryIds || [];
     const fetchedMemories = await this.adapter.getMemories(userId, memoryIds);
-    const memoriesMap = new Map<string, any>();
+    const memoriesMap = new Map<string, { id: string; content?: string; createdAt?: Date; metadata?: unknown }>();
 
     for (const m of fetchedMemories) {
       memoriesMap.set(m.id, m);

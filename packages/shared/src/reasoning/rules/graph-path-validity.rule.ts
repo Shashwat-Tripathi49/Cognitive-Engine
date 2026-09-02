@@ -13,7 +13,7 @@ export class GraphPathValidityRule implements IReasoningRule {
 
   async evaluate(context: ReasoningRuleContext): Promise<RuleEvaluationResult> {
     const evaluatedIds: string[] = [];
-    const relationships: any[] = [];
+    const relationships: { id: string; sourceEntityId: string; targetEntityId: string; relationType: string; status?: string }[] = [];
 
     // 1. Check all referenced relationships exist and are active
     for (const relId of context.finding.involvedRelationshipIds || []) {

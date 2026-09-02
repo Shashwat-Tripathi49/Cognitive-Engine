@@ -17,6 +17,7 @@ import {
   CandidateConfirmationItem,
   ConfirmationStatus,
   GraphRelationship,
+  RelationshipType,
   SubgraphQueryOptions,
   SubgraphResult,
 } from './types.js';
@@ -442,11 +443,11 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       .insert(canonicalEntities)
       .values({
         id: input.id,
-        userId: input.userId as any,
+        userId: input.userId,
         canonicalName: input.canonicalName,
         entityType: input.entityType,
         status: input.status || 'ACTIVE',
-        currentCanonicalId: input.currentCanonicalId as any,
+        currentCanonicalId: input.currentCanonicalId,
         description: input.description,
       })
       .returning();
@@ -473,7 +474,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       .where(
         and(
           eq(canonicalEntities.id, id),
-          eq(canonicalEntities.userId, userId as any)
+          eq(canonicalEntities.userId, userId)
         )
       )
       .limit(1);
@@ -509,7 +510,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       .from(canonicalEntities)
       .where(
         and(
-          eq(canonicalEntities.userId, userId as any),
+          eq(canonicalEntities.userId, userId),
           eq(canonicalEntities.entityType, entityType),
           eq(canonicalEntities.canonicalName, canonicalName)
         )
@@ -532,7 +533,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       offset?: number;
     } = {}
   ): Promise<CanonicalEntity[]> {
-    const conditions = [eq(canonicalEntities.userId, userId as any)];
+    const conditions = [eq(canonicalEntities.userId, userId)];
     if (options.entityType) {
       conditions.push(eq(canonicalEntities.entityType, options.entityType));
     }
@@ -563,15 +564,15 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       .set({
         canonicalName: updates.canonicalName,
         status: updates.status,
-        mergedIntoId: updates.mergedIntoId as any,
-        currentCanonicalId: updates.currentCanonicalId as any,
+        mergedIntoId: updates.mergedIntoId,
+        currentCanonicalId: updates.currentCanonicalId,
         description: updates.description,
         updatedAt: new Date(),
       })
       .where(
         and(
           eq(canonicalEntities.id, id),
-          eq(canonicalEntities.userId, userId as any)
+          eq(canonicalEntities.userId, userId)
         )
       )
       .returning();
@@ -595,13 +596,13 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
     const [row] = await this.db
       .insert(entityAliases)
       .values({
-        userId: input.userId as any,
-        canonicalId: input.canonicalId as any,
+        userId: input.userId,
+        canonicalId: input.canonicalId,
         aliasName: input.aliasName,
         normalizedAlias: norm,
         status: input.status || 'ACTIVE',
         verificationActor: input.verificationActor || 'SYSTEM',
-        sourceMemoryId: input.sourceMemoryId as any,
+        sourceMemoryId: input.sourceMemoryId,
       })
       .returning();
 
@@ -629,7 +630,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       .where(
         and(
           eq(entityAliases.canonicalId, canonicalId),
-          eq(entityAliases.userId, userId as any)
+          eq(entityAliases.userId, userId)
         )
       );
 
@@ -657,7 +658,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       .from(entityAliases)
       .where(
         and(
-          eq(entityAliases.userId, userId as any),
+          eq(entityAliases.userId, userId),
           eq(entityAliases.normalizedAlias, norm),
           eq(entityAliases.status, 'ACTIVE')
         )
@@ -688,17 +689,17 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
     const [row] = await this.db
       .insert(entityResolutionProvenance)
       .values({
-        userId: input.userId as any,
-        mentionId: input.mentionId as any,
-        sourceFragmentId: input.sourceFragmentId as any,
-        sourceFragmentRevisionId: input.sourceFragmentRevisionId as any,
+        userId: input.userId,
+        mentionId: input.mentionId,
+        sourceFragmentId: input.sourceFragmentId,
+        sourceFragmentRevisionId: input.sourceFragmentRevisionId,
         sourceContentHash: input.sourceContentHash,
-        sourceMemoryId: input.sourceMemoryId as any,
-        canonicalId: input.canonicalId as any,
+        sourceMemoryId: input.sourceMemoryId,
+        canonicalId: input.canonicalId,
         surfaceMention: input.surfaceMention,
         resolutionMethod: input.resolutionMethod,
-        similarityScore: input.similarityScore as any,
-        separationMargin: input.separationMargin as any,
+        similarityScore: input.similarityScore,
+        separationMargin: input.separationMargin,
         resolverVersion: input.resolverVersion,
         decidedBy: input.decidedBy,
       })
@@ -733,7 +734,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       .where(
         and(
           eq(entityResolutionProvenance.sourceFragmentId, fragmentId),
-          eq(entityResolutionProvenance.userId, userId as any)
+          eq(entityResolutionProvenance.userId, userId)
         )
       );
 
@@ -766,7 +767,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       .where(
         and(
           eq(entityResolutionProvenance.canonicalId, canonicalId),
-          eq(entityResolutionProvenance.userId, userId as any)
+          eq(entityResolutionProvenance.userId, userId)
         )
       );
 
@@ -795,13 +796,13 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
     const [row] = await this.db
       .insert(candidateConfirmationQueue)
       .values({
-        userId: input.userId as any,
+        userId: input.userId,
         surfaceMention: input.surfaceMention,
         entityType: input.entityType,
-        suggestedCanonicalId: input.suggestedCanonicalId as any,
-        similarityScore: input.similarityScore as any,
-        sourceMemoryId: input.sourceMemoryId as any,
-        sourceFragmentId: input.sourceFragmentId as any,
+        suggestedCanonicalId: input.suggestedCanonicalId,
+        similarityScore: input.similarityScore,
+        sourceMemoryId: input.sourceMemoryId,
+        sourceFragmentId: input.sourceFragmentId,
         status: input.status,
       })
       .returning();
@@ -827,7 +828,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       .from(candidateConfirmationQueue)
       .where(
         and(
-          eq(candidateConfirmationQueue.userId, userId as any),
+          eq(candidateConfirmationQueue.userId, userId),
           eq(candidateConfirmationQueue.status, 'PENDING')
         )
       )
@@ -862,7 +863,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       .where(
         and(
           eq(candidateConfirmationQueue.id, id),
-          eq(candidateConfirmationQueue.userId, userId as any)
+          eq(candidateConfirmationQueue.userId, userId)
         )
       )
       .returning();
@@ -892,14 +893,14 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
     const [row] = await this.db
       .insert(kgRelationships)
       .values({
-        userId: input.userId as any,
-        sourceEntityId: input.sourceEntityId as any,
-        targetEntityId: input.targetEntityId as any,
+        userId: input.userId,
+        sourceEntityId: input.sourceEntityId,
+        targetEntityId: input.targetEntityId,
         relationType: input.relationType,
-        confidence: input.confidence as any,
-        evidenceCount: input.evidenceCount as any,
-        sourceFragmentId: input.sourceFragmentId as any,
-        sourceMemoryId: input.sourceMemoryId as any,
+        confidence: input.confidence,
+        evidenceCount: input.evidenceCount,
+        sourceFragmentId: input.sourceFragmentId,
+        sourceMemoryId: input.sourceMemoryId,
         sourceContentHash: input.sourceContentHash,
         extractionRunId: input.extractionRunId,
         status: input.status,
@@ -913,7 +914,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       userId: row.userId,
       sourceEntityId: row.sourceEntityId,
       targetEntityId: row.targetEntityId,
-      relationType: row.relationType as any,
+      relationType: row.relationType as RelationshipType,
       confidence: row.confidence,
       evidenceCount: row.evidenceCount,
       sourceFragmentId: row.sourceFragmentId,
@@ -937,7 +938,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       .from(kgRelationships)
       .where(
         and(
-          eq(kgRelationships.userId, userId as any),
+          eq(kgRelationships.userId, userId),
           eq(kgRelationships.status, 'ACTIVE'),
           or(
             eq(kgRelationships.sourceEntityId, entityId),
@@ -951,7 +952,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       userId: r.userId,
       sourceEntityId: r.sourceEntityId,
       targetEntityId: r.targetEntityId,
-      relationType: r.relationType as any,
+      relationType: r.relationType as RelationshipType,
       confidence: r.confidence,
       evidenceCount: r.evidenceCount,
       sourceFragmentId: r.sourceFragmentId,
@@ -975,7 +976,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       .from(kgRelationships)
       .where(
         and(
-          eq(kgRelationships.userId, userId as any),
+          eq(kgRelationships.userId, userId),
           eq(kgRelationships.sourceFragmentId, fragmentId)
         )
       );
@@ -985,7 +986,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
       userId: r.userId,
       sourceEntityId: r.sourceEntityId,
       targetEntityId: r.targetEntityId,
-      relationType: r.relationType as any,
+      relationType: r.relationType as RelationshipType,
       confidence: r.confidence,
       evidenceCount: r.evidenceCount,
       sourceFragmentId: r.sourceFragmentId,
@@ -1036,7 +1037,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
         .from(kgRelationships)
         .where(
           and(
-            eq(kgRelationships.userId, userId as any),
+            eq(kgRelationships.userId, userId),
             eq(kgRelationships.status, 'ACTIVE')
           )
         )
@@ -1049,7 +1050,7 @@ export class DrizzleKnowledgeGraphRepository implements IKnowledgeGraphRepositor
           userId: r.userId,
           sourceEntityId: r.sourceEntityId,
           targetEntityId: r.targetEntityId,
-          relationType: r.relationType as any,
+          relationType: r.relationType as RelationshipType,
           confidence: r.confidence,
           evidenceCount: r.evidenceCount,
           sourceFragmentId: r.sourceFragmentId,
