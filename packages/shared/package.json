@@ -34,6 +34,10 @@
     "./reasoning": {
       "types": "./src/reasoning/index.ts",
       "default": "./src/reasoning/index.ts"
+    },
+    "./cognitive": {
+      "types": "./src/cognitive/index.ts",
+      "default": "./src/cognitive/index.ts"
     }
   },
   "scripts": {

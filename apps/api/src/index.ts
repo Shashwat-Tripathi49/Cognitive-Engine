@@ -6,6 +6,7 @@ import { captureRouter } from './routes/capture.js';
 import { memoryApp } from './routes/memory.js';
 import { graphRouter } from './routes/graph.js';
 import { reasoningRouter } from './routes/reasoning.js';
+import { cognitiveRouter } from './routes/cognitive.js';
 
 const app = new Hono();
 
@@ -51,6 +52,7 @@ app.route('/capture', captureRouter);
 app.route('/memory', memoryApp);
 app.route('/graph', graphRouter);
 app.route('/reasoning', reasoningRouter);
+app.route('/cognitive', cognitiveRouter);
 
 const port = env.PORT || 3001;
 

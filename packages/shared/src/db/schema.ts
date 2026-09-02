@@ -449,4 +449,51 @@ export const validatedClaims = pgTable(
 export type ValidatedClaimSelect = typeof validatedClaims.$inferSelect;
 export type ValidatedClaimInsert = typeof validatedClaims.$inferInsert;
 
+// ============================================================================
+// 5. Cognitive Engine: Candidate Findings
+// ============================================================================
+
+/**
+ * Candidate findings generated deterministically by Cognitive Engine discovery
+ */
+export const candidateFindings = pgTable(
+  'candidate_findings',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id').notNull(),
+    findingType: varchar('finding_type', { length: 64 }).notNull(),
+    summary: text('summary').notNull(),
+    statement: text('statement').notNull(),
+    subjectEntityId: uuid('subject_entity_id'),
+    objectEntityId: uuid('object_entity_id'),
+    involvedEntityIds: jsonb('involved_entity_ids').notNull().default([]),
+    involvedMemoryIds: jsonb('involved_memory_ids').notNull().default([]),
+    involvedRelationshipIds: jsonb('involved_relationship_ids').notNull().default([]),
+    temporalStart: timestamp('temporal_start', { mode: 'date', withTimezone: true }).notNull(),
+    temporalEnd: timestamp('temporal_end', { mode: 'date', withTimezone: true }).notNull(),
+    deterministicMetrics: jsonb('deterministic_metrics').notNull().default({}),
+    discoveryAlgorithm: varchar('discovery_algorithm', { length: 128 }).notNull(),
+    discoveryVersion: varchar('discovery_version', { length: 32 }).notNull().default('1.0.0'),
+    discoveryConfidence: customType<{ data: number; driverData: number }>({
+      dataType() {
+        return 'real';
+      },
+    })('discovery_confidence').notNull(),
+    provenanceReferences: jsonb('provenance_references').notNull().default([]),
+    metadata: jsonb('metadata').notNull().default({}),
+    createdAt: timestamp('created_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    index('candidate_findings_user_id_idx').on(table.userId),
+    index('candidate_findings_type_idx').on(table.userId, table.findingType),
+    index('candidate_findings_created_at_idx').on(table.userId, table.createdAt),
+  ]
+);
+
+export type CandidateFindingSelect = typeof candidateFindings.$inferSelect;
+export type CandidateFindingInsert = typeof candidateFindings.$inferInsert;
+
+
 
