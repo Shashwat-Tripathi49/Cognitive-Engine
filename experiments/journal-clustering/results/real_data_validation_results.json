@@ -1,0 +1,1583 @@
+{
+  "metadata": {
+    "timestamp": "2026-09-02T12:47:03.545Z",
+    "totalEntries": 30,
+    "operatingPoint": {
+      "stringThreshold": 0.85,
+      "embedThreshold": 0.8,
+      "separationMargin": 0.04,
+      "confirmationLowerBound": 0.75,
+      "modifierTrapMinDelta": 3
+    }
+  },
+  "metrics": {
+    "totalFragments": 30,
+    "totalMentionsExtracted": 29,
+    "decisionsResolved": 16,
+    "decisionsNoMatchCreated": 12,
+    "decisionsAmbiguous": 1,
+    "totalCanonicalEntities": 12,
+    "totalPendingCandidates": 1,
+    "totalRelationshipAssertions": 13,
+    "totalProvenanceRecords": 29
+  },
+  "canonicalEntities": [
+    {
+      "id": "ent_h2hohmtz",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "canonicalName": "API routes",
+      "entityType": "Topic",
+      "status": "ACTIVE",
+      "currentCanonicalId": "ent_h2hohmtz",
+      "description": null,
+      "aliases": [
+        "API routes"
+      ],
+      "createdAt": "2026-09-02T12:47:03.542Z",
+      "updatedAt": "2026-09-02T12:47:03.542Z"
+    },
+    {
+      "id": "ent_b0jr8p5x",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "canonicalName": "entity extraction",
+      "entityType": "Topic",
+      "status": "ACTIVE",
+      "currentCanonicalId": "ent_b0jr8p5x",
+      "description": null,
+      "aliases": [
+        "entity extraction"
+      ],
+      "createdAt": "2026-09-02T12:47:03.541Z",
+      "updatedAt": "2026-09-02T12:47:03.541Z"
+    },
+    {
+      "id": "ent_2vshowu7",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "canonicalName": "backend architecture",
+      "entityType": "Topic",
+      "status": "ACTIVE",
+      "currentCanonicalId": "ent_2vshowu7",
+      "description": null,
+      "aliases": [
+        "backend architecture"
+      ],
+      "createdAt": "2026-09-02T12:47:03.541Z",
+      "updatedAt": "2026-09-02T12:47:03.541Z"
+    },
+    {
+      "id": "ent_7uuk4thn",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "canonicalName": "entity resolution",
+      "entityType": "Topic",
+      "status": "ACTIVE",
+      "currentCanonicalId": "ent_7uuk4thn",
+      "description": null,
+      "aliases": [
+        "entity resolution"
+      ],
+      "createdAt": "2026-09-02T12:47:01.862Z",
+      "updatedAt": "2026-09-02T12:47:01.862Z"
+    },
+    {
+      "id": "ent_3zaq1yex",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "canonicalName": "knowledge graphs",
+      "entityType": "Topic",
+      "status": "ACTIVE",
+      "currentCanonicalId": "ent_3zaq1yex",
+      "description": null,
+      "aliases": [
+        "knowledge graphs",
+        "knowledge graph"
+      ],
+      "createdAt": "2026-09-02T12:47:00.377Z",
+      "updatedAt": "2026-09-02T12:47:00.377Z"
+    },
+    {
+      "id": "ent_2yhf22mb",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "canonicalName": "Cognitive Engine",
+      "entityType": "Project",
+      "status": "ACTIVE",
+      "currentCanonicalId": "ent_2yhf22mb",
+      "description": null,
+      "aliases": [
+        "Cognitive Engine"
+      ],
+      "createdAt": "2026-09-02T12:46:59.075Z",
+      "updatedAt": "2026-09-02T12:46:59.075Z"
+    },
+    {
+      "id": "ent_ll3m9vay",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "canonicalName": "middleware",
+      "entityType": "Topic",
+      "status": "ACTIVE",
+      "currentCanonicalId": "ent_ll3m9vay",
+      "description": null,
+      "aliases": [
+        "middleware"
+      ],
+      "createdAt": "2026-09-02T12:46:57.688Z",
+      "updatedAt": "2026-09-02T12:46:57.688Z"
+    },
+    {
+      "id": "ent_fk5hqn2u",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "canonicalName": "authentication",
+      "entityType": "Topic",
+      "status": "ACTIVE",
+      "currentCanonicalId": "ent_fk5hqn2u",
+      "description": null,
+      "aliases": [
+        "authentication"
+      ],
+      "createdAt": "2026-09-02T12:46:56.487Z",
+      "updatedAt": "2026-09-02T12:46:56.487Z"
+    },
+    {
+      "id": "ent_7u2oqmmk",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "canonicalName": "YouTube",
+      "entityType": "Organization",
+      "status": "ACTIVE",
+      "currentCanonicalId": "ent_7u2oqmmk",
+      "description": null,
+      "aliases": [
+        "YouTube"
+      ],
+      "createdAt": "2026-09-02T12:46:55.832Z",
+      "updatedAt": "2026-09-02T12:46:55.832Z"
+    },
+    {
+      "id": "ent_nbrwvb7r",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "canonicalName": "API",
+      "entityType": "Topic",
+      "status": "ACTIVE",
+      "currentCanonicalId": "ent_nbrwvb7r",
+      "description": null,
+      "aliases": [
+        "API"
+      ],
+      "createdAt": "2026-09-02T12:46:55.707Z",
+      "updatedAt": "2026-09-02T12:46:55.707Z"
+    },
+    {
+      "id": "ent_z2zt5bg7",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "canonicalName": "backend",
+      "entityType": "Topic",
+      "status": "ACTIVE",
+      "currentCanonicalId": "ent_z2zt5bg7",
+      "description": null,
+      "aliases": [
+        "backend"
+      ],
+      "createdAt": "2026-09-02T12:46:55.294Z",
+      "updatedAt": "2026-09-02T12:46:55.294Z"
+    },
+    {
+      "id": "ent_m9g8u1bh",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "canonicalName": "Rahul",
+      "entityType": "Person",
+      "status": "ACTIVE",
+      "currentCanonicalId": "ent_m9g8u1bh",
+      "description": null,
+      "aliases": [
+        "Rahul"
+      ],
+      "createdAt": "2026-09-02T12:46:55.142Z",
+      "updatedAt": "2026-09-02T12:46:55.142Z"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel_k60o9chg",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_m9g8u1bh",
+      "targetEntityId": "ent_z2zt5bg7",
+      "relationType": "MENTIONED_WITH",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_001",
+      "sourceMemoryId": "mem_001",
+      "sourceContentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
+      "extractionRunId": "mock_run_u3jfd9q",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:46:48.406Z",
+      "validAt": "2026-08-01T09:30:00.000Z",
+      "createdAt": "2026-09-02T12:46:55.707Z",
+      "updatedAt": "2026-09-02T12:46:55.707Z"
+    },
+    {
+      "id": "rel_5dkpizdk",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_m9g8u1bh",
+      "targetEntityId": "ent_nbrwvb7r",
+      "relationType": "MENTIONED_WITH",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_001",
+      "sourceMemoryId": "mem_001",
+      "sourceContentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
+      "extractionRunId": "mock_run_u3jfd9q",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:46:48.406Z",
+      "validAt": "2026-08-01T09:30:00.000Z",
+      "createdAt": "2026-09-02T12:46:55.707Z",
+      "updatedAt": "2026-09-02T12:46:55.707Z"
+    },
+    {
+      "id": "rel_qcbhzzeq",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_z2zt5bg7",
+      "targetEntityId": "ent_nbrwvb7r",
+      "relationType": "MENTIONED_WITH",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_001",
+      "sourceMemoryId": "mem_001",
+      "sourceContentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
+      "extractionRunId": "mock_run_u3jfd9q",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:46:48.406Z",
+      "validAt": "2026-08-01T09:30:00.000Z",
+      "createdAt": "2026-09-02T12:46:55.707Z",
+      "updatedAt": "2026-09-02T12:46:55.707Z"
+    },
+    {
+      "id": "rel_cv2rv6cq",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_z2zt5bg7",
+      "targetEntityId": "ent_7u2oqmmk",
+      "relationType": "BELONGS_TO",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_002",
+      "sourceMemoryId": "mem_002",
+      "sourceContentHash": "84f8eda10fa2bd6f098f77686b2a8776c644d4a47b33c42f0f326fa784c684dd",
+      "extractionRunId": "mock_run_4roqi9d",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:46:55.707Z",
+      "validAt": "2026-08-01T14:00:00.000Z",
+      "createdAt": "2026-09-02T12:46:55.832Z",
+      "updatedAt": "2026-09-02T12:46:55.832Z"
+    },
+    {
+      "id": "rel_17b2h8so",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_fk5hqn2u",
+      "targetEntityId": "ent_ll3m9vay",
+      "relationType": "MENTIONED_WITH",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_003",
+      "sourceMemoryId": "mem_003",
+      "sourceContentHash": "0994a54f61ba4a679f87106d74fb27d4723b140f128edf13b6887192c239d186",
+      "extractionRunId": "mock_run_wyxzaa9",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:46:55.832Z",
+      "validAt": "2026-08-02T10:15:00.000Z",
+      "createdAt": "2026-09-02T12:46:57.688Z",
+      "updatedAt": "2026-09-02T12:46:57.688Z"
+    },
+    {
+      "id": "rel_tj1ge6y9",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_ll3m9vay",
+      "targetEntityId": "ent_nbrwvb7r",
+      "relationType": "MENTIONED_WITH",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_004",
+      "sourceMemoryId": "mem_004",
+      "sourceContentHash": "a9d215872d4f0e251ada6c80b1bf0b34a526fb2f7b52397b78bd35dd576669b4",
+      "extractionRunId": "mock_run_jkcqwal",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:46:57.688Z",
+      "validAt": "2026-08-02T16:45:00.000Z",
+      "createdAt": "2026-09-02T12:46:58.959Z",
+      "updatedAt": "2026-09-02T12:46:58.959Z"
+    },
+    {
+      "id": "rel_fwneidat",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_m9g8u1bh",
+      "targetEntityId": "ent_2yhf22mb",
+      "relationType": "WORKED_ON",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_006",
+      "sourceMemoryId": "mem_006",
+      "sourceContentHash": "6e8e07f2ec456f3cf5a9a2214a3da7f848fa60f4e893110b005f5187a95040ac",
+      "extractionRunId": "mock_run_zs27uj5",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:46:59.076Z",
+      "validAt": "2026-08-03T17:30:00.000Z",
+      "createdAt": "2026-09-02T12:46:59.076Z",
+      "updatedAt": "2026-09-02T12:46:59.076Z"
+    },
+    {
+      "id": "rel_mlctgpy6",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_m9g8u1bh",
+      "targetEntityId": "ent_2vshowu7",
+      "relationType": "MENTIONED_WITH",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_011",
+      "sourceMemoryId": "mem_011",
+      "sourceContentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
+      "extractionRunId": "mock_run_483mgj3",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:47:03.541Z",
+      "validAt": "2026-08-06T16:00:00.000Z",
+      "createdAt": "2026-09-02T12:47:03.541Z",
+      "updatedAt": "2026-09-02T12:47:03.541Z"
+    },
+    {
+      "id": "rel_kq72blhf",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_m9g8u1bh",
+      "targetEntityId": "ent_z2zt5bg7",
+      "relationType": "MENTIONED_WITH",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_011",
+      "sourceMemoryId": "mem_011",
+      "sourceContentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
+      "extractionRunId": "mock_run_483mgj3",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:47:03.541Z",
+      "validAt": "2026-08-06T16:00:00.000Z",
+      "createdAt": "2026-09-02T12:47:03.541Z",
+      "updatedAt": "2026-09-02T12:47:03.541Z"
+    },
+    {
+      "id": "rel_gerz0eri",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_2vshowu7",
+      "targetEntityId": "ent_z2zt5bg7",
+      "relationType": "MENTIONED_WITH",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_011",
+      "sourceMemoryId": "mem_011",
+      "sourceContentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
+      "extractionRunId": "mock_run_483mgj3",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:47:03.541Z",
+      "validAt": "2026-08-06T16:00:00.000Z",
+      "createdAt": "2026-09-02T12:47:03.541Z",
+      "updatedAt": "2026-09-02T12:47:03.541Z"
+    },
+    {
+      "id": "rel_iw6b5efo",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_h2hohmtz",
+      "targetEntityId": "ent_nbrwvb7r",
+      "relationType": "MENTIONED_WITH",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_013",
+      "sourceMemoryId": "mem_013",
+      "sourceContentHash": "a5136b3f22fba98133cbeb5f02d2faaa6015f498f58281ce564efa581df1bc39",
+      "extractionRunId": "mock_run_dc2m9ea",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:47:03.542Z",
+      "validAt": "2026-08-07T14:45:00.000Z",
+      "createdAt": "2026-09-02T12:47:03.542Z",
+      "updatedAt": "2026-09-02T12:47:03.542Z"
+    },
+    {
+      "id": "rel_pw3qk1rz",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_m9g8u1bh",
+      "targetEntityId": "ent_z2zt5bg7",
+      "relationType": "MENTIONED_WITH",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_021",
+      "sourceMemoryId": "mem_021",
+      "sourceContentHash": "79f73ae762fbbf3ecbe9b0840fd5eddfe5595b38e8d8efd2f0a267c2c68c2aaf",
+      "extractionRunId": "mock_run_1137gz9",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:47:03.543Z",
+      "validAt": "2026-08-11T16:15:00.000Z",
+      "createdAt": "2026-09-02T12:47:03.543Z",
+      "updatedAt": "2026-09-02T12:47:03.543Z"
+    },
+    {
+      "id": "rel_tduw0nr1",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "sourceEntityId": "ent_z2zt5bg7",
+      "targetEntityId": "ent_nbrwvb7r",
+      "relationType": "MENTIONED_WITH",
+      "confidence": 1,
+      "evidenceCount": 1,
+      "sourceFragmentId": "frag_030",
+      "sourceMemoryId": "mem_030",
+      "sourceContentHash": "cc5426782a98ee24a47392d4d47a65607c0273e95c33fb46ae434bf5e20bc178",
+      "extractionRunId": "mock_run_4b30i41",
+      "status": "ACTIVE",
+      "assertedAt": "2026-09-02T12:47:03.544Z",
+      "validAt": "2026-08-16T10:00:00.000Z",
+      "createdAt": "2026-09-02T12:47:03.544Z",
+      "updatedAt": "2026-09-02T12:47:03.544Z"
+    }
+  ],
+  "pendingCandidates": [
+    {
+      "id": "cand_9am5qjoh",
+      "userId": "00000000-0000-0000-0000-000000000001",
+      "surfaceMention": "auth",
+      "entityType": "Topic",
+      "suggestedCanonicalId": "ent_fk5hqn2u",
+      "similarityScore": 0.8315489148401938,
+      "sourceMemoryId": "mem_004",
+      "sourceFragmentId": "frag_004",
+      "status": "PENDING",
+      "createdAt": "2026-09-02T12:46:58.958Z",
+      "updatedAt": "2026-09-02T12:46:58.958Z"
+    }
+  ],
+  "fragmentExecutionLogs": [
+    {
+      "entryId": 1,
+      "date": "2026-08-01T09:30:00Z",
+      "text": "Worked on the backend for a couple of hours today. Rahul helped me figure out why the API wasn't responding properly. Still feels like there's a lot I don't understand.",
+      "fragmentId": "frag_001",
+      "contentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
+      "result": {
+        "fragmentId": "frag_001",
+        "entitiesExtracted": 3,
+        "entitiesResolved": 0,
+        "entitiesCreated": 3,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 3,
+        "resolvedEntities": [
+          {
+            "mention": "Rahul",
+            "entityType": "Person",
+            "outcome": "NO_MATCH",
+            "canonicalId": "ent_m9g8u1bh",
+            "canonicalName": "Rahul",
+            "resolutionMethod": "L8_DEFAULT_FALLBACK",
+            "confidence": 0
+          },
+          {
+            "mention": "backend",
+            "entityType": "Topic",
+            "outcome": "NO_MATCH",
+            "canonicalId": "ent_z2zt5bg7",
+            "canonicalName": "backend",
+            "resolutionMethod": "L8_DEFAULT_FALLBACK",
+            "confidence": 0
+          },
+          {
+            "mention": "API",
+            "entityType": "Topic",
+            "outcome": "NO_MATCH",
+            "canonicalId": "ent_nbrwvb7r",
+            "canonicalName": "API",
+            "resolutionMethod": "L8_DEFAULT_FALLBACK",
+            "confidence": 0
+          }
+        ],
+        "graphRelationships": [
+          {
+            "id": "rel_k60o9chg",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_m9g8u1bh",
+            "targetEntityId": "ent_z2zt5bg7",
+            "relationType": "MENTIONED_WITH",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_001",
+            "sourceMemoryId": "mem_001",
+            "sourceContentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
+            "extractionRunId": "mock_run_u3jfd9q",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:46:48.406Z",
+            "validAt": "2026-08-01T09:30:00.000Z",
+            "createdAt": "2026-09-02T12:46:55.707Z",
+            "updatedAt": "2026-09-02T12:46:55.707Z"
+          },
+          {
+            "id": "rel_5dkpizdk",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_m9g8u1bh",
+            "targetEntityId": "ent_nbrwvb7r",
+            "relationType": "MENTIONED_WITH",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_001",
+            "sourceMemoryId": "mem_001",
+            "sourceContentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
+            "extractionRunId": "mock_run_u3jfd9q",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:46:48.406Z",
+            "validAt": "2026-08-01T09:30:00.000Z",
+            "createdAt": "2026-09-02T12:46:55.707Z",
+            "updatedAt": "2026-09-02T12:46:55.707Z"
+          },
+          {
+            "id": "rel_qcbhzzeq",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_z2zt5bg7",
+            "targetEntityId": "ent_nbrwvb7r",
+            "relationType": "MENTIONED_WITH",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_001",
+            "sourceMemoryId": "mem_001",
+            "sourceContentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
+            "extractionRunId": "mock_run_u3jfd9q",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:46:48.406Z",
+            "validAt": "2026-08-01T09:30:00.000Z",
+            "createdAt": "2026-09-02T12:46:55.707Z",
+            "updatedAt": "2026-09-02T12:46:55.707Z"
+          }
+        ],
+        "provenanceIds": [
+          "prov_wecx0405",
+          "prov_8pxe1l6b",
+          "prov_gbo7gqmc"
+        ],
+        "executionTimeMs": 7301
+      }
+    },
+    {
+      "entryId": 2,
+      "date": "2026-08-01T14:00:00Z",
+      "text": "Had a pretty unproductive morning. Kept switching between the backend and random YouTube videos. Need to get more disciplined about this.",
+      "fragmentId": "frag_002",
+      "contentHash": "84f8eda10fa2bd6f098f77686b2a8776c644d4a47b33c42f0f326fa784c684dd",
+      "result": {
+        "fragmentId": "frag_002",
+        "entitiesExtracted": 2,
+        "entitiesResolved": 1,
+        "entitiesCreated": 1,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 1,
+        "resolvedEntities": [
+          {
+            "mention": "backend",
+            "entityType": "Topic",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_z2zt5bg7",
+            "canonicalName": "backend",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          },
+          {
+            "mention": "YouTube",
+            "entityType": "Organization",
+            "outcome": "NO_MATCH",
+            "canonicalId": "ent_7u2oqmmk",
+            "canonicalName": "YouTube",
+            "resolutionMethod": "L8_DEFAULT_FALLBACK",
+            "confidence": 0
+          }
+        ],
+        "graphRelationships": [
+          {
+            "id": "rel_cv2rv6cq",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_z2zt5bg7",
+            "targetEntityId": "ent_7u2oqmmk",
+            "relationType": "BELONGS_TO",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_002",
+            "sourceMemoryId": "mem_002",
+            "sourceContentHash": "84f8eda10fa2bd6f098f77686b2a8776c644d4a47b33c42f0f326fa784c684dd",
+            "extractionRunId": "mock_run_4roqi9d",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:46:55.707Z",
+            "validAt": "2026-08-01T14:00:00.000Z",
+            "createdAt": "2026-09-02T12:46:55.832Z",
+            "updatedAt": "2026-09-02T12:46:55.832Z"
+          }
+        ],
+        "provenanceIds": [
+          "prov_npg649le",
+          "prov_sevb3gnl"
+        ],
+        "executionTimeMs": 125
+      }
+    },
+    {
+      "entryId": 3,
+      "date": "2026-08-02T10:15:00Z",
+      "text": "Talked to R about the authentication issue. He thinks the middleware is probably where I'm messing something up. Going to look at that tomorrow.",
+      "fragmentId": "frag_003",
+      "contentHash": "0994a54f61ba4a679f87106d74fb27d4723b140f128edf13b6887192c239d186",
+      "result": {
+        "fragmentId": "frag_003",
+        "entitiesExtracted": 2,
+        "entitiesResolved": 0,
+        "entitiesCreated": 2,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 1,
+        "resolvedEntities": [
+          {
+            "mention": "authentication",
+            "entityType": "Topic",
+            "outcome": "NO_MATCH",
+            "canonicalId": "ent_fk5hqn2u",
+            "canonicalName": "authentication",
+            "resolutionMethod": "L8_DEFAULT_FALLBACK",
+            "confidence": 0
+          },
+          {
+            "mention": "middleware",
+            "entityType": "Topic",
+            "outcome": "NO_MATCH",
+            "canonicalId": "ent_ll3m9vay",
+            "canonicalName": "middleware",
+            "resolutionMethod": "L8_DEFAULT_FALLBACK",
+            "confidence": 0
+          }
+        ],
+        "graphRelationships": [
+          {
+            "id": "rel_17b2h8so",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_fk5hqn2u",
+            "targetEntityId": "ent_ll3m9vay",
+            "relationType": "MENTIONED_WITH",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_003",
+            "sourceMemoryId": "mem_003",
+            "sourceContentHash": "0994a54f61ba4a679f87106d74fb27d4723b140f128edf13b6887192c239d186",
+            "extractionRunId": "mock_run_wyxzaa9",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:46:55.832Z",
+            "validAt": "2026-08-02T10:15:00.000Z",
+            "createdAt": "2026-09-02T12:46:57.688Z",
+            "updatedAt": "2026-09-02T12:46:57.688Z"
+          }
+        ],
+        "provenanceIds": [
+          "prov_ay77vvnk",
+          "prov_4bllbzu5"
+        ],
+        "executionTimeMs": 1856
+      }
+    },
+    {
+      "entryId": 4,
+      "date": "2026-08-02T16:45:00Z",
+      "text": "Finally understood a bit of the auth flow today. The middleware thing makes much more sense now. Still need to clean up the API though.",
+      "fragmentId": "frag_004",
+      "contentHash": "a9d215872d4f0e251ada6c80b1bf0b34a526fb2f7b52397b78bd35dd576669b4",
+      "result": {
+        "fragmentId": "frag_004",
+        "entitiesExtracted": 3,
+        "entitiesResolved": 2,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 1,
+        "relationshipsCreated": 1,
+        "resolvedEntities": [
+          {
+            "mention": "auth",
+            "entityType": "Topic",
+            "outcome": "AMBIGUOUS",
+            "resolutionMethod": "L7_CONFIRMATION_BAND",
+            "confidence": 0.8315489148401938
+          },
+          {
+            "mention": "middleware",
+            "entityType": "Topic",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_ll3m9vay",
+            "canonicalName": "middleware",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          },
+          {
+            "mention": "API",
+            "entityType": "Topic",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_nbrwvb7r",
+            "canonicalName": "API",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          }
+        ],
+        "graphRelationships": [
+          {
+            "id": "rel_tj1ge6y9",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_ll3m9vay",
+            "targetEntityId": "ent_nbrwvb7r",
+            "relationType": "MENTIONED_WITH",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_004",
+            "sourceMemoryId": "mem_004",
+            "sourceContentHash": "a9d215872d4f0e251ada6c80b1bf0b34a526fb2f7b52397b78bd35dd576669b4",
+            "extractionRunId": "mock_run_jkcqwal",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:46:57.688Z",
+            "validAt": "2026-08-02T16:45:00.000Z",
+            "createdAt": "2026-09-02T12:46:58.959Z",
+            "updatedAt": "2026-09-02T12:46:58.959Z"
+          }
+        ],
+        "provenanceIds": [
+          "prov_k8q50uop",
+          "prov_xcz1mdeg",
+          "prov_9hm9vx6z"
+        ],
+        "executionTimeMs": 1271
+      }
+    },
+    {
+      "entryId": 5,
+      "date": "2026-08-03T11:00:00Z",
+      "text": "Spent most of today working on the Cognitive Engine. The basic capture part is actually working surprisingly well. Need to figure out what comes after memory.",
+      "fragmentId": "frag_005",
+      "contentHash": "c777e3ef1f59682e034696511f7982cd5fa3cfe6b70d24bfd26fa6b4e2a1e020",
+      "result": {
+        "fragmentId": "frag_005",
+        "entitiesExtracted": 1,
+        "entitiesResolved": 0,
+        "entitiesCreated": 1,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [
+          {
+            "mention": "Cognitive Engine",
+            "entityType": "Project",
+            "outcome": "NO_MATCH",
+            "canonicalId": "ent_2yhf22mb",
+            "canonicalName": "Cognitive Engine",
+            "resolutionMethod": "L8_DEFAULT_FALLBACK",
+            "confidence": 0
+          }
+        ],
+        "graphRelationships": [],
+        "provenanceIds": [
+          "prov_fon8afzt"
+        ],
+        "executionTimeMs": 116
+      }
+    },
+    {
+      "entryId": 6,
+      "date": "2026-08-03T17:30:00Z",
+      "text": "Rahul asked how the Cognitive Engine is coming along. Told him the memory search works but the actual intelligence part is still pretty basic.",
+      "fragmentId": "frag_006",
+      "contentHash": "6e8e07f2ec456f3cf5a9a2214a3da7f848fa60f4e893110b005f5187a95040ac",
+      "result": {
+        "fragmentId": "frag_006",
+        "entitiesExtracted": 2,
+        "entitiesResolved": 2,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 1,
+        "resolvedEntities": [
+          {
+            "mention": "Rahul",
+            "entityType": "Person",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_m9g8u1bh",
+            "canonicalName": "Rahul",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          },
+          {
+            "mention": "Cognitive Engine",
+            "entityType": "Project",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_2yhf22mb",
+            "canonicalName": "Cognitive Engine",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          }
+        ],
+        "graphRelationships": [
+          {
+            "id": "rel_fwneidat",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_m9g8u1bh",
+            "targetEntityId": "ent_2yhf22mb",
+            "relationType": "WORKED_ON",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_006",
+            "sourceMemoryId": "mem_006",
+            "sourceContentHash": "6e8e07f2ec456f3cf5a9a2214a3da7f848fa60f4e893110b005f5187a95040ac",
+            "extractionRunId": "mock_run_zs27uj5",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:46:59.076Z",
+            "validAt": "2026-08-03T17:30:00.000Z",
+            "createdAt": "2026-09-02T12:46:59.076Z",
+            "updatedAt": "2026-09-02T12:46:59.076Z"
+          }
+        ],
+        "provenanceIds": [
+          "prov_xvl27pim",
+          "prov_jncdalj9"
+        ],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 7,
+      "date": "2026-08-04T12:00:00Z",
+      "text": "Didn't really work today. Was supposed to work on the engine but ended up going out with friends in the evening. Feeling a little guilty about wasting the day.",
+      "fragmentId": "frag_007",
+      "contentHash": "bb81f348d3a1e8241d7e5f476c5f320234611989ab57e588e7f80ed735a47d9b",
+      "result": {
+        "fragmentId": "frag_007",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 8,
+      "date": "2026-08-05T09:00:00Z",
+      "text": "Started reading about knowledge graphs. At first it sounded unnecessarily complicated, but I think it might actually make sense for the project.",
+      "fragmentId": "frag_008",
+      "contentHash": "3e765080b9896fd0b04f5b002e3e1bc168275dd6b7b534fa7b7c0c34adfaeb21",
+      "result": {
+        "fragmentId": "frag_008",
+        "entitiesExtracted": 1,
+        "entitiesResolved": 0,
+        "entitiesCreated": 1,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [
+          {
+            "mention": "knowledge graphs",
+            "entityType": "Topic",
+            "outcome": "NO_MATCH",
+            "canonicalId": "ent_3zaq1yex",
+            "canonicalName": "knowledge graphs",
+            "resolutionMethod": "L8_DEFAULT_FALLBACK",
+            "confidence": 0
+          }
+        ],
+        "graphRelationships": [],
+        "provenanceIds": [
+          "prov_03np7lwe"
+        ],
+        "executionTimeMs": 1301
+      }
+    },
+    {
+      "entryId": 9,
+      "date": "2026-08-05T15:20:00Z",
+      "text": "R sent me a paper about entity resolution. Haven't read it properly yet but the idea of connecting different names to the same thing seems important.",
+      "fragmentId": "frag_009",
+      "contentHash": "a22ee051fcf597635d865a8567c7b5f64a38efbca783c685c39b9eae63fc3093",
+      "result": {
+        "fragmentId": "frag_009",
+        "entitiesExtracted": 1,
+        "entitiesResolved": 0,
+        "entitiesCreated": 1,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [
+          {
+            "mention": "entity resolution",
+            "entityType": "Topic",
+            "outcome": "NO_MATCH",
+            "canonicalId": "ent_7uuk4thn",
+            "canonicalName": "entity resolution",
+            "resolutionMethod": "L8_DEFAULT_FALLBACK",
+            "confidence": 0
+          }
+        ],
+        "graphRelationships": [],
+        "provenanceIds": [
+          "prov_ldfnoevy"
+        ],
+        "executionTimeMs": 1485
+      }
+    },
+    {
+      "entryId": 10,
+      "date": "2026-08-06T10:00:00Z",
+      "text": "Worked on entity extraction today. The annoying part is that the model sometimes identifies things that aren't actually entities. Need some kind of strict filter.",
+      "fragmentId": "frag_010",
+      "contentHash": "dc4f943675afaff6fd223d3583344e1a816cea105b62b4b7b1720be760f80a87",
+      "result": {
+        "fragmentId": "frag_010",
+        "entitiesExtracted": 1,
+        "entitiesResolved": 0,
+        "entitiesCreated": 1,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [
+          {
+            "mention": "entity extraction",
+            "entityType": "Topic",
+            "outcome": "NO_MATCH",
+            "canonicalId": "ent_b0jr8p5x",
+            "canonicalName": "entity extraction",
+            "resolutionMethod": "L8_DEFAULT_FALLBACK",
+            "confidence": 0
+          }
+        ],
+        "graphRelationships": [],
+        "provenanceIds": [
+          "prov_0al82k6k"
+        ],
+        "executionTimeMs": 1679
+      }
+    },
+    {
+      "entryId": 11,
+      "date": "2026-08-06T16:00:00Z",
+      "text": "Had another discussion with Rahul about the project. We went through the backend architecture and he pointed out that I was trying to build too much at once.",
+      "fragmentId": "frag_011",
+      "contentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
+      "result": {
+        "fragmentId": "frag_011",
+        "entitiesExtracted": 3,
+        "entitiesResolved": 2,
+        "entitiesCreated": 1,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 3,
+        "resolvedEntities": [
+          {
+            "mention": "Rahul",
+            "entityType": "Person",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_m9g8u1bh",
+            "canonicalName": "Rahul",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          },
+          {
+            "mention": "backend architecture",
+            "entityType": "Topic",
+            "outcome": "NO_MATCH",
+            "canonicalId": "ent_2vshowu7",
+            "canonicalName": "backend architecture",
+            "resolutionMethod": "L4_MODIFIER_TRAP_GATEKEEPER",
+            "confidence": 0.2
+          },
+          {
+            "mention": "backend",
+            "entityType": "Topic",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_z2zt5bg7",
+            "canonicalName": "backend",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          }
+        ],
+        "graphRelationships": [
+          {
+            "id": "rel_mlctgpy6",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_m9g8u1bh",
+            "targetEntityId": "ent_2vshowu7",
+            "relationType": "MENTIONED_WITH",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_011",
+            "sourceMemoryId": "mem_011",
+            "sourceContentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
+            "extractionRunId": "mock_run_483mgj3",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:47:03.541Z",
+            "validAt": "2026-08-06T16:00:00.000Z",
+            "createdAt": "2026-09-02T12:47:03.541Z",
+            "updatedAt": "2026-09-02T12:47:03.541Z"
+          },
+          {
+            "id": "rel_kq72blhf",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_m9g8u1bh",
+            "targetEntityId": "ent_z2zt5bg7",
+            "relationType": "MENTIONED_WITH",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_011",
+            "sourceMemoryId": "mem_011",
+            "sourceContentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
+            "extractionRunId": "mock_run_483mgj3",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:47:03.541Z",
+            "validAt": "2026-08-06T16:00:00.000Z",
+            "createdAt": "2026-09-02T12:47:03.541Z",
+            "updatedAt": "2026-09-02T12:47:03.541Z"
+          },
+          {
+            "id": "rel_gerz0eri",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_2vshowu7",
+            "targetEntityId": "ent_z2zt5bg7",
+            "relationType": "MENTIONED_WITH",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_011",
+            "sourceMemoryId": "mem_011",
+            "sourceContentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
+            "extractionRunId": "mock_run_483mgj3",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:47:03.541Z",
+            "validAt": "2026-08-06T16:00:00.000Z",
+            "createdAt": "2026-09-02T12:47:03.541Z",
+            "updatedAt": "2026-09-02T12:47:03.541Z"
+          }
+        ],
+        "provenanceIds": [
+          "prov_zqkdglnv",
+          "prov_l1b3ugvi",
+          "prov_v90lv8tu"
+        ],
+        "executionTimeMs": 1
+      }
+    },
+    {
+      "entryId": 12,
+      "date": "2026-08-07T09:30:00Z",
+      "text": "I think he's right. I should probably finish one complete pipeline instead of constantly adding new features.",
+      "fragmentId": "frag_012",
+      "contentHash": "c7bf2fc5d6c8382d40b795c9b046b1959b8c568c5714533d225e0906a2bc004e",
+      "result": {
+        "fragmentId": "frag_012",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 13,
+      "date": "2026-08-07T14:45:00Z",
+      "text": "Spent the afternoon fixing the API routes. Nothing major, just a bunch of stupid little issues that somehow took forever.",
+      "fragmentId": "frag_013",
+      "contentHash": "a5136b3f22fba98133cbeb5f02d2faaa6015f498f58281ce564efa581df1bc39",
+      "result": {
+        "fragmentId": "frag_013",
+        "entitiesExtracted": 2,
+        "entitiesResolved": 1,
+        "entitiesCreated": 1,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 1,
+        "resolvedEntities": [
+          {
+            "mention": "API routes",
+            "entityType": "Topic",
+            "outcome": "NO_MATCH",
+            "canonicalId": "ent_h2hohmtz",
+            "canonicalName": "API routes",
+            "resolutionMethod": "L4_MODIFIER_TRAP_GATEKEEPER",
+            "confidence": 0.2
+          },
+          {
+            "mention": "API",
+            "entityType": "Topic",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_nbrwvb7r",
+            "canonicalName": "API",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          }
+        ],
+        "graphRelationships": [
+          {
+            "id": "rel_iw6b5efo",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_h2hohmtz",
+            "targetEntityId": "ent_nbrwvb7r",
+            "relationType": "MENTIONED_WITH",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_013",
+            "sourceMemoryId": "mem_013",
+            "sourceContentHash": "a5136b3f22fba98133cbeb5f02d2faaa6015f498f58281ce564efa581df1bc39",
+            "extractionRunId": "mock_run_dc2m9ea",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:47:03.542Z",
+            "validAt": "2026-08-07T14:45:00.000Z",
+            "createdAt": "2026-09-02T12:47:03.542Z",
+            "updatedAt": "2026-09-02T12:47:03.542Z"
+          }
+        ],
+        "provenanceIds": [
+          "prov_krln4duf",
+          "prov_ngx9cmw1"
+        ],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 14,
+      "date": "2026-08-08T11:15:00Z",
+      "text": "The backend is finally feeling less messy. Still not happy with the way some of the database stuff is organized though.",
+      "fragmentId": "frag_014",
+      "contentHash": "06b92a8ae6e30d1995052ed151374b0d2f3cffbc24f2dfc3b81c740212654062",
+      "result": {
+        "fragmentId": "frag_014",
+        "entitiesExtracted": 1,
+        "entitiesResolved": 1,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [
+          {
+            "mention": "backend",
+            "entityType": "Topic",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_z2zt5bg7",
+            "canonicalName": "backend",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          }
+        ],
+        "graphRelationships": [],
+        "provenanceIds": [
+          "prov_9csb4dwb"
+        ],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 15,
+      "date": "2026-08-08T17:00:00Z",
+      "text": "Started working on the knowledge graph properly today. Entities, aliases, relationships, provenance... there's a lot going on.",
+      "fragmentId": "frag_015",
+      "contentHash": "0f0ed1f1430f40a5dcaa5ef57de3bf64ebfc6db622c7ac8dde62e7c4cbd8af4d",
+      "result": {
+        "fragmentId": "frag_015",
+        "entitiesExtracted": 1,
+        "entitiesResolved": 1,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [
+          {
+            "mention": "knowledge graph",
+            "entityType": "Topic",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_3zaq1yex",
+            "canonicalName": "knowledge graphs",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          }
+        ],
+        "graphRelationships": [],
+        "provenanceIds": [
+          "prov_yvzxdqmb"
+        ],
+        "executionTimeMs": 1
+      }
+    },
+    {
+      "entryId": 16,
+      "date": "2026-08-09T10:30:00Z",
+      "text": "Got confused between the project name and the actual topic today. Need to be careful about how these things are classified.",
+      "fragmentId": "frag_016",
+      "contentHash": "b4c427e617d7cb17d82d049f133099fa910b7dd7df4c4472660aae157f7ee5b7",
+      "result": {
+        "fragmentId": "frag_016",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 17,
+      "date": "2026-08-09T16:00:00Z",
+      "text": "Rahul mentioned that the resolver shouldn't confidently match two things just because their names look similar. That probably explains some of the weird results I was seeing.",
+      "fragmentId": "frag_017",
+      "contentHash": "93f2a595690455437ce84cac8461c6c009d097e201ca7b914ca8c1bfd517b9b8",
+      "result": {
+        "fragmentId": "frag_017",
+        "entitiesExtracted": 1,
+        "entitiesResolved": 1,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [
+          {
+            "mention": "Rahul",
+            "entityType": "Person",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_m9g8u1bh",
+            "canonicalName": "Rahul",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          }
+        ],
+        "graphRelationships": [],
+        "provenanceIds": [
+          "prov_kd78l6nb"
+        ],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 18,
+      "date": "2026-08-10T11:00:00Z",
+      "text": "Tried the resolver again with a few variations of the same name. Much better this time. The alias thing seems pretty useful.",
+      "fragmentId": "frag_018",
+      "contentHash": "d32cb859ab7ccb9eb76a99a0e6ad2548cba7894fef42639c59d73a894dc202bb",
+      "result": {
+        "fragmentId": "frag_018",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 19,
+      "date": "2026-08-10T15:30:00Z",
+      "text": "Worked on the API again. I keep saying I'm going to stop touching it and move on, and then I find one more thing that needs fixing.",
+      "fragmentId": "frag_019",
+      "contentHash": "ea5ae465aaff5b01911f4d732b93ed90a6a5eafd5b02b72c2206e8655c83a4b7",
+      "result": {
+        "fragmentId": "frag_019",
+        "entitiesExtracted": 1,
+        "entitiesResolved": 1,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [
+          {
+            "mention": "API",
+            "entityType": "Topic",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_nbrwvb7r",
+            "canonicalName": "API",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          }
+        ],
+        "graphRelationships": [],
+        "provenanceIds": [
+          "prov_ca49lo6d"
+        ],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 20,
+      "date": "2026-08-11T09:45:00Z",
+      "text": "Had a decent day today. Got the capture to memory to graph flow working end to end. It's not perfect, but at least there's finally a proper pipeline.",
+      "fragmentId": "frag_020",
+      "contentHash": "b897ddf2226c560168903e1d93d61d47eed1262057ed1dab91f5c89f05bf63c1",
+      "result": {
+        "fragmentId": "frag_020",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 21,
+      "date": "2026-08-11T16:15:00Z",
+      "text": "Didn't mention Rahul by name today but spoke to him about the backend. He suggested keeping the first version simple and testing it with real journal entries.",
+      "fragmentId": "frag_021",
+      "contentHash": "79f73ae762fbbf3ecbe9b0840fd5eddfe5595b38e8d8efd2f0a267c2c68c2aaf",
+      "result": {
+        "fragmentId": "frag_021",
+        "entitiesExtracted": 2,
+        "entitiesResolved": 2,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 1,
+        "resolvedEntities": [
+          {
+            "mention": "Rahul",
+            "entityType": "Person",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_m9g8u1bh",
+            "canonicalName": "Rahul",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          },
+          {
+            "mention": "backend",
+            "entityType": "Topic",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_z2zt5bg7",
+            "canonicalName": "backend",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          }
+        ],
+        "graphRelationships": [
+          {
+            "id": "rel_pw3qk1rz",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_m9g8u1bh",
+            "targetEntityId": "ent_z2zt5bg7",
+            "relationType": "MENTIONED_WITH",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_021",
+            "sourceMemoryId": "mem_021",
+            "sourceContentHash": "79f73ae762fbbf3ecbe9b0840fd5eddfe5595b38e8d8efd2f0a267c2c68c2aaf",
+            "extractionRunId": "mock_run_1137gz9",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:47:03.543Z",
+            "validAt": "2026-08-11T16:15:00.000Z",
+            "createdAt": "2026-09-02T12:47:03.543Z",
+            "updatedAt": "2026-09-02T12:47:03.543Z"
+          }
+        ],
+        "provenanceIds": [
+          "prov_66ltsgk9",
+          "prov_e79pwbsy"
+        ],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 22,
+      "date": "2026-08-12T10:00:00Z",
+      "text": "I'm going to do that. Instead of inventing more test cases, I want to see what happens when the system processes actual messy writing.",
+      "fragmentId": "frag_022",
+      "contentHash": "14b7b553404beab869971004ba078c47efcbcd3adadaced2cbcdca1bf9f314bd",
+      "result": {
+        "fragmentId": "frag_022",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 23,
+      "date": "2026-08-12T14:30:00Z",
+      "text": "Tested a few entries and noticed that some things are getting created twice. Need to check whether the resolver is failing or whether extraction itself is the problem.",
+      "fragmentId": "frag_023",
+      "contentHash": "2a661c567bbe4920c5aa17924fd8ffec84ba3415e8599deb4953267ba8cc341a",
+      "result": {
+        "fragmentId": "frag_023",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 24,
+      "date": "2026-08-13T11:00:00Z",
+      "text": "The duplicate problem seems to happen mostly when I describe the same thing differently. This is probably exactly what the alias system is supposed to help with.",
+      "fragmentId": "frag_024",
+      "contentHash": "c5fa359b539ed08f5973234492f2f37e5e41348aa563f40373dd33402f0d83c8",
+      "result": {
+        "fragmentId": "frag_024",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 1
+      }
+    },
+    {
+      "entryId": 25,
+      "date": "2026-08-13T17:00:00Z",
+      "text": "Took a break from coding and went for a walk. Came back with a much clearer idea of how the graph should work. Sometimes stepping away actually helps.",
+      "fragmentId": "frag_025",
+      "contentHash": "63fd7ee4f5322d257a40b968b50814d0cc8efc10b6c46636b831c3553bc7081e",
+      "result": {
+        "fragmentId": "frag_025",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 26,
+      "date": "2026-08-14T10:30:00Z",
+      "text": "Worked on the entity resolver again. I don't want it making aggressive guesses. If it's genuinely unsure, I'd rather have it say ambiguous than silently create the wrong connection.",
+      "fragmentId": "frag_026",
+      "contentHash": "3f83376bde8808bd434a5190fcc48a7631a4a6e3203beb91dfbc7a7361bcea60",
+      "result": {
+        "fragmentId": "frag_026",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 27,
+      "date": "2026-08-14T16:00:00Z",
+      "text": "The graph is starting to look useful. I can see the project, the people involved, the technical topics, and some of the things I've been working on repeatedly.",
+      "fragmentId": "frag_027",
+      "contentHash": "88f848f3f04df40391421c0cc613555dab1ed47db98dfbb9ac8b62ecb002e881",
+      "result": {
+        "fragmentId": "frag_027",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 28,
+      "date": "2026-08-15T11:30:00Z",
+      "text": "One thing I'm still worried about is all these mentioned-with relationships. Just because two things appear in the same journal entry doesn't necessarily mean they're actually related.",
+      "fragmentId": "frag_028",
+      "contentHash": "ff6907820ce97d245bb0159dacf9b22b694669ac0103199e2af291f65cc2fea8",
+      "result": {
+        "fragmentId": "frag_028",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 29,
+      "date": "2026-08-15T17:00:00Z",
+      "text": "I think the next real challenge is figuring out what the system can actually conclude from the graph without making things up. That's probably where the reasoning part comes in.",
+      "fragmentId": "frag_029",
+      "contentHash": "60f06cd4854f396ca9b765ebaae96b79045622199ab9886b2986e2f08fb83442",
+      "result": {
+        "fragmentId": "frag_029",
+        "entitiesExtracted": 0,
+        "entitiesResolved": 0,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 0,
+        "resolvedEntities": [],
+        "graphRelationships": [],
+        "provenanceIds": [],
+        "executionTimeMs": 0
+      }
+    },
+    {
+      "entryId": 30,
+      "date": "2026-08-16T10:00:00Z",
+      "text": "Looking back over the last few days, I've spent a ridiculous amount of time on backend and API problems. At least the system now has enough information to potentially notice patterns like that.",
+      "fragmentId": "frag_030",
+      "contentHash": "cc5426782a98ee24a47392d4d47a65607c0273e95c33fb46ae434bf5e20bc178",
+      "result": {
+        "fragmentId": "frag_030",
+        "entitiesExtracted": 2,
+        "entitiesResolved": 2,
+        "entitiesCreated": 0,
+        "entitiesAmbiguous": 0,
+        "relationshipsCreated": 1,
+        "resolvedEntities": [
+          {
+            "mention": "backend",
+            "entityType": "Topic",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_z2zt5bg7",
+            "canonicalName": "backend",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          },
+          {
+            "mention": "API",
+            "entityType": "Topic",
+            "outcome": "RESOLVED",
+            "canonicalId": "ent_nbrwvb7r",
+            "canonicalName": "API",
+            "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
+            "confidence": 1
+          }
+        ],
+        "graphRelationships": [
+          {
+            "id": "rel_tduw0nr1",
+            "userId": "00000000-0000-0000-0000-000000000001",
+            "sourceEntityId": "ent_z2zt5bg7",
+            "targetEntityId": "ent_nbrwvb7r",
+            "relationType": "MENTIONED_WITH",
+            "confidence": 1,
+            "evidenceCount": 1,
+            "sourceFragmentId": "frag_030",
+            "sourceMemoryId": "mem_030",
+            "sourceContentHash": "cc5426782a98ee24a47392d4d47a65607c0273e95c33fb46ae434bf5e20bc178",
+            "extractionRunId": "mock_run_4b30i41",
+            "status": "ACTIVE",
+            "assertedAt": "2026-09-02T12:47:03.544Z",
+            "validAt": "2026-08-16T10:00:00.000Z",
+            "createdAt": "2026-09-02T12:47:03.544Z",
+            "updatedAt": "2026-09-02T12:47:03.544Z"
+          }
+        ],
+        "provenanceIds": [
+          "prov_mifhciuo",
+          "prov_poyn82gy"
+        ],
+        "executionTimeMs": 0
+      }
+    }
+  ]
+}

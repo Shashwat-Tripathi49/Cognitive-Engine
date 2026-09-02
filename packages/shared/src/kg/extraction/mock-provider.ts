@@ -52,12 +52,23 @@ const DEFAULT_MOCK_ENTITIES: { pattern: RegExp; name: string; type: string }[] =
   { pattern: /\b(Himachal)\b/i, name: 'Himachal', type: 'Place' },
   { pattern: /\b(Kyoto)\b/i, name: 'Kyoto', type: 'Place' },
 
-  // Topics
+  // Topics & Technical Concepts
   { pattern: /\b(Vector\s+Search)\b/i, name: 'Vector Search', type: 'Topic' },
   { pattern: /\b(System\s+Design)\b/i, name: 'System Design', type: 'Topic' },
   { pattern: /\b(Distributed\s+Systems)\b/i, name: 'Distributed Systems', type: 'Topic' },
   { pattern: /\b(Quantitative\s+Aptitude)\b/i, name: 'Quantitative Aptitude', type: 'Topic' },
   { pattern: /\b(Machine\s+Learning)\b/i, name: 'Machine Learning', type: 'Topic' },
+  { pattern: /\b(knowledge\s+graphs?)\b/i, name: 'knowledge graph', type: 'Topic' },
+  { pattern: /\b(entity\s+resolution)\b/i, name: 'entity resolution', type: 'Topic' },
+  { pattern: /\b(entity\s+extraction)\b/i, name: 'entity extraction', type: 'Topic' },
+  { pattern: /\b(authentication|auth)\b/i, name: 'authentication', type: 'Topic' },
+  { pattern: /\b(middleware)\b/i, name: 'middleware', type: 'Topic' },
+  { pattern: /\b(backend\s+architecture)\b/i, name: 'backend architecture', type: 'Topic' },
+  { pattern: /\b(backend)\b/i, name: 'backend', type: 'Topic' },
+  { pattern: /\b(API\s+routes?)\b/i, name: 'API routes', type: 'Topic' },
+  { pattern: /\b(API)\b/i, name: 'API', type: 'Topic' },
+  { pattern: /\b(YouTube)\b/i, name: 'YouTube', type: 'Organization' },
+  { pattern: /\b\b(R)\b/i, name: 'R', type: 'Person' },
 
   // Goals
   { pattern: /\b(CAT\s+2026\s+Preparation)\b/i, name: 'CAT 2026 Preparation', type: 'Goal' },

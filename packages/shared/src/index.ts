@@ -3,6 +3,7 @@ export * from './db/index.js';
 export * from './capture/index.js';
 export * from './memory/index.js';
 export * from './kg/index.js';
+export * from './reasoning/index.js';
 
 /**
  * Common shared constants — Sprint 1C-B Baseline

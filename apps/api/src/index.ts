@@ -5,6 +5,7 @@ import { env, checkDatabaseHealth } from '@cognitive-engine/shared';
 import { captureRouter } from './routes/capture.js';
 import { memoryApp } from './routes/memory.js';
 import { graphRouter } from './routes/graph.js';
+import { reasoningRouter } from './routes/reasoning.js';
 
 const app = new Hono();
 
@@ -44,11 +45,12 @@ app.get('/health', async (c) => {
 });
 
 /**
- * Mount Routers — Sprint 1B, Sprint 1C-B & Knowledge Graph Engine
+ * Mount Routers — Sprint 1B, Sprint 1C-B, Knowledge Graph & Reasoning Engine
  */
 app.route('/capture', captureRouter);
 app.route('/memory', memoryApp);
 app.route('/graph', graphRouter);
+app.route('/reasoning', reasoningRouter);
 
 const port = env.PORT || 3001;
 

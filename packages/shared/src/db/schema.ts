@@ -3,6 +3,7 @@ import {
   uuid,
   text,
   varchar,
+  boolean,
   timestamp,
   jsonb,
   index,
@@ -329,4 +330,123 @@ export const kgRelationships = pgTable(
 
 export type KgRelationshipSelect = typeof kgRelationships.$inferSelect;
 export type KgRelationshipInsert = typeof kgRelationships.$inferInsert;
+
+/**
+ * Evidence Chains Table — Milestone 5 Reasoning Engine
+ *
+ * Machine-verifiable audit chains linking validated claims back to root cognitive fragments.
+ */
+export const evidenceChains = pgTable(
+  'evidence_chains',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id').notNull(),
+    findingId: varchar('finding_id', { length: 64 }).notNull(),
+    isVerified: boolean('is_verified').notNull().default(true),
+    chainIntegrityHash: varchar('chain_integrity_hash', { length: 64 }).notNull(),
+    rootFragmentIds: jsonb('root_fragment_ids').notNull().default([]),
+    ruleEvaluations: jsonb('rule_evaluations').notNull().default([]),
+    verificationTimestamp: timestamp('verification_timestamp', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    createdAt: timestamp('created_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    index('evidence_chains_user_id_idx').on(table.userId),
+    index('evidence_chains_finding_id_idx').on(table.userId, table.findingId),
+  ]
+);
+
+export type EvidenceChainSelect = typeof evidenceChains.$inferSelect;
+export type EvidenceChainInsert = typeof evidenceChains.$inferInsert;
+
+/**
+ * Evidence Objects Table — Milestone 5 Reasoning Engine
+ *
+ * Concrete atomic pieces of evidence backing an EvidenceChain.
+ */
+export const evidenceObjects = pgTable(
+  'evidence_objects',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id').notNull(),
+    chainId: uuid('chain_id')
+      .notNull()
+      .references(() => evidenceChains.id, { onDelete: 'cascade' }),
+    evidenceType: varchar('evidence_type', { length: 32 }).notNull(),
+    sourceId: uuid('source_id').notNull(),
+    sourceContentHash: varchar('source_content_hash', { length: 64 }),
+    sourceTimestamp: timestamp('source_timestamp', { mode: 'date', withTimezone: true }),
+    validFrom: timestamp('valid_from', { mode: 'date', withTimezone: true }),
+    validTo: timestamp('valid_to', { mode: 'date', withTimezone: true }),
+    summary: text('summary').notNull(),
+    verified: boolean('verified').notNull().default(true),
+    verificationDetails: text('verification_details'),
+    metadata: jsonb('metadata').notNull().default({}),
+    createdAt: timestamp('created_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    index('evidence_objects_user_id_idx').on(table.userId),
+    index('evidence_objects_chain_id_idx').on(table.chainId),
+    index('evidence_objects_source_id_idx').on(table.userId, table.sourceId),
+  ]
+);
+
+export type EvidenceObjectSelect = typeof evidenceObjects.$inferSelect;
+export type EvidenceObjectInsert = typeof evidenceObjects.$inferInsert;
+
+/**
+ * Validated Claims Table — Milestone 5 Reasoning Engine
+ *
+ * Final deterministic claims emitted by the Reasoning Engine, linked to an EvidenceChain.
+ */
+export const validatedClaims = pgTable(
+  'validated_claims',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id').notNull(),
+    sourceFindingId: varchar('source_finding_id', { length: 64 }).notNull(),
+    evidenceChainId: uuid('evidence_chain_id')
+      .notNull()
+      .references(() => evidenceChains.id, { onDelete: 'restrict' }),
+    claimType: varchar('claim_type', { length: 64 }).notNull(),
+    status: varchar('status', { length: 32 }).notNull(),
+    subjectEntityId: uuid('subject_entity_id'),
+    objectEntityId: uuid('object_entity_id'),
+    statement: text('statement').notNull(),
+    deterministicSupportScore: customType<{ data: number; driverData: number }>({
+      dataType() {
+        return 'real';
+      },
+    })('deterministic_support_score').notNull(),
+    appliedRuleIds: jsonb('applied_rule_ids').notNull().default([]),
+    passedRuleIds: jsonb('passed_rule_ids').notNull().default([]),
+    failedRuleIds: jsonb('failed_rule_ids').notNull().default([]),
+    rejectionReason: varchar('rejection_reason', { length: 128 }),
+    temporalStart: timestamp('temporal_start', { mode: 'date', withTimezone: true }).notNull(),
+    temporalEnd: timestamp('temporal_end', { mode: 'date', withTimezone: true }).notNull(),
+    reasoningVersion: varchar('reasoning_version', { length: 32 }).notNull().default('1.0.0'),
+    createdAt: timestamp('created_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    index('validated_claims_user_id_idx').on(table.userId),
+    index('validated_claims_status_idx').on(table.userId, table.status),
+    index('validated_claims_type_idx').on(table.userId, table.claimType),
+    index('validated_claims_chain_idx').on(table.evidenceChainId),
+    index('validated_claims_finding_idx').on(table.userId, table.sourceFindingId),
+  ]
+);
+
+export type ValidatedClaimSelect = typeof validatedClaims.$inferSelect;
+export type ValidatedClaimInsert = typeof validatedClaims.$inferInsert;
+
 

@@ -30,6 +30,10 @@
     "./kg": {
       "types": "./src/kg/index.ts",
       "default": "./src/kg/index.ts"
+    },
+    "./reasoning": {
+      "types": "./src/reasoning/index.ts",
+      "default": "./src/reasoning/index.ts"
     }
   },
   "scripts": {
