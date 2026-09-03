@@ -151,6 +151,22 @@ describe('Cognitive Engine Golden-Path Validation (30 Journal Entries Dataset)',
     expect(apiFinding!.deterministicMetrics.distinctFragmentCount).toBe(5);
     expect(apiFinding!.provenanceReferences.length).toBe(5);
 
+    // Negative case assertions: verify absence of unsupported finding types
+    const spuriousClusters = discoveryResult.findings.filter(
+      (f) => f.findingType === 'COGNITIVE_CLUSTER'
+    );
+    expect(spuriousClusters).toHaveLength(0);
+
+    const spuriousCollaborations = discoveryResult.findings.filter(
+      (f) => f.findingType === 'COLLABORATION_PATTERN'
+    );
+    expect(spuriousCollaborations).toHaveLength(0);
+
+    const spuriousDecisions = discoveryResult.findings.filter(
+      (f) => f.findingType === 'ARCHITECTURAL_DECISION'
+    );
+    expect(spuriousDecisions).toHaveLength(0);
+
     // 2. Validate Discovered Findings through Reasoning Engine
     const evalBackend = await reasoningEngine.evaluateFinding({
       userId,
