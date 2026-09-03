@@ -38,6 +38,10 @@
     "./cognitive": {
       "types": "./src/cognitive/index.ts",
       "default": "./src/cognitive/index.ts"
+    },
+    "./reflection": {
+      "types": "./src/reflection/index.ts",
+      "default": "./src/reflection/index.ts"
     }
   },
   "scripts": {

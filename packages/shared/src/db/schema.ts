@@ -495,5 +495,51 @@ export const candidateFindings = pgTable(
 export type CandidateFindingSelect = typeof candidateFindings.$inferSelect;
 export type CandidateFindingInsert = typeof candidateFindings.$inferInsert;
 
+// ============================================================================
+// 6. Reflection Engine: Reflections
+// ============================================================================
 
+/**
+ * Reflections Table — Milestone 7 Reflection Engine
+ *
+ * Persists grounded, validated linguistic explanations of validated claims with cryptographic lineage.
+ */
+export const reflections = pgTable(
+  'reflections',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id').notNull(),
+    sourceClaimId: uuid('source_claim_id')
+      .notNull()
+      .references(() => validatedClaims.id, { onDelete: 'restrict' }),
+    evidenceChainId: uuid('evidence_chain_id')
+      .notNull()
+      .references(() => evidenceChains.id, { onDelete: 'restrict' }),
+    reflectionType: varchar('reflection_type', { length: 64 }).notNull(),
+    text: text('text').notNull(),
+    structuredPropositions: jsonb('structured_propositions').notNull().default([]),
+    groundedSegments: jsonb('grounded_segments').notNull().default([]),
+    chainIntegrityHash: varchar('chain_integrity_hash', { length: 64 }).notNull(),
+    bundleIntegrityHash: varchar('bundle_integrity_hash', { length: 64 }).notNull(),
+    canonicalizationVersion: varchar('canonicalization_version', { length: 32 }).notNull().default('1.0.0'),
+    synthesisMethod: varchar('synthesis_method', { length: 32 }).notNull(), // 'LLM_CONSTRAINED' | 'DETERMINISTIC_FALLBACK'
+    engineVersion: varchar('engine_version', { length: 32 }).notNull().default('1.0.0'),
+    promptVersion: varchar('prompt_version', { length: 32 }).notNull().default('v1.0.0'),
+    modelInfo: jsonb('model_info').notNull().default({}),
+    validationDetails: jsonb('validation_details').notNull().default({}),
+    temporalStart: timestamp('temporal_start', { mode: 'date', withTimezone: true }).notNull(),
+    temporalEnd: timestamp('temporal_end', { mode: 'date', withTimezone: true }).notNull(),
+    createdAt: timestamp('created_at', { mode: 'date', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    index('reflections_user_id_idx').on(table.userId),
+    index('reflections_claim_idx').on(table.sourceClaimId),
+    index('reflections_chain_idx').on(table.evidenceChainId),
+    index('reflections_created_at_idx').on(table.userId, table.createdAt),
+  ]
+);
 
+export type ReflectionSelect = typeof reflections.$inferSelect;
+export type ReflectionInsert = typeof reflections.$inferInsert;
