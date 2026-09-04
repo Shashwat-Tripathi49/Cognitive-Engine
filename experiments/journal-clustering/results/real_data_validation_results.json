@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "timestamp": "2026-09-02T12:47:03.545Z",
+    "timestamp": "2026-09-04T09:58:30.536Z",
     "totalEntries": 30,
     "operatingPoint": {
       "stringThreshold": 0.85,
@@ -23,424 +23,424 @@
   },
   "canonicalEntities": [
     {
-      "id": "ent_h2hohmtz",
+      "id": "ent_z52w0wq2",
       "userId": "00000000-0000-0000-0000-000000000001",
       "canonicalName": "API routes",
       "entityType": "Topic",
       "status": "ACTIVE",
-      "currentCanonicalId": "ent_h2hohmtz",
+      "currentCanonicalId": "ent_z52w0wq2",
       "description": null,
       "aliases": [
         "API routes"
       ],
-      "createdAt": "2026-09-02T12:47:03.542Z",
-      "updatedAt": "2026-09-02T12:47:03.542Z"
+      "createdAt": "2026-09-04T09:58:30.533Z",
+      "updatedAt": "2026-09-04T09:58:30.533Z"
     },
     {
-      "id": "ent_b0jr8p5x",
+      "id": "ent_5746o21t",
       "userId": "00000000-0000-0000-0000-000000000001",
       "canonicalName": "entity extraction",
       "entityType": "Topic",
       "status": "ACTIVE",
-      "currentCanonicalId": "ent_b0jr8p5x",
+      "currentCanonicalId": "ent_5746o21t",
       "description": null,
       "aliases": [
         "entity extraction"
       ],
-      "createdAt": "2026-09-02T12:47:03.541Z",
-      "updatedAt": "2026-09-02T12:47:03.541Z"
+      "createdAt": "2026-09-04T09:58:30.532Z",
+      "updatedAt": "2026-09-04T09:58:30.532Z"
     },
     {
-      "id": "ent_2vshowu7",
+      "id": "ent_1xn68e3d",
       "userId": "00000000-0000-0000-0000-000000000001",
       "canonicalName": "backend architecture",
       "entityType": "Topic",
       "status": "ACTIVE",
-      "currentCanonicalId": "ent_2vshowu7",
+      "currentCanonicalId": "ent_1xn68e3d",
       "description": null,
       "aliases": [
         "backend architecture"
       ],
-      "createdAt": "2026-09-02T12:47:03.541Z",
-      "updatedAt": "2026-09-02T12:47:03.541Z"
+      "createdAt": "2026-09-04T09:58:30.532Z",
+      "updatedAt": "2026-09-04T09:58:30.532Z"
     },
     {
-      "id": "ent_7uuk4thn",
+      "id": "ent_o87iy8xe",
       "userId": "00000000-0000-0000-0000-000000000001",
       "canonicalName": "entity resolution",
       "entityType": "Topic",
       "status": "ACTIVE",
-      "currentCanonicalId": "ent_7uuk4thn",
+      "currentCanonicalId": "ent_o87iy8xe",
       "description": null,
       "aliases": [
         "entity resolution"
       ],
-      "createdAt": "2026-09-02T12:47:01.862Z",
-      "updatedAt": "2026-09-02T12:47:01.862Z"
+      "createdAt": "2026-09-04T09:58:29.152Z",
+      "updatedAt": "2026-09-04T09:58:29.152Z"
     },
     {
-      "id": "ent_3zaq1yex",
+      "id": "ent_8tuhhcy1",
       "userId": "00000000-0000-0000-0000-000000000001",
       "canonicalName": "knowledge graphs",
       "entityType": "Topic",
       "status": "ACTIVE",
-      "currentCanonicalId": "ent_3zaq1yex",
+      "currentCanonicalId": "ent_8tuhhcy1",
       "description": null,
       "aliases": [
         "knowledge graphs",
         "knowledge graph"
       ],
-      "createdAt": "2026-09-02T12:47:00.377Z",
-      "updatedAt": "2026-09-02T12:47:00.377Z"
+      "createdAt": "2026-09-04T09:58:27.996Z",
+      "updatedAt": "2026-09-04T09:58:27.996Z"
     },
     {
-      "id": "ent_2yhf22mb",
+      "id": "ent_1tieuqrb",
       "userId": "00000000-0000-0000-0000-000000000001",
       "canonicalName": "Cognitive Engine",
       "entityType": "Project",
       "status": "ACTIVE",
-      "currentCanonicalId": "ent_2yhf22mb",
+      "currentCanonicalId": "ent_1tieuqrb",
       "description": null,
       "aliases": [
         "Cognitive Engine"
       ],
-      "createdAt": "2026-09-02T12:46:59.075Z",
-      "updatedAt": "2026-09-02T12:46:59.075Z"
+      "createdAt": "2026-09-04T09:58:27.027Z",
+      "updatedAt": "2026-09-04T09:58:27.027Z"
     },
     {
-      "id": "ent_ll3m9vay",
+      "id": "ent_nbvc4xms",
       "userId": "00000000-0000-0000-0000-000000000001",
       "canonicalName": "middleware",
       "entityType": "Topic",
       "status": "ACTIVE",
-      "currentCanonicalId": "ent_ll3m9vay",
+      "currentCanonicalId": "ent_nbvc4xms",
       "description": null,
       "aliases": [
         "middleware"
       ],
-      "createdAt": "2026-09-02T12:46:57.688Z",
-      "updatedAt": "2026-09-02T12:46:57.688Z"
+      "createdAt": "2026-09-04T09:58:25.959Z",
+      "updatedAt": "2026-09-04T09:58:25.959Z"
     },
     {
-      "id": "ent_fk5hqn2u",
+      "id": "ent_l82h9rp5",
       "userId": "00000000-0000-0000-0000-000000000001",
       "canonicalName": "authentication",
       "entityType": "Topic",
       "status": "ACTIVE",
-      "currentCanonicalId": "ent_fk5hqn2u",
+      "currentCanonicalId": "ent_l82h9rp5",
       "description": null,
       "aliases": [
         "authentication"
       ],
-      "createdAt": "2026-09-02T12:46:56.487Z",
-      "updatedAt": "2026-09-02T12:46:56.487Z"
+      "createdAt": "2026-09-04T09:58:25.222Z",
+      "updatedAt": "2026-09-04T09:58:25.222Z"
     },
     {
-      "id": "ent_7u2oqmmk",
+      "id": "ent_x2mhgoyl",
       "userId": "00000000-0000-0000-0000-000000000001",
       "canonicalName": "YouTube",
       "entityType": "Organization",
       "status": "ACTIVE",
-      "currentCanonicalId": "ent_7u2oqmmk",
+      "currentCanonicalId": "ent_x2mhgoyl",
       "description": null,
       "aliases": [
         "YouTube"
       ],
-      "createdAt": "2026-09-02T12:46:55.832Z",
-      "updatedAt": "2026-09-02T12:46:55.832Z"
+      "createdAt": "2026-09-04T09:58:24.670Z",
+      "updatedAt": "2026-09-04T09:58:24.670Z"
     },
     {
-      "id": "ent_nbrwvb7r",
+      "id": "ent_vo415shh",
       "userId": "00000000-0000-0000-0000-000000000001",
       "canonicalName": "API",
       "entityType": "Topic",
       "status": "ACTIVE",
-      "currentCanonicalId": "ent_nbrwvb7r",
+      "currentCanonicalId": "ent_vo415shh",
       "description": null,
       "aliases": [
         "API"
       ],
-      "createdAt": "2026-09-02T12:46:55.707Z",
-      "updatedAt": "2026-09-02T12:46:55.707Z"
+      "createdAt": "2026-09-04T09:58:24.572Z",
+      "updatedAt": "2026-09-04T09:58:24.572Z"
     },
     {
-      "id": "ent_z2zt5bg7",
+      "id": "ent_iypxff1i",
       "userId": "00000000-0000-0000-0000-000000000001",
       "canonicalName": "backend",
       "entityType": "Topic",
       "status": "ACTIVE",
-      "currentCanonicalId": "ent_z2zt5bg7",
+      "currentCanonicalId": "ent_iypxff1i",
       "description": null,
       "aliases": [
         "backend"
       ],
-      "createdAt": "2026-09-02T12:46:55.294Z",
-      "updatedAt": "2026-09-02T12:46:55.294Z"
+      "createdAt": "2026-09-04T09:58:24.235Z",
+      "updatedAt": "2026-09-04T09:58:24.235Z"
     },
     {
-      "id": "ent_m9g8u1bh",
+      "id": "ent_8dec29vg",
       "userId": "00000000-0000-0000-0000-000000000001",
       "canonicalName": "Rahul",
       "entityType": "Person",
       "status": "ACTIVE",
-      "currentCanonicalId": "ent_m9g8u1bh",
+      "currentCanonicalId": "ent_8dec29vg",
       "description": null,
       "aliases": [
         "Rahul"
       ],
-      "createdAt": "2026-09-02T12:46:55.142Z",
-      "updatedAt": "2026-09-02T12:46:55.142Z"
+      "createdAt": "2026-09-04T09:58:24.117Z",
+      "updatedAt": "2026-09-04T09:58:24.117Z"
     }
   ],
   "relationships": [
     {
-      "id": "rel_k60o9chg",
+      "id": "rel_blv8yy4p",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_m9g8u1bh",
-      "targetEntityId": "ent_z2zt5bg7",
+      "sourceEntityId": "ent_8dec29vg",
+      "targetEntityId": "ent_iypxff1i",
       "relationType": "MENTIONED_WITH",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_001",
       "sourceMemoryId": "mem_001",
       "sourceContentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
-      "extractionRunId": "mock_run_u3jfd9q",
+      "extractionRunId": "mock_run_0fv81a6",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:46:48.406Z",
+      "assertedAt": "2026-09-04T09:58:23.675Z",
       "validAt": "2026-08-01T09:30:00.000Z",
-      "createdAt": "2026-09-02T12:46:55.707Z",
-      "updatedAt": "2026-09-02T12:46:55.707Z"
+      "createdAt": "2026-09-04T09:58:24.572Z",
+      "updatedAt": "2026-09-04T09:58:24.572Z"
     },
     {
-      "id": "rel_5dkpizdk",
+      "id": "rel_1iusl1yh",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_m9g8u1bh",
-      "targetEntityId": "ent_nbrwvb7r",
+      "sourceEntityId": "ent_8dec29vg",
+      "targetEntityId": "ent_vo415shh",
       "relationType": "MENTIONED_WITH",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_001",
       "sourceMemoryId": "mem_001",
       "sourceContentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
-      "extractionRunId": "mock_run_u3jfd9q",
+      "extractionRunId": "mock_run_0fv81a6",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:46:48.406Z",
+      "assertedAt": "2026-09-04T09:58:23.675Z",
       "validAt": "2026-08-01T09:30:00.000Z",
-      "createdAt": "2026-09-02T12:46:55.707Z",
-      "updatedAt": "2026-09-02T12:46:55.707Z"
+      "createdAt": "2026-09-04T09:58:24.572Z",
+      "updatedAt": "2026-09-04T09:58:24.572Z"
     },
     {
-      "id": "rel_qcbhzzeq",
+      "id": "rel_1sjs0pnr",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_z2zt5bg7",
-      "targetEntityId": "ent_nbrwvb7r",
+      "sourceEntityId": "ent_iypxff1i",
+      "targetEntityId": "ent_vo415shh",
       "relationType": "MENTIONED_WITH",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_001",
       "sourceMemoryId": "mem_001",
       "sourceContentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
-      "extractionRunId": "mock_run_u3jfd9q",
+      "extractionRunId": "mock_run_0fv81a6",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:46:48.406Z",
+      "assertedAt": "2026-09-04T09:58:23.675Z",
       "validAt": "2026-08-01T09:30:00.000Z",
-      "createdAt": "2026-09-02T12:46:55.707Z",
-      "updatedAt": "2026-09-02T12:46:55.707Z"
+      "createdAt": "2026-09-04T09:58:24.572Z",
+      "updatedAt": "2026-09-04T09:58:24.572Z"
     },
     {
-      "id": "rel_cv2rv6cq",
+      "id": "rel_6btmaamp",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_z2zt5bg7",
-      "targetEntityId": "ent_7u2oqmmk",
+      "sourceEntityId": "ent_iypxff1i",
+      "targetEntityId": "ent_x2mhgoyl",
       "relationType": "BELONGS_TO",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_002",
       "sourceMemoryId": "mem_002",
       "sourceContentHash": "84f8eda10fa2bd6f098f77686b2a8776c644d4a47b33c42f0f326fa784c684dd",
-      "extractionRunId": "mock_run_4roqi9d",
+      "extractionRunId": "mock_run_92bfn4y",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:46:55.707Z",
+      "assertedAt": "2026-09-04T09:58:24.572Z",
       "validAt": "2026-08-01T14:00:00.000Z",
-      "createdAt": "2026-09-02T12:46:55.832Z",
-      "updatedAt": "2026-09-02T12:46:55.832Z"
+      "createdAt": "2026-09-04T09:58:24.670Z",
+      "updatedAt": "2026-09-04T09:58:24.670Z"
     },
     {
-      "id": "rel_17b2h8so",
+      "id": "rel_ljsr2fm7",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_fk5hqn2u",
-      "targetEntityId": "ent_ll3m9vay",
+      "sourceEntityId": "ent_l82h9rp5",
+      "targetEntityId": "ent_nbvc4xms",
       "relationType": "MENTIONED_WITH",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_003",
       "sourceMemoryId": "mem_003",
       "sourceContentHash": "0994a54f61ba4a679f87106d74fb27d4723b140f128edf13b6887192c239d186",
-      "extractionRunId": "mock_run_wyxzaa9",
+      "extractionRunId": "mock_run_5bxafcw",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:46:55.832Z",
+      "assertedAt": "2026-09-04T09:58:24.670Z",
       "validAt": "2026-08-02T10:15:00.000Z",
-      "createdAt": "2026-09-02T12:46:57.688Z",
-      "updatedAt": "2026-09-02T12:46:57.688Z"
+      "createdAt": "2026-09-04T09:58:25.959Z",
+      "updatedAt": "2026-09-04T09:58:25.959Z"
     },
     {
-      "id": "rel_tj1ge6y9",
+      "id": "rel_ulq0twfk",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_ll3m9vay",
-      "targetEntityId": "ent_nbrwvb7r",
+      "sourceEntityId": "ent_nbvc4xms",
+      "targetEntityId": "ent_vo415shh",
       "relationType": "MENTIONED_WITH",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_004",
       "sourceMemoryId": "mem_004",
       "sourceContentHash": "a9d215872d4f0e251ada6c80b1bf0b34a526fb2f7b52397b78bd35dd576669b4",
-      "extractionRunId": "mock_run_jkcqwal",
+      "extractionRunId": "mock_run_xsglmt5",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:46:57.688Z",
+      "assertedAt": "2026-09-04T09:58:25.960Z",
       "validAt": "2026-08-02T16:45:00.000Z",
-      "createdAt": "2026-09-02T12:46:58.959Z",
-      "updatedAt": "2026-09-02T12:46:58.959Z"
+      "createdAt": "2026-09-04T09:58:26.929Z",
+      "updatedAt": "2026-09-04T09:58:26.929Z"
     },
     {
-      "id": "rel_fwneidat",
+      "id": "rel_t960h3wi",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_m9g8u1bh",
-      "targetEntityId": "ent_2yhf22mb",
+      "sourceEntityId": "ent_8dec29vg",
+      "targetEntityId": "ent_1tieuqrb",
       "relationType": "WORKED_ON",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_006",
       "sourceMemoryId": "mem_006",
       "sourceContentHash": "6e8e07f2ec456f3cf5a9a2214a3da7f848fa60f4e893110b005f5187a95040ac",
-      "extractionRunId": "mock_run_zs27uj5",
+      "extractionRunId": "mock_run_ofxz15f",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:46:59.076Z",
+      "assertedAt": "2026-09-04T09:58:27.027Z",
       "validAt": "2026-08-03T17:30:00.000Z",
-      "createdAt": "2026-09-02T12:46:59.076Z",
-      "updatedAt": "2026-09-02T12:46:59.076Z"
+      "createdAt": "2026-09-04T09:58:27.027Z",
+      "updatedAt": "2026-09-04T09:58:27.027Z"
     },
     {
-      "id": "rel_mlctgpy6",
+      "id": "rel_sx17n7dl",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_m9g8u1bh",
-      "targetEntityId": "ent_2vshowu7",
+      "sourceEntityId": "ent_8dec29vg",
+      "targetEntityId": "ent_1xn68e3d",
       "relationType": "MENTIONED_WITH",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_011",
       "sourceMemoryId": "mem_011",
       "sourceContentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
-      "extractionRunId": "mock_run_483mgj3",
+      "extractionRunId": "mock_run_25prpp6",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:47:03.541Z",
+      "assertedAt": "2026-09-04T09:58:30.532Z",
       "validAt": "2026-08-06T16:00:00.000Z",
-      "createdAt": "2026-09-02T12:47:03.541Z",
-      "updatedAt": "2026-09-02T12:47:03.541Z"
+      "createdAt": "2026-09-04T09:58:30.532Z",
+      "updatedAt": "2026-09-04T09:58:30.532Z"
     },
     {
-      "id": "rel_kq72blhf",
+      "id": "rel_1t54tf6d",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_m9g8u1bh",
-      "targetEntityId": "ent_z2zt5bg7",
+      "sourceEntityId": "ent_8dec29vg",
+      "targetEntityId": "ent_iypxff1i",
       "relationType": "MENTIONED_WITH",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_011",
       "sourceMemoryId": "mem_011",
       "sourceContentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
-      "extractionRunId": "mock_run_483mgj3",
+      "extractionRunId": "mock_run_25prpp6",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:47:03.541Z",
+      "assertedAt": "2026-09-04T09:58:30.532Z",
       "validAt": "2026-08-06T16:00:00.000Z",
-      "createdAt": "2026-09-02T12:47:03.541Z",
-      "updatedAt": "2026-09-02T12:47:03.541Z"
+      "createdAt": "2026-09-04T09:58:30.532Z",
+      "updatedAt": "2026-09-04T09:58:30.532Z"
     },
     {
-      "id": "rel_gerz0eri",
+      "id": "rel_3760b7g4",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_2vshowu7",
-      "targetEntityId": "ent_z2zt5bg7",
+      "sourceEntityId": "ent_1xn68e3d",
+      "targetEntityId": "ent_iypxff1i",
       "relationType": "MENTIONED_WITH",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_011",
       "sourceMemoryId": "mem_011",
       "sourceContentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
-      "extractionRunId": "mock_run_483mgj3",
+      "extractionRunId": "mock_run_25prpp6",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:47:03.541Z",
+      "assertedAt": "2026-09-04T09:58:30.532Z",
       "validAt": "2026-08-06T16:00:00.000Z",
-      "createdAt": "2026-09-02T12:47:03.541Z",
-      "updatedAt": "2026-09-02T12:47:03.541Z"
+      "createdAt": "2026-09-04T09:58:30.532Z",
+      "updatedAt": "2026-09-04T09:58:30.532Z"
     },
     {
-      "id": "rel_iw6b5efo",
+      "id": "rel_8nz64ulr",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_h2hohmtz",
-      "targetEntityId": "ent_nbrwvb7r",
+      "sourceEntityId": "ent_z52w0wq2",
+      "targetEntityId": "ent_vo415shh",
       "relationType": "MENTIONED_WITH",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_013",
       "sourceMemoryId": "mem_013",
       "sourceContentHash": "a5136b3f22fba98133cbeb5f02d2faaa6015f498f58281ce564efa581df1bc39",
-      "extractionRunId": "mock_run_dc2m9ea",
+      "extractionRunId": "mock_run_y5lm3q7",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:47:03.542Z",
+      "assertedAt": "2026-09-04T09:58:30.533Z",
       "validAt": "2026-08-07T14:45:00.000Z",
-      "createdAt": "2026-09-02T12:47:03.542Z",
-      "updatedAt": "2026-09-02T12:47:03.542Z"
+      "createdAt": "2026-09-04T09:58:30.533Z",
+      "updatedAt": "2026-09-04T09:58:30.533Z"
     },
     {
-      "id": "rel_pw3qk1rz",
+      "id": "rel_smd1uv9l",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_m9g8u1bh",
-      "targetEntityId": "ent_z2zt5bg7",
+      "sourceEntityId": "ent_8dec29vg",
+      "targetEntityId": "ent_iypxff1i",
       "relationType": "MENTIONED_WITH",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_021",
       "sourceMemoryId": "mem_021",
       "sourceContentHash": "79f73ae762fbbf3ecbe9b0840fd5eddfe5595b38e8d8efd2f0a267c2c68c2aaf",
-      "extractionRunId": "mock_run_1137gz9",
+      "extractionRunId": "mock_run_0593ep2",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:47:03.543Z",
+      "assertedAt": "2026-09-04T09:58:30.534Z",
       "validAt": "2026-08-11T16:15:00.000Z",
-      "createdAt": "2026-09-02T12:47:03.543Z",
-      "updatedAt": "2026-09-02T12:47:03.543Z"
+      "createdAt": "2026-09-04T09:58:30.534Z",
+      "updatedAt": "2026-09-04T09:58:30.534Z"
     },
     {
-      "id": "rel_tduw0nr1",
+      "id": "rel_z3diwzcg",
       "userId": "00000000-0000-0000-0000-000000000001",
-      "sourceEntityId": "ent_z2zt5bg7",
-      "targetEntityId": "ent_nbrwvb7r",
+      "sourceEntityId": "ent_iypxff1i",
+      "targetEntityId": "ent_vo415shh",
       "relationType": "MENTIONED_WITH",
       "confidence": 1,
       "evidenceCount": 1,
       "sourceFragmentId": "frag_030",
       "sourceMemoryId": "mem_030",
       "sourceContentHash": "cc5426782a98ee24a47392d4d47a65607c0273e95c33fb46ae434bf5e20bc178",
-      "extractionRunId": "mock_run_4b30i41",
+      "extractionRunId": "mock_run_0ag5f4z",
       "status": "ACTIVE",
-      "assertedAt": "2026-09-02T12:47:03.544Z",
+      "assertedAt": "2026-09-04T09:58:30.535Z",
       "validAt": "2026-08-16T10:00:00.000Z",
-      "createdAt": "2026-09-02T12:47:03.544Z",
-      "updatedAt": "2026-09-02T12:47:03.544Z"
+      "createdAt": "2026-09-04T09:58:30.535Z",
+      "updatedAt": "2026-09-04T09:58:30.535Z"
     }
   ],
   "pendingCandidates": [
     {
-      "id": "cand_9am5qjoh",
+      "id": "cand_eet05kds",
       "userId": "00000000-0000-0000-0000-000000000001",
       "surfaceMention": "auth",
       "entityType": "Topic",
-      "suggestedCanonicalId": "ent_fk5hqn2u",
+      "suggestedCanonicalId": "ent_l82h9rp5",
       "similarityScore": 0.8315489148401938,
       "sourceMemoryId": "mem_004",
       "sourceFragmentId": "frag_004",
       "status": "PENDING",
-      "createdAt": "2026-09-02T12:46:58.958Z",
-      "updatedAt": "2026-09-02T12:46:58.958Z"
+      "createdAt": "2026-09-04T09:58:26.929Z",
+      "updatedAt": "2026-09-04T09:58:26.929Z"
     }
   ],
   "fragmentExecutionLogs": [
@@ -462,7 +462,7 @@
             "mention": "Rahul",
             "entityType": "Person",
             "outcome": "NO_MATCH",
-            "canonicalId": "ent_m9g8u1bh",
+            "canonicalId": "ent_8dec29vg",
             "canonicalName": "Rahul",
             "resolutionMethod": "L8_DEFAULT_FALLBACK",
             "confidence": 0
@@ -471,7 +471,7 @@
             "mention": "backend",
             "entityType": "Topic",
             "outcome": "NO_MATCH",
-            "canonicalId": "ent_z2zt5bg7",
+            "canonicalId": "ent_iypxff1i",
             "canonicalName": "backend",
             "resolutionMethod": "L8_DEFAULT_FALLBACK",
             "confidence": 0
@@ -480,7 +480,7 @@
             "mention": "API",
             "entityType": "Topic",
             "outcome": "NO_MATCH",
-            "canonicalId": "ent_nbrwvb7r",
+            "canonicalId": "ent_vo415shh",
             "canonicalName": "API",
             "resolutionMethod": "L8_DEFAULT_FALLBACK",
             "confidence": 0
@@ -488,66 +488,66 @@
         ],
         "graphRelationships": [
           {
-            "id": "rel_k60o9chg",
+            "id": "rel_blv8yy4p",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_m9g8u1bh",
-            "targetEntityId": "ent_z2zt5bg7",
+            "sourceEntityId": "ent_8dec29vg",
+            "targetEntityId": "ent_iypxff1i",
             "relationType": "MENTIONED_WITH",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_001",
             "sourceMemoryId": "mem_001",
             "sourceContentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
-            "extractionRunId": "mock_run_u3jfd9q",
+            "extractionRunId": "mock_run_0fv81a6",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:46:48.406Z",
+            "assertedAt": "2026-09-04T09:58:23.675Z",
             "validAt": "2026-08-01T09:30:00.000Z",
-            "createdAt": "2026-09-02T12:46:55.707Z",
-            "updatedAt": "2026-09-02T12:46:55.707Z"
+            "createdAt": "2026-09-04T09:58:24.572Z",
+            "updatedAt": "2026-09-04T09:58:24.572Z"
           },
           {
-            "id": "rel_5dkpizdk",
+            "id": "rel_1iusl1yh",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_m9g8u1bh",
-            "targetEntityId": "ent_nbrwvb7r",
+            "sourceEntityId": "ent_8dec29vg",
+            "targetEntityId": "ent_vo415shh",
             "relationType": "MENTIONED_WITH",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_001",
             "sourceMemoryId": "mem_001",
             "sourceContentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
-            "extractionRunId": "mock_run_u3jfd9q",
+            "extractionRunId": "mock_run_0fv81a6",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:46:48.406Z",
+            "assertedAt": "2026-09-04T09:58:23.675Z",
             "validAt": "2026-08-01T09:30:00.000Z",
-            "createdAt": "2026-09-02T12:46:55.707Z",
-            "updatedAt": "2026-09-02T12:46:55.707Z"
+            "createdAt": "2026-09-04T09:58:24.572Z",
+            "updatedAt": "2026-09-04T09:58:24.572Z"
           },
           {
-            "id": "rel_qcbhzzeq",
+            "id": "rel_1sjs0pnr",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_z2zt5bg7",
-            "targetEntityId": "ent_nbrwvb7r",
+            "sourceEntityId": "ent_iypxff1i",
+            "targetEntityId": "ent_vo415shh",
             "relationType": "MENTIONED_WITH",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_001",
             "sourceMemoryId": "mem_001",
             "sourceContentHash": "fa2e9d47de17b56ac59bd02b7be6e1e04d4339071e7bf7203498abf7a3fef13c",
-            "extractionRunId": "mock_run_u3jfd9q",
+            "extractionRunId": "mock_run_0fv81a6",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:46:48.406Z",
+            "assertedAt": "2026-09-04T09:58:23.675Z",
             "validAt": "2026-08-01T09:30:00.000Z",
-            "createdAt": "2026-09-02T12:46:55.707Z",
-            "updatedAt": "2026-09-02T12:46:55.707Z"
+            "createdAt": "2026-09-04T09:58:24.572Z",
+            "updatedAt": "2026-09-04T09:58:24.572Z"
           }
         ],
         "provenanceIds": [
-          "prov_wecx0405",
-          "prov_8pxe1l6b",
-          "prov_gbo7gqmc"
+          "prov_zyc7zxeo",
+          "prov_40jip5i2",
+          "prov_cj8ivtnl"
         ],
-        "executionTimeMs": 7301
+        "executionTimeMs": 897
       }
     },
     {
@@ -568,7 +568,7 @@
             "mention": "backend",
             "entityType": "Topic",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_z2zt5bg7",
+            "canonicalId": "ent_iypxff1i",
             "canonicalName": "backend",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -577,7 +577,7 @@
             "mention": "YouTube",
             "entityType": "Organization",
             "outcome": "NO_MATCH",
-            "canonicalId": "ent_7u2oqmmk",
+            "canonicalId": "ent_x2mhgoyl",
             "canonicalName": "YouTube",
             "resolutionMethod": "L8_DEFAULT_FALLBACK",
             "confidence": 0
@@ -585,29 +585,29 @@
         ],
         "graphRelationships": [
           {
-            "id": "rel_cv2rv6cq",
+            "id": "rel_6btmaamp",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_z2zt5bg7",
-            "targetEntityId": "ent_7u2oqmmk",
+            "sourceEntityId": "ent_iypxff1i",
+            "targetEntityId": "ent_x2mhgoyl",
             "relationType": "BELONGS_TO",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_002",
             "sourceMemoryId": "mem_002",
             "sourceContentHash": "84f8eda10fa2bd6f098f77686b2a8776c644d4a47b33c42f0f326fa784c684dd",
-            "extractionRunId": "mock_run_4roqi9d",
+            "extractionRunId": "mock_run_92bfn4y",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:46:55.707Z",
+            "assertedAt": "2026-09-04T09:58:24.572Z",
             "validAt": "2026-08-01T14:00:00.000Z",
-            "createdAt": "2026-09-02T12:46:55.832Z",
-            "updatedAt": "2026-09-02T12:46:55.832Z"
+            "createdAt": "2026-09-04T09:58:24.670Z",
+            "updatedAt": "2026-09-04T09:58:24.670Z"
           }
         ],
         "provenanceIds": [
-          "prov_npg649le",
-          "prov_sevb3gnl"
+          "prov_kpm4s0ln",
+          "prov_e4ob9n3r"
         ],
-        "executionTimeMs": 125
+        "executionTimeMs": 98
       }
     },
     {
@@ -628,7 +628,7 @@
             "mention": "authentication",
             "entityType": "Topic",
             "outcome": "NO_MATCH",
-            "canonicalId": "ent_fk5hqn2u",
+            "canonicalId": "ent_l82h9rp5",
             "canonicalName": "authentication",
             "resolutionMethod": "L8_DEFAULT_FALLBACK",
             "confidence": 0
@@ -637,7 +637,7 @@
             "mention": "middleware",
             "entityType": "Topic",
             "outcome": "NO_MATCH",
-            "canonicalId": "ent_ll3m9vay",
+            "canonicalId": "ent_nbvc4xms",
             "canonicalName": "middleware",
             "resolutionMethod": "L8_DEFAULT_FALLBACK",
             "confidence": 0
@@ -645,29 +645,29 @@
         ],
         "graphRelationships": [
           {
-            "id": "rel_17b2h8so",
+            "id": "rel_ljsr2fm7",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_fk5hqn2u",
-            "targetEntityId": "ent_ll3m9vay",
+            "sourceEntityId": "ent_l82h9rp5",
+            "targetEntityId": "ent_nbvc4xms",
             "relationType": "MENTIONED_WITH",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_003",
             "sourceMemoryId": "mem_003",
             "sourceContentHash": "0994a54f61ba4a679f87106d74fb27d4723b140f128edf13b6887192c239d186",
-            "extractionRunId": "mock_run_wyxzaa9",
+            "extractionRunId": "mock_run_5bxafcw",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:46:55.832Z",
+            "assertedAt": "2026-09-04T09:58:24.670Z",
             "validAt": "2026-08-02T10:15:00.000Z",
-            "createdAt": "2026-09-02T12:46:57.688Z",
-            "updatedAt": "2026-09-02T12:46:57.688Z"
+            "createdAt": "2026-09-04T09:58:25.959Z",
+            "updatedAt": "2026-09-04T09:58:25.959Z"
           }
         ],
         "provenanceIds": [
-          "prov_ay77vvnk",
-          "prov_4bllbzu5"
+          "prov_yx0gsvie",
+          "prov_2umew7x4"
         ],
-        "executionTimeMs": 1856
+        "executionTimeMs": 1289
       }
     },
     {
@@ -695,7 +695,7 @@
             "mention": "middleware",
             "entityType": "Topic",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_ll3m9vay",
+            "canonicalId": "ent_nbvc4xms",
             "canonicalName": "middleware",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -704,7 +704,7 @@
             "mention": "API",
             "entityType": "Topic",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_nbrwvb7r",
+            "canonicalId": "ent_vo415shh",
             "canonicalName": "API",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -712,30 +712,30 @@
         ],
         "graphRelationships": [
           {
-            "id": "rel_tj1ge6y9",
+            "id": "rel_ulq0twfk",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_ll3m9vay",
-            "targetEntityId": "ent_nbrwvb7r",
+            "sourceEntityId": "ent_nbvc4xms",
+            "targetEntityId": "ent_vo415shh",
             "relationType": "MENTIONED_WITH",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_004",
             "sourceMemoryId": "mem_004",
             "sourceContentHash": "a9d215872d4f0e251ada6c80b1bf0b34a526fb2f7b52397b78bd35dd576669b4",
-            "extractionRunId": "mock_run_jkcqwal",
+            "extractionRunId": "mock_run_xsglmt5",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:46:57.688Z",
+            "assertedAt": "2026-09-04T09:58:25.960Z",
             "validAt": "2026-08-02T16:45:00.000Z",
-            "createdAt": "2026-09-02T12:46:58.959Z",
-            "updatedAt": "2026-09-02T12:46:58.959Z"
+            "createdAt": "2026-09-04T09:58:26.929Z",
+            "updatedAt": "2026-09-04T09:58:26.929Z"
           }
         ],
         "provenanceIds": [
-          "prov_k8q50uop",
-          "prov_xcz1mdeg",
-          "prov_9hm9vx6z"
+          "prov_5x9fi09e",
+          "prov_g958hmj0",
+          "prov_xsp77o95"
         ],
-        "executionTimeMs": 1271
+        "executionTimeMs": 969
       }
     },
     {
@@ -756,7 +756,7 @@
             "mention": "Cognitive Engine",
             "entityType": "Project",
             "outcome": "NO_MATCH",
-            "canonicalId": "ent_2yhf22mb",
+            "canonicalId": "ent_1tieuqrb",
             "canonicalName": "Cognitive Engine",
             "resolutionMethod": "L8_DEFAULT_FALLBACK",
             "confidence": 0
@@ -764,9 +764,9 @@
         ],
         "graphRelationships": [],
         "provenanceIds": [
-          "prov_fon8afzt"
+          "prov_cvywv5ck"
         ],
-        "executionTimeMs": 116
+        "executionTimeMs": 98
       }
     },
     {
@@ -787,7 +787,7 @@
             "mention": "Rahul",
             "entityType": "Person",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_m9g8u1bh",
+            "canonicalId": "ent_8dec29vg",
             "canonicalName": "Rahul",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -796,7 +796,7 @@
             "mention": "Cognitive Engine",
             "entityType": "Project",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_2yhf22mb",
+            "canonicalId": "ent_1tieuqrb",
             "canonicalName": "Cognitive Engine",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -804,27 +804,27 @@
         ],
         "graphRelationships": [
           {
-            "id": "rel_fwneidat",
+            "id": "rel_t960h3wi",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_m9g8u1bh",
-            "targetEntityId": "ent_2yhf22mb",
+            "sourceEntityId": "ent_8dec29vg",
+            "targetEntityId": "ent_1tieuqrb",
             "relationType": "WORKED_ON",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_006",
             "sourceMemoryId": "mem_006",
             "sourceContentHash": "6e8e07f2ec456f3cf5a9a2214a3da7f848fa60f4e893110b005f5187a95040ac",
-            "extractionRunId": "mock_run_zs27uj5",
+            "extractionRunId": "mock_run_ofxz15f",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:46:59.076Z",
+            "assertedAt": "2026-09-04T09:58:27.027Z",
             "validAt": "2026-08-03T17:30:00.000Z",
-            "createdAt": "2026-09-02T12:46:59.076Z",
-            "updatedAt": "2026-09-02T12:46:59.076Z"
+            "createdAt": "2026-09-04T09:58:27.027Z",
+            "updatedAt": "2026-09-04T09:58:27.027Z"
           }
         ],
         "provenanceIds": [
-          "prov_xvl27pim",
-          "prov_jncdalj9"
+          "prov_ch95s32x",
+          "prov_7tdameuv"
         ],
         "executionTimeMs": 0
       }
@@ -866,7 +866,7 @@
             "mention": "knowledge graphs",
             "entityType": "Topic",
             "outcome": "NO_MATCH",
-            "canonicalId": "ent_3zaq1yex",
+            "canonicalId": "ent_8tuhhcy1",
             "canonicalName": "knowledge graphs",
             "resolutionMethod": "L8_DEFAULT_FALLBACK",
             "confidence": 0
@@ -874,9 +874,9 @@
         ],
         "graphRelationships": [],
         "provenanceIds": [
-          "prov_03np7lwe"
+          "prov_rvdcjpcp"
         ],
-        "executionTimeMs": 1301
+        "executionTimeMs": 969
       }
     },
     {
@@ -897,7 +897,7 @@
             "mention": "entity resolution",
             "entityType": "Topic",
             "outcome": "NO_MATCH",
-            "canonicalId": "ent_7uuk4thn",
+            "canonicalId": "ent_o87iy8xe",
             "canonicalName": "entity resolution",
             "resolutionMethod": "L8_DEFAULT_FALLBACK",
             "confidence": 0
@@ -905,9 +905,9 @@
         ],
         "graphRelationships": [],
         "provenanceIds": [
-          "prov_ldfnoevy"
+          "prov_8rkmt6ce"
         ],
-        "executionTimeMs": 1485
+        "executionTimeMs": 1156
       }
     },
     {
@@ -928,7 +928,7 @@
             "mention": "entity extraction",
             "entityType": "Topic",
             "outcome": "NO_MATCH",
-            "canonicalId": "ent_b0jr8p5x",
+            "canonicalId": "ent_5746o21t",
             "canonicalName": "entity extraction",
             "resolutionMethod": "L8_DEFAULT_FALLBACK",
             "confidence": 0
@@ -936,9 +936,9 @@
         ],
         "graphRelationships": [],
         "provenanceIds": [
-          "prov_0al82k6k"
+          "prov_9eyp7uyx"
         ],
-        "executionTimeMs": 1679
+        "executionTimeMs": 1380
       }
     },
     {
@@ -959,7 +959,7 @@
             "mention": "Rahul",
             "entityType": "Person",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_m9g8u1bh",
+            "canonicalId": "ent_8dec29vg",
             "canonicalName": "Rahul",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -968,7 +968,7 @@
             "mention": "backend architecture",
             "entityType": "Topic",
             "outcome": "NO_MATCH",
-            "canonicalId": "ent_2vshowu7",
+            "canonicalId": "ent_1xn68e3d",
             "canonicalName": "backend architecture",
             "resolutionMethod": "L4_MODIFIER_TRAP_GATEKEEPER",
             "confidence": 0.2
@@ -977,7 +977,7 @@
             "mention": "backend",
             "entityType": "Topic",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_z2zt5bg7",
+            "canonicalId": "ent_iypxff1i",
             "canonicalName": "backend",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -985,66 +985,66 @@
         ],
         "graphRelationships": [
           {
-            "id": "rel_mlctgpy6",
+            "id": "rel_sx17n7dl",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_m9g8u1bh",
-            "targetEntityId": "ent_2vshowu7",
+            "sourceEntityId": "ent_8dec29vg",
+            "targetEntityId": "ent_1xn68e3d",
             "relationType": "MENTIONED_WITH",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_011",
             "sourceMemoryId": "mem_011",
             "sourceContentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
-            "extractionRunId": "mock_run_483mgj3",
+            "extractionRunId": "mock_run_25prpp6",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:47:03.541Z",
+            "assertedAt": "2026-09-04T09:58:30.532Z",
             "validAt": "2026-08-06T16:00:00.000Z",
-            "createdAt": "2026-09-02T12:47:03.541Z",
-            "updatedAt": "2026-09-02T12:47:03.541Z"
+            "createdAt": "2026-09-04T09:58:30.532Z",
+            "updatedAt": "2026-09-04T09:58:30.532Z"
           },
           {
-            "id": "rel_kq72blhf",
+            "id": "rel_1t54tf6d",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_m9g8u1bh",
-            "targetEntityId": "ent_z2zt5bg7",
+            "sourceEntityId": "ent_8dec29vg",
+            "targetEntityId": "ent_iypxff1i",
             "relationType": "MENTIONED_WITH",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_011",
             "sourceMemoryId": "mem_011",
             "sourceContentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
-            "extractionRunId": "mock_run_483mgj3",
+            "extractionRunId": "mock_run_25prpp6",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:47:03.541Z",
+            "assertedAt": "2026-09-04T09:58:30.532Z",
             "validAt": "2026-08-06T16:00:00.000Z",
-            "createdAt": "2026-09-02T12:47:03.541Z",
-            "updatedAt": "2026-09-02T12:47:03.541Z"
+            "createdAt": "2026-09-04T09:58:30.532Z",
+            "updatedAt": "2026-09-04T09:58:30.532Z"
           },
           {
-            "id": "rel_gerz0eri",
+            "id": "rel_3760b7g4",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_2vshowu7",
-            "targetEntityId": "ent_z2zt5bg7",
+            "sourceEntityId": "ent_1xn68e3d",
+            "targetEntityId": "ent_iypxff1i",
             "relationType": "MENTIONED_WITH",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_011",
             "sourceMemoryId": "mem_011",
             "sourceContentHash": "6d8863e07657395611600cc30365fc0fa2bfaadf0a48532646aa0613976b9b91",
-            "extractionRunId": "mock_run_483mgj3",
+            "extractionRunId": "mock_run_25prpp6",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:47:03.541Z",
+            "assertedAt": "2026-09-04T09:58:30.532Z",
             "validAt": "2026-08-06T16:00:00.000Z",
-            "createdAt": "2026-09-02T12:47:03.541Z",
-            "updatedAt": "2026-09-02T12:47:03.541Z"
+            "createdAt": "2026-09-04T09:58:30.532Z",
+            "updatedAt": "2026-09-04T09:58:30.532Z"
           }
         ],
         "provenanceIds": [
-          "prov_zqkdglnv",
-          "prov_l1b3ugvi",
-          "prov_v90lv8tu"
+          "prov_j0xechcm",
+          "prov_wh58g78z",
+          "prov_85rubk6y"
         ],
-        "executionTimeMs": 1
+        "executionTimeMs": 0
       }
     },
     {
@@ -1084,7 +1084,7 @@
             "mention": "API routes",
             "entityType": "Topic",
             "outcome": "NO_MATCH",
-            "canonicalId": "ent_h2hohmtz",
+            "canonicalId": "ent_z52w0wq2",
             "canonicalName": "API routes",
             "resolutionMethod": "L4_MODIFIER_TRAP_GATEKEEPER",
             "confidence": 0.2
@@ -1093,7 +1093,7 @@
             "mention": "API",
             "entityType": "Topic",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_nbrwvb7r",
+            "canonicalId": "ent_vo415shh",
             "canonicalName": "API",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -1101,27 +1101,27 @@
         ],
         "graphRelationships": [
           {
-            "id": "rel_iw6b5efo",
+            "id": "rel_8nz64ulr",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_h2hohmtz",
-            "targetEntityId": "ent_nbrwvb7r",
+            "sourceEntityId": "ent_z52w0wq2",
+            "targetEntityId": "ent_vo415shh",
             "relationType": "MENTIONED_WITH",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_013",
             "sourceMemoryId": "mem_013",
             "sourceContentHash": "a5136b3f22fba98133cbeb5f02d2faaa6015f498f58281ce564efa581df1bc39",
-            "extractionRunId": "mock_run_dc2m9ea",
+            "extractionRunId": "mock_run_y5lm3q7",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:47:03.542Z",
+            "assertedAt": "2026-09-04T09:58:30.533Z",
             "validAt": "2026-08-07T14:45:00.000Z",
-            "createdAt": "2026-09-02T12:47:03.542Z",
-            "updatedAt": "2026-09-02T12:47:03.542Z"
+            "createdAt": "2026-09-04T09:58:30.533Z",
+            "updatedAt": "2026-09-04T09:58:30.533Z"
           }
         ],
         "provenanceIds": [
-          "prov_krln4duf",
-          "prov_ngx9cmw1"
+          "prov_zt6i06hc",
+          "prov_7oludph8"
         ],
         "executionTimeMs": 0
       }
@@ -1144,7 +1144,7 @@
             "mention": "backend",
             "entityType": "Topic",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_z2zt5bg7",
+            "canonicalId": "ent_iypxff1i",
             "canonicalName": "backend",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -1152,7 +1152,7 @@
         ],
         "graphRelationships": [],
         "provenanceIds": [
-          "prov_9csb4dwb"
+          "prov_hmk31oxb"
         ],
         "executionTimeMs": 0
       }
@@ -1175,7 +1175,7 @@
             "mention": "knowledge graph",
             "entityType": "Topic",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_3zaq1yex",
+            "canonicalId": "ent_8tuhhcy1",
             "canonicalName": "knowledge graphs",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -1183,9 +1183,9 @@
         ],
         "graphRelationships": [],
         "provenanceIds": [
-          "prov_yvzxdqmb"
+          "prov_xl9i8qkf"
         ],
-        "executionTimeMs": 1
+        "executionTimeMs": 0
       }
     },
     {
@@ -1225,7 +1225,7 @@
             "mention": "Rahul",
             "entityType": "Person",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_m9g8u1bh",
+            "canonicalId": "ent_8dec29vg",
             "canonicalName": "Rahul",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -1233,7 +1233,7 @@
         ],
         "graphRelationships": [],
         "provenanceIds": [
-          "prov_kd78l6nb"
+          "prov_sqjha05z"
         ],
         "executionTimeMs": 0
       }
@@ -1275,7 +1275,7 @@
             "mention": "API",
             "entityType": "Topic",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_nbrwvb7r",
+            "canonicalId": "ent_vo415shh",
             "canonicalName": "API",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -1283,7 +1283,7 @@
         ],
         "graphRelationships": [],
         "provenanceIds": [
-          "prov_ca49lo6d"
+          "prov_z16c5u3z"
         ],
         "executionTimeMs": 0
       }
@@ -1325,7 +1325,7 @@
             "mention": "Rahul",
             "entityType": "Person",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_m9g8u1bh",
+            "canonicalId": "ent_8dec29vg",
             "canonicalName": "Rahul",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -1334,7 +1334,7 @@
             "mention": "backend",
             "entityType": "Topic",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_z2zt5bg7",
+            "canonicalId": "ent_iypxff1i",
             "canonicalName": "backend",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -1342,27 +1342,27 @@
         ],
         "graphRelationships": [
           {
-            "id": "rel_pw3qk1rz",
+            "id": "rel_smd1uv9l",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_m9g8u1bh",
-            "targetEntityId": "ent_z2zt5bg7",
+            "sourceEntityId": "ent_8dec29vg",
+            "targetEntityId": "ent_iypxff1i",
             "relationType": "MENTIONED_WITH",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_021",
             "sourceMemoryId": "mem_021",
             "sourceContentHash": "79f73ae762fbbf3ecbe9b0840fd5eddfe5595b38e8d8efd2f0a267c2c68c2aaf",
-            "extractionRunId": "mock_run_1137gz9",
+            "extractionRunId": "mock_run_0593ep2",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:47:03.543Z",
+            "assertedAt": "2026-09-04T09:58:30.534Z",
             "validAt": "2026-08-11T16:15:00.000Z",
-            "createdAt": "2026-09-02T12:47:03.543Z",
-            "updatedAt": "2026-09-02T12:47:03.543Z"
+            "createdAt": "2026-09-04T09:58:30.534Z",
+            "updatedAt": "2026-09-04T09:58:30.534Z"
           }
         ],
         "provenanceIds": [
-          "prov_66ltsgk9",
-          "prov_e79pwbsy"
+          "prov_5loxsdce",
+          "prov_6yrhm0df"
         ],
         "executionTimeMs": 0
       }
@@ -1421,7 +1421,7 @@
         "resolvedEntities": [],
         "graphRelationships": [],
         "provenanceIds": [],
-        "executionTimeMs": 1
+        "executionTimeMs": 0
       }
     },
     {
@@ -1497,7 +1497,7 @@
         "resolvedEntities": [],
         "graphRelationships": [],
         "provenanceIds": [],
-        "executionTimeMs": 0
+        "executionTimeMs": 1
       }
     },
     {
@@ -1537,7 +1537,7 @@
             "mention": "backend",
             "entityType": "Topic",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_z2zt5bg7",
+            "canonicalId": "ent_iypxff1i",
             "canonicalName": "backend",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -1546,7 +1546,7 @@
             "mention": "API",
             "entityType": "Topic",
             "outcome": "RESOLVED",
-            "canonicalId": "ent_nbrwvb7r",
+            "canonicalId": "ent_vo415shh",
             "canonicalName": "API",
             "resolutionMethod": "L2_EXACT_NORMALIZED_MATCH",
             "confidence": 1
@@ -1554,27 +1554,27 @@
         ],
         "graphRelationships": [
           {
-            "id": "rel_tduw0nr1",
+            "id": "rel_z3diwzcg",
             "userId": "00000000-0000-0000-0000-000000000001",
-            "sourceEntityId": "ent_z2zt5bg7",
-            "targetEntityId": "ent_nbrwvb7r",
+            "sourceEntityId": "ent_iypxff1i",
+            "targetEntityId": "ent_vo415shh",
             "relationType": "MENTIONED_WITH",
             "confidence": 1,
             "evidenceCount": 1,
             "sourceFragmentId": "frag_030",
             "sourceMemoryId": "mem_030",
             "sourceContentHash": "cc5426782a98ee24a47392d4d47a65607c0273e95c33fb46ae434bf5e20bc178",
-            "extractionRunId": "mock_run_4b30i41",
+            "extractionRunId": "mock_run_0ag5f4z",
             "status": "ACTIVE",
-            "assertedAt": "2026-09-02T12:47:03.544Z",
+            "assertedAt": "2026-09-04T09:58:30.535Z",
             "validAt": "2026-08-16T10:00:00.000Z",
-            "createdAt": "2026-09-02T12:47:03.544Z",
-            "updatedAt": "2026-09-02T12:47:03.544Z"
+            "createdAt": "2026-09-04T09:58:30.535Z",
+            "updatedAt": "2026-09-04T09:58:30.535Z"
           }
         ],
         "provenanceIds": [
-          "prov_mifhciuo",
-          "prov_poyn82gy"
+          "prov_vat4gyx9",
+          "prov_axe4gji4"
         ],
         "executionTimeMs": 0
       }

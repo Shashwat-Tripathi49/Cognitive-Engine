@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { env, checkDatabaseHealth, CONSTANTS } from "../packages/shared/src";
+import { env, checkDatabaseHealth, CONSTANTS } from "@cognitive-engine/shared";
 
 console.info("========================================");
 console.info("⚡ Sprint 1A Verification Script");

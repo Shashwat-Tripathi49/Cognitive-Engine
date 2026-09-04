@@ -83,9 +83,9 @@ export class TemplateReflectionSynthesizer {
       const entA = entities[0]?.canonicalName || 'A';
       const entB = entities[1]?.canonicalName || 'B';
       const intervalMetric = metrics.find((m) => m.metricType === 'SEQUENCE_INTERVAL');
-      const intervalHours = intervalMetric ? intervalMetric.value : 24;
+      const intervalPhrase = intervalMetric ? ` (average interval: ${intervalMetric.value} hours)` : '';
 
-      const text = `Across ${count} observation windows between ${startDate} and ${endDate}, observations of '${entA}' were consistently followed by '${entB}' (average interval: ${intervalHours} hours).`;
+      const text = `Across ${count} observation windows between ${startDate} and ${endDate}, observations of '${entA}' were consistently followed by '${entB}'${intervalPhrase}.`;
 
       const prop: GroundedProposition = {
         propositionId: 'p1',

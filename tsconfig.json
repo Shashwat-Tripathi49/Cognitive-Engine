@@ -1,0 +1,10 @@
+{
+  "extends": "@cognitive-engine/config/typescript/node.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  },
+  "include": ["scripts/**/*"]
+}

@@ -7,10 +7,7 @@ import {
   DeterministicMockExtractionProvider,
   LayeredHybridEntityResolver,
   MiniLMEmbeddingProvider,
-  CanonicalEntity,
-  GraphRelationship,
-  EntityResolutionProvenance,
-  CandidateConfirmationItem,
+  type EntityResolutionProvenance,
 } from '@cognitive-engine/shared';
 
 // 30 Raw Journal Entries provided by user
