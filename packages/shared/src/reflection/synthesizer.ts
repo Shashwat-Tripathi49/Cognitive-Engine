@@ -19,7 +19,71 @@ export interface IReflectionSynthesizer {
 }
 
 /**
- * Production Groq Synthesizer using llama-3.3-70b-versatile
+ * Production OpenRouter Synthesizer using meta-llama/llama-3.3-70b-instruct
+ */
+export class OpenRouterReflectionSynthesizer implements IReflectionSynthesizer {
+  constructor(
+    private apiKey?: string,
+    private model: string = 'meta-llama/llama-3.3-70b-instruct',
+    private temperature: number = 0.0
+  ) {}
+
+  async generate(bundle: ReflectionInputBundle, feedback?: string): Promise<LLMReflectionResponse> {
+    const key =
+      this.apiKey || process.env.OPENROUTER_API_KEY || process.env.GROQ_API_KEY;
+    if (!key) {
+      throw new Error('OPENROUTER_API_KEY is not configured');
+    }
+
+    const systemPrompt = buildReflectionSystemPrompt();
+    let userPrompt = buildReflectionUserPrompt(bundle);
+    if (feedback) {
+      userPrompt += `\n\n[PREVIOUS ATTEMPT VALIDATION FAILED WITH ERROR: ${feedback}. Correct your output to strictly conform to all rules.]`;
+    }
+
+    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${key}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+        'X-Title': 'Cognitive Engine',
+      },
+      body: JSON.stringify({
+        model: this.model,
+        temperature: this.temperature,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt },
+        ],
+        response_format: { type: 'json_object' },
+      }),
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`OpenRouter API returned error ${res.status}: ${errText}`);
+    }
+
+    const json = (await res.json()) as { choices?: { message?: { content?: string } }[] };
+    const rawContent = json.choices?.[0]?.message?.content;
+    if (!rawContent) {
+      throw new Error('Empty response from OpenRouter API');
+    }
+
+    // Strip optional markdown code fences if provider enclosed JSON
+    const cleaned = rawContent
+      .replace(/^```(?:json)?\s*/i, '')
+      .replace(/\s*```$/, '')
+      .trim();
+
+    const parsed = JSON.parse(cleaned) as LLMReflectionResponse;
+    return parsed;
+  }
+}
+
+/**
+ * Backwards-compatible Groq Synthesizer
  */
 export class GroqReflectionSynthesizer implements IReflectionSynthesizer {
   constructor(
@@ -29,7 +93,7 @@ export class GroqReflectionSynthesizer implements IReflectionSynthesizer {
   ) {}
 
   async generate(bundle: ReflectionInputBundle, feedback?: string): Promise<LLMReflectionResponse> {
-    const key = this.apiKey || process.env.GROQ_API_KEY;
+    const key = this.apiKey || process.env.GROQ_API_KEY || process.env.OPENROUTER_API_KEY;
     if (!key) {
       throw new Error('GROQ_API_KEY is not configured');
     }
@@ -63,12 +127,17 @@ export class GroqReflectionSynthesizer implements IReflectionSynthesizer {
     }
 
     const json = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-    const content = json.choices?.[0]?.message?.content;
-    if (!content) {
+    const rawContent = json.choices?.[0]?.message?.content;
+    if (!rawContent) {
       throw new Error('Empty response from Groq API');
     }
 
-    const parsed = JSON.parse(content) as LLMReflectionResponse;
+    const cleaned = rawContent
+      .replace(/^```(?:json)?\s*/i, '')
+      .replace(/\s*```$/, '')
+      .trim();
+
+    const parsed = JSON.parse(cleaned) as LLMReflectionResponse;
     return parsed;
   }
 }
@@ -112,8 +181,8 @@ export class ReflectionSynthesisCoordinator {
       maxRegenerationAttempts: 1,
       llmTimeoutMs: 5000,
       temperature: 0.0,
-      defaultModel: 'llama-3.3-70b-versatile',
-      defaultProvider: 'groq',
+      defaultModel: 'meta-llama/llama-3.3-70b-instruct',
+      defaultProvider: 'openrouter',
     }
   ) {}
 

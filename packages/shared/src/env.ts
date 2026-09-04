@@ -21,6 +21,8 @@ export const serverEnvSchema = z.object({
     .url()
     .default("postgresql://postgres:postgres@localhost:5432/cognitive_engine"),
   CLERK_SECRET_KEY: z.string().optional(),
+  OPENROUTER_API_KEY: z.string().optional(),
+  GROQ_API_KEY: z.string().optional(),
 });
 
 /**

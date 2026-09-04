@@ -419,4 +419,145 @@ describe('Reflection Engine — Adversarial & Hostile Test Suite (H1 through H13
     expect(result.response.reflectionText).not.toContain('performance problems');
     expect(result.response.reflectionText).toContain('recurring co-mention');
   });
+
+  it('H14: Live Benchmark Regression — Rejects unauthorized relational promotion (WORKED_ON) and score leakage on TEMPORAL_SEQUENCE', async () => {
+    const temporalBundle: ReflectionInputBundle = {
+      schemaVersion: '1.0.0',
+      canonicalizationVersion: '1.0.0',
+      claimId: '5c9118ae-b16d-4bee-9ea6-f376d5881ea7',
+      claimType: 'TEMPORAL_SEQUENCE',
+      claimStatement:
+        "Observed chronological sequence where 'Rahul' was followed by 'API' across 3 distinct observation windows.",
+      evidenceChainId: 'chain_seq_1',
+      chainIntegrityHash: 'hash_seq_1',
+      authorizedFacts: {
+        entities: [
+          {
+            factId: 'ent:rahul',
+            entityId: 'ent_rahul_id',
+            canonicalName: 'Rahul',
+            entityType: 'Person',
+          },
+          {
+            factId: 'ent:api',
+            entityId: 'ent_api_id',
+            canonicalName: 'API',
+            entityType: 'Topic',
+          },
+        ],
+        relationships: [
+          {
+            factId: 'rel:rahul-api',
+            sourceEntityId: 'ent_rahul_id',
+            sourceEntityName: 'Rahul',
+            targetEntityId: 'ent_api_id',
+            targetEntityName: 'API',
+            relationType: 'CHRONOLOGICALLY_FOLLOWED_BY',
+            status: 'ACTIVE',
+          },
+        ],
+        temporalSpan: {
+          factId: 'temp:span',
+          startDate: '2026-08-01T00:00:00.000Z',
+          endDate: '2026-08-11T00:00:00.000Z',
+          durationDays: 10,
+        },
+        metrics: [
+          {
+            factId: 'metric:distinct_fragment_count',
+            metricType: 'COUNT',
+            value: 5,
+          },
+        ],
+      },
+      untrustedSnippets: [],
+    };
+
+    // Live benchmark defect payload: asserts WORKED_ON and leaks internal support score
+    const defectiveOutput: LLMReflectionResponse = {
+      propositions: [
+        {
+          propositionId: 'p1',
+          authorizedFactId: 'rel:rahul-api',
+          subject: 'Rahul',
+          predicate: 'WORKED_ON',
+          object: 'API',
+        },
+        {
+          propositionId: 'p2',
+          authorizedFactId: 'metric:distinct_fragment_count',
+          subject: 'API',
+          predicate: 'MENTIONED_IN_ENTRIES',
+          object: '5',
+        },
+      ],
+      segments: [
+        {
+          segmentId: 's1',
+          text: 'Rahul worked on API.',
+          groundedPropositionIds: ['p1'],
+        },
+        {
+          segmentId: 's2',
+          text: 'API appears in 5 entries. API has a support score of 1.',
+          groundedPropositionIds: ['p2'],
+        },
+      ],
+      reflectionText: 'Rahul worked on API. API appears in 5 entries. API has a support score of 1.',
+    };
+
+    // 1. Gate G1 rejects unauthorized predicate WORKED_ON against CHRONOLOGICALLY_FOLLOWED_BY fact
+    const valResult = validator.validate(temporalBundle, defectiveOutput);
+    expect(valResult.passed).toBe(false);
+    expect(valResult.failureReason).toContain(
+      "Relationship fact requires predicate 'CHRONOLOGICALLY_FOLLOWED_BY', found 'WORKED_ON'"
+    );
+
+    // 1b. Gate G1 defense-in-depth: even if a bundle somehow had a WORKED_ON relationship fact, claimType whitelist rejects it
+    const leakyBundle: ReflectionInputBundle = {
+      ...temporalBundle,
+      authorizedFacts: {
+        ...temporalBundle.authorizedFacts,
+        relationships: [
+          {
+            ...temporalBundle.authorizedFacts.relationships[0]!,
+            relationType: 'WORKED_ON',
+          },
+        ],
+      },
+    };
+    const valResultLeaky = validator.validate(leakyBundle, defectiveOutput);
+    expect(valResultLeaky.passed).toBe(false);
+    expect(valResultLeaky.failureReason).toContain(
+      "Predicate 'WORKED_ON' is not authorized for claim type 'TEMPORAL_SEQUENCE'"
+    );
+
+    // 2. If proposition claimed CHRONOLOGICALLY_FOLLOWED_BY, Gate G2 catches "support score" and Gate G5 catches "worked on"
+    const stealthDefectiveOutput: LLMReflectionResponse = {
+      ...defectiveOutput,
+      propositions: [
+        {
+          propositionId: 'p1',
+          authorizedFactId: 'rel:rahul-api',
+          subject: 'Rahul',
+          predicate: 'CHRONOLOGICALLY_FOLLOWED_BY',
+          object: 'API',
+        },
+        defectiveOutput.propositions[1],
+      ],
+    };
+    const valResult2 = validator.validate(temporalBundle, stealthDefectiveOutput);
+    expect(valResult2.passed).toBe(false);
+    expect(valResult2.failureReason).toMatch(/Surfacing internal reasoning scores|Unauthorized verb 'worked on'/);
+
+    // 3. Coordinator activates deterministic fallback without consuming the promoted relationship
+    const mock = new MockReflectionSynthesizer(async () => defectiveOutput);
+    const coordinator = new ReflectionSynthesisCoordinator(mock, validator);
+    const result = await coordinator.executeSynthesis(temporalBundle);
+
+    expect(result.synthesisMethod).toBe('DETERMINISTIC_FALLBACK');
+    expect(result.response.reflectionText).not.toContain('worked on');
+    expect(result.response.reflectionText).not.toContain('support score');
+    expect(result.response.reflectionText).toContain('consistently followed by');
+  });
 });

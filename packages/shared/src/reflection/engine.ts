@@ -9,7 +9,7 @@ import {
 import { buildReflectionInputBundle, computeBundleHash } from './canonical.js';
 import {
   IReflectionSynthesizer,
-  GroqReflectionSynthesizer,
+  OpenRouterReflectionSynthesizer,
   ReflectionSynthesisCoordinator,
 } from './synthesizer.js';
 import { ReflectionValidator } from './validator.js';
@@ -42,7 +42,7 @@ export class ReflectionEngine {
     validator: ReflectionValidator = new ReflectionValidator(),
     config?: ReflectionEngineConfig
   ) {
-    const synth = customSynthesizer || new GroqReflectionSynthesizer();
+    const synth = customSynthesizer || new OpenRouterReflectionSynthesizer();
     this.coordinator = new ReflectionSynthesisCoordinator(synth, validator, config);
   }
 

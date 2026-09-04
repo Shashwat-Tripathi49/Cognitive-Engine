@@ -93,29 +93,31 @@ export function buildReflectionInputBundle(
 
   // Build authorized relationships if both subject and object exist
   const relationships: AuthorizedRelationshipFact[] = [];
-  if (claim.subjectEntityId && claim.objectEntityId) {
+  if (claim.subjectEntityId && claim.objectEntityId && claim.claimType !== 'RECURRING_TOPIC_FOCUS') {
+    let relationType: AuthorizedRelationshipFact['relationType'] = 'MENTIONED_WITH';
+    if (claim.claimType === 'TEMPORAL_SEQUENCE') {
+      relationType = 'CHRONOLOGICALLY_FOLLOWED_BY';
+    } else if (claim.claimType === 'COLLABORATION_PATTERN') {
+      relationType = 'WORKED_ON';
+    }
+
     relationships.push({
       factId: `rel:${claim.subjectEntityId}-${claim.objectEntityId}`,
       sourceEntityId: claim.subjectEntityId,
       sourceEntityName: subjectName,
       targetEntityId: claim.objectEntityId,
       targetEntityName: objectName,
-      relationType: 'WORKED_ON',
+      relationType,
       status: 'ACTIVE',
     });
   }
 
-  // Build metrics
+  // Build metrics (strictly empirical facts — never internal engine/rule scores)
   const metrics: AuthorizedMetricFact[] = [
     {
       factId: 'metric:distinct_fragment_count',
       metricType: 'COUNT',
       value: evidenceChain.rootFragmentIds.length,
-    },
-    {
-      factId: 'metric:support_score',
-      metricType: 'COUNT', // Internal reference, value preserved
-      value: claim.deterministicSupportScore,
     },
   ];
 

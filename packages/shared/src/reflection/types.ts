@@ -44,7 +44,12 @@ export interface AuthorizedRelationshipFact {
   readonly sourceEntityName: string;
   readonly targetEntityId: string;
   readonly targetEntityName: string;
-  readonly relationType: 'WORKED_ON' | 'COLLABORATED_WITH' | 'USES_TECHNOLOGY' | 'MENTIONED_WITH';
+  readonly relationType:
+    | 'WORKED_ON'
+    | 'COLLABORATED_WITH'
+    | 'USES_TECHNOLOGY'
+    | 'MENTIONED_WITH'
+    | 'CHRONOLOGICALLY_FOLLOWED_BY';
   readonly status: 'ACTIVE';
 }
 

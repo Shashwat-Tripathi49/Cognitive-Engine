@@ -32,6 +32,34 @@ const NUMBER_WORDS: Record<string, number> = {
   thirty: 30,
 };
 
+// Allowlisted predicates per Claim Type to prevent unauthorized relational promotion
+export const CLAIM_TYPE_ALLOWED_PREDICATES: Record<string, ReadonlySet<string>> = {
+  TEMPORAL_SEQUENCE: new Set([
+    'CHRONOLOGICALLY_FOLLOWED_BY',
+    'OBSERVED_IN_WINDOW',
+    'MENTIONED_IN_ENTRIES',
+    'HAS_SEQUENCE_INTERVAL',
+  ]),
+  RECURRING_TOPIC_FOCUS: new Set([
+    'MENTIONED_IN_ENTRIES',
+    'OBSERVED_IN_WINDOW',
+    'CO_OCCURS_WITH',
+  ]),
+  COGNITIVE_CLUSTER: new Set([
+    'CO_OCCURS_WITH',
+    'HAS_PAIRWISE_COHESION',
+    'OBSERVED_IN_WINDOW',
+    'MENTIONED_IN_ENTRIES',
+  ]),
+  COLLABORATION_PATTERN: new Set([
+    'CO_OCCURS_WITH',
+    'WORKED_ON',
+    'COLLABORATED_WITH',
+    'OBSERVED_IN_WINDOW',
+    'MENTIONED_IN_ENTRIES',
+  ]),
+};
+
 export class ReflectionValidator {
   /**
    * Evaluates all 5 validation gates deterministically.
@@ -225,6 +253,20 @@ export class ReflectionValidator {
       }
     }
 
+    // Enforce claim-type-specific predicate whitelist
+    const allowedPredicates = CLAIM_TYPE_ALLOWED_PREDICATES[bundle.claimType];
+    if (allowedPredicates) {
+      for (const prop of propositions) {
+        if (!allowedPredicates.has(prop.predicate)) {
+          return {
+            gate: 'G1',
+            passed: false,
+            error: `Predicate '${prop.predicate}' is not authorized for claim type '${bundle.claimType}'`,
+          };
+        }
+      }
+    }
+
     return { gate: 'G1', passed: true };
   }
 
@@ -247,6 +289,15 @@ export class ReflectionValidator {
         gate: 'G2',
         passed: false,
         error: 'Exposing raw percentage or probability score in reflection prose is strictly forbidden',
+      };
+    }
+
+    // Forbidden check: internal reasoning engine scores or support scores
+    if (/\b(support score|confidence score|internal score|probability score|support of \d+)\b/i.test(text)) {
+      return {
+        gate: 'G2',
+        passed: false,
+        error: 'Surfacing internal reasoning scores in reflection prose is strictly forbidden',
       };
     }
 
@@ -511,13 +562,14 @@ export class ReflectionValidator {
         };
       }
     } else if (predicate === 'CHRONOLOGICALLY_FOLLOWED_BY') {
-      // SequenceFrame must not introduce causal verbs
-      const causalVerbs = /\b(caused|led to|resulted in|triggered|enabled|because)\b/i;
-      const match = segmentText.match(causalVerbs);
+      // SequenceFrame must not introduce causal verbs or unauthorized relational action verbs
+      const forbiddenVerbs =
+        /\b(caused|led to|resulted in|triggered|enabled|because|worked on|working on|collaborated|helped|solved|built|designed|managed)\b/i;
+      const match = segmentText.match(forbiddenVerbs);
       if (match) {
         return {
           passed: false,
-          error: `Causal verb '${match[0]}' used in temporal sequence realization`,
+          error: `Unauthorized verb '${match[0]}' used in temporal sequence realization`,
         };
       }
     }
