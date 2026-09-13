@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import {
   IKnowledgeGraphRepository,
   DrizzleKnowledgeGraphRepository,
@@ -116,7 +117,7 @@ export class KnowledgeGraphEngine {
 
     // 3. Resolve each extracted mention through the V2 resolver waterfall
     for (const mention of extractedMentions) {
-      const mentionId = `mention_${Math.random().toString(36).substring(2, 10)}`;
+      const mentionId = crypto.randomUUID();
 
       const res = await this.resolver.resolve(
         mention.name,

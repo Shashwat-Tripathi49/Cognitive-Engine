@@ -10,6 +10,7 @@ const queryClient = postgres(env.DATABASE_URL, {
   max: env.NODE_ENV === "production" ? 10 : 2,
   idle_timeout: 30,
   connect_timeout: 10,
+  transform: { undefined: null },
 });
 
 /**
