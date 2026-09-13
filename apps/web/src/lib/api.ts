@@ -156,11 +156,48 @@ export async function searchMemories(
   );
 }
 
+export async function getCaptureById(
+  id: string,
+  token?: string | null
+): Promise<CognitiveFragment> {
+  return fetchApi<CognitiveFragment>(`/capture/${id}`, { method: 'GET' }, token);
+}
+
+export async function getMemoryById(
+  id: string,
+  token?: string | null
+): Promise<{ data: Record<string, unknown> }> {
+  return fetchApi<{ data: Record<string, unknown> }>(`/memory/${id}`, { method: 'GET' }, token);
+}
+
+export async function getMemorySubgraph(
+  fragmentId: string,
+  userId = '11111111-1111-1111-1111-111111111111',
+  token?: string | null
+): Promise<{ data: { entities: Array<Record<string, unknown>>; relationships: Array<Record<string, unknown>> } }> {
+  return fetchApi<{ data: { entities: Array<Record<string, unknown>>; relationships: Array<Record<string, unknown>> } }>(
+    `/graph/subgraph?userId=${encodeURIComponent(userId)}&fragmentId=${encodeURIComponent(fragmentId)}`,
+    { method: 'GET' },
+    token
+  );
+}
+
+export async function getCognitiveFindings(
+  userId = '11111111-1111-1111-1111-111111111111',
+  token?: string | null
+): Promise<{ data: Array<Record<string, unknown>> }> {
+  return fetchApi<{ data: Array<Record<string, unknown>> }>(
+    `/cognitive/findings?userId=${encodeURIComponent(userId)}`,
+    { method: 'GET' },
+    token
+  );
+}
+
 /**
  * React Hook that binds Clerk auth session token to API requests
  */
 export function useApi() {
-  const { getToken } = useAuth();
+  const { getToken, userId: clerkUserId } = useAuth();
 
   const getAuthToken = useCallback(async () => {
     try {
@@ -169,6 +206,8 @@ export function useApi() {
       return null;
     }
   }, [getToken]);
+
+  const activeUserId = clerkUserId || '11111111-1111-1111-1111-111111111111';
 
   const capture = useCallback(
     async (text: string, modality: CognitiveFragmentModality = 'text') => {
@@ -194,12 +233,49 @@ export function useApi() {
     [getAuthToken]
   );
 
+  const getCapture = useCallback(
+    async (id: string) => {
+      const token = await getAuthToken();
+      return getCaptureById(id, token);
+    },
+    [getAuthToken]
+  );
+
+  const getMemory = useCallback(
+    async (id: string) => {
+      const token = await getAuthToken();
+      return getMemoryById(id, token);
+    },
+    [getAuthToken]
+  );
+
+  const getSubgraph = useCallback(
+    async (fragmentId: string) => {
+      const token = await getAuthToken();
+      return getMemorySubgraph(fragmentId, activeUserId, token);
+    },
+    [getAuthToken, activeUserId]
+  );
+
+  const getFindings = useCallback(
+    async () => {
+      const token = await getAuthToken();
+      return getCognitiveFindings(activeUserId, token);
+    },
+    [getAuthToken, activeUserId]
+  );
+
   return useMemo(
     () => ({
+      userId: activeUserId,
       createCapture: capture,
       listCaptures: getCaptures,
       searchMemories: search,
+      getCaptureById: getCapture,
+      getMemoryById: getMemory,
+      getMemorySubgraph: getSubgraph,
+      getCognitiveFindings: getFindings,
     }),
-    [capture, getCaptures, search]
+    [activeUserId, capture, getCaptures, search, getCapture, getMemory, getSubgraph, getFindings]
   );
 }

@@ -8,7 +8,8 @@ import { UserButton, SignInButton, useUser } from '@clerk/nextjs';
 export function AppHeader() {
   const pathname = usePathname();
   const isCapture = pathname === '/' || pathname === '/capture';
-  const isSearch = pathname === '/search';
+  const isArchives = pathname.startsWith('/archives') || pathname === '/search';
+  const isInsights = pathname.startsWith('/insights');
   const { isSignedIn, isLoaded } = useUser();
 
   return (
@@ -89,9 +90,9 @@ export function AppHeader() {
             </span>
           </Link>
 
-          {/* Framed Archive Stamp Badge */}
+          {/* Framed Ledger Stamp Badge */}
           <Link
-            href="/search"
+            href="/archives"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '0.68rem',
@@ -108,11 +109,11 @@ export function AppHeader() {
               transition: 'transform var(--duration-fast)',
             }}
           >
-            ARCHIVE
+            ARCHIVAL LEDGER
           </Link>
         </div>
 
-        {/* Center: Framed Mode Toggle (RECORD | SEARCH) */}
+        {/* Center: Framed Mode Toggle (RECORD | ARCHIVES | INSIGHTS) */}
         <nav
           role="tablist"
           aria-label="Mode Selection"
@@ -136,7 +137,7 @@ export function AppHeader() {
               fontWeight: 600,
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
-              padding: '6px 18px',
+              padding: '6px 16px',
               backgroundColor: isCapture ? 'var(--action-espresso)' : 'transparent',
               color: isCapture ? 'var(--ink-inverse)' : 'var(--ink-stone)',
               textDecoration: 'none',
@@ -148,28 +149,49 @@ export function AppHeader() {
           </Link>
 
           <Link
-            href="/search"
+            href="/archives"
             role="tab"
-            aria-selected={isSearch}
+            aria-selected={isArchives}
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '0.72rem',
               fontWeight: 600,
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
-              padding: '6px 18px',
-              backgroundColor: isSearch ? 'var(--action-espresso)' : 'transparent',
-              color: isSearch ? 'var(--ink-inverse)' : 'var(--ink-stone)',
+              padding: '6px 16px',
+              backgroundColor: isArchives ? 'var(--action-espresso)' : 'transparent',
+              color: isArchives ? 'var(--ink-inverse)' : 'var(--ink-stone)',
               textDecoration: 'none',
               transition: 'all var(--duration-fast)',
               cursor: 'pointer',
             }}
           >
-            SEARCH
+            ARCHIVES
+          </Link>
+
+          <Link
+            href="/insights"
+            role="tab"
+            aria-selected={isInsights}
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.72rem',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              padding: '6px 16px',
+              backgroundColor: isInsights ? 'var(--action-espresso)' : 'transparent',
+              color: isInsights ? 'var(--ink-inverse)' : 'var(--ink-stone)',
+              textDecoration: 'none',
+              transition: 'all var(--duration-fast)',
+              cursor: 'pointer',
+            }}
+          >
+            INSIGHTS
           </Link>
         </nav>
 
-        {/* Right: User Auth & Three-Dot Archival Menu */}
+        {/* Right: User Auth & Context Menu */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           {isLoaded && (
             <>
