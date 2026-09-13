@@ -4,23 +4,23 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { AppHeader } from '../components/AppHeader';
 import { BottomNav } from '../components/BottomNav';
+import { JournalCalendar } from '../components/JournalCalendar';
 import { useApi } from '../lib/api';
 
 /**
- * RecordPage — Minimalist Thought Capture Surface
+ * RecordPage — Full-Screen Open Journal Spread
  *
- * Mental Model:
- * "I want to record something now."
- *
- * Responsibilities:
- * - Provides a calm, distraction-free writing surface for raw thoughts.
- * - Handles asynchronous ingestion through the Capture Engine (POST /capture).
- * - Displays accurate, non-hallucinatory processing feedback upon completion.
- * - Seamlessly guides the user to the Archives to inspect their accumulating thoughts.
+ * Mental Model & Layout:
+ * - The entire DOM is transformed into an open notebook spread across the screen:
+ *   - LEFT PAGE: The Thought Ingestion / Record Composer (writing directly on paper).
+ *   - CENTER BINDING: Subtle shadow crease and stitch spine binding the pages.
+ *   - RIGHT PAGE: The Ultra-Soft Botanical Calendar Spread inspired by bullet journal art.
+ * - Maximizes viewport coverage edge-to-edge for an authentic, immersive writing desk feeling.
  */
 export default function RecordPage() {
   const [text, setText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [feedback, setFeedback] = useState<{
     status: 'idle' | 'success' | 'error';
     message: string;
@@ -30,23 +30,23 @@ export default function RecordPage() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const api = useApi();
 
-  // Word count calculation
+  // Dynamic word count calculation
   const wordCount = useMemo(() => {
     const trimmed = text.trim();
     if (!trimmed) return 0;
     return trimmed.split(/\s+/).length;
   }, [text]);
 
-  // Auto-focus textarea on page load
+  // Focus textarea on mount
   useEffect(() => {
     textareaRef.current?.focus();
   }, []);
 
-  // Auto-resize textarea to fit writing naturally
+  // Auto-resize textarea to fit text naturally
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${Math.max(160, textareaRef.current.scrollHeight)}px`;
+      textareaRef.current.style.height = `${Math.max(260, textareaRef.current.scrollHeight)}px`;
     }
   }, [text]);
 
@@ -64,11 +64,13 @@ export default function RecordPage() {
       setFeedback({
         status: 'success',
         message: 'Thought captured and anchored to your memory ledger.',
-        details: `Reference: #${fragment.id.slice(0, 8)}`,
+        details: `Ref #${fragment.id.slice(0, 8)} · ${new Date(
+          fragment.capturedAt
+        ).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`,
       });
 
       if (textareaRef.current) {
-        textareaRef.current.style.height = '160px';
+        textareaRef.current.style.height = '260px';
         textareaRef.current.focus();
       }
     } catch (err: unknown) {
@@ -92,6 +94,13 @@ export default function RecordPage() {
     }
   };
 
+  const formattedSelectedDate = selectedDate.toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
   return (
     <div
       style={{
@@ -104,372 +113,426 @@ export default function RecordPage() {
     >
       <AppHeader />
 
+      {/* Semantic Main Container with clean, comfortable breathing room */}
       <main
+        id="main-content"
+        role="main"
+        aria-label="Cognitive Record Ledger"
         style={{
           flex: 1,
+          maxWidth: '1240px',
           width: '100%',
-          maxWidth: '760px',
           margin: '0 auto',
-          padding: '56px 24px 120px 24px',
+          padding: '36px 24px 80px 24px',
+          boxSizing: 'border-box',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
+          gap: '24px',
         }}
       >
-        {/* Subtle Framing Marks for Calm Editorial Focus */}
-        <div style={{ width: '100%', position: 'relative' }}>
-          <header
-            style={{
-              marginBottom: '32px',
-              textAlign: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '8px',
-              alignItems: 'center',
-            }}
-          >
+        {/* Top Status & Date Header */}
+        <header
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '4px 2px',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <span
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '0.72rem',
+                color: '#6E5A48',
+                letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                letterSpacing: '0.14em',
-                color: 'var(--ink-dust)',
                 fontWeight: 600,
               }}
             >
-              RECORD // PRESENT MOMENT
+              COGNITIVE JOURNAL // ARCHIVAL LEDGER
             </span>
-            <h1
+            <span style={{ color: 'rgba(110, 90, 70, 0.4)', fontSize: '0.75rem' }}>·</span>
+            <span
               style={{
-                fontFamily: 'var(--font-serif)',
-                fontStyle: 'italic',
-                fontSize: '2.25rem',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--ink-bone)',
-                lineHeight: 1.25,
-                margin: 0,
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.72rem',
+                color: 'var(--accent-moss)',
+                fontWeight: 600,
               }}
             >
-              What is preoccupying your attention right now?
-            </h1>
-          </header>
+              {formattedSelectedDate}
+            </span>
+          </div>
 
-          {/* Tactile Writing Slip Card */}
-          <div style={{ position: 'relative', width: '100%' }}>
-            {/* Tilted Backing Slip */}
+          <Link
+            href="/archives"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.68rem',
+              color: '#5A4635',
+              textDecoration: 'none',
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              padding: '4px 10px',
+              borderRadius: '3px',
+              border: '1px solid rgba(110, 90, 70, 0.25)',
+              backgroundColor: 'rgba(255, 255, 255, 0.4)',
+            }}
+          >
+            Archives & Search →
+          </Link>
+        </header>
+
+        {/* Responsive Two-Column DOM Grid: Record Composer (Left) + Botanical Calendar (Right) */}
+        <div className="record-page-grid">
+          {/* ============================================================
+              LEFT STANDALONE CARD: RECORD / THOUGHT COMPOSER
+             ============================================================ */}
+          <section
+            aria-labelledby="record-prompt-heading"
+            style={{
+              backgroundColor: '#FAF8F3',
+              borderRadius: '8px',
+              border: '1.5px solid rgba(80, 65, 50, 0.22)',
+              boxShadow:
+                '0 12px 32px rgba(43, 35, 26, 0.08), 0 2px 6px rgba(43, 35, 26, 0.04)',
+              padding: '36px 36px 32px 36px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              position: 'relative',
+              boxSizing: 'border-box',
+              minHeight: '520px',
+            }}
+          >
+            {/* Subtle Archival Margin Red/Tan Guide Line */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                left: '26px',
+                width: '1px',
+                backgroundColor: 'rgba(184, 93, 54, 0.25)',
+                pointerEvents: 'none',
+              }}
+            />
+
+            {/* Faint Dotted Paper Texture on Composer */}
             <div
               aria-hidden="true"
               style={{
                 position: 'absolute',
                 inset: 0,
-                backgroundColor: 'var(--surface-raised)',
-                border: '1.5px solid var(--border-structural)',
-                transform: 'rotate(0.35deg) translate(4px, 5px)',
+                backgroundImage:
+                  'radial-gradient(rgba(90, 75, 60, 0.14) 1px, transparent 1px)',
+                backgroundSize: '18px 18px',
+                backgroundPosition: '9px 9px',
                 zIndex: 0,
+                pointerEvents: 'none',
+                opacity: 0.6,
               }}
             />
 
-            <form
-              onSubmit={handleSubmit}
+            {/* Card Content */}
+            <div
               style={{
                 position: 'relative',
                 zIndex: 1,
-                width: '100%',
-                backgroundColor: 'var(--surface-pure)',
-                border: '1.5px solid var(--ink-bone)',
-                boxShadow: 'var(--shadow-slip)',
-                padding: '28px 32px 24px 32px',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '20px',
+                gap: '18px',
               }}
             >
-              {/* Corner Architectural Crop Marks */}
-              <span
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  top: '6px',
-                  left: '8px',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  color: 'var(--ink-bone)',
-                  lineHeight: 1,
-                  userSelect: 'none',
-                }}
-              >
-                ┌
-              </span>
-              <span
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  top: '6px',
-                  right: '8px',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  color: 'var(--ink-bone)',
-                  lineHeight: 1,
-                  userSelect: 'none',
-                }}
-              >
-                ┐
-              </span>
-              <span
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  bottom: '6px',
-                  left: '8px',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  color: 'var(--ink-bone)',
-                  lineHeight: 1,
-                  userSelect: 'none',
-                }}
-              >
-                └
-              </span>
-              <span
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  bottom: '6px',
-                  right: '8px',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  color: 'var(--ink-bone)',
-                  lineHeight: 1,
-                  userSelect: 'none',
-                }}
-              >
-                ┘
-              </span>
-
-              {/* Textarea Label & Keyboard Shortcut Helper */}
+              {/* Header Meta */}
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  borderBottom: '1px solid var(--border-hairline)',
-                  paddingBottom: '8px',
                 }}
               >
-                <label
-                  htmlFor="record-textarea"
+                <span
                   style={{
                     fontFamily: 'var(--font-mono)',
                     fontSize: '0.68rem',
                     textTransform: 'uppercase',
-                    letterSpacing: '0.1em',
-                    color: 'var(--ink-dust)',
+                    letterSpacing: '0.14em',
+                    color: '#8C7A68',
                     fontWeight: 600,
                   }}
                 >
-                  Raw Thought Observation
-                </label>
+                  ENTRY // PRESENT OBSERVATION
+                </span>
                 <span
                   style={{
                     fontFamily: 'var(--font-mono)',
                     fontSize: '0.68rem',
-                    color: 'var(--ink-dust)',
-                    letterSpacing: '0.04em',
+                    color: 'var(--accent-moss)',
+                    fontWeight: 600,
                   }}
                 >
-                  {wordCount > 0 ? `${wordCount} words · ` : ''}⌘+ENTER to record
+                  {formattedSelectedDate}
                 </span>
               </div>
 
-              {/* Thought Textarea */}
-              <textarea
-                id="record-textarea"
-                ref={textareaRef}
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Write freely. Your thoughts are privately normalized, hashed, and indexed..."
-                disabled={isSubmitting}
-                rows={5}
+              {/* Thought Writing Prompt */}
+              <h1
+                id="record-prompt-heading"
                 style={{
-                  width: '100%',
-                  backgroundColor: 'transparent',
-                  color: 'var(--ink-bone)',
-                  border: 'none',
-                  outline: 'none',
-                  resize: 'none',
-                  fontSize: '1.25rem',
-                  lineHeight: '1.7',
                   fontFamily: 'var(--font-serif)',
-                  padding: '4px 0',
-                }}
-              />
-
-              {/* Action Bar */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  paddingTop: '12px',
-                  borderTop: '1px solid var(--border-hairline)',
+                  fontStyle: 'italic',
+                  fontSize: '2.1rem',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: '#281E15',
+                  lineHeight: 1.25,
+                  margin: 0,
                 }}
               >
-                <Link
-                  href="/archives"
+                What is preoccupying your attention right now?
+              </h1>
+
+              {/* Clean Writing Textarea Surface */}
+              <form
+                onSubmit={handleSubmit}
+                style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+              >
+                <div
                   style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.75rem',
-                    color: 'var(--ink-stone)',
-                    textDecoration: 'none',
-                    letterSpacing: '0.04em',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '6px',
-                    transition: 'color var(--duration-fast)',
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink-bone)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-stone)')}
-                >
-                  <span>Explore Archives</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-
-                <button
-                  type="submit"
-                  disabled={!text.trim() || isSubmitting}
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.8rem',
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.12em',
-                    backgroundColor:
-                      !text.trim() || isSubmitting
-                        ? 'var(--surface-raised)'
-                        : 'var(--action-espresso)',
-                    color:
-                      !text.trim() || isSubmitting
-                        ? 'var(--ink-dust)'
-                        : 'var(--ink-inverse)',
-                    border: '1.5px solid var(--ink-bone)',
-                    padding: '10px 26px',
-                    cursor: !text.trim() || isSubmitting ? 'default' : 'pointer',
-                    transition: 'all var(--duration-fast)',
-                    boxShadow:
-                      text.trim() && !isSubmitting
-                        ? '2px 2px 0px rgba(0,0,0,0.25)'
-                        : 'none',
+                    justifyContent: 'space-between',
+                    borderBottom: '1px dashed rgba(110, 92, 75, 0.25)',
+                    paddingBottom: '6px',
                   }}
                 >
-                  {isSubmitting ? 'RECORDING...' : 'RECORD'}
-                </button>
-              </div>
-            </form>
-          </div>
-
-          {/* Feedback & Status Banner */}
-          {feedback.status === 'success' && (
-            <div
-              role="status"
-              style={{
-                marginTop: '24px',
-                padding: '16px 20px',
-                backgroundColor: 'var(--surface-pure)',
-                border: '1.5px solid var(--ink-bone)',
-                boxShadow: 'var(--shadow-slip)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                fontFamily: 'var(--font-body)',
-              }}
-            >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.78rem',
-                    fontWeight: 700,
-                    color: 'var(--accent-moss)',
-                    letterSpacing: '0.04em',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                  }}
-                >
-                  <span>✓</span> {feedback.message}
-                </span>
-                {feedback.details && (
+                  <label
+                    htmlFor="record-textarea"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.65rem',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.1em',
+                      color: '#8C7A68',
+                      fontWeight: 600,
+                    }}
+                  >
+                    Journal Observation
+                  </label>
                   <span
                     style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '0.68rem',
-                      color: 'var(--ink-dust)',
+                      fontSize: '0.65rem',
+                      color: '#8C7A68',
+                      letterSpacing: '0.04em',
                     }}
                   >
-                    {feedback.details}
+                    {wordCount > 0 ? `${wordCount} words · ` : ''}⌘+ENTER to record
                   </span>
-                )}
-              </div>
+                </div>
 
-              <Link
-                href="/archives"
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.72rem',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  padding: '6px 14px',
-                  backgroundColor: 'var(--surface-raised)',
-                  border: '1px solid var(--border-structural)',
-                  color: 'var(--ink-bone)',
-                  textDecoration: 'none',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                View Archives →
-              </Link>
-            </div>
-          )}
+                <textarea
+                  id="record-textarea"
+                  ref={textareaRef}
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Write freely. Thoughts are normalized, cryptographically hashed, and anchored to your memory ledger..."
+                  disabled={isSubmitting}
+                  rows={8}
+                  style={{
+                    width: '100%',
+                    backgroundColor: 'transparent',
+                    color: '#281E15',
+                    border: 'none',
+                    outline: 'none',
+                    resize: 'none',
+                    fontSize: '1.25rem',
+                    lineHeight: '1.75',
+                    fontFamily: 'var(--font-serif)',
+                    padding: '8px 0',
+                    boxSizing: 'border-box',
+                  }}
+                />
 
-          {feedback.status === 'error' && (
-            <div
-              role="alert"
-              style={{
-                marginTop: '24px',
-                padding: '14px 18px',
-                backgroundColor: 'var(--accent-ochre-bg)',
-                border: '1.5px solid var(--accent-ochre)',
-                color: 'var(--ink-bone)',
-                fontFamily: 'var(--font-body)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <span style={{ fontSize: '0.875rem' }}>{feedback.message}</span>
-              <button
-                type="button"
-                onClick={() => handleSubmit()}
-                style={{
-                  padding: '5px 12px',
-                  backgroundColor: 'var(--surface-pure)',
-                  border: '1px solid var(--border-structural)',
-                  color: 'var(--ink-bone)',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.72rem',
-                  cursor: 'pointer',
-                  fontWeight: 600,
-                }}
-              >
-                RETRY
-              </button>
+                {/* Submit Action Bar */}
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    paddingTop: '12px',
+                    borderTop: '1px solid rgba(110, 92, 75, 0.2)',
+                  }}
+                >
+                  <Link
+                    href="/archives"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.75rem',
+                      color: '#6E5C4B',
+                      textDecoration: 'none',
+                      letterSpacing: '0.04em',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                    }}
+                  >
+                    <span>Explore Archives</span>
+                    <span aria-hidden="true">→</span>
+                  </Link>
+
+                  <button
+                    type="submit"
+                    disabled={!text.trim() || isSubmitting}
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.12em',
+                      backgroundColor:
+                        !text.trim() || isSubmitting
+                          ? 'rgba(110, 92, 75, 0.15)'
+                          : '#281E15',
+                      color:
+                        !text.trim() || isSubmitting
+                          ? '#8C7A68'
+                          : '#FAF8F3',
+                      border: '1.5px solid #281E15',
+                      padding: '10px 28px',
+                      cursor: !text.trim() || isSubmitting ? 'default' : 'pointer',
+                      transition: 'all var(--duration-fast)',
+                      boxShadow:
+                        text.trim() && !isSubmitting
+                          ? '2px 2px 0px rgba(0,0,0,0.2)'
+                          : 'none',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    {isSubmitting ? 'RECORDING...' : 'RECORD'}
+                  </button>
+                </div>
+              </form>
             </div>
-          )}
+
+            {/* Feedback Notifications inside Left Card */}
+            <div style={{ position: 'relative', zIndex: 1, marginTop: '16px' }}>
+              {feedback.status === 'success' && (
+                <div
+                  role="status"
+                  style={{
+                    padding: '14px 18px',
+                    backgroundColor: 'rgba(250, 248, 243, 0.98)',
+                    border: '1.5px solid #281E15',
+                    boxShadow: '2px 2px 0px rgba(0,0,0,0.12)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    fontFamily: 'var(--font-body)',
+                    borderRadius: '4px',
+                  }}
+                >
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.78rem',
+                        fontWeight: 700,
+                        color: 'var(--accent-moss)',
+                        letterSpacing: '0.04em',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                      }}
+                    >
+                      <span>✓</span> {feedback.message}
+                    </span>
+                    {feedback.details && (
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: '#8C7A68' }}>
+                        {feedback.details}
+                      </span>
+                    )}
+                  </div>
+
+                  <Link
+                    href="/archives"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.7rem',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.08em',
+                      padding: '5px 12px',
+                      backgroundColor: '#EFECE4',
+                      border: '1px solid #6E5C4B',
+                      color: '#281E15',
+                      textDecoration: 'none',
+                      borderRadius: '2px',
+                    }}
+                  >
+                    View Archives →
+                  </Link>
+                </div>
+              )}
+
+              {feedback.status === 'error' && (
+                <div
+                  role="alert"
+                  style={{
+                    padding: '12px 16px',
+                    backgroundColor: 'rgba(184, 93, 54, 0.12)',
+                    border: '1.5px solid #B85D36',
+                    color: '#281E15',
+                    fontFamily: 'var(--font-body)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    borderRadius: '4px',
+                  }}
+                >
+                  <span style={{ fontSize: '0.85rem' }}>{feedback.message}</span>
+                  <button
+                    type="button"
+                    onClick={() => handleSubmit()}
+                    style={{
+                      padding: '4px 10px',
+                      backgroundColor: '#FAF8F3',
+                      border: '1px solid #B85D36',
+                      color: '#281E15',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.7rem',
+                      cursor: 'pointer',
+                      fontWeight: 600,
+                      borderRadius: '2px',
+                    }}
+                  >
+                    RETRY
+                  </button>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* ============================================================
+              RIGHT STANDALONE CARD: SEPARATE JOURNAL CALENDAR COMPANION
+             ============================================================ */}
+          <aside
+            aria-labelledby="calendar-heading"
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              width: '100%',
+            }}
+          >
+            <JournalCalendar
+              selectedDate={selectedDate}
+              onSelectDate={(date) => setSelectedDate(date)}
+            />
+          </aside>
         </div>
       </main>
 

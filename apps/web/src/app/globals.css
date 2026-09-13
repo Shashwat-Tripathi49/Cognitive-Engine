@@ -118,3 +118,19 @@ a:active {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--ink-stone);
 }
+
+/* Record Ledger Layout Grid (DOM Configuration) */
+.record-page-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(340px, 450px);
+  gap: 40px;
+  align-items: start;
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .record-page-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
