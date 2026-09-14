@@ -4,7 +4,20 @@ import {
   ReflectionValidationResult,
   ValidationGateResult,
   GroundedProposition,
+  ReflectionSegment,
+  AuthorizedEntityFact,
+  AuthorizedRelationshipFact,
+  AuthorizedMetricFact,
 } from './types.js';
+
+export interface PartialWithholdingResult {
+  validResponse?: LLMReflectionResponse;
+  withheldSegmentsCount: number;
+  totalSegmentsCount: number;
+  withheldPropositionIds: string[];
+  reasons: string[];
+  allSegmentsPassed: boolean;
+}
 
 // Number words to digits mapping for quantitative checking
 const NUMBER_WORDS: Record<string, number> = {
@@ -110,6 +123,150 @@ export class ReflectionValidator {
   }
 
   /**
+   * Builds factMap for fast O(1) authorized fact resolution
+   */
+  buildFactMap(bundle: ReflectionInputBundle): Map<string, { type: string; fact: unknown }> {
+    const { entities, relationships, temporalSpan, metrics } = bundle.authorizedFacts;
+    const factMap = new Map<string, { type: string; fact: unknown }>();
+    entities.forEach((e) => factMap.set(e.factId, { type: 'ENTITY', fact: e }));
+    relationships.forEach((r) => factMap.set(r.factId, { type: 'RELATIONSHIP', fact: r }));
+    factMap.set(temporalSpan.factId, { type: 'TEMPORAL_SPAN', fact: temporalSpan });
+    metrics.forEach((m) => factMap.set(m.factId, { type: 'METRIC', fact: m }));
+    return factMap;
+  }
+
+  /**
+   * Validates a single proposition against Gate G1
+   */
+  validateSingleProposition(
+    bundle: ReflectionInputBundle,
+    prop: GroundedProposition,
+    factMap: Map<string, { type: string; fact: unknown }>
+  ): { passed: boolean; error?: string } {
+    const entry = factMap.get(prop.authorizedFactId);
+    if (!entry) {
+      return {
+        passed: false,
+        error: `Proposition '${prop.propositionId}' references non-existent authorizedFactId '${prop.authorizedFactId}'`,
+      };
+    }
+
+    const { type, fact } = entry;
+
+    if (type === 'ENTITY') {
+      const ent = fact as AuthorizedEntityFact;
+      if (prop.subject !== ent.canonicalName) {
+        return {
+          passed: false,
+          error: `Proposition subject '${prop.subject}' does not match authorized entity canonicalName '${ent.canonicalName}'`,
+        };
+      }
+      if (
+        prop.predicate !== 'MENTIONED_IN_ENTRIES' &&
+        prop.predicate !== 'OBSERVED_IN_WINDOW' &&
+        prop.predicate !== 'CHRONOLOGICALLY_FOLLOWED_BY'
+      ) {
+        return {
+          passed: false,
+          error: `Predicate '${prop.predicate}' not permitted for entity fact '${prop.authorizedFactId}'`,
+        };
+      }
+    } else if (type === 'RELATIONSHIP') {
+      const rel = fact as AuthorizedRelationshipFact;
+
+      // Directionality check
+      if (prop.subject !== rel.sourceEntityName || prop.object !== rel.targetEntityName) {
+        // Check if symmetric co-occurrence allows reversed order
+        if (rel.relationType === 'MENTIONED_WITH') {
+          const matchesSymmetric =
+            (prop.subject === rel.sourceEntityName && prop.object === rel.targetEntityName) ||
+            (prop.subject === rel.targetEntityName && prop.object === rel.sourceEntityName);
+          if (!matchesSymmetric) {
+            return {
+              passed: false,
+              error: `Proposition tuple ('${prop.subject}', '${prop.object}') does not match authorized relationship ('${rel.sourceEntityName}', '${rel.targetEntityName}')`,
+            };
+          }
+        } else {
+          return {
+            passed: false,
+            error: `Directionality mismatch: expected subject '${rel.sourceEntityName}', object '${rel.targetEntityName}'`,
+          };
+        }
+      }
+
+      // Predicate check
+      if (rel.relationType === 'MENTIONED_WITH') {
+        if (prop.predicate !== 'CO_OCCURS_WITH') {
+          return {
+            passed: false,
+            error: `MENTIONED_WITH relationships must strictly use predicate 'CO_OCCURS_WITH', found '${prop.predicate}'`,
+          };
+        }
+      } else {
+        if (prop.predicate !== rel.relationType) {
+          return {
+            passed: false,
+            error: `Relationship fact requires predicate '${rel.relationType}', found '${prop.predicate}'`,
+          };
+        }
+      }
+    } else if (type === 'TEMPORAL_SPAN') {
+      if (
+        prop.predicate !== 'OBSERVED_IN_WINDOW' &&
+        prop.predicate !== 'CHRONOLOGICALLY_FOLLOWED_BY' &&
+        prop.predicate !== 'HAS_PAIRWISE_COHESION'
+      ) {
+        return {
+          passed: false,
+          error: `Invalid predicate '${prop.predicate}' for temporal span fact`,
+        };
+      }
+    } else if (type === 'METRIC') {
+      const m = fact as AuthorizedMetricFact;
+      if (m.metricType === 'COUNT') {
+        if (prop.predicate !== 'MENTIONED_IN_ENTRIES') {
+          return {
+            passed: false,
+            error: `Count metric requires predicate 'MENTIONED_IN_ENTRIES', found '${prop.predicate}'`,
+          };
+        }
+        if (prop.object !== m.value.toString()) {
+          return {
+            passed: false,
+            error: `Count mismatch: expected '${m.value}', found '${prop.object}'`,
+          };
+        }
+      } else if (m.metricType === 'COHESION_SCORE') {
+        if (prop.predicate !== 'HAS_PAIRWISE_COHESION') {
+          return {
+            passed: false,
+            error: `Cohesion metric requires predicate 'HAS_PAIRWISE_COHESION'`,
+          };
+        }
+      } else if (m.metricType === 'SEQUENCE_INTERVAL') {
+        if (prop.predicate !== 'HAS_SEQUENCE_INTERVAL') {
+          return {
+            passed: false,
+            error: `Sequence interval metric requires predicate 'HAS_SEQUENCE_INTERVAL'`,
+          };
+        }
+      }
+    }
+
+    // Enforce claim-type-specific predicate whitelist
+    const allowedPredicates = CLAIM_TYPE_ALLOWED_PREDICATES[bundle.claimType];
+    if (allowedPredicates && !allowedPredicates.has(prop.predicate)) {
+      return {
+        passed: false,
+        error: `Predicate '${prop.predicate}' is not authorized for claim type '${bundle.claimType}'`,
+      };
+    }
+
+    return { passed: true };
+  }
+
+  /**
    * Gate G1: Exact Fact-Tuple Validation
    */
   private validateGateG1(
@@ -120,154 +277,181 @@ export class ReflectionValidator {
       return { gate: 'G1', passed: false, error: 'Propositions array cannot be empty' };
     }
 
-    const { entities, relationships, temporalSpan, metrics } = bundle.authorizedFacts;
-
-    const factMap = new Map<string, { type: string; fact: unknown }>();
-    entities.forEach((e) => factMap.set(e.factId, { type: 'ENTITY', fact: e }));
-    relationships.forEach((r) => factMap.set(r.factId, { type: 'RELATIONSHIP', fact: r }));
-    factMap.set(temporalSpan.factId, { type: 'TEMPORAL_SPAN', fact: temporalSpan });
-    metrics.forEach((m) => factMap.set(m.factId, { type: 'METRIC', fact: m }));
+    const factMap = this.buildFactMap(bundle);
 
     for (const prop of propositions) {
-      const entry = factMap.get(prop.authorizedFactId);
-      if (!entry) {
-        return {
-          gate: 'G1',
-          passed: false,
-          error: `Proposition '${prop.propositionId}' references non-existent authorizedFactId '${prop.authorizedFactId}'`,
-        };
-      }
-
-      const { type, fact } = entry;
-
-      if (type === 'ENTITY') {
-        const ent = fact as typeof entities[0];
-        if (prop.subject !== ent.canonicalName) {
-          return {
-            gate: 'G1',
-            passed: false,
-            error: `Proposition subject '${prop.subject}' does not match authorized entity canonicalName '${ent.canonicalName}'`,
-          };
-        }
-        if (
-          prop.predicate !== 'MENTIONED_IN_ENTRIES' &&
-          prop.predicate !== 'OBSERVED_IN_WINDOW' &&
-          prop.predicate !== 'CHRONOLOGICALLY_FOLLOWED_BY'
-        ) {
-          return {
-            gate: 'G1',
-            passed: false,
-            error: `Predicate '${prop.predicate}' not permitted for entity fact '${prop.authorizedFactId}'`,
-          };
-        }
-      } else if (type === 'RELATIONSHIP') {
-        const rel = fact as typeof relationships[0];
-
-        // Directionality check
-        if (prop.subject !== rel.sourceEntityName || prop.object !== rel.targetEntityName) {
-          // Check if symmetric co-occurrence allows reversed order
-          if (rel.relationType === 'MENTIONED_WITH') {
-            const matchesSymmetric =
-              (prop.subject === rel.sourceEntityName && prop.object === rel.targetEntityName) ||
-              (prop.subject === rel.targetEntityName && prop.object === rel.sourceEntityName);
-            if (!matchesSymmetric) {
-              return {
-                gate: 'G1',
-                passed: false,
-                error: `Proposition tuple ('${prop.subject}', '${prop.object}') does not match authorized relationship ('${rel.sourceEntityName}', '${rel.targetEntityName}')`,
-              };
-            }
-          } else {
-            return {
-              gate: 'G1',
-              passed: false,
-              error: `Directionality mismatch: expected subject '${rel.sourceEntityName}', object '${rel.targetEntityName}'`,
-            };
-          }
-        }
-
-        // Predicate check
-        if (rel.relationType === 'MENTIONED_WITH') {
-          if (prop.predicate !== 'CO_OCCURS_WITH') {
-            return {
-              gate: 'G1',
-              passed: false,
-              error: `MENTIONED_WITH relationships must strictly use predicate 'CO_OCCURS_WITH', found '${prop.predicate}'`,
-            };
-          }
-        } else {
-          if (prop.predicate !== rel.relationType) {
-            return {
-              gate: 'G1',
-              passed: false,
-              error: `Relationship fact requires predicate '${rel.relationType}', found '${prop.predicate}'`,
-            };
-          }
-        }
-      } else if (type === 'TEMPORAL_SPAN') {
-        if (
-          prop.predicate !== 'OBSERVED_IN_WINDOW' &&
-          prop.predicate !== 'CHRONOLOGICALLY_FOLLOWED_BY' &&
-          prop.predicate !== 'HAS_PAIRWISE_COHESION'
-        ) {
-          return {
-            gate: 'G1',
-            passed: false,
-            error: `Invalid predicate '${prop.predicate}' for temporal span fact`,
-          };
-        }
-      } else if (type === 'METRIC') {
-        const m = fact as typeof metrics[0];
-        if (m.metricType === 'COUNT') {
-          if (prop.predicate !== 'MENTIONED_IN_ENTRIES') {
-            return {
-              gate: 'G1',
-              passed: false,
-              error: `Count metric requires predicate 'MENTIONED_IN_ENTRIES', found '${prop.predicate}'`,
-            };
-          }
-          if (prop.object !== m.value.toString()) {
-            return {
-              gate: 'G1',
-              passed: false,
-              error: `Count mismatch: expected '${m.value}', found '${prop.object}'`,
-            };
-          }
-        } else if (m.metricType === 'COHESION_SCORE') {
-          if (prop.predicate !== 'HAS_PAIRWISE_COHESION') {
-            return {
-              gate: 'G1',
-              passed: false,
-              error: `Cohesion metric requires predicate 'HAS_PAIRWISE_COHESION'`,
-            };
-          }
-        } else if (m.metricType === 'SEQUENCE_INTERVAL') {
-          if (prop.predicate !== 'HAS_SEQUENCE_INTERVAL') {
-            return {
-              gate: 'G1',
-              passed: false,
-              error: `Sequence interval metric requires predicate 'HAS_SEQUENCE_INTERVAL'`,
-            };
-          }
-        }
-      }
-    }
-
-    // Enforce claim-type-specific predicate whitelist
-    const allowedPredicates = CLAIM_TYPE_ALLOWED_PREDICATES[bundle.claimType];
-    if (allowedPredicates) {
-      for (const prop of propositions) {
-        if (!allowedPredicates.has(prop.predicate)) {
-          return {
-            gate: 'G1',
-            passed: false,
-            error: `Predicate '${prop.predicate}' is not authorized for claim type '${bundle.claimType}'`,
-          };
-        }
+      const res = this.validateSingleProposition(bundle, prop, factMap);
+      if (!res.passed) {
+        return { gate: 'G1', passed: false, error: res.error };
       }
     }
 
     return { gate: 'G1', passed: true };
+  }
+
+  /**
+   * Evaluates reflection response under Option A (Partial Withholding).
+   * Strips ungrounded segments and licensing propositions, retaining grounded prose.
+   *
+   * Point 1: A segment survives if and only if EVERY referenced proposition ID survives.
+   * Point 2: Spliced text is deterministically reconstituted from surviving segments.
+   */
+  validateWithPartialWithholding(
+    bundle: ReflectionInputBundle,
+    response: LLMReflectionResponse
+  ): PartialWithholdingResult {
+    const reasons: string[] = [];
+    const totalSegmentsCount = response.segments?.length || 0;
+
+    if (!response || !Array.isArray(response.segments) || !Array.isArray(response.propositions)) {
+      return {
+        validResponse: undefined,
+        withheldSegmentsCount: totalSegmentsCount,
+        totalSegmentsCount,
+        withheldPropositionIds: [],
+        reasons: ['Malformed response: missing segments or propositions array'],
+        allSegmentsPassed: false,
+      };
+    }
+
+    // Step 1: Validate propositions individually against Gate G1
+    const validPropMap = new Map<string, GroundedProposition>();
+    const withheldPropositionIds: string[] = [];
+    const factMap = this.buildFactMap(bundle);
+
+    for (const prop of response.propositions) {
+      const g1Check = this.validateSingleProposition(bundle, prop, factMap);
+      if (g1Check.passed) {
+        validPropMap.set(prop.propositionId, prop);
+      } else {
+        withheldPropositionIds.push(prop.propositionId);
+        reasons.push(`Proposition '${prop.propositionId}' failed Gate G1: ${g1Check.error}`);
+      }
+    }
+
+    // Step 2: Validate each segment individually
+    const entityDict = this.buildEntityDictionary(bundle);
+    const survivingSegments: ReflectionSegment[] = [];
+
+    for (const seg of response.segments) {
+      // Must reference at least one proposition
+      if (!seg.groundedPropositionIds || seg.groundedPropositionIds.length === 0) {
+        reasons.push(`Segment '${seg.segmentId}' withheld: no proposition IDs referenced`);
+        continue;
+      }
+
+      // Point 1: ALL-MUST-SURVIVE rule
+      // Every referenced proposition ID must be in validPropMap!
+      const allPropsValid = seg.groundedPropositionIds.every((pId: string) => validPropMap.has(pId));
+      if (!allPropsValid) {
+        const missing = seg.groundedPropositionIds.filter((pId: string) => !validPropMap.has(pId));
+        reasons.push(
+          `Segment '${seg.segmentId}' withheld: references ungrounded proposition(s) [${missing.join(', ')}]`
+        );
+        continue;
+      }
+
+      // Gate G2: Quantitative grounding on segment text
+      const g2Check = this.validateGateG2(bundle, seg.text);
+      if (!g2Check.passed) {
+        reasons.push(`Segment '${seg.segmentId}' withheld: failed Gate G2 (${g2Check.error})`);
+        continue;
+      }
+
+      // Gate G3: Anti-causal check on segment text
+      const g3Check = this.validateGateG3(seg.text);
+      if (!g3Check.passed) {
+        reasons.push(`Segment '${seg.segmentId}' withheld: failed Gate G3 (${g3Check.error})`);
+        continue;
+      }
+
+      // Gate G4: Anti-psychological & anti-coaching check on segment text
+      const g4Check = this.validateGateG4(seg.text);
+      if (!g4Check.passed) {
+        reasons.push(`Segment '${seg.segmentId}' withheld: failed Gate G4 (${g4Check.error})`);
+        continue;
+      }
+
+      // Gate G5 entity licensing check
+      const extractedEntities = this.extractEntitiesFromText(seg.text, entityDict);
+      const licensedEntities = new Set<string>();
+      for (const pId of seg.groundedPropositionIds) {
+        const p = validPropMap.get(pId)!;
+        licensedEntities.add(p.subject.toLowerCase());
+        if (p.object) {
+          licensedEntities.add(p.object.toLowerCase());
+        }
+      }
+
+      let entityLicensed = true;
+      for (const ent of extractedEntities) {
+        if (!licensedEntities.has(ent.toLowerCase())) {
+          reasons.push(`Segment '${seg.segmentId}' withheld: mentions unlicensed entity '${ent}'`);
+          entityLicensed = false;
+          break;
+        }
+      }
+      if (!entityLicensed) continue;
+
+      // Gate G5 realization frame check for all referenced predicates
+      let framePassed = true;
+      for (const pId of seg.groundedPropositionIds) {
+        const p = validPropMap.get(pId)!;
+        const frameCheck = this.verifySegmentRealizationFrame(seg.text, p.predicate);
+        if (!frameCheck.passed) {
+          reasons.push(
+            `Segment '${seg.segmentId}' withheld: failed realization frame check for '${p.predicate}' (${frameCheck.error})`
+          );
+          framePassed = false;
+          break;
+        }
+      }
+      if (!framePassed) continue;
+
+      // Passed all checks!
+      survivingSegments.push(seg);
+    }
+
+    const withheldSegmentsCount = totalSegmentsCount - survivingSegments.length;
+    const allSegmentsPassed = withheldSegmentsCount === 0 && withheldPropositionIds.length === 0;
+
+    if (survivingSegments.length === 0) {
+      return {
+        validResponse: undefined,
+        withheldSegmentsCount: totalSegmentsCount,
+        totalSegmentsCount,
+        withheldPropositionIds,
+        reasons,
+        allSegmentsPassed: false,
+      };
+    }
+
+    // Collect surviving propositions referenced by surviving segments
+    const survivingPropIds = new Set<string>();
+    survivingSegments.forEach((s) => s.groundedPropositionIds.forEach((pId: string) => survivingPropIds.add(pId)));
+    const survivingProps: GroundedProposition[] = [];
+    validPropMap.forEach((p, id) => {
+      if (survivingPropIds.has(id)) survivingProps.push(p);
+    });
+
+    // Reconstitute clean reflection prose (Point 2: deterministic clean splice)
+    const reconstitutedText = survivingSegments
+      .map((s) => s.text.trim())
+      .join(' ')
+      .trim();
+
+    return {
+      validResponse: {
+        propositions: survivingProps,
+        segments: survivingSegments,
+        reflectionText: reconstitutedText,
+      },
+      withheldSegmentsCount,
+      totalSegmentsCount,
+      withheldPropositionIds,
+      reasons,
+      allSegmentsPassed,
+    };
   }
 
   /**

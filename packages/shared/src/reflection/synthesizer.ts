@@ -6,16 +6,80 @@ import {
 import { buildReflectionSystemPrompt, buildReflectionUserPrompt } from './prompt.js';
 import { TemplateReflectionSynthesizer } from './fallback.js';
 import { ReflectionValidator } from './validator.js';
+import { DualProviderReflectionTransport, ReflectionProviderName } from './transport/index.js';
 
 export interface SynthesisExecutionResult {
   response: LLMReflectionResponse;
   synthesisMethod: 'LLM_CONSTRAINED' | 'DETERMINISTIC_FALLBACK';
   modelInfo: Record<string, unknown>;
   attempts: number;
+  withheldSegmentsCount?: number;
+  withheldReason?: string;
+}
+
+export interface SynthesizerOutput {
+  response: LLMReflectionResponse;
+  providerUsed?: ReflectionProviderName | string;
+  fellBack?: boolean;
+  primaryFailureReason?: string;
 }
 
 export interface IReflectionSynthesizer {
   generate(bundle: ReflectionInputBundle, feedback?: string): Promise<LLMReflectionResponse>;
+  generateWithMetadata?(bundle: ReflectionInputBundle, feedback?: string): Promise<SynthesizerOutput>;
+}
+
+/**
+ * Production Dual-Provider Synthesizer (Groq primary, Gemini fallback)
+ */
+export class DualProviderReflectionSynthesizer implements IReflectionSynthesizer {
+  constructor(
+    private transport: DualProviderReflectionTransport = new DualProviderReflectionTransport(),
+    private defaultModel: string = 'llama-3.3-70b-versatile',
+    private temperature: number = 0.0
+  ) {}
+
+  getTransport(): DualProviderReflectionTransport {
+    return this.transport;
+  }
+
+  getDefaultModel(): string {
+    return this.defaultModel;
+  }
+
+  async generateWithMetadata(
+    bundle: ReflectionInputBundle,
+    feedback?: string
+  ): Promise<SynthesizerOutput> {
+    const systemPrompt = buildReflectionSystemPrompt();
+    let userPrompt = buildReflectionUserPrompt(bundle);
+    if (feedback) {
+      userPrompt += `\n\n[PREVIOUS ATTEMPT VALIDATION FAILED WITH ERROR: ${feedback}. Correct your output to strictly conform to all rules.]`;
+    }
+
+    const transportResult = await this.transport.generateReflection({
+      systemPrompt,
+      prompt: userPrompt,
+      temperature: this.temperature,
+    });
+
+    const parsed = JSON.parse(transportResult.text) as LLMReflectionResponse;
+    if (!parsed || !Array.isArray(parsed.propositions) || !Array.isArray(parsed.segments)) {
+      throw new Error('LLM output missing propositions or segments array');
+    }
+
+    return {
+      response: parsed,
+      providerUsed: transportResult.providerUsed,
+      fellBack: transportResult.fellBack,
+      primaryFailureReason: transportResult.primaryFailureReason,
+    };
+  }
+
+  async generate(bundle: ReflectionInputBundle, feedback?: string): Promise<LLMReflectionResponse> {
+    const res = await this.generateWithMetadata(bundle, feedback);
+    return res.response;
+  }
 }
 
 /**
@@ -169,7 +233,8 @@ export class MockReflectionSynthesizer implements IReflectionSynthesizer {
 }
 
 /**
- * Orchestrates synthesis with Bounded Regeneration and Deterministic Fallback
+ * Orchestrates synthesis with Bounded Regeneration, Option A Partial Withholding,
+ * and Deterministic Fallback
  */
 export class ReflectionSynthesisCoordinator {
   private fallbackSynthesizer = new TemplateReflectionSynthesizer();
@@ -179,10 +244,10 @@ export class ReflectionSynthesisCoordinator {
     private validator: ReflectionValidator = new ReflectionValidator(),
     private config: ReflectionEngineConfig = {
       maxRegenerationAttempts: 1,
-      llmTimeoutMs: 5000,
+      llmTimeoutMs: 15000,
       temperature: 0.0,
-      defaultModel: 'meta-llama/llama-3.3-70b-instruct',
-      defaultProvider: 'openrouter',
+      defaultModel: 'llama-3.3-70b-versatile',
+      defaultProvider: 'groq',
     }
   ) {}
 
@@ -190,34 +255,99 @@ export class ReflectionSynthesisCoordinator {
     let attempts = 0;
     let lastError = '';
 
-    // Primary attempt + max 1 bounded regeneration
+    let bestPartialCandidate: {
+      response: LLMReflectionResponse;
+      providerUsed?: string;
+      fellBack?: boolean;
+      primaryFailureReason?: string;
+      withheldSegmentsCount: number;
+      withheldReason: string;
+    } | null = null;
+
+    let lastProviderUsed = this.config.defaultProvider;
+    let lastFellBack = false;
+    let lastPrimaryFailureReason: string | undefined;
+
+    // Primary attempt + max 1 bounded regeneration attempt
     while (attempts <= this.config.maxRegenerationAttempts) {
       attempts++;
       try {
-        const candidate = await this.synthesizer.generate(bundle, lastError || undefined);
-        const valResult = this.validator.validate(bundle, candidate);
+        let candidate: LLMReflectionResponse;
+        if (this.synthesizer.generateWithMetadata) {
+          const metaRes = await this.synthesizer.generateWithMetadata(bundle, lastError || undefined);
+          candidate = metaRes.response;
+          lastProviderUsed = metaRes.providerUsed || this.config.defaultProvider;
+          lastFellBack = metaRes.fellBack ?? false;
+          lastPrimaryFailureReason = metaRes.primaryFailureReason;
+        } else {
+          candidate = await this.synthesizer.generate(bundle, lastError || undefined);
+        }
 
-        if (valResult.passed) {
+        // Evaluate using Option A: Partial Withholding
+        const withholdingResult = this.validator.validateWithPartialWithholding(bundle, candidate);
+
+        if (withholdingResult.allSegmentsPassed && withholdingResult.validResponse) {
+          // 100% of candidate output is grounded!
           return {
-            response: candidate,
+            response: withholdingResult.validResponse,
             synthesisMethod: 'LLM_CONSTRAINED',
             modelInfo: {
               model: this.config.defaultModel,
-              provider: this.config.defaultProvider,
+              provider: lastProviderUsed,
+              fellBack: lastFellBack,
+              primaryFailureReason: lastPrimaryFailureReason,
               temperature: this.config.temperature,
+              withheldSegmentsCount: 0,
             },
             attempts,
+            withheldSegmentsCount: 0,
           };
         }
 
-        lastError = valResult.failureReason || 'Validation failed';
+        if (withholdingResult.validResponse && withholdingResult.validResponse.segments.length > 0) {
+          // Some segments survived
+          if (
+            !bestPartialCandidate ||
+            withholdingResult.validResponse.segments.length > bestPartialCandidate.response.segments.length
+          ) {
+            bestPartialCandidate = {
+              response: withholdingResult.validResponse,
+              providerUsed: lastProviderUsed,
+              fellBack: lastFellBack,
+              primaryFailureReason: lastPrimaryFailureReason,
+              withheldSegmentsCount: withholdingResult.withheldSegmentsCount,
+              withheldReason: withholdingResult.reasons.join('; '),
+            };
+          }
+        }
+
+        lastError = withholdingResult.reasons.join('; ') || 'Validation failed';
       } catch (err: unknown) {
         lastError = (err as Error).message || 'Generation error';
       }
     }
 
-    // Fallback: Activate Deterministic Fallback Generator
-    // Completely independent of rejected LLM prose
+    // After bounded regeneration: if any partial candidate survived, return it! (Option A)
+    if (bestPartialCandidate) {
+      return {
+        response: bestPartialCandidate.response,
+        synthesisMethod: 'LLM_CONSTRAINED',
+        modelInfo: {
+          model: this.config.defaultModel,
+          provider: bestPartialCandidate.providerUsed || lastProviderUsed,
+          fellBack: bestPartialCandidate.fellBack ?? lastFellBack,
+          primaryFailureReason: bestPartialCandidate.primaryFailureReason || lastPrimaryFailureReason,
+          temperature: this.config.temperature,
+          withheldSegmentsCount: bestPartialCandidate.withheldSegmentsCount,
+          withheldReason: bestPartialCandidate.withheldReason,
+        },
+        attempts,
+        withheldSegmentsCount: bestPartialCandidate.withheldSegmentsCount,
+        withheldReason: bestPartialCandidate.withheldReason,
+      };
+    }
+
+    // Option A rule: Only drop to deterministic fallback if ZERO segments survived across all attempts
     const fallbackResponse = this.fallbackSynthesizer.generateFallback(bundle);
     const fallbackVal = this.validator.validate(bundle, fallbackResponse);
 
@@ -239,3 +369,4 @@ export class ReflectionSynthesisCoordinator {
     };
   }
 }
+

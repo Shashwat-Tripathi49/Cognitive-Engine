@@ -9,7 +9,7 @@ import {
 import { buildReflectionInputBundle, computeBundleHash } from './canonical.js';
 import {
   IReflectionSynthesizer,
-  OpenRouterReflectionSynthesizer,
+  DualProviderReflectionSynthesizer,
   ReflectionSynthesisCoordinator,
 } from './synthesizer.js';
 import { ReflectionValidator } from './validator.js';
@@ -42,7 +42,7 @@ export class ReflectionEngine {
     validator: ReflectionValidator = new ReflectionValidator(),
     config?: ReflectionEngineConfig
   ) {
-    const synth = customSynthesizer || new OpenRouterReflectionSynthesizer();
+    const synth = customSynthesizer || new DualProviderReflectionSynthesizer();
     this.coordinator = new ReflectionSynthesisCoordinator(synth, validator, config);
   }
 
@@ -137,6 +137,8 @@ export class ReflectionEngine {
         propositionsCount: response.propositions.length,
         segmentsCount: response.segments.length,
         attempts: synthesisResult.attempts,
+        withheldSegmentsCount: synthesisResult.withheldSegmentsCount ?? 0,
+        withheldReason: synthesisResult.withheldReason,
       },
       temporalScope: {
         startDate: claim.temporalScope.startDate,
