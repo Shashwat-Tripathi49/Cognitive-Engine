@@ -93,7 +93,7 @@ export class GeminiProviderAdapter implements ILlmProviderAdapter {
         const errText = await response.text();
         const parsed = JSON.parse(errText);
         if (parsed?.error?.message && typeof parsed.error.message === 'string') {
-          errorSummary = parsed.error.message.replace(/key=[A-Za-z0-9_\-]+/gi, 'key=[REDACTED]');
+          errorSummary = parsed.error.message.replace(/key=[A-Za-z0-9_-]+/gi, 'key=[REDACTED]');
         }
       } catch {
         // Fallback to HTTP status

@@ -10,7 +10,11 @@ import {
   IReflectionSynthesizer,
 } from '../../synthesizer.js';
 import { ReflectionValidator } from '../../validator.js';
-import { ReflectionInputBundle, LLMReflectionResponse } from '../../types.js';
+import {
+  ReflectionInputBundle,
+  LLMReflectionResponse,
+  PropositionPredicate,
+} from '../../types.js';
 
 const sampleBundle: ReflectionInputBundle = {
   schemaVersion: '1.0.0',
@@ -314,7 +318,7 @@ describe('Dual-Provider LLM Transport & Option A Partial Withholding', () => {
         {
           propositionId: 'p3',
           subject: 'backend',
-          predicate: 'CAUSED_BY' as any, // Unauthorized predicate!
+          predicate: 'CAUSED_BY' as unknown as PropositionPredicate, // Unauthorized predicate!
           object: 'stress',
           authorizedFactId: 'ent:1',
         },
@@ -389,7 +393,7 @@ describe('Dual-Provider LLM Transport & Option A Partial Withholding', () => {
         {
           propositionId: 'p2_bad',
           subject: 'backend',
-          predicate: 'INVALID_PREDICATE' as any,
+          predicate: 'INVALID_PREDICATE' as unknown as PropositionPredicate,
           object: 'invalid',
           authorizedFactId: 'ent:1',
         },
@@ -421,7 +425,7 @@ describe('Dual-Provider LLM Transport & Option A Partial Withholding', () => {
         {
           propositionId: 'p_hallucinated',
           subject: 'unicorn',
-          predicate: 'CAUSED_BY' as any,
+          predicate: 'CAUSED_BY' as unknown as PropositionPredicate,
           object: 'magic',
           authorizedFactId: 'fake:fact',
         },
@@ -460,5 +464,55 @@ describe('Dual-Provider LLM Transport & Option A Partial Withholding', () => {
     expect(result.modelInfo.provider).toBe('deterministic_engine');
     expect(result.response.reflectionText).toContain("repeated focus on 'backend'");
     expect(result.attempts).toBe(2); // 1 initial + 1 bounded regeneration attempt
+  });
+
+  // Test 11: DualProviderReflectionSynthesizer integration
+  it('11. DualProviderReflectionSynthesizer: formats prompt and parses response with metadata', async () => {
+    const validJsonOutput = JSON.stringify({
+      propositions: [
+        {
+          propositionId: 'p1',
+          subject: 'backend',
+          predicate: 'MENTIONED_IN_ENTRIES',
+          object: '5',
+          authorizedFactId: 'ent:1',
+        },
+      ],
+      segments: [
+        {
+          segmentId: 's1',
+          text: 'The topic backend was recorded across 5 entries.',
+          groundedPropositionIds: ['p1'],
+        },
+      ],
+      reflectionText: 'The topic backend was recorded across 5 entries.',
+    });
+
+    const mockGroq: ILlmProviderAdapter = {
+      name: 'groq',
+      isConfigured: () => true,
+      generate: vi.fn().mockResolvedValue(validJsonOutput),
+    };
+    const mockGemini: ILlmProviderAdapter = {
+      name: 'gemini',
+      isConfigured: () => true,
+      generate: vi.fn(),
+    };
+
+    const transport = new DualProviderReflectionTransport(mockGroq, mockGemini);
+    const synthesizer = new DualProviderReflectionSynthesizer(transport);
+
+    expect(synthesizer.getTransport()).toBe(transport);
+    expect(synthesizer.getDefaultModel()).toBe('llama-3.3-70b-versatile');
+
+    const output = await synthesizer.generateWithMetadata(sampleBundle);
+    expect(output.providerUsed).toBe('groq');
+    expect(output.fellBack).toBe(false);
+    expect(output.response.propositions).toHaveLength(1);
+    expect(output.response.segments).toHaveLength(1);
+    expect(output.response.reflectionText).toBe('The topic backend was recorded across 5 entries.');
+
+    const directResponse = await synthesizer.generate(sampleBundle);
+    expect(directResponse.reflectionText).toBe('The topic backend was recorded across 5 entries.');
   });
 });

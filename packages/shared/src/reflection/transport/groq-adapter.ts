@@ -86,7 +86,7 @@ export class GroqProviderAdapter implements ILlmProviderAdapter {
         const parsed = JSON.parse(errText);
         if (parsed?.error?.message && typeof parsed.error.message === 'string') {
           // Exclude any accidentally reflected credentials
-          errorSummary = parsed.error.message.replace(/Bearer\s+[A-Za-z0-9_\-]+/gi, 'Bearer [REDACTED]');
+          errorSummary = parsed.error.message.replace(/Bearer\s+[A-Za-z0-9_-]+/gi, 'Bearer [REDACTED]');
         }
       } catch {
         // Fallback to HTTP status text

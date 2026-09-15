@@ -16,11 +16,11 @@ export interface DualTransportConfig {
 
 function sanitizeError(msg: string): string {
   return msg
-    .replace(/Bearer\s+[A-Za-z0-9_\-]+/gi, 'Bearer [REDACTED]')
-    .replace(/key=[A-Za-z0-9_\-]+/gi, 'key=[REDACTED]')
-    .replace(/x-goog-api-key:\s*[A-Za-z0-9_\-]+/gi, 'x-goog-api-key: [REDACTED]')
+    .replace(/Bearer\s+[A-Za-z0-9_-]+/gi, 'Bearer [REDACTED]')
+    .replace(/key=[A-Za-z0-9_-]+/gi, 'key=[REDACTED]')
+    .replace(/x-goog-api-key:\s*[A-Za-z0-9_-]+/gi, 'x-goog-api-key: [REDACTED]')
     .replace(/gsk_[A-Za-z0-9_]+/gi, '[REDACTED_GROQ_KEY]')
-    .replace(/AIzaSy[A-Za-z0-9_\-]+/gi, '[REDACTED_GEMINI_KEY]');
+    .replace(/AIzaSy[A-Za-z0-9_-]+/gi, '[REDACTED_GEMINI_KEY]');
 }
 
 export class DualProviderReflectionTransport {
