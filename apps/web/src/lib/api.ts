@@ -193,6 +193,20 @@ export async function getCognitiveFindings(
   );
 }
 
+export async function triggerPatternDiscovery(
+  userId = '11111111-1111-1111-1111-111111111111',
+  token?: string | null
+): Promise<{ success: boolean; findingsCount?: number }> {
+  return fetchApi<{ success: boolean; findingsCount?: number }>(
+    '/cognitive/discover',
+    {
+      method: 'POST',
+      body: JSON.stringify({ userId, persistFindings: true }),
+    },
+    token
+  );
+}
+
 /**
  * React Hook that binds Clerk auth session token to API requests
  */
@@ -265,6 +279,14 @@ export function useApi() {
     [getAuthToken, activeUserId]
   );
 
+  const discover = useCallback(
+    async () => {
+      const token = await getAuthToken();
+      return triggerPatternDiscovery(activeUserId, token);
+    },
+    [getAuthToken, activeUserId]
+  );
+
   return useMemo(
     () => ({
       userId: activeUserId,
@@ -275,7 +297,8 @@ export function useApi() {
       getMemoryById: getMemory,
       getMemorySubgraph: getSubgraph,
       getCognitiveFindings: getFindings,
+      discoverPatterns: discover,
     }),
-    [activeUserId, capture, getCaptures, search, getCapture, getMemory, getSubgraph, getFindings]
+    [activeUserId, capture, getCaptures, search, getCapture, getMemory, getSubgraph, getFindings, discover]
   );
 }

@@ -70,22 +70,7 @@ export default function InsightsPage() {
     setError(null);
 
     try {
-      const res = await fetch('http://localhost:3001/cognitive/discover', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer test_token_user_A',
-        },
-        body: JSON.stringify({
-          userId: api.userId,
-          persistFindings: true,
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error('Pattern discovery returned non-200 status');
-      }
-
+      await api.discoverPatterns();
       await loadInsightsData();
     } catch (err) {
       console.error('Pattern discovery run error:', err);

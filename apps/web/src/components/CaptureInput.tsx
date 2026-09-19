@@ -1,13 +1,19 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { Button } from '@cognitive-engine/ui';
 
 interface CaptureInputProps {
   onCapture: (text: string) => Promise<void>;
   isLoading?: boolean;
+  autoFocus?: boolean;
 }
 
-export function CaptureInput({ onCapture, isLoading = false }: CaptureInputProps) {
+export function CaptureInput({
+  onCapture,
+  isLoading = false,
+  autoFocus = false,
+}: CaptureInputProps) {
   const [text, setText] = useState('');
   const [error, setError] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -19,11 +25,18 @@ export function CaptureInput({ onCapture, isLoading = false }: CaptureInputProps
     return trimmed.split(/\s+/).length;
   }, [text]);
 
-  // Auto-resize textarea
+  // Focus textarea on mount if requested
+  useEffect(() => {
+    if (autoFocus) {
+      textareaRef.current?.focus();
+    }
+  }, [autoFocus]);
+
+  // Auto-resize textarea to fit text naturally
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${Math.max(120, textareaRef.current.scrollHeight)}px`;
+      textareaRef.current.style.height = `${Math.max(140, textareaRef.current.scrollHeight)}px`;
     }
   }, [text]);
 
@@ -37,13 +50,13 @@ export function CaptureInput({ onCapture, isLoading = false }: CaptureInputProps
       await onCapture(trimmed);
       setText('');
       if (textareaRef.current) {
-        textareaRef.current.style.height = '120px';
+        textareaRef.current.style.height = '140px';
       }
     } catch (err: unknown) {
       const message =
         err instanceof Error
           ? err.message
-          : 'Unable to record thought. Please check your connection.';
+          : 'Unable to record thought. Please verify your connection.';
       setError(message);
     }
   };
@@ -56,30 +69,31 @@ export function CaptureInput({ onCapture, isLoading = false }: CaptureInputProps
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%' }}>
-      {/* Editorial Prompt */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+      {/* Editorial Prompt Header */}
+      <section style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
         <span
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '0.68rem',
             textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: 'var(--accent-moss)',
-            fontWeight: 500,
+            letterSpacing: '0.12em',
+            color: 'var(--status-success)',
+            fontWeight: 600,
           }}
         >
-          Session: Unstructured Thought
+          RECORD // PRESENT MOMENT
         </span>
         <h1
           style={{
             fontFamily: 'var(--font-serif)',
             fontStyle: 'italic',
-            fontSize: '1.5rem',
+            fontSize: '1.85rem',
             fontWeight: 400,
-            lineHeight: 1.35,
-            letterSpacing: '-0.01em',
+            lineHeight: 1.25,
+            letterSpacing: '-0.015em',
             color: 'var(--ink-bone)',
+            margin: 0,
           }}
         >
           What is preoccupying your attention right now?
@@ -92,13 +106,15 @@ export function CaptureInput({ onCapture, isLoading = false }: CaptureInputProps
         style={{
           width: '100%',
           backgroundColor: 'var(--surface-pure)',
-          border: '1px solid var(--border-structural)',
+          border: '1.5px solid var(--border-structural)',
           boxShadow: 'var(--shadow-slip)',
           borderRadius: 'var(--radius-slip)',
-          padding: '20px 22px',
+          padding: '24px 28px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '14px',
+          gap: '16px',
+          boxSizing: 'border-box',
+          position: 'relative',
         }}
       >
         <textarea
@@ -114,15 +130,17 @@ export function CaptureInput({ onCapture, isLoading = false }: CaptureInputProps
           aria-label="Capture thought content"
           style={{
             width: '100%',
-            minHeight: '95px',
+            minHeight: '120px',
             backgroundColor: 'transparent',
             color: 'var(--ink-bone)',
             border: 'none',
             outline: 'none',
             resize: 'none',
-            fontSize: '0.975rem',
-            lineHeight: '1.68',
-            fontFamily: 'var(--font-body)',
+            fontSize: '1.18rem',
+            lineHeight: '1.7',
+            fontFamily: 'var(--font-serif)',
+            padding: '2px 0',
+            boxSizing: 'border-box',
           }}
         />
 
@@ -131,11 +149,12 @@ export function CaptureInput({ onCapture, isLoading = false }: CaptureInputProps
             role="alert"
             style={{
               padding: '10px 14px',
-              backgroundColor: 'var(--accent-ochre-bg)',
-              border: '1px solid var(--accent-ochre)',
-              color: 'var(--accent-ochre)',
+              backgroundColor: 'var(--status-error-bg)',
+              border: '1px solid var(--status-error-border)',
+              color: 'var(--status-error)',
               fontSize: '0.85rem',
               fontFamily: 'var(--font-body)',
+              borderRadius: 'var(--radius-stamp)',
             }}
           >
             {error}
@@ -148,7 +167,7 @@ export function CaptureInput({ onCapture, isLoading = false }: CaptureInputProps
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            paddingTop: '12px',
+            paddingTop: '14px',
             borderTop: '1px solid var(--border-hairline)',
           }}
         >
@@ -157,40 +176,26 @@ export function CaptureInput({ onCapture, isLoading = false }: CaptureInputProps
               fontFamily: 'var(--font-mono)',
               fontSize: '0.68rem',
               color: 'var(--ink-dust)',
-              letterSpacing: '0.05em',
+              letterSpacing: '0.06em',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
             }}
           >
-            <span>{wordCount} {wordCount === 1 ? 'WD' : 'WDS'}</span>
+            <span>{wordCount} {wordCount === 1 ? 'WORD' : 'WORDS'}</span>
             <span>·</span>
-            <span>⌘+ENTER</span>
+            <span>⌘+ENTER TO RECORD</span>
           </div>
 
-          <button
+          <Button
             type="submit"
-            disabled={isLoading || !text.trim()}
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: '0.82rem',
-              fontWeight: 600,
-              letterSpacing: '-0.01em',
-              backgroundColor: !text.trim() || isLoading ? 'var(--surface-raised)' : 'var(--ink-bone)',
-              color: !text.trim() || isLoading ? 'var(--ink-dust)' : 'var(--ink-inverse)',
-              border: 'none',
-              padding: '8px 18px',
-              borderRadius: 'var(--radius-stamp)',
-              cursor: !text.trim() || isLoading ? 'not-allowed' : 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              boxShadow: text.trim() && !isLoading ? 'var(--shadow-entry)' : 'none',
-              transition: 'background-color var(--duration-fast)',
-            }}
+            variant="primary"
+            size="md"
+            isLoading={isLoading}
+            disabled={!text.trim() || isLoading}
           >
-            {isLoading ? 'Recording...' : 'Record Thought'}
-          </button>
+            {isLoading ? 'RECORDING...' : 'RECORD'}
+          </Button>
         </div>
       </form>
     </div>

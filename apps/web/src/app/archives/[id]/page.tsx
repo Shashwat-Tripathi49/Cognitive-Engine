@@ -369,6 +369,7 @@ export default function MemoryDetailPage() {
                         padding: '6px 12px',
                         backgroundColor: 'var(--surface-raised)',
                         border: '1px solid var(--border-structural)',
+                        borderRadius: 'var(--radius-stamp)',
                         display: 'flex',
                         alignItems: 'center',
                         gap: '8px',
@@ -377,7 +378,7 @@ export default function MemoryDetailPage() {
                       <span
                         style={{
                           fontFamily: 'var(--font-serif)',
-                          fontSize: '0.9rem',
+                          fontSize: '0.92rem',
                           fontWeight: 600,
                           color: 'var(--ink-bone)',
                         }}

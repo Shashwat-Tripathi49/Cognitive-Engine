@@ -1,238 +1,180 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 import type { CognitiveFragment } from '@cognitive-engine/shared';
-import { formatRelativeTime } from '../lib/utils';
+import { Badge } from '@cognitive-engine/ui';
 
 interface FragmentCardProps {
   fragment: CognitiveFragment;
   index?: number;
 }
 
-// Generate consistent archival reference number from ID or index
-function getRefId(id: string | undefined, index: number): string {
-  if (!id) return String(1000 + index * 37);
-  let hash = 0;
-  for (let i = 0; i < id.length; i++) {
-    hash = (hash << 5) - hash + id.charCodeAt(i);
-    hash |= 0;
-  }
-  return String(Math.abs(hash % 9000) + 1000);
-}
+export function FragmentCard({ fragment }: FragmentCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
 
-// Extract tags from content
-function extractTags(content: string): string[] {
-  const words = content
-    .replace(/[^a-zA-Z0-9\s]/g, ' ')
-    .split(/\s+/)
-    .filter((w) => w.length > 5);
-
-  const unique = Array.from(new Set(words.map((w) => w.toUpperCase())));
-  if (unique.length >= 2) return unique.slice(0, 2);
-  if (unique.length === 1) return [unique[0], 'LEDGER'];
-  return ['LEDGER', 'THOUGHT'];
-}
-
-export function FragmentCard({ fragment, index = 0 }: FragmentCardProps) {
-  const formattedTime = formatRelativeTime(fragment.capturedAt);
-  const fullDate = new Date(fragment.capturedAt).toLocaleString('en-US', {
+  const capturedDate = new Date(fragment.capturedAt);
+  const timeFormatted = capturedDate.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+  const dateFormatted = capturedDate.toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
   });
 
-  const refId = useMemo(() => getRefId(fragment.id, index), [fragment.id, index]);
-  const tags = useMemo(() => extractTags(fragment.content), [fragment.content]);
-
-  // Extract a high-impact title and body
-  const { title, body } = useMemo(() => {
-    const parts = fragment.content.split(/\n|\.\s+/);
-    if (parts.length > 1 && parts[0].trim().length > 3 && parts[0].trim().length < 60) {
-      return {
-        title: parts[0].trim(),
-        body: fragment.content.slice(parts[0].length).trim().replace(/^\.?\s*/, ''),
-      };
-    }
-    if (fragment.content.length > 50) {
-      const breakIdx = fragment.content.lastIndexOf(' ', 42);
-      const cutoff = breakIdx > 15 ? breakIdx : 42;
-      return {
-        title: fragment.content.slice(0, cutoff),
-        body: fragment.content.slice(cutoff).trim(),
-      };
-    }
-    return {
-      title: fragment.content,
-      body: '',
-    };
-  }, [fragment.content]);
-
-  const rotationAngle = useMemo(() => {
-    const angles = ['0deg', '-0.3deg', '0.35deg', '-0.25deg', '0.2deg'];
-    return angles[index % angles.length];
-  }, [index]);
+  const wordCount = fragment.content.trim().split(/\s+/).length;
 
   return (
     <article
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       style={{
-        backgroundColor: 'var(--surface-pure)',
-        border: '1.5px solid var(--ink-bone)',
-        boxShadow: 'var(--shadow-card)',
-        padding: '22px 24px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '16px',
-        transform: rotationAngle,
-        transition: 'transform var(--duration-fast), box-shadow var(--duration-fast)',
-        position: 'relative',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = '3px 4px 0px rgba(0,0,0,0.18)';
-        e.currentTarget.style.transform = 'none';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = 'var(--shadow-card)';
-        e.currentTarget.style.transform = rotationAngle;
+        width: '100%',
+        backgroundColor: isHovered ? 'var(--surface-raised)' : 'var(--surface-pure)',
+        border: '1px solid var(--border-structural)',
+        borderRadius: 'var(--radius-stamp)',
+        boxShadow: isHovered ? 'var(--shadow-slip)' : 'none',
+        padding: '18px 22px',
+        display: 'grid',
+        gridTemplateColumns: '70px minmax(0, 1fr) auto',
+        gap: '20px',
+        alignItems: 'baseline',
+        transform: isHovered ? 'translateX(3px)' : 'none',
+        transition: `all var(--duration-micro) var(--ease-precise)`,
+        boxSizing: 'border-box',
+        cursor: 'pointer',
       }}
     >
-      {/* Top Header Row: Archival Ref Stamp */}
+      {/* Column 1: Ledger Time Stamp */}
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          width: '100%',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          gap: '2px',
+          userSelect: 'none',
         }}
       >
         <span
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.72rem',
-            color: 'var(--ink-dust)',
+            fontSize: '0.85rem',
             fontWeight: 600,
-            letterSpacing: '0.08em',
+            color: 'var(--ink-bone)',
+            letterSpacing: '0.04em',
           }}
         >
-          REF: {refId}
+          {timeFormatted}
+        </span>
+        <span
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.62rem',
+            color: 'var(--ink-dust)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.06em',
+          }}
+        >
+          {dateFormatted}
         </span>
       </div>
 
-      {/* Main Content Layout with Icon Glyph */}
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-        {/* Archival Document Icon Box */}
-        <div
+      {/* Column 2: Human Thought Content & Metadata */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          minWidth: 0,
+        }}
+      >
+        <p
           style={{
-            width: '40px',
-            height: '40px',
-            flexShrink: 0,
-            backgroundColor: 'var(--surface-raised)',
-            border: '1px solid var(--border-structural)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            fontFamily: 'var(--font-serif)',
+            fontSize: '1.18rem',
+            lineHeight: '1.65',
+            color: 'var(--ink-bone)',
+            margin: 0,
+            wordBreak: 'break-word',
+            display: '-webkit-box',
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
           }}
         >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--ink-bone)"
-            strokeWidth="2"
-            strokeLinecap="square"
-            aria-hidden="true"
-          >
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-            <polyline points="14 2 14 8 20 8" />
-            <line x1="16" y1="13" x2="8" y2="13" />
-            <line x1="16" y1="17" x2="8" y2="17" />
-          </svg>
-        </div>
+          {fragment.content}
+        </p>
 
-        {/* Title and Body */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: 1, minWidth: 0 }}>
-          <h3
+        {/* Metadata Strip */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '8px',
+          }}
+        >
+          <Badge variant="neutral" size="sm">
+            REF #{fragment.id.slice(0, 8)}
+          </Badge>
+
+          <span
             style={{
-              fontFamily: 'var(--font-headline)',
-              fontSize: '1.45rem',
-              fontWeight: 700,
-              lineHeight: '1.25',
-              letterSpacing: '-0.015em',
-              color: 'var(--ink-bone)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.65rem',
+              color: 'var(--ink-dust)',
+              letterSpacing: '0.04em',
             }}
           >
-            {title}
-          </h3>
+            {wordCount} {wordCount === 1 ? 'word' : 'words'}
+          </span>
 
-          {body && (
-            <p
-              style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: '1.02rem',
-                lineHeight: '1.6',
-                color: 'var(--ink-stone)',
-                whiteSpace: 'pre-wrap',
-                wordBreak: 'break-word',
-              }}
-            >
-              {body}
-            </p>
-          )}
+          <span
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.65rem',
+              color: 'var(--ink-dust)',
+            }}
+          >
+            ·
+          </span>
+
+          <span
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.65rem',
+              color: 'var(--ink-dust)',
+              textTransform: 'uppercase',
+            }}
+          >
+            {fragment.modality}
+          </span>
         </div>
       </div>
 
-      {/* Bottom Row: Taxonomy Tag Pills & Archival Metadata */}
+      {/* Column 3: Subtle Action Affordance */}
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '10px',
-          paddingTop: '12px',
-          borderTop: '1px solid var(--border-hairline)',
+          justifyContent: 'center',
+          color: isHovered ? 'var(--ink-bone)' : 'var(--ink-dust)',
+          transform: isHovered ? 'translateX(2px)' : 'none',
+          transition: `all var(--duration-micro) var(--ease-precise)`,
+          paddingLeft: '8px',
         }}
+        aria-hidden="true"
       >
-        {/* Taxonomy Tags */}
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.65rem',
-                fontWeight: 600,
-                letterSpacing: '0.08em',
-                padding: '4px 10px',
-                backgroundColor: 'var(--tag-bg)',
-                color: 'var(--ink-stone)',
-                border: '1px solid var(--border-hairline)',
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* Timestamp */}
-        <div
+        <span
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.68rem',
-            color: 'var(--ink-dust)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
+            fontSize: '1rem',
+            fontWeight: 700,
           }}
         >
-          <span>{formattedTime}</span>
-          <span>•</span>
-          <time dateTime={new Date(fragment.capturedAt).toISOString()} title={fullDate}>
-            {fullDate}
-          </time>
-        </div>
+          →
+        </span>
       </div>
     </article>
   );

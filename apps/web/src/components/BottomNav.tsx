@@ -43,7 +43,7 @@ export function BottomNav() {
           backgroundColor: isCapture ? 'var(--action-espresso)' : 'transparent',
           color: isCapture ? 'var(--ink-inverse)' : 'var(--ink-bone)',
           textDecoration: 'none',
-          transition: 'all var(--duration-fast)',
+          transition: 'all var(--duration-micro) var(--ease-precise)',
           cursor: 'pointer',
         }}
       >
@@ -78,7 +78,7 @@ export function BottomNav() {
           backgroundColor: isArchives ? 'var(--action-espresso)' : 'transparent',
           color: isArchives ? 'var(--ink-inverse)' : 'var(--ink-bone)',
           textDecoration: 'none',
-          transition: 'all var(--duration-fast)',
+          transition: 'all var(--duration-micro) var(--ease-precise)',
           cursor: 'pointer',
         }}
       >
@@ -114,7 +114,7 @@ export function BottomNav() {
           backgroundColor: isInsights ? 'var(--action-espresso)' : 'transparent',
           color: isInsights ? 'var(--ink-inverse)' : 'var(--ink-bone)',
           textDecoration: 'none',
-          transition: 'all var(--duration-fast)',
+          transition: 'all var(--duration-micro) var(--ease-precise)',
           cursor: 'pointer',
         }}
       >

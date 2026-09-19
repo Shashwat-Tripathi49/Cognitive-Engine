@@ -26,16 +26,22 @@ export function AppHeader() {
       <div
         style={{
           width: '100%',
-          padding: '12px 28px',
+          maxWidth: '1280px',
+          margin: '0 auto',
+          padding: '12px 24px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '12px',
+          boxSizing: 'border-box',
         }}
       >
-        {/* Left: Vintage Archival Crest Emblem & Brand Label */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        {/* Left: Archival Crest Emblem & Brand Label */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <Link
             href="/"
+            aria-label="Cognitive Engine Home"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -43,26 +49,23 @@ export function AppHeader() {
               textDecoration: 'none',
             }}
           >
-            {/* Vintage CE Archival Crest Seal */}
+            {/* Archival Seal */}
             <div
               style={{
-                width: '32px',
-                height: '32px',
+                width: '30px',
+                height: '30px',
                 borderRadius: '50%',
                 backgroundColor: 'var(--surface-raised)',
                 border: '1.5px solid var(--ink-bone)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '1px 1.5px 0px rgba(0, 0, 0, 0.15)',
-                position: 'relative',
-                overflow: 'hidden',
+                boxShadow: '1px 1.5px 0px rgba(0, 0, 0, 0.12)',
               }}
             >
-              {/* Classical Archival Engraving Stamp SVG */}
               <svg
-                width="20"
-                height="20"
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="var(--ink-bone)"
@@ -91,40 +94,38 @@ export function AppHeader() {
           </Link>
 
           {/* Framed Ledger Stamp Badge */}
-          <Link
-            href="/archives"
+          <span
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.68rem',
+              fontSize: '0.65rem',
               fontWeight: 700,
               letterSpacing: '0.12em',
               textTransform: 'uppercase',
-              padding: '4px 10px',
-              border: '1.5px solid var(--ink-bone)',
+              padding: '3px 8px',
+              border: '1px solid var(--border-structural)',
               backgroundColor: 'var(--surface-pure)',
               color: 'var(--ink-bone)',
-              boxShadow: '1.5px 1.5px 0px rgba(0, 0, 0, 0.12)',
-              transform: 'rotate(-0.5deg)',
+              borderRadius: '1px',
               display: 'inline-block',
-              transition: 'transform var(--duration-fast)',
             }}
           >
             ARCHIVAL LEDGER
-          </Link>
+          </span>
         </div>
 
-        {/* Center: Framed Mode Toggle (RECORD | ARCHIVES | INSIGHTS) */}
+        {/* Center: Mode Tabs (RECORD | ARCHIVES | INSIGHTS) */}
         <nav
           role="tablist"
-          aria-label="Mode Selection"
+          aria-label="Navigation Mode"
           style={{
             display: 'flex',
             alignItems: 'center',
             border: '1.5px solid var(--ink-bone)',
             backgroundColor: 'var(--surface-pure)',
-            boxShadow: '2px 2px 0px rgba(0, 0, 0, 0.12)',
+            boxShadow: '1.5px 1.5px 0px rgba(0, 0, 0, 0.12)',
             padding: '2px',
             gap: '2px',
+            borderRadius: '1px',
           }}
         >
           <Link
@@ -137,12 +138,13 @@ export function AppHeader() {
               fontWeight: 600,
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
-              padding: '6px 16px',
+              padding: '5px 14px',
               backgroundColor: isCapture ? 'var(--action-espresso)' : 'transparent',
               color: isCapture ? 'var(--ink-inverse)' : 'var(--ink-stone)',
               textDecoration: 'none',
-              transition: 'all var(--duration-fast)',
+              transition: 'all var(--duration-micro) var(--ease-precise)',
               cursor: 'pointer',
+              borderRadius: '1px',
             }}
           >
             RECORD
@@ -158,12 +160,13 @@ export function AppHeader() {
               fontWeight: 600,
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
-              padding: '6px 16px',
+              padding: '5px 14px',
               backgroundColor: isArchives ? 'var(--action-espresso)' : 'transparent',
               color: isArchives ? 'var(--ink-inverse)' : 'var(--ink-stone)',
               textDecoration: 'none',
-              transition: 'all var(--duration-fast)',
+              transition: 'all var(--duration-micro) var(--ease-precise)',
               cursor: 'pointer',
+              borderRadius: '1px',
             }}
           >
             ARCHIVES
@@ -179,20 +182,21 @@ export function AppHeader() {
               fontWeight: 600,
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
-              padding: '6px 16px',
+              padding: '5px 14px',
               backgroundColor: isInsights ? 'var(--action-espresso)' : 'transparent',
               color: isInsights ? 'var(--ink-inverse)' : 'var(--ink-stone)',
               textDecoration: 'none',
-              transition: 'all var(--duration-fast)',
+              transition: 'all var(--duration-micro) var(--ease-precise)',
               cursor: 'pointer',
+              borderRadius: '1px',
             }}
           >
             INSIGHTS
           </Link>
         </nav>
 
-        {/* Right: User Auth & Context Menu */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        {/* Right: Auth & Controls */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           {isLoaded && (
             <>
               {isSignedIn ? (
@@ -202,7 +206,7 @@ export function AppHeader() {
                       avatarBox: {
                         width: '28px',
                         height: '28px',
-                        borderRadius: '0px',
+                        borderRadius: '1px',
                         border: '1.5px solid var(--ink-bone)',
                       },
                     },
@@ -214,15 +218,16 @@ export function AppHeader() {
                     type="button"
                     style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '0.72rem',
+                      fontSize: '0.7rem',
                       fontWeight: 600,
                       textTransform: 'uppercase',
-                      letterSpacing: '0.06em',
+                      letterSpacing: '0.08em',
                       padding: '5px 12px',
-                      backgroundColor: 'transparent',
+                      backgroundColor: 'var(--surface-pure)',
                       color: 'var(--ink-bone)',
                       border: '1px solid var(--border-structural)',
                       cursor: 'pointer',
+                      borderRadius: '1px',
                     }}
                   >
                     SIGN IN
@@ -231,22 +236,6 @@ export function AppHeader() {
               )}
             </>
           )}
-
-          {/* Three-Dot Archival Context Indicator */}
-          <span
-            aria-hidden="true"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '1.25rem',
-              fontWeight: 700,
-              color: 'var(--ink-bone)',
-              lineHeight: 1,
-              userSelect: 'none',
-              cursor: 'default',
-            }}
-          >
-            ⋮
-          </span>
         </div>
       </div>
     </header>

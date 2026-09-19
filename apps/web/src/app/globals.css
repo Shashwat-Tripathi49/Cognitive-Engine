@@ -6,8 +6,8 @@
   --surface-hover: #E5E1D7;
   --surface-pressed: #DCD8CD;
 
-  --border-hairline: rgba(26, 22, 18, 0.12);
-  --border-structural: rgba(26, 22, 18, 0.25);
+  --border-hairline: rgba(26, 22, 18, 0.10);
+  --border-structural: rgba(26, 22, 18, 0.22);
   --border-focus: #1A1612;
 
   --ink-bone: #1A1612;
@@ -21,19 +21,40 @@
   --tag-bg: #EFECE4;
   --highlight-bg: rgba(26, 22, 18, 0.08);
 
-  --accent-moss: #3A5A40;
-  --accent-ochre: #B85D36;
-  --accent-ochre-bg: rgba(184, 93, 54, 0.08);
+  /* Semantic Status Roles (Muted, Academic, Non-SaaS) */
+  --status-success: #3A5A40;
+  --status-success-bg: rgba(58, 90, 64, 0.08);
+  --status-success-border: rgba(58, 90, 64, 0.28);
+
+  --status-warning: #B85D36;
+  --status-warning-bg: rgba(184, 93, 54, 0.08);
+  --status-warning-border: rgba(184, 93, 54, 0.28);
+
+  --status-error: #8B3A2B;
+  --status-error-bg: rgba(139, 58, 43, 0.08);
+  --status-error-border: rgba(139, 58, 43, 0.28);
+
+  --status-info: #4D5C6A;
+  --status-info-bg: rgba(77, 92, 106, 0.08);
+  --status-info-border: rgba(77, 92, 106, 0.25);
+
+  /* Backward Compatibility Aliases */
+  --accent-moss: var(--status-success);
+  --accent-ochre: var(--status-warning);
+  --accent-ochre-bg: var(--status-warning-bg);
+  --ink-zinc: var(--ink-stone);
 
   /* Varied Geometry Scale */
   --radius-sharp: 0px;
   --radius-stamp: 1px;
   --radius-slip: 2px;
+  --radius-pill: 9999px;
 
   /* Directional Shadows */
   --shadow-slip: 2px 3px 0px rgba(26, 22, 18, 0.20);
   --shadow-card: 2px 3px 0px rgba(0, 0, 0, 0.10);
-  --shadow-dock: 2px 4px 0px rgba(0, 0, 0, 0.30);
+  --shadow-dock: 2px 4px 0px rgba(0, 0, 0, 0.28);
+  --shadow-entry: var(--shadow-slip);
 
   /* Spacing Grid (4px base) */
   --space-1: 4px;
@@ -47,7 +68,11 @@
   --space-12: 48px;
   --space-16: 64px;
 
-  /* Motion */
+  /* Motion Scale (Controlled, Precise, No Bounce) */
+  --duration-micro: 120ms;
+  --duration-standard: 220ms;
+  --duration-emphasis: 350ms;
+  --ease-precise: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-fast: 100ms;
 }
 
@@ -119,10 +144,54 @@ a:active {
   background: var(--ink-stone);
 }
 
-/* Record Ledger Layout Grid (DOM Configuration) */
+/* Semantic Typography Utility Classes */
+.font-human {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.font-editorial {
+  font-family: var(--font-headline), Georgia, serif;
+}
+
+.font-system {
+  font-family: var(--font-display), -apple-system, sans-serif;
+}
+
+.font-utility {
+  font-family: var(--font-body), -apple-system, sans-serif;
+}
+
+.font-provenance {
+  font-family: var(--font-mono), monospace;
+}
+
+.measure-reading {
+  max-width: 760px;
+}
+
+/* Animations */
+@keyframes ce-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ce-pulse {
+  0%, 100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Record Ledger Layout Grid */
 .record-page-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(340px, 450px);
+  grid-template-columns: minmax(0, 1.25fr) minmax(340px, 440px);
   gap: 40px;
   align-items: start;
   width: 100%;

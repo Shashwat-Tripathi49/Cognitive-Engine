@@ -64,9 +64,9 @@ export default function RecordPage() {
       setFeedback({
         status: 'success',
         message: 'Thought captured and anchored to your memory ledger.',
-        details: `Ref #${fragment.id.slice(0, 8)} · ${new Date(
+        details: `Ref #${fragment.id.slice(0, 8)} · SHA-256: ${fragment.contentHash.slice(0, 16)}… · ${new Date(
           fragment.capturedAt
-        ).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`,
+        ).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`,
       });
 
       if (textareaRef.current) {
