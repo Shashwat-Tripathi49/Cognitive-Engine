@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Space_Grotesk, Newsreader, Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
+import { AuthGuard } from "../components/AuthGuard";
 
 const displayFont = Space_Grotesk({
   subsets: ["latin"],
@@ -51,13 +52,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider dynamic>
+    <ClerkProvider
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+      signInFallbackRedirectUrl="/"
+      signUpFallbackRedirectUrl="/"
+      dynamic
+    >
       <html
         lang="en"
         className={`${displayFont.variable} ${serifFont.variable} ${headlineFont.variable} ${bodyFont.variable} ${monoFont.variable}`}
       >
         <body style={{ backgroundColor: "var(--canvas-bg)", color: "var(--ink-bone)" }}>
-          {children}
+          <AuthGuard>{children}</AuthGuard>
         </body>
       </html>
     </ClerkProvider>

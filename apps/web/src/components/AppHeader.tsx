@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { UserButton, SignInButton, useUser } from '@clerk/nextjs';
+import { UserButton, useUser } from '@clerk/nextjs';
 
 export function AppHeader() {
   const pathname = usePathname();
@@ -213,26 +213,26 @@ export function AppHeader() {
                   }}
                 />
               ) : (
-                <SignInButton mode="modal">
-                  <button
-                    type="button"
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.7rem',
-                      fontWeight: 600,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.08em',
-                      padding: '5px 12px',
-                      backgroundColor: 'var(--surface-pure)',
-                      color: 'var(--ink-bone)',
-                      border: '1px solid var(--border-structural)',
-                      cursor: 'pointer',
-                      borderRadius: '1px',
-                    }}
-                  >
-                    SIGN IN
-                  </button>
-                </SignInButton>
+                <Link
+                  href="/sign-in"
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.7rem',
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    padding: '5px 12px',
+                    backgroundColor: 'var(--surface-pure)',
+                    color: 'var(--ink-bone)',
+                    border: '1px solid var(--border-structural)',
+                    cursor: 'pointer',
+                    borderRadius: '1px',
+                    textDecoration: 'none',
+                    display: 'inline-block',
+                  }}
+                >
+                  SIGN IN
+                </Link>
               )}
             </>
           )}
