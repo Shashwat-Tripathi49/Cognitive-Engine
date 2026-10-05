@@ -1,0 +1,19 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "freellmapi/cohere/north-mini-code:free",
+  "provider": {
+    "freellmapi": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "FreeLLMAPI Local",
+      "options": {
+        "baseURL": "http://127.0.0.1:31415/v1",
+        "apiKey": "{env:FREELLMAPI_API_KEY}"
+      },
+      "models": {
+        "cohere/north-mini-code:free": {
+          "name": "Cohere North Mini Code"
+        }
+      }
+    }
+  }
+}
