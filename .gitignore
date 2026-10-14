@@ -67,5 +67,10 @@ venv/
 __pycache__/
 *.pyc
 
+# OMO plugin runtime state
+.omo/
+
+# Nested duplicate clone
+Cognitive-Engine/
 
 .env*
